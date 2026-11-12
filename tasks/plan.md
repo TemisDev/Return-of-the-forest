@@ -67,3 +67,9 @@ El seguimiento vive en Trello: https://trello.com/b/rv1JFCL7/bosque-de-regreso-g
 
 ## Pendientes
 Experiencia de Juan y Diego, perfiles Trello, conformidad con sus roles propuestos, editor y hardware.
+
+## Avance del primer corte — 11/11/2026
+- Editor confirmado: Unity 6000.3.22f1. T05 conserva pendiente la apertura en otro equipo.
+- C-01/T07: nivel integrado y validación estructural sin errores. Pendiente aceptación manual de Diego.
+- T06: controlador y cámara implementados en ArroyoPlayable; 6/6 pruebas automatizadas aprobadas en Unity. Pendiente recorrido manual con teclado y ratón.
+- Claude C-02: revisar recorrido y ampliar QA. Codex siguiente: T08 y T09. La UI espera los contratos de progreso y sesión.

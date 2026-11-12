@@ -1,6 +1,23 @@
 # Relevo de Codex
 Fecha: 11 de noviembre de 2026.
-Encargo: D-01 / T05, proyecto base y coordinación.
+Encargo: T06 e integración de C-01. Este avance sustituye el estado pendiente de T06 descrito más abajo.
+
+## Avance T06
+- Entrega C-01 revisada; validador del nivel ejecutado en Unity: 0 errores y 0 avisos.
+- Escena jugable: Game/Assets/_Bosque/Scenes/Integration/ArroyoPlayable.unity.
+- Movimiento relativo a cámara, salto solo en suelo, colisiones y retorno a SafeRespawn al caer por debajo de Y=-5. Cámara orbital con ajuste frente a obstáculos; cuerpo de cápsula provisional.
+- Unity 6000.3.22f1: suite EditMode final, 6/6 pruebas aprobadas, salida 0. La prueba de salto detectó una regresión deliberada, retirada antes de repetir toda la suite.
+- Capturas renderizadas al inicio y tras simular avance hasta (3.00, 0.03, 14.40), salida 0. Registros locales en .dev-logs/.
+- Escena original de Claude intacta. SHA256: 617AD893A90A3784D633DDDCFDD1163545F9B2EF6B4FD0964A0A0D14A0F3BBD2.
+- Se conservan los ajustes generados por Unity: SceneTemplateSettings, migración URP del recurso PC y escena integrada en Build Settings.
+- Pendiente prueba manual de teclado/ratón, build y apertura en otro equipo. T06/T07 quedan en revisión de Diego.
+
+Controles: WASD, ratón y Espacio. Escape libera cursor y clic izquierdo lo recaptura. Escape todavía no pausa.
+No hay interacción, recuperación del agua ni bloqueo lógico de salida: pertenecen a T08/T09.
+Claude sigue Docs/ENCARGO-PARA-CLAUDE-C02.md; Codex sigue con T08/T09 y después publica contratos de progreso/sesión antes de encargar UI.
+La escena integrada es una copia independiente: los cambios del nivel necesitan reintegración explícita de Codex. El menú de preparación abre la integración existente sin sobrescribirla.
+
+## Registro anterior T05
 
 ## Hecho
 - GDD y tablero revisados.

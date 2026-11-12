@@ -1,5 +1,5 @@
 # Contratos del primer corte
-Estado: acuerdo inicial de integración, 11 de noviembre de 2026. No describe sistemas de gameplay ya implementados.
+Estado: T06 implementado; interacción y sesión pendientes, 11 de noviembre de 2026.
 
 ## Base
 - Editor Unity 6000.3.22f1.
@@ -28,6 +28,16 @@ Cada marcador debe ser único y estar bajo ArroyoGreybox. Evitar dependencias en
 Recorrido orientativo: 25–40 metros. Paso útil mínimo aproximado: 2 metros. Obstáculos de salto iniciales bajos, ajustables tras T06.
 No diseñar un salto obligatorio hasta medir las capacidades reales del controlador.
 Sin cámara de gameplay ni personaje persistente en la escena de nivel; puede existir una cámara solo de vista previa, desactivada para integración.
+
+## Movimiento implementado (T06)
+Assembly: Bosque.Runtime, referencia Unity.InputSystem. Namespace: Bosque.Player.
+- ThirdPersonMotor.SetRespawn(Transform): define el marcador de retorno.
+- ThirdPersonMotor.Simulate(Vector2 input, bool jump, float yaw, float dt): movimiento relativo al giro horizontal de cámara, gravedad y salto solo en suelo.
+- ThirdPersonCamera.Configure(Transform): fija objetivo. Yaw expone el giro horizontal; Step(Vector2 lookDelta, float dt) permite simular cámara para pruebas.
+- ThirdPersonInput.Configure(ThirdPersonCamera): conecta teclado y ratón.
+Velocidad inicial 4,5 m/s; salto configurado 1,1 m; gravedad -24 m/s². Controlador de 1,8 m con radio 0,35 m. Se usa SafeRespawn; los SafePoint adicionales no tienen lógica aún.
+Escena integrada: Assets/_Bosque/Scenes/Integration/ArroyoPlayable.unity. Es una copia del nivel: Codex debe reintegrar futuros cambios explícitamente. El menú de preparación abre la copia existente sin sobrescribirla.
+Escape libera el cursor; todavía no hay pausa de sesión. ExitMarker no implementa bloqueo de salida.
 
 ## Interacción pendiente
 Codex definirá el componente/contrato de interacción y su alcance durante T08. Claude no debe suponer nombres de métodos o eventos.

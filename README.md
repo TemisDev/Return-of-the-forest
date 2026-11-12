@@ -3,7 +3,9 @@ Prototipo Unity 3D para PC sobre recuperación de hábitats y ODS 15.
 
 ## Abrir el proyecto
 En Unity Hub, usa Add y selecciona la carpeta **Game**. Editor: **6000.3.22f1**.
-La plantilla inicial incluye una escena de ejemplo. El nivel de juego todavía debe desarrollarse.
+Abre **Assets/_Bosque/Scenes/Integration/ArroyoPlayable.unity** y pulsa Play.
+WASD mueve, el ratón gira la cámara y Espacio salta. Escape libera el cursor y clic izquierdo lo captura de nuevo. Escape todavía no pausa.
+El arroyo y el personaje usan formas provisionales. Interacción y recuperación del agua siguen pendientes.
 
 ## Dependencias de la base importada
 - Universal Render Pipeline: 17.3.0.
@@ -18,6 +20,7 @@ La fuente de versiones es Game/Packages/manifest.json y su resolución en packag
 
 Lee [AGENTS.md](AGENTS.md), [reparto de trabajo](Docs/COORDINACION-IA.md) y [contratos](Docs/CONTRATOS.md).
 Para comenzar en Claude Code, abre esta carpeta y utiliza [el encargo inicial](Docs/ENCARGO-PARA-CLAUDE.md).
+Tras C-01, utiliza [el encargo C-02](Docs/ENCARGO-PARA-CLAUDE-C02.md) para revisar el recorrido integrado.
 No ejecutes dos instancias de Unity sobre Game/.
 
 ## Primeras entregas
