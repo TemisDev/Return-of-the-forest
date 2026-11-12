@@ -1,0 +1,7 @@
+{
+  "name": "Bosque.Runtime",
+  "rootNamespace": "Bosque",
+  "references": [
+    "Unity.InputSystem"
+  ]
+}
