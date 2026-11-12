@@ -1,0 +1,27 @@
+# Unity generated/cache
+Game/[Ll]ibrary/
+Game/[Tt]emp/
+Game/[Oo]bj/
+Game/[Ll]ogs/
+Game/[Bb]uild/
+Game/[Bb]uilds/
+Game/[Uu]ser[Ss]ettings/
+Game/[Mm]emoryCaptures/
+Game/[Rr]ecordings/
+Game/.vs/
+Game/.idea/
+Game/*.csproj
+Game/*.sln
+Game/*.slnx
+Game/*.user
+Game/*.pidb
+Game/*.booproj
+Game/*.opendb
+Game/*.VC.db
+# Local generation and presentation artifacts
+.slides-build/
+.dev-logs/
+# Local secrets
+.env
+.env.*
+!.env.example
