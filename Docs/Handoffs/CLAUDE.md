@@ -1,4 +1,93 @@
 # Relevo de Claude Code
+
+# C-02: revisión del recorrido con T06 integrado
+Fecha: 12 de noviembre de 2026. Estado: terminado salvo las pruebas manuales, que quedan pendientes para Diego.
+
+## Resumen
+- **Pruebas manuales con teclado y ratón:** ninguna ejecutada. No tengo acceso interactivo a Play Mode. Los 22 casos M-01..M-22 de `Docs/QA/ARROYO-ACEPTACION.md` quedan **Pendientes** para Diego.
+- **Comprobaciones automatizadas** sobre el controlador real de Codex: 22 OK, 0 FALLA y 9 informativas (sección R del documento de QA).
+- **A-03 (conservación de contenido ajeno):** OK en batch, sobre una copia temporal que ya se eliminó.
+- **Escenas:** la de integración y la de nivel no se modificaron. Sus hashes SHA256 son los mismos antes y después de todas las ejecuciones:
+  - `ArroyoPlayable.unity` `39EE49F2B467668782E0CE53AC8CD52B4A8F92C26D74C725E6085D1039836ED0`
+  - `ArroyoGreybox.unity` `617AD893A90A3784D633DDDCFDD1163545F9B2EF6B4FD0964A0A0D14A0F3BBD2`
+  - **No hace falta reintegrar.**
+- **Límites respetados:** no toqué Packages, ProjectSettings, Runtime/Player ni Scenes/Integration. No creé UI, interacción, recuperación, pausa ni reinicio. No hice operaciones Git.
+
+## Archivos creados o modificados en C-02
+- `Game/Assets/_Bosque/Tests/Acceptance/Editor/ArroyoTraversalProbe.cs` (nuevo): sonda automatizada. Abre ArroyoPlayable sin guardarla y controla `ThirdPersonMotor.Simulate` y `ThirdPersonCamera.Step`.
+- `Game/Assets/_Bosque/Tests/Acceptance/Editor/ArroyoA03PreservationCheck.cs` (nuevo): A-03 sobre una copia temporal que borra al terminar.
+- `.meta` de lo anterior y de la carpeta `Tests/Acceptance/Editor`, generados por Unity.
+  - Estas clases se compilan en `Assembly-CSharp-Editor` (carpeta `Editor`, sin `.asmdef`).
+  - Usan `Bosque.Runtime` y `Bosque.LevelTools`.
+- `Game/Assets/_Bosque/Editor/LevelTools/ArroyoGreyboxGenerator.cs`: se añadió `Generate(string scenePath)` para generar sobre una copia de prueba.
+  - Rechaza cualquier ruta bajo `Assets/_Bosque/Scenes/`, así que no puede escribir en la integración.
+  - `Generate()` y el menú se comportan igual que antes.
+- `Docs/QA/ARROYO-ACEPTACION.md`:
+  - A-03 resuelta.
+  - Nuevas secciones M (manual) y R (automatizada).
+  - B-01..B-08 pasan a Pendiente porque T06 ya está listo.
+  - Incidencias I-01..I-05.
+
+## Cómo repetir
+Ejecutar con el editor de Unity cerrado sobre Game/:
+```
+"C:\Program Files\Unity\Hub\Editor\6000.3.22f1\Editor\Unity.exe" -batchmode -projectPath "<repo>\Game" -executeMethod Bosque.Acceptance.ArroyoTraversalProbe.RunBatch -logFile <log>
+"C:\Program Files\Unity\Hub\Editor\6000.3.22f1\Editor\Unity.exe" -batchmode -projectPath "<repo>\Game" -executeMethod Bosque.Acceptance.ArroyoA03PreservationCheck.RunBatch -logFile <log>
+```
+Los resultados aparecen en el log con las líneas `[C02]` y `[A03]`. Salida 0 si no hubo excepciones; la A-03 sale con 2 si alguna comprobación falla.
+
+## Ejecuciones reales (Unity 6000.3.22f1, batch, 12-nov)
+1. **Sonda, primera pasada:** 20 OK y 1 FALLA. La falla (R-06) era un error de la sonda: el personaje salía del cauce y la sonda seguía empujando hasta hacerlo caer por el borde abierto. Corregí la sonda; el nivel no tenía ese fallo.
+2. **Sonda, segunda pasada:** 22 OK, 0 FALLA y 9 informativas. Salida 0 y sin errores de compilación.
+3. **A-03:** correcta, salida 0. Se conservan:
+   - Un objeto ajeno bajo Geometry.
+   - Un `AudioSource` y un hijo añadidos a Obstacle_01.
+   - Una raíz ajena en la escena.
+   - Un objeto ajeno dentro de DegradedVisuals.
+   - SafePoint_02 movido a otro padre: no se duplica y conserva su posición.
+
+   El recuento pasa de 144 a 144 objetos y el validador da CORRECTA. Un ajuste manual de posición en Obstacle_01 se sobrescribe, que es el comportamiento documentado.
+
+**Recorrido y alcance (medido, no jugado):**
+- Spawn → Exit en 8.3 s sin saltos.
+- Las rampas funcionan en ambos sentidos.
+- Desde el borde de la orilla, la superficie de cada obstáculo queda a 0.72–0.85 m del pecho y su centro a 1.88 m en horizontal. **Los tres obstáculos son alcanzables desde la orilla.**
+- Caída por el borde abierto: retorno en 0.54 s; cinco caídas seguidas, cinco retornos.
+- Muros y barandilla bloquean.
+- La cámara nunca queda dentro de geometría en las 504 orientaciones medidas.
+
+**Qué no se comprobó:**
+- Lectura real de teclado y ratón con Input System, y captura, liberación y foco del cursor (M-19..M-21).
+- Sensación de control y de cámara, Play Mode real, rendimiento, build.
+- Lo que se ve cuando la cámara se acerca al cuerpo (I-05).
+- Mis capturas de referencia son las de Codex (`.dev-logs/arroyo-*.png`); no hice capturas nuevas.
+
+## Incidencias reproducibles
+El detalle está en `Docs/QA/ARROYO-ACEPTACION.md`, sección Incidencias.
+- **I-01, media:** el jugador se sube encima de Obstacle_01 (+0.20 m) y Obstacle_03 (+0.30 m) y cruza el cauce sobre ellos. Para reproducirlo: en ArroyoPlayable, desde (2, 0, 10), caminar hacia -X. Cuando T08 retire un obstáculo con el jugador encima, este caerá a un tramo del cauce sin rampa.
+- **I-02, baja:** entre los obstáculos (Z 10.4–17.3 y Z 18.7–25.4) solo se sale del cauce saltando, porque la pared mide 0.6 m y el escalón 0.3 m.
+- **I-03, baja:** LowLog_Optional (0.35 m) se sube caminando: el collider de cápsula redondeado actúa como rampa.
+- **I-04, baja, de Codex:** el retorno siempre va a SafeRespawn (Z 2). Retroceso de hasta unos 26 m.
+- **I-05, baja, de Codex y pendiente de M-13:** junto a los muros sur y norte la cámara queda a 0.26 m del foco, dentro del radio del cuerpo (0.35 m).
+
+## Ajustes de geometría propuestos (no aplicados)
+No los apliqué para no desincronizar la escena de integración sin acuerdo. Son ajustes de mi generador: si Codex y Diego los aprueban, los implemento con una regeneración y Codex reintegra la copia.
+1. **I-01, techo de obstáculos ≥ +0.45 m sobre la orilla** (escalón 0.3 m + 0.15 m de margen). Los centros en X no cambian, así que el alcance medido apenas varía; la superficie queda unos 0.1 m más cerca.
+   - Obstacle_01: diámetro del tronco de 0.8 a 1.1 m. Raíz en Y -0.05, BoxCollider 2.9 × 1.1 × 1.1. Techo +0.50.
+   - Obstacle_03: BoxCollider 2.8 × 1.1 × 1.2, raíz en Y -0.05, con una rama visual más alta. Techo +0.50.
+   - Obstacle_02: BoxCollider 2.8 × 1.1 × 1.4, raíz en Y -0.05. Pasa de +0.40 a +0.50 para tener margen.
+2. **I-02, dos rampas más:** `Ramp_Mid_A` en Z 14 y `Ramp_Mid_B` en Z 22, iguales a las actuales (2.5 m de ancho, 16.7°). Cada tramo del cauce tendría salida a pie, a 3.5 m o menos de cualquier punto. Alternativa descartada: reducir la profundidad a 0.3 m, porque el cauce se leería peor.
+3. **I-03:** si Diego quiere que el tronco enseñe a saltar, cambiar a un BoxCollider de 0.5 m de alto y mantener el rodeo de 2 m por el este. Si no, dejarlo como decorado y quitarle "Optional" del nombre en la próxima regeneración.
+4. **Barandilla (R-12, opcional):** se salta con un solo salto (1.06 m frente a 0.5 m). Si se quiere impedir, subirla a 1.2 m. Recomiendo no tocarla; el retorno funciona.
+
+## Necesidades para Codex (C-02)
+- Decidir si se aplican los ajustes 1 y 2. Si se aplican, reintegrar Obstacles y Geometry en ArroyoPlayable.
+- T09: valorar el retorno por tramo con SafePoint_01..03 (I-04).
+- Cámara: revisar I-05 cuando Diego ejecute M-13. Posibles soluciones: ocultar el cuerpo con la cámara a menos de 0.5 m o subir el pitch.
+
+---
+
+# Registro C-01
 Fecha: 11 de noviembre de 2026.
 Encargo: C-01 / T07, herramienta de editor y escena greybox del arroyo, más casos de aceptación para T10.
 
@@ -85,11 +174,11 @@ Ningún objeto de los grupos visuales tiene collider: la física es igual en amb
 **No ejecutado:**
 - No abrí la escena en el editor con interfaz, así que no la revisé visualmente: no comprobé materiales en pantalla, iluminación ni legibilidad de los obstáculos.
 - No probé los menús interactivos.
-- No ejecuté la prueba A-03, que comprueba que se conserva contenido ajeno. El código está escrito para ello, pero no lo verifiqué.
+- No ejecuté la prueba A-03, que comprueba que se conserva contenido ajeno. *Resuelto en C-02: A-03 OK en batch.*
 - No probé nada jugable: no existen controlador, interacción ni restauración. Todos los casos B de `Docs/QA/ARROYO-ACEPTACION.md` están marcados como `Bloqueada`.
 
 ## Incidencias
-1. **`Game/ProjectSettings/SceneTemplateSettings.json`:** Unity lo crea al arrancar el editor sobre este proyecto. Apareció en mi primera ejecución, lo borré y volvió a aparecer en la segunda, que no creó ninguna escena nueva. Tiene contenido por defecto y no lo escribe mi código. Ahora existe sin rastrear. **Codex decide si versionarlo o borrarlo**; yo no vuelvo a tocarlo.
+1. **`Game/ProjectSettings/SceneTemplateSettings.json`:** Unity lo crea al arrancar el editor sobre este proyecto. Apareció en mi primera ejecución, lo borré y volvió a aparecer en la segunda, que no creó ninguna escena nueva. Tiene contenido por defecto y no lo escribe mi código. *Resuelto: Codex decidió conservarlo (relevo de Codex, T06).*
 2. La primera ejecución batch tardó varios minutos por la importación inicial; la segunda fue mucho más rápida. No hubo errores.
 3. Las zarzas del portal son solo visuales y no bloquean físicamente. El bloqueo de la salida antes de restaurar debe implementarlo T09.
 

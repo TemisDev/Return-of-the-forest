@@ -149,8 +149,21 @@ namespace Bosque.LevelTools
 
         public static void Generate()
         {
+            Generate(ScenePath);
+        }
+
+        /// <summary>
+        /// Genera o actualiza la escena en <paramref name="scenePath"/>. Solo para la escena de nivel
+        /// o copias de prueba; nunca apuntar a la escena de integración de Codex.
+        /// </summary>
+        public static void Generate(string scenePath)
+        {
+            if (scenePath.StartsWith("Assets/_Bosque/Scenes/", StringComparison.OrdinalIgnoreCase))
+            {
+                throw new InvalidOperationException("La herramienta de nivel no escribe en escenas de integración: " + scenePath);
+            }
             var palette = BuildMaterials();
-            var scene = OpenOrCreateScene();
+            var scene = OpenOrCreateScene(scenePath);
             var root = FindOrCreateRoot(scene);
             var b = new GreyboxBuilder();
 
@@ -173,31 +186,31 @@ namespace Bosque.LevelTools
             b.Group(root, RestoredVisuals).gameObject.SetActive(false);
 
             EditorSceneManager.MarkSceneDirty(scene);
-            if (!EditorSceneManager.SaveScene(scene, ScenePath))
+            if (!EditorSceneManager.SaveScene(scene, scenePath))
             {
-                throw new InvalidOperationException("No se pudo guardar " + ScenePath);
+                throw new InvalidOperationException("No se pudo guardar " + scenePath);
             }
             AssetDatabase.SaveAssets();
-            Debug.Log("[ArroyoGreybox] Escena guardada en " + ScenePath + ". Objetos creados: " + b.Created +
+            Debug.Log("[ArroyoGreybox] Escena guardada en " + scenePath + ". Objetos creados: " + b.Created +
                       ", actualizados: " + b.Updated + ".");
         }
 
         // ------------------------------------------------------------------ Escena
 
-        private static Scene OpenOrCreateScene()
+        private static Scene OpenOrCreateScene(string scenePath)
         {
             var active = SceneManager.GetActiveScene();
-            if (active.path == ScenePath && active.isLoaded) return active;
+            if (active.path == scenePath && active.isLoaded) return active;
 
-            if (AssetDatabase.LoadAssetAtPath<SceneAsset>(ScenePath) != null)
+            if (AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePath) != null)
             {
-                return EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
+                return EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
             }
 
             var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
-            if (!EditorSceneManager.SaveScene(scene, ScenePath))
+            if (!EditorSceneManager.SaveScene(scene, scenePath))
             {
-                throw new InvalidOperationException("No se pudo crear " + ScenePath);
+                throw new InvalidOperationException("No se pudo crear " + scenePath);
             }
             return scene;
         }
