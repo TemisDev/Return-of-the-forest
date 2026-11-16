@@ -61,4 +61,4 @@ I-02 (salida del cauce saltando), I-03 (tronco decorativo subible), I-04 (SafeRe
 
 ## Revisión y entrega
 La revisión cubre lógica de estados, repetición de interacciones, separación lógica/visual, referencias serializadas, propiedad de archivos y consultas físicas acotadas. No hay cambios de paquetes ni lógica artística duplicada.
-La rama se entrega mediante PR hacia develop para revisión humana; no se fusiona automáticamente con develop o main. Consultar el último relevo de Codex para el enlace final.
+La rama se entrega en [PR #1 hacia develop](https://github.com/TemisDev/Return-of-the-forest/pull/1), abierto para revisión humana; no se fusiona automáticamente con develop o main.

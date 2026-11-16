@@ -1,6 +1,7 @@
 # Relevo de Codex
 ## Entregable 02 — 16 de noviembre de 2026
 Rama: feature/arroyo-gameplay-v2, creada desde develop actualizado y copia limpia. Remoto: https://github.com/TemisDev/Return-of-the-forest.
+PR de entrega: https://github.com/TemisDev/Return-of-the-forest/pull/1 (base develop, abierto para revisión; sin fusionar).
 T08/T09 implementados: interacción E, retirada única de tres obstáculos, progreso, restauración ambiental, barrera, llegada/victoria y reinicio R. Se preserva T06; Teleport reutiliza el controlador y limpia velocidad vertical.
 Guía vigente: Docs/INTEGRACION-ARROYO-V2.md. Evidencia y limitaciones: Docs/ENTREGABLE-02-RESULTADOS.md. Estos documentos sustituyen el estado pendiente de T08/T09 del registro histórico inferior.
 Suite final: 21/21 aprobadas, incluida prueba automatizada que entra en Play Mode. Integración idempotente 203 → 203 objetos y escena base intacta. Capturas renderizadas de antes/después aprobadas. Build Windows x64 Development: Succeeded, 0 errores, salida 0. Ejecutable en Builds/ArroyoV2/BosqueDeRegreso.exe; arranque headless sostenido 6 segundos sin errores encontrados. No equivale a prueba manual ni en otra PC.
