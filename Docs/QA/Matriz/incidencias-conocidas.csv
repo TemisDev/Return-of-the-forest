@@ -1,0 +1,6 @@
+﻿ID,Prioridad según fuente,Descripción,Impacto,Estado,Commit revalidado,Evidencia
+I-01,Media,Caminar sobre obstáculos 1 y 3,Riesgo al retirar obstáculos con jugador encima,ABIERTA / POR REVALIDAR,,
+I-02,Baja,Salida del cauce exige saltar en tramos,Comprobar si navegación prevista,ABIERTA / POR REVALIDAR,,
+I-03,Baja,Tronco opcional se supera caminando,Comprobar intención didáctica,ABIERTA / POR REVALIDAR,,
+I-04,Baja,Respawn siempre en inicio,Retroceso largo,ABIERTA / POR REVALIDAR,,
+I-05,Baja,Cámara se acerca al cuerpo junto a paredes,Riesgo visual / clipping,ABIERTA / POR REVALIDAR,,
