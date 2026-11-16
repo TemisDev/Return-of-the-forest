@@ -1,4 +1,14 @@
 # Relevo de Codex
+## Entregable 02 — 16 de noviembre de 2026
+Rama: feature/arroyo-gameplay-v2, creada desde develop actualizado y copia limpia. Remoto: https://github.com/TemisDev/Return-of-the-forest.
+T08/T09 implementados: interacción E, retirada única de tres obstáculos, progreso, restauración ambiental, barrera, llegada/victoria y reinicio R. Se preserva T06; Teleport reutiliza el controlador y limpia velocidad vertical.
+Guía vigente: Docs/INTEGRACION-ARROYO-V2.md. Evidencia y limitaciones: Docs/ENTREGABLE-02-RESULTADOS.md. Estos documentos sustituyen el estado pendiente de T08/T09 del registro histórico inferior.
+Suite final: 21/21 aprobadas, incluida prueba automatizada que entra en Play Mode. Integración idempotente 203 → 203 objetos y escena base intacta. Capturas renderizadas de antes/después aprobadas. Build Windows x64 Development: Succeeded, 0 errores, salida 0. Ejecutable en Builds/ArroyoV2/BosqueDeRegreso.exe; arranque headless sostenido 6 segundos sin errores encontrados. No equivale a prueba manual ni en otra PC.
+Se conservaron y revisaron los ajustes URP/batching que serializó la build. No hay proceso Unity ni jugador de prueba activo al cerrar la entrega.
+I-01 mitigada por rechazo de interacción encima del soporte. I-02..I-05 conservan las limitaciones de la guía. No se editan fuentes originales de Arte, nivel base ni documentos de QA. El kit OBJ/texturas se instancia por referencia en la escena integrada; no se asume un kit de prefabs terminado.
+QA siguiente: ejecutar criterios manuales de la guía, entrada real, cámara y build en la PC de prueba. Claude puede reemplazar HUD escuchando StateChanged; no duplicar progreso ni añadir pausa sin contrato.
+
+## Registro histórico T06/T05
 Fecha: 11 de noviembre de 2026.
 Encargo: T06 e integración de C-01. Este avance sustituye el estado pendiente de T06 descrito más abajo.
 
