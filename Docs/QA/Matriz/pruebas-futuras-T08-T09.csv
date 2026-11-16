@@ -1,0 +1,11 @@
+﻿ID,Acción,Esperado,Estado,Commit,Evidencia
+F-01,Presionar E a distancia válida,Activa objeto interactuable una vez,BLOQUEADO: funcionalidad por confirmar,,
+F-02,Presionar E fuera de alcance,No activa objeto,BLOQUEADO: funcionalidad por confirmar,,
+F-03,Interactuar dos veces mismo obstáculo,No incrementa progreso dos veces,BLOQUEADO: funcionalidad por confirmar,,
+F-04,Retirar los tres obstáculos,Progreso completo y restauración única,BLOQUEADO: funcionalidad por confirmar,,
+F-05,Alcanzar salida con progreso incompleto,La salida permanece bloqueada,BLOQUEADO: funcionalidad por confirmar,,
+F-06,Alcanzar salida con progreso completo,La salida se desbloquea,BLOQUEADO: funcionalidad por confirmar,,
+F-07,Reiniciar sesión,Restaura estado inicial,BLOQUEADO: funcionalidad por confirmar,,
+F-08,Probar HUD de progreso,Valor coincide con obstáculos retirados,BLOQUEADO: funcionalidad por confirmar,,
+F-09,Interrumpir interacción con salto/movimiento,No hay doble activación o bloqueo,BLOQUEADO: funcionalidad por confirmar,,
+F-10,Cambiar de escena/reabrir,Sin referencias rotas ni excepciones,BLOQUEADO: funcionalidad por confirmar,,
