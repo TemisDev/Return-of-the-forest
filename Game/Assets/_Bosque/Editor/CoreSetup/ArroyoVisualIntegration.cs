@@ -21,6 +21,29 @@ namespace Bosque.CoreSetup
             try { Integrate(); EditorApplication.Exit(0); }
             catch (Exception e) { Debug.LogException(e); EditorApplication.Exit(1); }
         }
+        public static void FinishLandscapeBatch()
+        {
+            try
+            {
+                ArroyoPlayableSetup.CreateOrOpen();
+                var landscape = GameObject.Find("Gameplay/VisualIntegrationV3").transform;
+                if (landscape.Find("ValleyBackdrop") == null)
+                {
+                    var root = GameObject.Find("ArroyoGreybox").transform;
+                    ArroyoGameplaySetup.Find(root, "WestWall").GetComponent<Renderer>().enabled = false;
+                    var backdrop = ArroyoGameplaySetup.Child(landscape, "ValleyBackdrop");
+                    var rock = Model(backdrop, "Rock_01", Vector3.zero, Vector3.one, "Rock");
+                    Fit(rock, new Bounds(new Vector3(24, -10, 18), new Vector3(25, 16, 65)));
+                    var distant = Model(backdrop, "Rock_01", Vector3.zero, Vector3.one, "Rock");
+                    Fit(distant, new Bounds(new Vector3(36, -7, 38), new Vector3(24, 18, 48)));
+                    var scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+                    EditorSceneManager.MarkSceneDirty(scene); EditorSceneManager.SaveScene(scene);
+                }
+                Debug.Log("[ArteV3] Acabado de paisaje aplicado sin alterar colisiones.");
+                EditorApplication.Exit(0);
+            }
+            catch (Exception e) { Debug.LogException(e); EditorApplication.Exit(1); }
+        }
         public static void Integrate()
         {
             ArroyoPlayableSetup.CreateOrOpen();
