@@ -1,0 +1,6 @@
+﻿ID,Descripción según contexto 13-nov,Severidad previa,Estado actual,Commit probado,Evidencia,Observación
+I-01,Jugador sobre obstáculos 1 y 3; riesgo al retirarlos,MEDIA,PENDIENTE DE REVALIDAR,,,
+I-02,Salir del cauce entre obstáculos requiere salto,BAJA,PENDIENTE DE REVALIDAR,,,
+I-03,Tronco opcional transitable sin salto,BAJA,PENDIENTE DE REVALIDAR,,,
+I-04,Respawn regresa al inicio,BAJA,PENDIENTE DE REVALIDAR,,,
+I-05,Cámara se acerca al cuerpo cerca de paredes,BAJA,PENDIENTE DE REVALIDAR,,,
