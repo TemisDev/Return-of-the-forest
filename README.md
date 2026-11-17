@@ -7,6 +7,8 @@ Abre **Assets/_Bosque/Scenes/Integration/ArroyoPlayable.unity** y pulsa Play.
 WASD mueve, el ratón gira la cámara y Espacio salta. **E** retira el obstáculo cercano y **R** reinicia. Escape libera el cursor y clic izquierdo lo captura de nuevo. Escape todavía no pausa.
 Retira los tres obstáculos desde la orilla (Z 10, 18 y 26). A 3/3 vuelve el agua y se habilita la salida; crúzala para completar. No se puede retirar un obstáculo estando encima.
 El personaje sigue siendo una cápsula provisional. El entorno usa geometría del prototipo y modelos/texturas del kit de Arte. [Contrato de integración y QA](Docs/INTEGRACION-ARROYO-V2.md).
+La integración artística V3 utiliza los prefabs de Arte V2, con estados de suelo/vegetación, ribera y barrera visual. [Comparación y verificación del Entregable 03](Docs/ENTREGABLE-03-INTEGRACION-VISUAL.md).
+Build visual Windows más reciente: **Builds/ArroyoV3/BosqueDeRegreso.exe** (conservar completa la carpeta).
 Build local Windows del Entregable 02: **Builds/ArroyoV2/BosqueDeRegreso.exe**. Mantener juntos el EXE y sus carpetas de datos. La build no está versionada en Git.
 
 ## Dependencias de la base importada

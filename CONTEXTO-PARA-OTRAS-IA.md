@@ -5,6 +5,9 @@
 Documento de entrada para comprender el proyecto y continuar sin perder decisiones ni sobrescribir trabajo. Resume la conversación, los archivos locales y los relevos disponibles. Es una fotografía del estado actual: antes de actuar, consultar los archivos y el estado Git más recientes.
 
 ## Actualización prioritaria — 16 de noviembre, Entregable 02
+### Estado posterior: Entregable 03, integración visual
+develop ya incorpora Programación, Arte y QA V2. El usuario confirmó aprobación manual de nueve aspectos del gameplay V2. En feature/arroyo-visual-integration se integran prefabs/materiales de Arte V2 sin modificar Runtime ni los 36 bloques de física/scripts originales de escena. Suite: 24/24 aprobadas. Consultar Docs/ENTREGABLE-03-INTEGRACION-VISUAL.md y el relevo de Codex para evidencia, build y PR. La repetición manual tras los cambios visuales sigue pendiente; no confundirla con la aprobación anterior.
+
 El cuerpo siguiente conserva el estado histórico del 13 de noviembre. Para continuar usar primero Docs/INTEGRACION-ARROYO-V2.md, Docs/ENTREGABLE-02-RESULTADOS.md y el último relevo de Codex.
 Ahora hay remoto https://github.com/TemisDev/Return-of-the-forest, develop con Arte/QA incorporados y rama de trabajo feature/arroyo-gameplay-v2. La copia estaba limpia al comenzar este ciclo y se actualizó desde origin/develop.
 T08/T09 ya tienen implementación en la escena integrada: interacción con E, tres IDs de obstáculo, progreso, restauración, barrera, llegada/victoria y R para reiniciar. Movimiento/cámara se conservan. Hay HUD provisional y referencias al kit artístico sin modificar originales ni la escena base. I-01 se mitiga rechazando interacción estando encima; I-02 a I-05 mantienen las limitaciones documentadas. Los resultados reales y límites de verificación se publican en el informe del Entregable 02. La entrega de este ciclo apunta al 22 de noviembre; la fecha general anterior era el 27. Claro y Refugio quedan fuera de este ciclo.
