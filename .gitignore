@@ -25,3 +25,5 @@ Game/*.VC.db
 .env
 .env.*
 !.env.example
+
+/Builds/
