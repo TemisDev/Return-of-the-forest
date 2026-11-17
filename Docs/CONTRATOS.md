@@ -1,5 +1,5 @@
 # Contratos del primer corte
-Estado: T06 implementado; interacción y sesión pendientes, 11 de noviembre de 2026.
+Estado: T06, T08 y T09 implementados para el arroyo, 16 de noviembre de 2026. Contrato detallado: [INTEGRACION-ARROYO-V2.md](INTEGRACION-ARROYO-V2.md).
 
 ## Base
 - Editor Unity 6000.3.22f1.
@@ -39,13 +39,10 @@ Velocidad inicial 4,5 m/s; salto configurado 1,1 m; gravedad -24 m/s². Controla
 Escena integrada: Assets/_Bosque/Scenes/Integration/ArroyoPlayable.unity. Es una copia del nivel: Codex debe reintegrar futuros cambios explícitamente. El menú de preparación abre la copia existente sin sobrescribirla.
 Escape libera el cursor; todavía no hay pausa de sesión. ExitMarker no implementa bloqueo de salida.
 
-## Interacción pendiente
-Codex definirá el componente/contrato de interacción y su alcance durante T08. Claude no debe suponer nombres de métodos o eventos.
-La recuperación debe ser única por zona y permitir reiniciar, pero su implementación corresponde a Codex en T09.
+## Interacción y restauración (T08/T09)
+InteractionTarget define Prompt, CanInteract(actor) y TryInteract(actor). PlayerInteractor selecciona una superficie válida a 2,5 m del pecho, con línea de visión, y revalida al pulsar E. RemovableObstacle impide retirar el soporte cuando el jugador está encima.
+RestorationProgress mantiene IDs únicos retirados, progreso y estados restaurado/completado. ArroyoSession aplica el estado a objetos/visuales, barrera y controles. Tras tres obstáculos se abre la barrera; ocupar el volumen de llegada completa una sola vez. R reinicia el nivel sin recargar escena.
+IDs: arroyo.log, arroyo.rocks y arroyo.branches. Eventos: Progress.Changed, Progress.Restored y ArroyoSession.StateChanged. Detalles, firmas, prefabs y criterios de QA en la guía de integración v2.
 
 ## UI pendiente
-Antes de implementar Runtime/UI, Codex debe publicar:
-- Lectura de objetivo y progreso.
-- Eventos al actualizar objetivo, recuperar hábitat y cambiar pausa.
-- Comandos de pausa, reanudación y reinicio.
-Estos son requisitos, no firmas de C# acordadas todavía. Claude presenta una propuesta si necesita otro dato.
+Existe un HUD provisional bajo Runtime/Session, sustituible por Runtime/UI. Puede leer ArroyoSession.Progress y escuchar StateChanged; el reinicio es ArroyoSession.Restart(). La pausa y reanudación siguen sin implementar y no tienen contrato de eventos. No añadir un segundo estado de sesión desde UI.

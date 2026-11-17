@@ -41,7 +41,7 @@ namespace Bosque.CoreSetup
             }
             catch (Exception e) { Debug.LogException(e); EditorApplication.Exit(1); }
         }
-        private static void CaptureImage(Camera camera, string path)
+        internal static void CaptureImage(Camera camera, string path)
         {
             var texture = new RenderTexture(1280, 720, 24);
             var request = new UniversalRenderPipeline.SingleCameraRequest { destination = texture };

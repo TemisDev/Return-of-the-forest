@@ -4,8 +4,10 @@ Prototipo Unity 3D para PC sobre recuperación de hábitats y ODS 15.
 ## Abrir el proyecto
 En Unity Hub, usa Add y selecciona la carpeta **Game**. Editor: **6000.3.22f1**.
 Abre **Assets/_Bosque/Scenes/Integration/ArroyoPlayable.unity** y pulsa Play.
-WASD mueve, el ratón gira la cámara y Espacio salta. Escape libera el cursor y clic izquierdo lo captura de nuevo. Escape todavía no pausa.
-El arroyo y el personaje usan formas provisionales. Interacción y recuperación del agua siguen pendientes.
+WASD mueve, el ratón gira la cámara y Espacio salta. **E** retira el obstáculo cercano y **R** reinicia. Escape libera el cursor y clic izquierdo lo captura de nuevo. Escape todavía no pausa.
+Retira los tres obstáculos desde la orilla (Z 10, 18 y 26). A 3/3 vuelve el agua y se habilita la salida; crúzala para completar. No se puede retirar un obstáculo estando encima.
+El personaje sigue siendo una cápsula provisional. El entorno usa geometría del prototipo y modelos/texturas del kit de Arte. [Contrato de integración y QA](Docs/INTEGRACION-ARROYO-V2.md).
+Build local Windows del Entregable 02: **Builds/ArroyoV2/BosqueDeRegreso.exe**. Mantener juntos el EXE y sus carpetas de datos. La build no está versionada en Git.
 
 ## Dependencias de la base importada
 - Universal Render Pipeline: 17.3.0.
@@ -30,6 +32,7 @@ No ejecutes dos instancias de Unity sobre Game/.
 4. Diego: validación del primer recorrido jugable.
 
 ## Referencias y seguimiento
+- [Entregable 02: cambios, pruebas y limitaciones](Docs/ENTREGABLE-02-RESULTADOS.md).
 - [GDD](GDD-Bosque-de-regreso-v0.1.md).
 - [Plan y tareas](tasks/plan.md).
 - [Trello](https://trello.com/b/rv1JFCL7/bosque-de-regreso-gdd-y-desarrollo-unity-3d).

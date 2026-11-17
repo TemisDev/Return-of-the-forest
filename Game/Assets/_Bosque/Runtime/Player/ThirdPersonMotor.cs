@@ -42,9 +42,14 @@ namespace Bosque.Player
         }
         private void Respawn()
         {
-            controller.enabled = false;
-            transform.SetPositionAndRotation(respawn != null ? respawn.position : initialPosition,
+            Teleport(respawn != null ? respawn.position : initialPosition,
                 respawn != null ? respawn.rotation : initialRotation);
+        }
+        public void Teleport(Vector3 position, Quaternion rotation)
+        {
+            Initialize();
+            controller.enabled = false;
+            transform.SetPositionAndRotation(position, rotation);
             verticalSpeed = 0;
             controller.enabled = true;
         }
