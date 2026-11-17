@@ -1,0 +1,6 @@
+﻿ID,Ruta,Tipo,Uso,Estado de validación
+AR2-01,Game/Assets/_Bosque/Art/Environment/Models/RiverReeds_01.obj,OBJ,Vegetación ribereña decorativa,NO EJECUTADO
+AR2-02,Game/Assets/_Bosque/Art/Environment/Models/ShrubCluster_01.obj,OBJ,Arbusto decorativo,NO EJECUTADO
+AR2-03,Game/Assets/_Bosque/Art/Environment/Textures/reeds_degraded.png,PNG,Detalle visual degradado,NO EJECUTADO
+AR2-04,Game/Assets/_Bosque/Art/Environment/Textures/reeds_restored.png,PNG,Detalle visual restaurado,NO EJECUTADO
+AR2-05,Game/Assets/_Bosque/Art/Editor/ArroyoArtKitBuilder.cs,C# Editor,Genera materiales y prefabs visuales,NO EJECUTADO
