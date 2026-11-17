@@ -83,4 +83,4 @@ La geometría física sigue siendo un prototipo acotado, con límites laterales 
 Conservar `.meta` y vínculos de prefabs. Arte puede proponer nuevas variantes, pero los cambios a la escena integrada se revisan con programación. No activar estados desde prefabs artísticos ni cambiar los colliders para adaptarlos a una malla: ajustar el montaje visual o documentar un cambio de diseño aparte.
 
 ## Entrega
-Commits pequeños, rama publicada y PR hacia develop. No se modifica main ni se fusiona automáticamente. El enlace final y el resultado de build se registran en el relevo de Codex al cerrar la entrega.
+Commits pequeños, rama publicada y [PR #2 hacia develop](https://github.com/TemisDev/Return-of-the-forest/pull/2). No se modifica main ni se fusiona automáticamente. La copia de trabajo queda limpia al cerrar la entrega.

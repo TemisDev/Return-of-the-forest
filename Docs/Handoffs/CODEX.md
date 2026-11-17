@@ -5,7 +5,8 @@ El usuario informó aprobación manual de los nueve aspectos de V2 (movimiento/s
 Arte V2 integrado en ArroyoPlayable mediante prefabs existentes, material de suelo por estado, vegetación ribereña, visuales de obstáculos/barrera, rocas de ribera y paisaje lejano. Se conserva T08/T09 sin cambios de Runtime. Los 36 bloques de física/scripts originales de escena son idénticos a develop; la escena base permanece intacta.
 Generador de Arte ejecutado: siete prefabs existentes conservados con GUIDs originales; ocho materiales con sincronización automática del campo _Color. Meshes, texturas, prefabs y código de Arte no alterados.
 24/24 pruebas automatizadas aprobadas. Geometría activa: degradado 79 renderers/2832 triángulos; restaurado 77/3012. Comparación en Docs/Evidence/ArroyoV3/. Informe: Docs/ENTREGABLE-03-INTEGRACION-VISUAL.md.
-Build Windows x64 Development: Succeeded, 0 errores, salida 0. Ejecutable en Builds/ArroyoV3/BosqueDeRegreso.exe. Arranque headless 6 s sin errores encontrados; proceso de prueba cerrado. Pendiente repetir los nueve aspectos manualmente, revisar oclusión visual de cámara y medir FPS en la PC de prueba. El PR se enlaza al cerrar la publicación.
+Build Windows x64 Development: Succeeded, 0 errores, salida 0. Ejecutable en Builds/ArroyoV3/BosqueDeRegreso.exe. Arranque headless 6 s sin errores encontrados; proceso de prueba cerrado. Pendiente repetir los nueve aspectos manualmente, revisar oclusión visual de cámara y medir FPS en la PC de prueba.
+PR de entrega: https://github.com/TemisDev/Return-of-the-forest/pull/2, abierto hacia develop; sin fusión automática ni cambios a main. No quedan procesos Unity o jugador de prueba activos.
 
 ## Entregable 02 — 16 de noviembre de 2026
 Rama: feature/arroyo-gameplay-v2, creada desde develop actualizado y copia limpia. Remoto: https://github.com/TemisDev/Return-of-the-forest.
