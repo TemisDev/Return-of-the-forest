@@ -1,0 +1,13 @@
+﻿recurso,tipo,uso previsto,estado,integrado en escena
+Environment/Models/Driftwood_V3.obj,OBJ,decoración / referencia visual,GENERADO,NO VERIFICADO
+Environment/Models/FernCluster_V3.obj,OBJ,decoración / referencia visual,GENERADO,NO VERIFICADO
+Environment/Models/RockCluster_V3.obj,OBJ,decoración / referencia visual,GENERADO,NO VERIFICADO
+Environment/Textures/riverbank_dry_v3.png,PNG,textura o interfaz,GENERADO,NO VERIFICADO
+Environment/Textures/riverbank_restored_v3.png,PNG,textura o interfaz,GENERADO,NO VERIFICADO
+Environment/Textures/stream_moss_v3.png,PNG,textura o interfaz,GENERADO,NO VERIFICADO
+Environment/Textures/water_ripple_mask_v3.png,PNG,textura o interfaz,GENERADO,NO VERIFICADO
+UI/Icons/exit_unlocked_v3.png,PNG,textura o interfaz,GENERADO,NO VERIFICADO
+UI/Icons/interact_e_v3.png,PNG,textura o interfaz,GENERADO,NO VERIFICADO
+UI/Icons/progress_leaf_v3.png,PNG,textura o interfaz,GENERADO,NO VERIFICADO
+UI/Icons/restoration_v3.png,PNG,textura o interfaz,GENERADO,NO VERIFICADO
+VFX/Textures/restoration_particles_v3.png,PNG,textura o interfaz,GENERADO,NO VERIFICADO
