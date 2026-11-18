@@ -11,6 +11,7 @@ namespace Bosque.CoreSetup
         public static void BuildWindowsBatch() => BuildWindows("ArroyoV2");
         public static void BuildVisualWindowsBatch() => BuildWindows("ArroyoV3");
         public static void BuildPolishedWindowsBatch() => BuildWindows("ArroyoV3Polish");
+        public static void BuildV4WindowsBatch() => BuildWindows("ArroyoV4");
         private static void BuildWindows(string name)
         {
             try
