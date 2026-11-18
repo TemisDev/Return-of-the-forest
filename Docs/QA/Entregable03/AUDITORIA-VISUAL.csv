@@ -1,0 +1,12 @@
+﻿id,prioridad,componente,caso,pasos,resultado_esperado,resultado_obtenido,estado,commit_probado,entorno,evidencia,incidencia
+AUDITORIA-01,P2,Materiales,Sin materiales magenta,Recorrer escena visual integrada,Todos materiales visibles,,NO EJECUTADO,,,,
+AUDITORIA-02,P2,Modelos,Escala coherente,"Comparar rocas, árboles y jugador",Sin tamaños anómalos,,NO EJECUTADO,,,,
+AUDITORIA-03,P2,Modelos,Pivot y suelo,Comprobar assets en pendiente,Sin flotación ni intersecciones graves,,NO EJECUTADO,,,,
+AUDITORIA-04,P2,Cámara,Oclusiones por vegetación,Mover cámara junto a árboles,La vegetación no bloquea lectura,,NO EJECUTADO,,,,
+AUDITORIA-05,P2,Interfaz,Indicador E legible,Situarse en zona iluminada y oscura,Texto y botones legibles,,NO EJECUTADO,,,,
+AUDITORIA-06,P2,Interfaz,Progreso legible,Retirar obstáculos y leer contador,Contador visible en todo estado,,NO EJECUTADO,,,,
+AUDITORIA-07,P1,Restauración,Cambio visual claro,Comparar capturas antes/después,Estados identificables,,NO EJECUTADO,,,,
+AUDITORIA-08,P2,Iluminación,Sin sobreexposición,Inspeccionar áreas de luz y sombra,Volúmenes visibles,,NO EJECUTADO,,,,
+AUDITORIA-09,P2,VFX,Efecto no tapa objetivo,Completar restauración,Transición permite observar salida,,NO EJECUTADO,,,,
+AUDITORIA-10,P2,UI,Sin distorsión de iconos,Cambiar resolución 16:9 y 16:10,Iconos conservan proporción,,NO EJECUTADO,,,,
+AUDITORIA-11,P2,Materiales,Texturas sin estiramiento notable,Inspeccionar cauce y troncos,Sin distorsión severa,,NO EJECUTADO,,,,
