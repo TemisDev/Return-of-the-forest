@@ -113,4 +113,4 @@ Las muestras cortas automáticas son un diagnóstico estacionario de una build D
 - El agua usa una textura estática; no es una simulación de flujo. El paisaje lejano es decorativo y no amplía el terreno accesible.
 
 ## Entrega
-La misma rama y el PR hacia develop conservan la integración anterior y añaden Arte/QA V3 autorizados. No se modifica main ni se fusiona automáticamente el PR. Enlace y estado final de la build en el relevo de Codex.
+La misma rama y el [PR #2 hacia develop](https://github.com/TemisDev/Return-of-the-forest/pull/2) conservan la integración anterior y añaden Arte/QA V3 autorizados. El título y la descripción se actualizaron con el alcance final y las evidencias. No se modifica main ni se fusiona automáticamente el PR. Copia de trabajo limpia al finalizar la publicación.

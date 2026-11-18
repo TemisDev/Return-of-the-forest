@@ -8,7 +8,7 @@ Suite final 27/27 aprobada, sin omisiones; incluye Play Mode y pruebas de efecto
 Build Windows Development Succeeded, 0 errores. Ejecutable: Builds/ArroyoV3Polish/BosqueDeRegreso.exe. Verificador optativo completó movimiento/salto, restauración, salida y tres ciclos completos en 1920x1080 y 1280x800, con render visible y salida normal 0. No se simularon pulsaciones físicas de E/R.
 Las capturas/FPS con ventana oculta se descartaron por ausencia de render. Solo se publican muestras visibles válidas: 3 s por estado, GTX1650/i5-10300H/16GB, no equivalentes al benchmark de 60 s. Contadores, resultados y capturas en Docs/Evidence/ArroyoV3Polish/.
 Matriz de cobertura separada: 12 casos cubiertos por automatización/inspección dentro del alcance indicado, 19 pendientes completos. Repetir manualmente los nueve criterios históricos, cámara/visibilidad y FPS 60 s; I-02..I-05 no se declaran resueltas.
-PR de la rama: https://github.com/TemisDev/Return-of-the-forest/pull/2 (actualizar descripción con esta entrega; no fusionar automáticamente).
+PR de la rama: https://github.com/TemisDev/Return-of-the-forest/pull/2, actualizado con título, alcance final, evidencias y QA pendiente; permanece abierto hacia develop y sin fusionar. La build y los verificadores se cerraron normalmente; no queda un proceso de prueba propio activo.
 
 ## Entregable 03 — 16 de noviembre de 2026
 Base develop df6830a, copia limpia al iniciar. Rama feature/arroyo-visual-integration.
