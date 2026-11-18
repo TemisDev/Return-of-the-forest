@@ -1,4 +1,24 @@
 # Relevo de Codex
+## Pulido Arte/QA V3 — 18 de noviembre de 2026
+Encargo vigente: Docs/ENTREGABLE-03-PULIDO-Y-VALIDACION.md. Se conserva feature/arroyo-visual-integration y su trabajo anterior.
+Se auditó la copia limpia y develop df6830a. Arte bbca565 y QA 9535f78 no estaban integrados. El usuario autorizó incorporarlos únicamente a esta rama; merges 99c27e6 y aa566b5. develop y main no se modifican.
+Integrados los tres modelos V3 mediante prefabs derivados, las cuatro texturas sobre superficies con UV, los cuatro iconos en el HUD existente y un efecto limitado a 24 partículas. Los OBJ no tienen UV: se usan materiales mates, sin estirarles texturas. Originales de Arte y CSV de QA sin cambios.
+T08/T09 y fuentes Runtime/World, Interaction y Player conservados; 26 bloques de física originales intactos. Solo se añaden referencias de iconos al HUD existente y presentación por StateChanged, sin nuevo progreso/GameManager.
+Suite final 27/27 aprobada, sin omisiones; incluye Play Mode y pruebas de efecto/reinicio/suscripciones. Mutación deliberada detectada y retirada antes de la suite final.
+Build Windows Development Succeeded, 0 errores. Ejecutable: Builds/ArroyoV3Polish/BosqueDeRegreso.exe. Verificador optativo completó movimiento/salto, restauración, salida y tres ciclos completos en 1920x1080 y 1280x800, con render visible y salida normal 0. No se simularon pulsaciones físicas de E/R.
+Las capturas/FPS con ventana oculta se descartaron por ausencia de render. Solo se publican muestras visibles válidas: 3 s por estado, GTX1650/i5-10300H/16GB, no equivalentes al benchmark de 60 s. Contadores, resultados y capturas en Docs/Evidence/ArroyoV3Polish/.
+Matriz de cobertura separada: 12 casos cubiertos por automatización/inspección dentro del alcance indicado, 19 pendientes completos. Repetir manualmente los nueve criterios históricos, cámara/visibilidad y FPS 60 s; I-02..I-05 no se declaran resueltas.
+PR de la rama: https://github.com/TemisDev/Return-of-the-forest/pull/2, actualizado con título, alcance final, evidencias y QA pendiente; permanece abierto hacia develop y sin fusionar. La build y los verificadores se cerraron normalmente; no queda un proceso de prueba propio activo.
+
+## Entregable 03 — 16 de noviembre de 2026
+Base develop df6830a, copia limpia al iniciar. Rama feature/arroyo-visual-integration.
+El usuario informó aprobación manual de los nueve aspectos de V2 (movimiento/salto, cámara, E, tres obstáculos, progreso, restauración, salida, reinicio y consola). Esa aprobación precede a esta integración y no sustituye su repetición manual posterior.
+Arte V2 integrado en ArroyoPlayable mediante prefabs existentes, material de suelo por estado, vegetación ribereña, visuales de obstáculos/barrera, rocas de ribera y paisaje lejano. Se conserva T08/T09 sin cambios de Runtime. Los 36 bloques de física/scripts originales de escena son idénticos a develop; la escena base permanece intacta.
+Generador de Arte ejecutado: siete prefabs existentes conservados con GUIDs originales; ocho materiales con sincronización automática del campo _Color. Meshes, texturas, prefabs y código de Arte no alterados.
+24/24 pruebas automatizadas aprobadas. Geometría activa: degradado 79 renderers/2832 triángulos; restaurado 77/3012. Comparación en Docs/Evidence/ArroyoV3/. Informe: Docs/ENTREGABLE-03-INTEGRACION-VISUAL.md.
+Build Windows x64 Development: Succeeded, 0 errores, salida 0. Ejecutable en Builds/ArroyoV3/BosqueDeRegreso.exe. Arranque headless 6 s sin errores encontrados; proceso de prueba cerrado. Pendiente repetir los nueve aspectos manualmente, revisar oclusión visual de cámara y medir FPS en la PC de prueba.
+PR de entrega: https://github.com/TemisDev/Return-of-the-forest/pull/2, abierto hacia develop; sin fusión automática ni cambios a main. No quedan procesos Unity o jugador de prueba activos.
+
 ## Entregable 02 — 16 de noviembre de 2026
 Rama: feature/arroyo-gameplay-v2, creada desde develop actualizado y copia limpia. Remoto: https://github.com/TemisDev/Return-of-the-forest.
 PR de entrega: https://github.com/TemisDev/Return-of-the-forest/pull/1 (base develop, abierto para revisión; sin fusionar).
