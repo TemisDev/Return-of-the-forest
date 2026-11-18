@@ -1,4 +1,6 @@
 using Bosque.Session;
+using Bosque.Interaction;
+using Bosque.Player;
 using NUnit.Framework;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -62,6 +64,65 @@ namespace Bosque.Tests
             Assert.That(session.Progress.IsRestored, Is.True);
             Assert.That(session.Progress.RemovedCount, Is.EqualTo(3));
             Assert.That(session.TryExit(session.Player), Is.True);
+        }
+        [TestCase(false)] [TestCase(true)] public void MovingInteractionDoesNotInterruptTheController(bool jump)
+        {
+            var player = session.Player;
+            var actor = player.GetComponent<PlayerInteractor>();
+            player.Teleport(new Vector3(-.6f, 0, 10), Quaternion.identity);
+            Physics.SyncTransforms();
+            player.Simulate(Vector2.zero, false, 0, .02f);
+            player.Simulate(Vector2.up, jump, 0, .02f);
+            Physics.SyncTransforms();
+            Assert.That(actor.TryInteract(), Is.True, "Interaccion desde la orilla durante movimiento/salto.");
+            Assert.That(session.Progress.RemovedCount, Is.EqualTo(1));
+            var before = player.transform.position;
+            for (int i = 0; i < 12; i++) player.Simulate(Vector2.up, false, 0, .02f);
+            Assert.That(player.transform.position.z, Is.GreaterThan(before.z + .5f));
+            Assert.That(player.GetComponent<CharacterController>().enabled, Is.True);
+        }
+        [Test] public void DecorationDoesNotHideTargetsFromNineBankApproaches()
+        {
+            var player = session.Player;
+            var actor = player.GetComponent<PlayerInteractor>();
+            foreach (int z in new[] { 10, 18, 26 })
+                foreach (float offset in new[] { -.8f, 0, .8f })
+                {
+                    player.Teleport(new Vector3(-.6f, 0, z + offset), Quaternion.identity);
+                    Physics.SyncTransforms(); actor.Scan();
+                    Assert.That(actor.Target, Is.Not.Null, "Decoracion tapa objetivo Z=" + z + ", offset=" + offset);
+                }
+            Assert.That(session.Progress.RemovedCount, Is.Zero, "Escanear no retira nada.");
+        }
+        [Test] public void CameraOrbitRemainsFiniteAndUnobstructedAlongV4Bank()
+        {
+            var player = session.Player;
+            var camera = Object.FindFirstObjectByType<ThirdPersonCamera>();
+            int samples = 0;
+            for (int state = 0; state < 2; state++)
+            {
+                foreach (float x in new[] { -.6f, 3, 5.2f })
+                    foreach (int z in new[] { 3, 10, 18, 26, 33 })
+                    {
+                        player.Teleport(new Vector3(x, 0, z), Quaternion.identity);
+                        Physics.SyncTransforms(); camera.Configure(player.transform);
+                        for (int angle = 0; angle < 16; angle++)
+                        {
+                            camera.Step(new Vector2(187.5f, 0), .02f);
+                            for (int frame = 0; frame < 30; frame++) camera.Step(Vector2.zero, .02f);
+                            var focus = player.transform.position + Vector3.up * 1.35f;
+                            var offset = camera.transform.position - focus;
+                            Assert.That(float.IsNaN(offset.sqrMagnitude) || float.IsInfinity(offset.sqrMagnitude), Is.False);
+                            Assert.That(offset.magnitude, Is.InRange(.19f, 4.5f));
+                            foreach (var hit in Physics.RaycastAll(focus, offset.normalized, offset.magnitude - .1f, ~0, QueryTriggerInteraction.Ignore))
+                                Assert.That(hit.transform == player.transform || hit.transform.IsChildOf(player.transform), Is.True,
+                                    "Camara detras de collider " + hit.transform.name + " en " + player.transform.position);
+                            samples++;
+                        }
+                    }
+                if (state == 0) Remove(3);
+            }
+            Assert.That(samples, Is.EqualTo(480));
         }
     }
 }
