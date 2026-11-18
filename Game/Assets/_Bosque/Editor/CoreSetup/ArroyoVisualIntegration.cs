@@ -195,7 +195,7 @@ namespace Bosque.CoreSetup
             }
             return go.transform;
         }
-        private static void Fit(Transform visual, Bounds target)
+        internal static void Fit(Transform visual, Bounds target)
         {
             var renderers = visual.GetComponentsInChildren<Renderer>();
             var bounds = renderers[0].bounds;
