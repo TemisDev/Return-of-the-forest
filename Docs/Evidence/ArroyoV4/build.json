@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-18",
+  "commit": "e692340",
+  "unity": "6000.3.22f1",
+  "target": "StandaloneWindows64",
+  "options": "Development",
+  "result": "Succeeded",
+  "errors": 0,
+  "editorExitCode": 0,
+  "output": "Builds/ArroyoV4/BosqueDeRegreso.exe",
+  "files": [
+    "Bosque de regreso_BurstDebugInformation_DoNotShip",
+    "BosqueDeRegreso_Data",
+    "D3D12",
+    "MonoBleedingEdge",
+    "BosqueDeRegreso.exe",
+    "UnityCrashHandler64.exe",
+    "UnityPlayer.dll",
+    "WinPixEventRuntime.dll"
+  ]
+}

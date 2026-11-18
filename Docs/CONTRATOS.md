@@ -46,3 +46,6 @@ IDs: arroyo.log, arroyo.rocks y arroyo.branches. Eventos: Progress.Changed, Prog
 
 ## UI pendiente
 Existe un HUD provisional bajo Runtime/Session, sustituible por Runtime/UI. Puede leer ArroyoSession.Progress y escuchar StateChanged; el reinicio es ArroyoSession.Restart(). La pausa y reanudación siguen sin implementar y no tienen contrato de eventos. No añadir un segundo estado de sesión desde UI.
+
+## Presentación V4 integrada (18/11/2026)
+El HUD de Session conserva la autoridad de ArroyoSession. F1 alterna instrucciones sin pausar; R reinicia y cierra la ayuda. Al completar aparecen mensaje ODS 15 y botones de reinicio/salida. Escape libera el cursor y no pausa. No se cambia ninguna API compartida. Los iconos y derivados visuales V4 se conectan en ArroyoPlayable; no regenerar esta escena con el generador de greybox. Los recursos de Scenes/Integration/ArtV4 no contienen lógica de gameplay ni colliders. Informe vigente: Docs/ENTREGABLE-04-INTEGRACION-Y-PULIDO.md.

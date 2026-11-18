@@ -4,6 +4,7 @@ Prototipo Unity 3D para PC sobre recuperación de hábitats y ODS 15.
 ## Abrir el proyecto
 En Unity Hub, usa Add y selecciona la carpeta **Game**. Editor: **6000.3.22f1**.
 Abre **Assets/_Bosque/Scenes/Integration/ArroyoPlayable.unity** y pulsa Play.
+Entrega vigente: **V4**, en `feature/arroyo-final-polish`. [Integración, evidencias y pasos para QA](Docs/ENTREGABLE-04-INTEGRACION-Y-PULIDO.md). Build local Windows Development: **Builds/ArroyoV4/BosqueDeRegreso.exe**; conservar completa la carpeta. F1 muestra ayuda; al completar aparecen el mensaje ODS 15 y los botones de reinicio y salida. La ayuda no pausa. La aceptación manual para RC1 sigue pendiente.
 WASD mueve, el ratón gira la cámara y Espacio salta. **E** retira el obstáculo cercano y **R** reinicia. Escape libera el cursor y clic izquierdo lo captura de nuevo. Escape todavía no pausa.
 Retira los tres obstáculos desde la orilla (Z 10, 18 y 26). A 3/3 vuelve el agua y se habilita la salida; crúzala para completar. No se puede retirar un obstáculo estando encima.
 El personaje sigue siendo una cápsula provisional. El entorno usa geometría del prototipo y modelos/texturas del kit de Arte. [Contrato de integración y QA](Docs/INTEGRACION-ARROYO-V2.md).
@@ -42,6 +43,6 @@ No ejecutes dos instancias de Unity sobre Game/.
 - Dirección visual y fuentes en assets/. Las imágenes son arte conceptual, no modelos 3D.
 
 ## Git
-Repositorio local para este juego, rama inicial codex/bootstrap-game. No hay remoto configurado ni publicación.
+Repositorio del juego: https://github.com/TemisDev/Return-of-the-forest. Base de integración `develop`; `main` se conserva. El trabajo V4 se entrega mediante PR para revisión, sin fusión automática.
 Game/Library, cachés y registros quedan fuera del repositorio. Se conservan .meta. Los recursos binarios del juego usarán Git LFS.
 Antes de añadir un remoto y compartir, los tres integrantes deben tener Git LFS instalado y usar la misma versión de Unity.
