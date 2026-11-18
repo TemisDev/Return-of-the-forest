@@ -1,0 +1,13 @@
+﻿id,prioridad,componente,caso,pasos,resultado_esperado,resultado_obtenido,estado,commit_probado,entorno,evidencia,incidencia
+REGRESION-01,P1,Movimiento,WASD y salto,Iniciar escena; caminar en diagonales; saltar,"Control consistente, sin salto aéreo repetido",,NO EJECUTADO,,,,
+REGRESION-02,P1,Cámara,Órbita y muros,Rotar cámara cerca de 3 paredes,Cámara conserva visión sin penetraciones graves,,NO EJECUTADO,,,,
+REGRESION-03,P1,Interacción,E en rango,Acercarse a Obstáculo 01; presionar E,Obstáculo se retira,,NO EJECUTADO,,,,
+REGRESION-04,P1,Interacción,E fuera de rango,Alejarse y presionar E,No cambia estado,,NO EJECUTADO,,,,
+REGRESION-05,P1,Interacción,E repetida,Interactuar varias veces con obstáculo ya retirado,Progreso aumenta solo una vez,,NO EJECUTADO,,,,
+REGRESION-06,P1,Progreso,Marcador 0/3 a 3/3,Retirar tres obstáculos,Marcador coincide con progreso,,NO EJECUTADO,,,,
+REGRESION-07,P1,Restauración,Activación al completar,Retirar obstáculos 1 2 y 3,Restauración se activa una vez,,NO EJECUTADO,,,,
+REGRESION-08,P1,Salida,Bloqueada antes de 3/3,Llegar a salida al inicio,No hay final anticipado,,NO EJECUTADO,,,,
+REGRESION-09,P1,Salida,Habilitada tras 3/3,Completar y acceder a salida,Permite finalizar,,NO EJECUTADO,,,,
+REGRESION-10,P1,Reinicio,R restaura nivel,"Tras completar, presionar R","Vuelven obstáculos, estado y progreso inicial",,NO EJECUTADO,,,,
+REGRESION-11,P1,Colisión,Sobre obstáculo al retirarlo,Subirse a obstáculo; interactuar,No genera bloqueo o caída imprevisible,,NO EJECUTADO,,,,
+REGRESION-12,P1,Consola,Ausencia errores rojos,Recorrer nivel y reiniciar varias veces,Sin excepciones durante pruebas,,NO EJECUTADO,,,,
