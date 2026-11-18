@@ -73,5 +73,19 @@ namespace Bosque.Tests
                 { session.Progress.TryRemove("arroyo.log"); session.Progress.TryRemove("arroyo.rocks"); session.Progress.TryRemove("arroyo.branches"); }
             }
         }
+        [Test] public void PolishedHudAndEffectHaveRequiredArtReferences()
+        {
+            var hud = Object.FindFirstObjectByType<ArroyoPrototypeHud>();
+            Assert.That(hud.HasArtIcons, Is.True, "Falta configurar uno de los cuatro iconos.");
+            var effects = Object.FindObjectsByType<RestorationFeedback>(FindObjectsSortMode.None);
+            Assert.That(effects.Length, Is.EqualTo(1));
+            var particles = effects[0].GetComponent<ParticleSystem>();
+            Assert.That(particles, Is.Not.Null);
+            Assert.That(particles.main.loop, Is.False);
+            Assert.That(particles.main.playOnAwake, Is.False);
+            Assert.That(particles.main.maxParticles, Is.LessThanOrEqualTo(24));
+            Assert.That(particles.GetComponent<ParticleSystemRenderer>().sharedMaterial.shader.name,
+                Is.EqualTo("Universal Render Pipeline/Particles/Unlit"));
+        }
     }
 }
