@@ -99,3 +99,7 @@ La prueba UX con una persona ajena al desarrollo (U01–U04) sigue pendiente: co
 Incidencias conservadas: I-01 protección de retirada estando encima, revalidar manualmente; I-02 salida del cauce entre rampas requiere salto; I-03 tronco opcional subible caminando; I-04 respawn inicial sin checkpoints; I-05 cercanía de cámara/cápsula junto a muros por observar manualmente. El personaje sigue siendo una cápsula, hay límites geométricos del prototipo visibles, agua estática y audio/animación final pendientes. No se incorporaron nuevas zonas.
 
 No fusionar automáticamente el PR. La aceptación final y la decisión de generar RC1 corresponden a QA y al usuario después de resolver o aceptar expresamente los pendientes.
+
+## Entrega Git
+
+[PR #3 hacia develop](https://github.com/TemisDev/Return-of-the-forest/pull/3), abierto y sin fusionar. Commits pequeños de integración `81948f0`, HUD `63b6462`, diagnóstico/build `e692340` y documentación/evidencias `e246355`. Se conserva `main` en `56d2558` y `develop` en `6b594e9`. No se publica una release ni se crea una etiqueta de versión final.
