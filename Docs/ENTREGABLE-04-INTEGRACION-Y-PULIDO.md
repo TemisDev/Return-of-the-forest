@@ -92,13 +92,41 @@ El verificador usa las APIs existentes para moverse/saltar, retirar tres obstác
 
 Diego debe usar los **41 casos** de `Docs/QA/Entregable04/MATRIZ-QA-V4.csv`. El [registro de cobertura por ID](Evidence/ArroyoV4/cobertura-QA-V4.csv) es separado y no reescribe los NO EJECUTADO originales. CUBIERTO significa únicamente el modo y alcance documentados, nunca aprobación humana implícita. Repetir los nueve criterios manuales aprobados en V2 sobre esta versión: movimiento/salto, cámara, E, tres obstáculos, 3/3, restauración, salida, R y consola. Añadir F1, foco/cursor, botones finales, cierre por ventana y pantalla completa. Probar cámara y línea de visión junto a todos los props nuevos; recorrer las rampas; revisar alfa/sombras desde varios ángulos.
 
-Conteo de cobertura: **15 cubiertos** en el alcance automatizado/inspeccionado, **19 parciales**, **7 no ejecutados**. Aceptación humana pendiente en los 41. La revisión del código comprobó separación entre presentación y estado, límites de partículas/geometría y conservación de fuentes/referencias. Las entradas físicas y la sensación de cámara permanecen fuera de la suite automatizada y se entregan expresamente a QA.
+Conteo inicial de cobertura: **15 cubiertos**, **19 parciales**, **7 no ejecutados**. Tras la ampliación descrita abajo: **17 cubiertos** en su alcance automático/inspeccionado, **20 parciales**, **4 no ejecutados** (U01–U04). Aceptación humana pendiente en los 41. La revisión del código comprobó separación entre presentación y estado, límites de partículas/geometría y conservación de fuentes/referencias. Las entradas físicas y la sensación de cámara permanecen fuera de la suite automatizada y se entregan expresamente a QA.
 
 La prueba UX con una persona ajena al desarrollo (U01–U04) sigue pendiente: comprensión del objetivo, duración del primer recorrido, reconocimiento del cambio e interpretación de iconos. No inferir esos resultados del recorrido automático.
 
 Incidencias conservadas: I-01 protección de retirada estando encima, revalidar manualmente; I-02 salida del cauce entre rampas requiere salto; I-03 tronco opcional subible caminando; I-04 respawn inicial sin checkpoints; I-05 cercanía de cámara/cápsula junto a muros por observar manualmente. El personaje sigue siendo una cápsula, hay límites geométricos del prototipo visibles, agua estática y audio/animación final pendientes. No se incorporaron nuevas zonas.
 
 No fusionar automáticamente el PR. La aceptación final y la decisión de generar RC1 corresponden a QA y al usuario después de resolver o aceptar expresamente los pendientes.
+
+## Ampliación de cierre solicitada por el usuario — 18/11/2026
+
+Suite final ampliada: **36/36 aprobadas**, cero fallidas y cero omitidas, salida 0 del editor. [Resultados completos y alcance](Evidence/ArroyoV4/pruebas-cierre.json). Pruebas en `ec960ba`; verificador externo en `cc1436f`. El primer intento de mutación no falló y reveló que el teclado virtual no estaba procesando teclas en segundo plano. Se reforzó la prueba para exigir eventos procesados y restaurar sus ajustes temporales. Tras invertir deliberadamente la protección de foco del HUD, la prueba falló (`Expected False but was True`, salida 2); se restauraron los bytes originales y pasó la suite completa. Ninguna mutación se incluyó en un commit ni en la build.
+
+Se añaden cuatro casos de prueba sobre el escenario real: interacción mientras se camina, interacción al saltar desde la orilla, escaneo desde nueve posiciones próximas a los tres obstáculos y recorrido de **480 posiciones de cámara** (15 ubicaciones × 16 ángulos × dos estados). Verifican continuidad del controlador, objetivos accesibles, posiciones finitas de cámara y ausencia de colliders entre su foco y su posición. No prueban que una planta o la cápsula nunca oculten visualmente al jugador: esa percepción sigue pendiente. La matriz separada actualiza N05, N10, V04 y R02 con este alcance.
+
+También se añade una prueba de Play Mode con eventos de teclado procesados por Input System y comprobación explícita de `wasPressedThisFrame`. El entorno batch informa **focus=False y cursorLocked=False**: se verifica la protección de ayuda/reinicio/interacción sin foco. No se presenta como prueba de F1/E/R con foco. Los ajustes temporales y el teclado virtual se restauran al terminar el caso; no se cambia la configuración del juego.
+
+Se intentó comprobar la entrada mediante control de escritorio en la build normal. Las pulsaciones y el clic de cierre no produjeron cambios verificables; no se atribuye una causa al juego ni se aprueban esos pasos. Ese proceso de prueba se terminó durante la limpieza y no se cuenta como cierre normal ni como prueba humana. La apertura, el render y los cierres normales de los recorridos automáticos sí tienen evidencia separada. El formulario [CIERRE-QA-V4](CIERRE-QA-V4.md) deja instrucciones y campos concretos para la entrada física, cámara, botones, pantalla completa y UX.
+
+### Repetición a 1080p con RAM externa
+
+Se entrega `Tools/Verify-ArroyoV4.ps1`: abre la build visible, ejecuta el verificador, muestrea working set desde Windows a 1 Hz, comprueba resolución/render/resultado y código de salida, y conserva CSV/JSON. Rechaza una carpeta no vacía para no mezclar ejecuciones. Sintaxis y protección de resultados existentes verificadas. Ejemplo desde PowerShell en la raíz: `& .\Tools\Verify-ArroyoV4.ps1 -OutputDirectory '.dev-logs/qa-nueva-ejecucion'`. No cerrar/minimizar la ventana durante el recorrido ni ejecutar otra carga pesada.
+
+Misma build de código e692340, mismo hardware y dos muestras de 60 s, a 1920×1080 con render verificado. Tres ciclos completos y **cierre normal 0**. [Datos del juego](Evidence/ArroyoV4/build-1080-ram.json), [resumen de Windows](Evidence/ArroyoV4/windows-memory-1080.json), [128 muestras de RAM](Evidence/ArroyoV4/memory-1080.csv).
+
+| Segunda medición 1080p | Degradado | Restaurado |
+|---|---:|---:|
+| FPS medios | 193.48 | 172.63 |
+| Mínimo por peor frame | 61.13 | 48.79 |
+| Peor frame | 16.36 ms | 20.49 ms |
+| Distancia | 272.53 m | 272.53 m |
+| Working set máximo observado por fase aproximada | 623.008 MiB | 636.332 MiB |
+
+Máximo observado del proceso en la ejecución completa: **636.332 MiB**. Las fases de RAM se asignan por hitos de captura y pueden incluir transición; no son fronteras exactas del muestreo FPS. El máximo es muestreado, no instantáneo, y no incluye VRAM. Las medias superan 60 FPS, pero hubo un frame por debajo de ese objetivo en restaurado. **No se garantiza 60 FPS en todos los frames** ni se atribuye una causa sin un perfil de ese pico. Se conservan ambas mediciones, sin sustituir la primera por la más favorable. La variación entre sesiones requiere revisión final de rendimiento por QA.
+
+La build no se recompila en esta ampliación porque solo se añaden pruebas del editor, un verificador externo y documentación; el código y la escena del ejecutable permanecen intactos. [Manifiesto de 288 archivos de runtime con SHA256](Evidence/ArroyoV4/build-manifest.json), excluyendo la carpeta de símbolos marcada DoNotShip. El manifiesto identifica esta build, no constituye una publicación final ni prueba de apertura en otro equipo.
 
 ## Entrega Git
 
