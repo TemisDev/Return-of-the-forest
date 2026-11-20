@@ -42,6 +42,18 @@ namespace Bosque.CoreSetup
                 }
                 Pose(player, camera);
                 ArroyoPreview.CaptureImage(camera, Path.Combine(folder, "arroyo-v3-" + label + "-restored.png"));
+                if (GameObject.Find("Gameplay/ArtV4Integration") != null)
+                {
+                    foreach (var node in UnityEngine.Object.FindObjectsByType<Transform>(FindObjectsSortMode.None))
+                        if (node.name.StartsWith("V4Foam_"))
+                        {
+                            var mesh = node.GetComponentInChildren<Renderer>();
+                            Debug.Log("[V4Preview] " + node.name + " bounds=" + mesh.bounds + " enabled=" + mesh.enabled + " material=" + mesh.sharedMaterial.name);
+                        }
+                    camera.transform.position = new Vector3(-.5f, 1.8f, 14);
+                    camera.transform.LookAt(new Vector3(-2.5f, -.3f, 14));
+                    ArroyoPreview.CaptureImage(camera, Path.Combine(folder, "arroyo-v4-foam-detail.png"));
+                }
                 Debug.Log("[ArteV3] Capturas " + label + " mediante interacciones reales, progreso " + session.Progress.RemovedCount);
                 EditorApplication.Exit(0);
             }
