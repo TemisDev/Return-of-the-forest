@@ -97,3 +97,7 @@ Las verificaciones actuales permiten entregar una candidata identificada al equi
 2. Medición visible: `& .\Tools\Verify-ArroyoRC1.ps1 -OutputDirectory '.dev-logs/rc1-nueva-corrida'`. Repetir tres veces con carpetas distintas. No minimizar la ventana ni ejecutar compilaciones durante la medición.
 3. Verificación corta en otra resolución: añadir `-SecondsPerState 3 -Width 1280 -Height 800`. Para pantalla completa: `-Fullscreen 1`. Estos recorridos cortos no reemplazan los tres de 60 s.
 4. Pruebas Unity: runner EditMode con `-runTests -testPlatform EditMode -testResults <xml>`, que también contiene casos de Play Mode. Los logs/XML completos permanecen en `.dev-logs/`; se publican resúmenes revisados sin rutas personales.
+
+## Entrega en GitHub
+
+[PR #6 hacia develop](https://github.com/TemisDev/Return-of-the-forest/pull/6), abierto y sin fusionar. Código/herramientas y evidencias del Entregable 05 subidos a `feature/arroyo-release-candidate`. Los ejecutables y ZIP permanecen locales, excluidos de Git. El trabajo V6 posterior y el relevo de Claude se conservaron sin incorporarlos al PR. Main no se modificó. La aceptación humana y RC1-PERF-01 continúan pendientes; no se publica una release definitiva.
