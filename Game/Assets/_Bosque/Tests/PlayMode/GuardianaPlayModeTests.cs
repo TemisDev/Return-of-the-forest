@@ -243,7 +243,7 @@ namespace Bosque.Tests.PlayMode
                 var rt = new RenderTexture(1600, 900, 24); var prev = cam.targetTexture;
                 cam.targetTexture = rt; cam.Render(); RenderTexture.active = rt;
                 var img = new Texture2D(1600, 900, TextureFormat.RGB24, false); img.ReadPixels(new Rect(0, 0, 1600, 900), 0, 0); img.Apply();
-                File.WriteAllBytes(Path.Combine(dir, "guardiana_" + name + ".png"), img.EncodeToPNG());
+                File.WriteAllBytes(Path.Combine(dir, "guardiana_" + name + ".jpg"), img.EncodeToJPG(90));
                 cam.targetTexture = prev; RenderTexture.active = null; rt.Release(); Object.Destroy(rt); Object.Destroy(img);
             }
             motor.Teleport(new Vector3(3, 0, 1), Quaternion.Euler(0, 180, 0)); yield return Settle(1.2f);

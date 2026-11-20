@@ -1,5 +1,14 @@
 # Relevo de Claude Code
 
+# Bloque 02: personaje, animaciones y audio (20/11/2026)
+
+- **Rama:** `feature/character-animation-audio`, que sale de la integración V6 `4c973e5`.
+- **Build:** `Builds/Windows/V7-Character-Audio`.
+- **Informe y pruebas manuales:** `Docs/Character/INFORME-BLOQUE-02.md`.
+- **Regenerar:** `Bosque.CharacterEditor.GuardianaBuilder.BuildAllBatch`.
+- **Pruebas:** PlayMode en `Tests/PlayMode` (9/9) y EditMode 38/38.
+- **Cambios en el motor** (compatibles con lo anterior): eventos de solo lectura, Shift para caminar y margen de apoyo de 0,1 s.
+
 # Bloque 01.2: integración del arte V6 en ArroyoPlayable (20/11/2026)
 
 - **Rama:** `feature/arroyo-v6-integration` (sin fusionar). Contiene `develop` (arte V6 y QA V6), las correcciones P1 `afcbe4d` y RC1.

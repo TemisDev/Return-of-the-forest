@@ -1,0 +1,15 @@
+{
+    "identifier": "V7-Character-Audio",
+    "commit": "8a944c8e05a8616603968230499e134ca2002ade",
+    "unity": "6000.3.22f1",
+    "builtAtUtc": "2026-11-20T21:22:02.6145478Z",
+    "target": "StandaloneWindows64",
+    "scene": "Assets/_Bosque/Scenes/Integration/ArroyoPlayable.unity",
+    "options": "None",
+    "development": false,
+    "optionalQaVerifier": true,
+    "errors": 0,
+    "warnings": 0,
+    "totalBytes": 383123014,
+    "buildSeconds": 141.93319929999999
+}
