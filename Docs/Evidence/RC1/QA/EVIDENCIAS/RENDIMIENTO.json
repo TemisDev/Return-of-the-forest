@@ -1,0 +1,57 @@
+{
+  "buildCommit": "8838ff5c74038a5399d15b141e30a6b60e5fc949",
+  "runs": [
+    {
+      "corrida": "RUN-01",
+      "sha_build": "8838ff5c74038a5399d15b141e30a6b60e5fc949",
+      "equipo": "Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz",
+      "gpu": "NVIDIA GeForce GTX 1650",
+      "ram_gb": 15.84,
+      "resolucion": "1920x1080",
+      "calidad": "PC",
+      "vsync_limite": "vsync=0;target=-1",
+      "herramienta": "Time.unscaledDeltaTime + ProfilerRecorder; Windows working set 1Hz",
+      "duracion_s": 120.004,
+      "fps_medio": 227.94,
+      "fps_minimo": 17.72,
+      "ram_pico_mb": 616.582,
+      "evidencia": "EVIDENCIAS/RUN-01.json",
+      "observaciones": "RAM en MiB; minimo=inverso peor frame, no 1% low. Patrulla API x3 z3-32; 60s/estado; transicion medida aparte en tercer ciclo; no capturas durante esa ventana."
+    },
+    {
+      "corrida": "RUN-02",
+      "sha_build": "8838ff5c74038a5399d15b141e30a6b60e5fc949",
+      "equipo": "Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz",
+      "gpu": "NVIDIA GeForce GTX 1650",
+      "ram_gb": 15.84,
+      "resolucion": "1920x1080",
+      "calidad": "PC",
+      "vsync_limite": "vsync=0;target=-1",
+      "herramienta": "Time.unscaledDeltaTime + ProfilerRecorder; Windows working set 1Hz",
+      "duracion_s": 120.007,
+      "fps_medio": 234.65,
+      "fps_minimo": 18.09,
+      "ram_pico_mb": 604.66,
+      "evidencia": "EVIDENCIAS/RUN-02.json",
+      "observaciones": "RAM en MiB; minimo=inverso peor frame, no 1% low. Patrulla API x3 z3-32; 60s/estado; transicion medida aparte en tercer ciclo; no capturas durante esa ventana."
+    },
+    {
+      "corrida": "RUN-03",
+      "sha_build": "8838ff5c74038a5399d15b141e30a6b60e5fc949",
+      "equipo": "Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz",
+      "gpu": "NVIDIA GeForce GTX 1650",
+      "ram_gb": 15.84,
+      "resolucion": "1920x1080",
+      "calidad": "PC",
+      "vsync_limite": "vsync=0;target=-1",
+      "herramienta": "Time.unscaledDeltaTime + ProfilerRecorder; Windows working set 1Hz",
+      "duracion_s": 120.008,
+      "fps_medio": 228.29,
+      "fps_minimo": 26.1,
+      "ram_pico_mb": 602.617,
+      "evidencia": "EVIDENCIAS/RUN-03.json",
+      "observaciones": "RAM en MiB; minimo=inverso peor frame, no 1% low. Patrulla API x3 z3-32; 60s/estado; transicion medida aparte en tercer ciclo; no capturas durante esa ventana."
+    }
+  ],
+  "method": "Three equivalent automatic patrols; no human playthrough claim"
+}

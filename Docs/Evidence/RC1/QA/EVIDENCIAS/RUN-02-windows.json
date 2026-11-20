@@ -1,0 +1,35 @@
+{
+  "source": "External Windows .NET Process.WorkingSet64",
+  "intervalSeconds": 1,
+  "width": 1920,
+  "height": 1080,
+  "executableSha256": "8DA50E79B68E979C53CAFB639961CA6C34D39BFED8E87B91CF9CAF5C12C081FE",
+  "requestedFullscreen": 0,
+  "launchToFirstCaptureObservedSeconds": 7.1116493,
+  "exitCode": 0,
+  "peakWorkingSetMiB": 604.66,
+  "sampleCount": 133,
+  "phaseNote": "Capture milestones approximate phases; include startup and transitions; not VRAM or instantaneous peak",
+  "phases": [
+    {
+      "phase": "completed",
+      "peakWorkingSetMiB": 604.66,
+      "samples": 4
+    },
+    {
+      "phase": "degraded",
+      "peakWorkingSetMiB": 601.949,
+      "samples": 60
+    },
+    {
+      "phase": "restored",
+      "peakWorkingSetMiB": 603.773,
+      "samples": 60
+    },
+    {
+      "phase": "startup",
+      "peakWorkingSetMiB": 587.91,
+      "samples": 9
+    }
+  ]
+}

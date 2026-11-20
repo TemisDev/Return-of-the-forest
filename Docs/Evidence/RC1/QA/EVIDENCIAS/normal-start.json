@@ -1,0 +1,11 @@
+{
+  "codeCommit": "8838ff5c74038a5399d15b141e30a6b60e5fc949",
+  "verificationFlagUsed": false,
+  "normalStartupObserved": true,
+  "initialHudZeroOfThreeObserved": true,
+  "capture": "Art/CAPTURAS/normal-window.jpg",
+  "desktopInputF1": "NO VERIFICADO: la accion de la herramienta no produjo cambio visible",
+  "desktopClose": "NO VERIFICADO",
+  "terminatedOwnTestProcessForCleanup": false,
+  "notCountedAsNormalClose": true
+}
