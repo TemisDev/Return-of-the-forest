@@ -21,7 +21,7 @@ $brLog = Join-Path $brOutput 'Player.log'
 $brArguments = @('-screen-width', $Width, '-screen-height', $Height, '-screen-fullscreen', $Fullscreen,
     '-arroyo-verify', '-arroyo-verify-seconds', $SecondsPerState, '-arroyo-benchmark-route',
     '-arroyo-verify-output', ('"' + $brOutput + '"'), '-logFile', ('"' + $brLog + '"'))
-$brPlayer = Start-Process -FilePath $brExe -ArgumentList $brArguments -WindowStyle Normal -PassThru
+$brPlayer = Start-Process -FilePath $brExe -WorkingDirectory (Split-Path -Parent $brExe) -ArgumentList $brArguments -WindowStyle Normal -PassThru
 $brSamples = [Collections.Generic.List[object]]::new()
 $brClock = [Diagnostics.Stopwatch]::StartNew()
 $brFirstCaptureSeconds = $null
@@ -46,6 +46,7 @@ $brPeak = ($brSamples | Measure-Object workingSetMiB -Maximum).Maximum
 [ordered]@{source='External Windows .NET Process.WorkingSet64'; intervalSeconds=1; width=$Width; height=$Height;
     executableSha256=(Get-FileHash -LiteralPath $brExe -Algorithm SHA256).Hash;
     requestedFullscreen=$Fullscreen; launchToFirstCaptureObservedSeconds=$brFirstCaptureSeconds;
+    launchWorkingDirectory='Executable folder';
     exitCode=$brPlayer.ExitCode; peakWorkingSetMiB=$brPeak; sampleCount=$brSamples.Count;
     phaseNote='Capture milestones approximate phases; include startup and transitions; not VRAM or instantaneous peak';
     phases=@($brSamples | Group-Object phaseByCapture | ForEach-Object {
