@@ -33,8 +33,13 @@ namespace Bosque.ArtV6.Editor
         public static void BuildShowcase()
         {
             Directory.CreateDirectory(Path.GetDirectoryName(ShowcaseScene));
-            if (File.Exists(ShowcaseScene)) AssetDatabase.DeleteAsset(ShowcaseScene);
-            if (!AssetDatabase.CopyAsset(SourceScene, ShowcaseScene)) throw new Exception("No se pudo copiar la escena base");
+            if (File.Exists(ShowcaseScene))
+            {
+                // Reemplaza el contenido conservando el .meta: el GUID de la escena de muestra no cambia entre ejecuciones.
+                File.Copy(SourceScene, ShowcaseScene, true);
+                AssetDatabase.ImportAsset(ShowcaseScene, ImportAssetOptions.ForceUpdate);
+            }
+            else if (!AssetDatabase.CopyAsset(SourceScene, ShowcaseScene)) throw new Exception("No se pudo copiar la escena base");
             var scene = EditorSceneManager.OpenScene(ShowcaseScene, OpenSceneMode.Single);
             Dress();
             EditorSceneManager.MarkSceneDirty(scene);
@@ -67,6 +72,7 @@ namespace Bosque.ArtV6.Editor
             Obstacles();
             ExitBarrier();
             Gate(root, deg, res);
+            OptionalLog(root);
             Trees(deg, res);
             Rocks(deg, res);
             Vegetation(deg, res);
@@ -308,11 +314,15 @@ namespace Bosque.ArtV6.Editor
             {
                 // En la orilla jugable la copa debe quedar por encima de la cámara (≈2.7 m): árbol alto y esbelto.
                 bool onBank = t.position.y < 1f;
-                string kind = onBank ? "B_Tall" : (i % 2 == 0 ? "A" : "B");
-                float s = onBank ? Rand(1.85f, 2.05f) : kind == "A" ? Rand(1.6f, 1.9f) : Rand(1.35f, 1.6f);
+                // Los árboles con collider usan el modelo B: su tronco es recto hasta los 3 m del collider
+                // (el A se bifurca antes y no puede ocupar el collider entero, QA6-014).
+                string kind = onBank ? "B_Tall" : "B";
+                float s = onBank ? Rand(1.85f, 2.05f) : (i % 2 == 0 ? Rand(1.6f, 1.9f) : Rand(1.35f, 1.6f));
                 float yaw = Rand(0, 360);
-                Put($"VIS_V6_Tree{kind}_Green", tr, t.position, new Vector3(0, yaw, 0), s);
-                Put($"VIS_V6_Tree{kind}_Dead", td, t.position, new Vector3(0, yaw, 0), s);
+                var green = Put($"VIS_V6_Tree{kind}_Green", tr, t.position, new Vector3(0, yaw, 0), s);
+                var dead = Put($"VIS_V6_Tree{kind}_Dead", td, t.position, new Vector3(0, yaw, 0), s);
+                var trunk = t.GetComponentInChildren<CapsuleCollider>(true);
+                if (trunk != null) AlignTrunkToCollider(green, dead, trunk); // QA6-014
                 i++;
             }
             // Bosque de fondo sobre los muros y más allá de la barranca este
@@ -330,6 +340,111 @@ namespace Bosque.ArtV6.Editor
             // Tocones talados en la orilla (relato de deforestación) solo en degradado
             foreach (var p in new[] { new Vector3(5.3f, 0, 12f), new Vector3(5.2f, 0, 21f), new Vector3(5.4f, 0, 27f), new Vector3(-0.4f, 0, 36.5f), new Vector3(5.0f, 0, 1.5f) })
                 Put("VIS_V6_Stump_A", td, p, new Vector3(0, Rand(0, 360), 0), Rand(0.45f, 0.6f));
+        }
+
+        /// <summary>
+        /// El pivote de los árboles V6 no está sobre el tronco. Endereza y desplaza ambos estados para que el
+        /// tronco visible (submalla de corteza) ocupe el collider del tronco de juego, que no se toca.
+        /// </summary>
+        private static void AlignTrunkToCollider(GameObject green, GameObject dead, CapsuleCollider trunk)
+        {
+            var cb = trunk.bounds;
+            float y0 = cb.min.y, y1 = cb.max.y;
+            Vector3 target = new Vector3(cb.center.x, y0, cb.center.z);
+            for (int pass = 0; pass < 3; pass++)
+            {
+                if (!BarkCentroid(green, y0, y0 + 0.5f, out var bottom, out _) || !BarkCentroid(green, y1 - 0.5f, y1, out var top, out _))
+                {
+                    Debug.LogWarning($"[V6] {green.name}: no se encontró corteza a la altura del collider {trunk.transform.parent?.name}");
+                    return;
+                }
+                // Enderezar el tramo de tronco que cubre el collider y llevar su base al centro del collider.
+                var straighten = Quaternion.FromToRotation(top - bottom, Vector3.up);
+                foreach (var go in new[] { green, dead })
+                {
+                    go.transform.rotation = straighten * go.transform.rotation;
+                    go.transform.position = bottom + straighten * (go.transform.position - bottom) + new Vector3(target.x - bottom.x, 0, target.z - bottom.z);
+                }
+            }
+            BarkCentroid(green, y0, y0 + 0.5f, out var b2, out float rb);
+            BarkCentroid(green, y1 - 0.5f, y1, out var t2, out float rt);
+            Debug.Log($"[V6] Tronco {trunk.transform.parent?.name}: base a {Horizontal(b2 - target):F3} m, " +
+                      $"arriba a {Horizontal(t2 - target):F3} m del collider; radio corteza {rb:F2}/{rt:F2} m (collider {cb.extents.x:F2} m)");
+        }
+
+        private static float Horizontal(Vector3 v) => new Vector2(v.x, v.z).magnitude;
+
+        /// <summary>Centro (xz) y radio medio de la corteza del tronco entre dos alturas del mundo.</summary>
+        private static bool BarkCentroid(GameObject tree, float yMin, float yMax, out Vector3 center, out float radius)
+        {
+            center = Vector3.zero; radius = 0;
+            var pts = new List<Vector3>();
+            foreach (var mf in tree.GetComponentsInChildren<MeshFilter>(true))
+            {
+                var r = mf.GetComponent<MeshRenderer>();
+                if (r == null || mf.sharedMesh == null || r.sharedMaterials.Length == 0) continue;
+                var mat = r.sharedMaterials[0];
+                if (mat == null || !mat.name.Contains("Bark")) continue;
+                var mesh = mf.sharedMesh; var verts = mesh.vertices;
+                var used = new HashSet<int>(mesh.GetTriangles(0));
+                var m = mf.transform.localToWorldMatrix;
+                foreach (int i in used)
+                {
+                    var w = m.MultiplyPoint3x4(verts[i]);
+                    if (w.y >= yMin && w.y <= yMax) pts.Add(w);
+                }
+            }
+            if (pts.Count < 6) return false;
+            // Mediana en xz: ignora el arranque de ramas que comparten la submalla de corteza.
+            float mx = Median(pts.Select(p => p.x)), mz = Median(pts.Select(p => p.z));
+            var near = pts.Where(p => new Vector2(p.x - mx, p.z - mz).magnitude < 0.6f).ToList();
+            if (near.Count < 6) near = pts;
+            center = new Vector3(near.Average(p => p.x), (yMin + yMax) * 0.5f, near.Average(p => p.z));
+            var c = center;
+            radius = Median(near.Select(p => new Vector2(p.x - c.x, p.z - c.z).magnitude));
+            return true;
+        }
+
+        private static float Median(IEnumerable<float> values)
+        {
+            var a = values.OrderBy(v => v).ToArray();
+            return a.Length == 0 ? 0 : a[a.Length / 2];
+        }
+
+        /// <summary>QA6-013: el tronco opcional del sendero conserva su collider; necesita un visual que lo ocupe.</summary>
+        private static void OptionalLog(Transform root)
+        {
+            var src = Find("LowLog_Optional");
+            var cap = src ? src.GetComponent<CapsuleCollider>() : null;
+            if (cap == null) { Debug.LogWarning("[V6] Sin LowLog_Optional"); return; }
+            var gs = root.Find("V6_Static") ?? Group(root, "V6_Static");
+            var log = Put("VIS_V6_DeadLog_A", gs, Vector3.zero, Vector3.zero, 1);
+            log.name = Tag + "_LowLog_Optional";
+            // Eje largo del collider en el mundo (dirección de la cápsula) y tamaño del modelo sin escalar.
+            var axisLocal = cap.direction == 0 ? Vector3.right : cap.direction == 1 ? Vector3.up : Vector3.forward;
+            var axis = src.TransformDirection(axisLocal).normalized;
+            float length = cap.height * Mathf.Abs(Vector3.Dot(src.lossyScale, axisLocal));
+            float radius = cap.bounds.extents.y; // tronco tumbado: el radio es la media altura de su caja
+            var mb = MeshBounds(log);
+            var yaw = Quaternion.FromToRotation(Vector3.right, new Vector3(axis.x, 0, axis.z).normalized);
+            log.transform.rotation = yaw;
+            // Algo más grueso que el collider para que el jugador choque con la madera, no con el aire.
+            float thick = radius * 2f * 1.15f;
+            log.transform.localScale = new Vector3(length / mb.size.x, thick / mb.size.y, thick / mb.size.z);
+            var b = MeshBounds(log, true);
+            log.transform.position += cap.bounds.center - b.center;
+            Debug.Log($"[V6] Tronco opcional: visual {b.size.ToString("F2")} sobre collider {cap.bounds.size.ToString("F2")}");
+        }
+
+        /// <summary>Caja de los renderers; con world=false, la del modelo en rotación/escala identidad.</summary>
+        private static Bounds MeshBounds(GameObject go, bool world = false)
+        {
+            var rot = go.transform.rotation; var sc = go.transform.localScale; var pos = go.transform.position;
+            if (!world) { go.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity); go.transform.localScale = Vector3.one; }
+            var rs = go.GetComponentsInChildren<Renderer>(true);
+            var b = rs[0].bounds; foreach (var r in rs) b.Encapsulate(r.bounds);
+            if (!world) { go.transform.SetPositionAndRotation(pos, rot); go.transform.localScale = sc; }
+            return b;
         }
 
         // ------------------------------------------------------------------ rocas

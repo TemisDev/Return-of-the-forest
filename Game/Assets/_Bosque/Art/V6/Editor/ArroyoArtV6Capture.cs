@@ -24,6 +24,7 @@ namespace Bosque.ArtV6.Editor
             ("05_cauce", new Vector3(0.3f, 1.1f, 8.5f), new Vector3(-2.8f, -0.5f, 22f)),
             ("06_salida", new Vector3(3f, 1.8f, 28.5f), new Vector3(3f, 1.2f, 38.5f)),
             ("07_vista_general", new Vector3(13f, 9f, -9f), new Vector3(0f, 0f, 16f)),
+            ("08_tronco_opcional", new Vector3(4.6f, 1.7f, 26.4f), new Vector3(1.75f, 0.15f, 30f)),
         };
 
         public static void BuildAndCaptureBatch()
@@ -110,7 +111,12 @@ namespace Bosque.ArtV6.Editor
                     Debug.Log("[V6][Capture] " + file);
                 }
             }
-            // No se guarda la escena: las activaciones fueron solo para fotografiar.
+            // No se guarda la escena: las activaciones fueron solo para fotografiar. Se deja el estado inicial
+            // (degradado) para que el material compartido del cielo no quede guardado en restaurado.
+            degraded.SetActive(true); restored.SetActive(false);
+            foreach (var o in obstacles) o.SetActive(true);
+            blocker.SetActive(true);
+            ambience.ApplyImmediate(false);
         }
 
         private static void BakeEnvironment()

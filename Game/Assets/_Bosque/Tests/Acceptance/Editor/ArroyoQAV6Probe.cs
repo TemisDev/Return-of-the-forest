@@ -317,8 +317,10 @@ namespace Bosque.Acceptance
             for (float x = -0.6f; x <= 5.6f; x += 0.4f)
                 for (float z = -3.5f; z <= 34.5f; z += 0.5f)
                 {
-                    cells++;
                     var a = new Vector3(x, 0.35f + 0.05f, z); var b = new Vector3(x, 1.8f - 0.35f, z);
+                    // Solo celdas transitables: si un collider de juego ya ocupa la celda, el jugador no puede estar ahí.
+                    if (Physics.OverlapCapsule(a, b, .3f, ~probeMask, QueryTriggerInteraction.Ignore).Any(c => !(c is CharacterController))) continue;
+                    cells++;
                     var hitsC = Physics.OverlapCapsule(a, b, .3f, probeMask).Where(c => owner[c].StartsWith("S:")).ToArray();
                     if (hitsC.Length > 0)
                     {
@@ -333,7 +335,7 @@ namespace Bosque.Acceptance
                 }
             Metrics[$"paso_{state}"] = new Dictionary<string, object> { ["celdas"] = cells, ["atraviesa_solido_visual"] = blocked };
             Rec($"K03-{state}", "Nivel", 100f * blocked / cells <= 2f ? "OK" : "AVISO",
-                $"Orilla transitable ({cells} celdas de 0,4×0,5 m): el cuerpo del jugador atraviesa sólidos V6 sin collider en {blocked} ({100f * blocked / cells:F1}%). Objetos: {Top(walk)}. Zonas: " +
+                $"Orilla transitable ({cells} celdas libres de colliders de juego, rejilla 0,4×0,5 m): el cuerpo del jugador atraviesa sólidos V6 sin collider en {blocked} ({100f * blocked / cells:F1}%). Objetos: {Top(walk)}. Zonas: " +
                 string.Join("; ", where.Select(kv => $"{kv.Key} X[{kv.Value.min.x:F1},{kv.Value.max.x:F1}] Z[{kv.Value.min.z:F1},{kv.Value.max.z:F1}]")));
 
             // Abertura del arco de salida (solo restaurado: la maraña es la barrera en degradado).
@@ -460,7 +462,8 @@ namespace Bosque.Acceptance
                 lum.Add($"{System.IO.Path.GetFileNameWithoutExtension(f).Replace("v6_", "")}={mean:F2}");
                 UnityEngine.Object.DestroyImmediate(t);
             }
-            Check("V01", "Visual", files.Length == 14 && magentaFiles == 0 && flatFiles == 0,
+            int deg = files.Count(f => f.Contains("_degradado_")), res = files.Count(f => f.Contains("_restaurado_"));
+            Check("V01", "Visual", deg >= 7 && deg == res && magentaFiles == 0 && flatFiles == 0,
                   $"{files.Length} capturas: con magenta (shader roto) {magentaFiles}, planas/vacías {flatFiles}. Luminancia media: {string.Join(", ", lum)}");
         }
 
