@@ -58,7 +58,7 @@ namespace Bosque.Session
             for (int i = 0; i < p.TotalCount; i++)
                 Icon(new Rect(44 + i * 29, 165, 23, 23), progressIcon, i < p.RemovedCount ? Accent : new Color(.48f, .51f, .45f));
             GUI.Label(new Rect(150, 162, 280, 30), progressText, body);
-            GUI.Label(new Rect(44, 205, 410, 24), "WASD · Ratón · Espacio    F1: ayuda", small);
+            GUI.Label(new Rect(44, 205, 410, 24), "WASD · Ratón · Espacio · E: retirar · F1: ayuda", small);
             if (interactor != null && interactor.Target != null)
             {
                 Panel(new Rect(378, 586, 524, 76));

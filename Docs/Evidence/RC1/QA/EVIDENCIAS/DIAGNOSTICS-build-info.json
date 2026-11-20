@@ -1,0 +1,15 @@
+{
+  "identifier": "RC1-Diagnostics",
+  "commit": "8838ff5c74038a5399d15b141e30a6b60e5fc949",
+  "unity": "6000.3.22f1",
+  "builtAtUtc": "2026-11-20T05:13:07.9160109Z",
+  "target": "StandaloneWindows64",
+  "scene": "Assets/_Bosque/Scenes/Integration/ArroyoPlayable.unity",
+  "options": "ForceOptimizeScriptCompilation, Il2CPP, CompressTextures, StripDebugSymbols, ShaderLivelinkSupport, Development",
+  "development": true,
+  "optionalQaVerifier": true,
+  "errors": 0,
+  "warnings": 0,
+  "totalBytes": 167689301,
+  "buildSeconds": 91.586293
+}
