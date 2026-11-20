@@ -9,6 +9,7 @@ namespace Bosque.Player
         [SerializeField] private ThirdPersonCamera cameraRig;
         private ThirdPersonMotor motor;
         public void Configure(ThirdPersonCamera rig) => cameraRig = rig;
+        public void CaptureCursor() => SetCursor(true);
         private void Awake() => motor = GetComponent<ThirdPersonMotor>();
         private void Start() => SetCursor(true);
         private void OnDisable() => SetCursor(false);

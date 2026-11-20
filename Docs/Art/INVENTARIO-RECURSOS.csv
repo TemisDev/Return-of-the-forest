@@ -1,0 +1,19 @@
+tipo,ruta,uso,estado
+OBJ,Models/GrassClump_01.obj,Proxy visual,Por importar y validar en Unity
+OBJ,Models/PineCanopy_01.obj,Proxy visual,Por importar y validar en Unity
+OBJ,Models/Rock_01.obj,Proxy visual,Por importar y validar en Unity
+OBJ,Models/Stump_01.obj,Proxy visual,Por importar y validar en Unity
+OBJ,Models/TreeTrunk_01.obj,Proxy visual,Por importar y validar en Unity
+PNG,Textures/leaf_degraded.png,Paleta plana,Por importar y validar en Unity
+PNG,Textures/leaf_restored.png,Paleta plana,Por importar y validar en Unity
+PNG,Textures/rock.png,Paleta plana,Por importar y validar en Unity
+PNG,Textures/soil_degraded.png,Paleta plana,Por importar y validar en Unity
+PNG,Textures/soil_restored.png,Paleta plana,Por importar y validar en Unity
+PNG,Textures/ui_cream.png,Paleta plana,Por importar y validar en Unity
+PNG,Textures/ui_dark.png,Paleta plana,Por importar y validar en Unity
+PNG,Textures/water_degraded.png,Paleta plana,Por importar y validar en Unity
+PNG,Textures/water_restored.png,Paleta plana,Por importar y validar en Unity
+PNG,Textures/wood.png,Paleta plana,Por importar y validar en Unity
+PNG,UI/interact.png,Icono de referencia,Por integrar en UI
+PNG,UI/progress.png,Icono de referencia,Por integrar en UI
+PNG,UI/restored.png,Icono de referencia,Por integrar en UI

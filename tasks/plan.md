@@ -73,3 +73,7 @@ Experiencia de Juan y Diego, perfiles Trello, conformidad con sus roles propuest
 - C-01/T07: nivel integrado y validación estructural sin errores. Pendiente aceptación manual de Diego.
 - T06: controlador y cámara implementados en ArroyoPlayable; 6/6 pruebas automatizadas aprobadas en Unity. Pendiente recorrido manual con teclado y ratón.
 - Claude C-02: revisar recorrido y ampliar QA. Codex siguiente: T08 y T09. La UI espera los contratos de progreso y sesión.
+
+## Entregable 02 — 16/11/2026
+T08/T09 implementadas y entregadas para revisión en https://github.com/TemisDev/Return-of-the-forest/pull/1, desde feature/arroyo-gameplay-v2 hacia develop. 21/21 pruebas aprobadas, incluyendo T06 y Play Mode automatizado; build Windows x64 correcta. Contratos en Docs/INTEGRACION-ARROYO-V2.md y evidencia en Docs/ENTREGABLE-02-RESULTADOS.md.
+Pendiente validación manual de Diego, hardware/rendimiento y otra PC. C-02 ya fue entregada; no repetir el encargo inicial. Este ciclo termina el 22 de noviembre y se limita al arroyo.

@@ -1,0 +1,14 @@
+{
+  "buildCommit": "8838ff5c74038a5399d15b141e30a6b60e5fc949",
+  "normalExitCode": 0,
+  "passed": true,
+  "searched": [
+    "NullReferenceException",
+    "InvalidOperationException",
+    "error CS",
+    "[Error]"
+  ],
+  "matchingLines": [],
+  "runtimeErrorGuard": "Verifier aborts on Error, Exception or Assert",
+  "rawLogPublished": false
+}

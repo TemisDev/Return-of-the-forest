@@ -1,7 +1,8 @@
 {
   "name": "Bosque.Movement.EditorTests",
   "references": [
-    "Bosque.Runtime"
+    "Bosque.Runtime",
+    "Unity.InputSystem"
   ],
   "includePlatforms": [
     "Editor"

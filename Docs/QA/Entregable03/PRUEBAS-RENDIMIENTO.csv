@@ -1,0 +1,9 @@
+﻿id,prioridad,componente,caso,pasos,resultado_esperado,resultado_obtenido,estado,commit_probado,entorno,evidencia,incidencia
+PRUEBAS-01,P1,Build,Arranque fuera del Editor,Ejecutar build Windows limpia,Carga escena sin errores,,NO EJECUTADO,,,,
+PRUEBAS-02,P1,Build,Finalización completa,Jugar 0/3 a salida en build,Se puede completar,,NO EJECUTADO,,,,
+PRUEBAS-03,P1,Rendimiento,FPS zona degradada,Recorrer 60 s y registrar min/media,Se registran datos reales,,NO EJECUTADO,,,,
+PRUEBAS-04,P1,Rendimiento,FPS restaurada,Recorrer 60 s y registrar min/media,Se registran datos reales,,NO EJECUTADO,,,,
+PRUEBAS-05,P2,Rendimiento,Picos en restauración,Activar restauración y medir frametime,Picos documentados,,NO EJECUTADO,,,,
+PRUEBAS-06,P1,Estabilidad,3 reinicios consecutivos,Completar y reiniciar 3 veces,No hay fallos ni estados residuales,,NO EJECUTADO,,,,
+PRUEBAS-07,P1,Estabilidad,Reabrir build,Cerrar y volver a abrir,Carga estado inicial,,NO EJECUTADO,,,,
+PRUEBAS-08,P2,Compatibilidad,Resolución 1920x1080,Probar 1920x1080 pantalla completa,UI visible y controles correctos,,NO EJECUTADO,,,,

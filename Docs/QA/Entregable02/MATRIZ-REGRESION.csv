@@ -1,0 +1,11 @@
+﻿ID,Área,Commit probado,Estado,Resultado real,Evidencia
+R-01,WASD y cámara relativa,,NO EJECUTADO,,
+R-02,Velocidad diagonal,,NO EJECUTADO,,
+R-03,Salto solo desde suelo,,NO EJECUTADO,,
+R-04,Retorno tras caída,,NO EJECUTADO,,
+R-05,Orbit cámara junto a paredes,,NO EJECUTADO,,
+R-06,Cursor Escape/clic Game,,NO EJECUTADO,,
+R-07,Llegar desde Spawn a Exit,,NO EJECUTADO,,
+R-08,Rampas en ambos sentidos,,NO EJECUTADO,,
+R-09,Sin bloqueo por decoración nueva,,NO EJECUTADO,,
+R-10,Arranque y cierre build Windows,,NO EJECUTADO,,

@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-18",
+  "source": "Windows PowerShell/.NET Process.WorkingSet64 sampled at 1Hz externally",
+  "width": 1280,
+  "height": 800,
+  "mode": "short verification; includes startup and three cycles; not 60s benchmark",
+  "exitCode": 0,
+  "peakWorkingSetMiB": 612.676,
+  "samples": [
+    {
+      "seconds": 0.005,
+      "workingSetMiB": 3.02
+    },
+    {
+      "seconds": 1.053,
+      "workingSetMiB": 378.469
+    },
+    {
+      "seconds": 2.066,
+      "workingSetMiB": 438.195
+    },
+    {
+      "seconds": 3.082,
+      "workingSetMiB": 445.004
+    },
+    {
+      "seconds": 4.097,
+      "workingSetMiB": 459.074
+    },
+    {
+      "seconds": 5.112,
+      "workingSetMiB": 585.254
+    },
+    {
+      "seconds": 6.122,
+      "workingSetMiB": 600.062
+    },
+    {
+      "seconds": 7.135,
+      "workingSetMiB": 602.199
+    },
+    {
+      "seconds": 8.151,
+      "workingSetMiB": 603.352
+    },
+    {
+      "seconds": 9.165,
+      "workingSetMiB": 607.684
+    },
+    {
+      "seconds": 10.177,
+      "workingSetMiB": 608.688
+    },
+    {
+      "seconds": 11.189,
+      "workingSetMiB": 610.434
+    },
+    {
+      "seconds": 12.207,
+      "workingSetMiB": 612.676
+    }
+  ]
+}

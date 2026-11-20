@@ -10,6 +10,7 @@
 Game/**/*.meta whitespace=-blank-at-eol
 Game/**/*.asset whitespace=-blank-at-eol
 Game/**/*.mat whitespace=-blank-at-eol
+Game/**/*.prefab whitespace=-blank-at-eol
 Game/**/*.unity whitespace=-blank-at-eol
 Game/**/*.wlt whitespace=-blank-at-eol
 # Keep the shipped Unity tutorial unchanged, including whitespace on empty lines.

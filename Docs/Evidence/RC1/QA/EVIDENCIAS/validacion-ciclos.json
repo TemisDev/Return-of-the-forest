@@ -1,0 +1,48 @@
+{
+  "buildCommit": "8838ff5c74038a5399d15b141e30a6b60e5fc949",
+  "runs": [
+    {
+      "session": "RUN-01",
+      "passed": true,
+      "completed": true,
+      "resets": 3,
+      "normalExitCode": 0
+    },
+    {
+      "session": "RUN-02",
+      "passed": true,
+      "completed": true,
+      "resets": 3,
+      "normalExitCode": 0
+    },
+    {
+      "session": "RUN-03",
+      "passed": true,
+      "completed": true,
+      "resets": 3,
+      "normalExitCode": 0
+    },
+    {
+      "session": "SMOKE-800",
+      "passed": true,
+      "completed": true,
+      "resets": 3,
+      "normalExitCode": 0
+    },
+    {
+      "session": "FULLSCREEN",
+      "passed": true,
+      "completed": true,
+      "resets": 3,
+      "normalExitCode": 0
+    },
+    {
+      "session": "DIAGNOSTICS",
+      "passed": true,
+      "completed": true,
+      "resets": 3,
+      "normalExitCode": 0
+    }
+  ],
+  "physicalCloseButtonsTested": false
+}
