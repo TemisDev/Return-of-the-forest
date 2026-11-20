@@ -1,5 +1,5 @@
 param(
-    [ValidateSet('Candidate','Diagnostics')][string]$Configuration = 'Candidate',
+    [ValidateSet('Candidate','Diagnostics','V6','V6-Diagnostics')][string]$Configuration = 'Candidate',
     [string]$Unity = 'C:\Program Files\Unity\Hub\Editor\6000.3.22f1\Editor\Unity.exe',
     [string]$Git = 'git'
 )
@@ -18,7 +18,12 @@ $brRunning = Get-CimInstance Win32_Process -Filter "Name='Unity.exe'" | Where-Ob
 if ($brRunning) { throw 'Cerrar el editor o batch de este proyecto antes de compilar.' }
 [IO.Directory]::CreateDirectory((Join-Path $brRoot '.dev-logs')) | Out-Null
 $brLog = Join-Path $brRoot ('.dev-logs/rc1-build-'+$Configuration+'-'+[DateTime]::UtcNow.ToString('yyyyMMdd-HHmmss')+'.log')
-$brMethod = if ($Configuration -eq 'Candidate') { 'Bosque.CoreSetup.ArroyoBuild.BuildRC1WindowsBatch' } else { 'Bosque.CoreSetup.ArroyoBuild.BuildRC1DiagnosticsBatch' }
+$brMethod = switch ($Configuration) {
+    'Candidate' { 'Bosque.CoreSetup.ArroyoBuild.BuildRC1WindowsBatch' }
+    'Diagnostics' { 'Bosque.CoreSetup.ArroyoBuild.BuildRC1DiagnosticsBatch' }
+    'V6' { 'Bosque.CoreSetup.ArroyoBuild.BuildV6WindowsBatch' }
+    'V6-Diagnostics' { 'Bosque.CoreSetup.ArroyoBuild.BuildV6DiagnosticsBatch' }
+}
 $brPreviousCommit = $env:BOSQUE_BUILD_COMMIT
 try {
     $env:BOSQUE_BUILD_COMMIT = $brCommit

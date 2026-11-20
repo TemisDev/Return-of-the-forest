@@ -15,6 +15,8 @@ namespace Bosque.CoreSetup
         public static void BuildV4WindowsBatch() => BuildWindows("ArroyoV4");
         public static void BuildRC1WindowsBatch() => BuildCandidate(false);
         public static void BuildRC1DiagnosticsBatch() => BuildCandidate(true);
+        public static void BuildV6WindowsBatch() => BuildCandidate(false, "V6");
+        public static void BuildV6DiagnosticsBatch() => BuildCandidate(true, "V6-Diagnostics");
         [Serializable] private sealed class CandidateInfo
         {
             public string identifier, commit, unity, builtAtUtc, target, scene, options;
@@ -23,14 +25,14 @@ namespace Bosque.CoreSetup
             public long totalBytes;
             public double buildSeconds;
         }
-        private static void BuildCandidate(bool diagnostics)
+        private static void BuildCandidate(bool diagnostics, string name = null)
         {
             try
             {
                 string commit = Environment.GetEnvironmentVariable("BOSQUE_BUILD_COMMIT");
                 if (commit == null || !Regex.IsMatch(commit, "^[0-9a-f]{40}$"))
                     throw new InvalidOperationException("Generar con Tools/Build-ArroyoRC1.ps1 desde una copia limpia.");
-                string identifier = diagnostics ? "RC1-Diagnostics" : "RC1";
+                string identifier = name ?? (diagnostics ? "RC1-Diagnostics" : "RC1");
                 string folder = Path.GetFullPath(Path.Combine(Application.dataPath, "../../Builds/Windows/" + identifier));
                 if (File.Exists(Path.Combine(folder, "build-info.json")))
                     throw new InvalidOperationException("Ya existe una build identificada; conservarla antes de generar otra candidata.");
