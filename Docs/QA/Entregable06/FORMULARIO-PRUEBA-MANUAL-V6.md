@@ -35,6 +35,19 @@ Rellenar a mano mientras se juega. Una hoja por sesión y por equipo. **No marca
 - [ ] Al empujar contra la barrera, ¿el personaje se mete dentro de las raíces? (QA6-001)
 - [ ] ¿Hay un congelamiento de 1 a 4 segundos al arrancar la build? (QA6-005)
 
+## M15 — build integrada
+
+- Ejecutable: `Builds/Windows/V6/BosqueDeRegreso.exe`.
+- Abre `build-info.json`, al lado del ejecutable, y anota aquí su `commit`, que debe ser `2cc512c…`: ______
+- Repite M01–M14 sobre esta build y anota los resultados en una hoja aparte, marcada como M15.
+- Además, comprueba:
+  - [ ] QA6-001: al empujar contra la barrera, el personaje no se mete en las raíces.
+  - [ ] QA6-002: cerca de los árboles de la orilla derecha, ninguna rama atraviesa al personaje.
+  - [ ] QA6-003: no hay tocones en la orilla; ahora están en lo alto del muro izquierdo.
+  - [ ] QA6-004: en el tronco caído (primer obstáculo), el personaje no pisa la madera al pulsar E.
+  - [ ] QA6-009: al retirar el tercer obstáculo se ve **un solo** efecto de partículas, junto al personaje.
+  - [ ] QA6-005: desde que se abre la ventana hasta que se puede mover, ¿cuántos segundos pasan? ___ s. ¿Hay algún parón **durante** el juego?
+
 ## UX con una persona ajena (U01–U04)
 
 No explicar la solución. Solo leer en voz alta la primera pantalla si lo pide.

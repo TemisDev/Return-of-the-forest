@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="38" result="Failed(Child)" total="38" passed="37" failed="1" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-20 20:18:01Z" end-time="2026-11-20 20:18:11Z" duration="9.8128532">
+  <test-suite type="TestSuite" id="1000" name="Bosque de regreso" fullname="Bosque de regreso" runstate="Runnable" testcasecount="38" result="Failed" site="Child" start-time="2026-11-20 20:18:01Z" end-time="2026-11-20 20:18:11Z" duration="9.812853" total="38" passed="37" failed="1" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <failure>
+      <message><![CDATA[One or more child tests had errors]]></message>
+    </failure>
+    <test-suite type="Assembly" id="1051" name="Bosque.Movement.EditorTests.dll" fullname="C:/Users/vince/OneDrive/Documents/ChatGPT/Personal life/Bosque de regreso - V6/Game/Library/ScriptAssemblies/Bosque.Movement.EditorTests.dll" runstate="Runnable" testcasecount="38" result="Failed" site="Child" start-time="2026-11-20 20:18:01Z" end-time="2026-11-20 20:18:11Z" duration="9.748608" total="38" passed="37" failed="1" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="11180" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <failure>
+        <message><![CDATA[One or more child tests had errors]]></message>
+      </failure>
+      <test-suite type="TestSuite" id="1052" name="Bosque" fullname="Bosque" runstate="Runnable" testcasecount="38" result="Failed" site="Child" start-time="2026-11-20 20:18:01Z" end-time="2026-11-20 20:18:11Z" duration="9.747595" total="38" passed="37" failed="1" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <failure>
+          <message><![CDATA[One or more child tests had errors]]></message>
+        </failure>
+        <test-suite type="TestSuite" id="1053" name="Tests" fullname="Bosque.Tests" runstate="Runnable" testcasecount="38" result="Failed" site="Child" start-time="2026-11-20 20:18:01Z" end-time="2026-11-20 20:18:11Z" duration="9.746770" total="38" passed="37" failed="1" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <failure>
+            <message><![CDATA[One or more child tests had errors]]></message>
+          </failure>
+          <test-suite type="TestFixture" id="1001" name="ArroyoGameplayTests" fullname="Bosque.Tests.ArroyoGameplayTests" classname="Bosque.Tests.ArroyoGameplayTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-11-20 20:17:50Z" end-time="2026-11-20 20:17:50Z" duration="0.053138" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1008" name="AnyOrderRestoresExactlyOnceAndOnlyThenAllowsCompletion" fullname="Bosque.Tests.ArroyoGameplayTests.AnyOrderRestoresExactlyOnceAndOnlyThenAllowsCompletion" methodname="AnyOrderRestoresExactlyOnceAndOnlyThenAllowsCompletion" classname="Bosque.Tests.ArroyoGameplayTests" runstate="Runnable" seed="1350594734" result="Passed" start-time="2026-11-20 20:17:50Z" end-time="2026-11-20 20:17:50Z" duration="0.019143" asserts="0">
+              <properties />
+            </test-case>
+            <test-case id="1002" name="InRangeTargetCanBeInteractedWith" fullname="Bosque.Tests.ArroyoGameplayTests.InRangeTargetCanBeInteractedWith" methodname="InRangeTargetCanBeInteractedWith" classname="Bosque.Tests.ArroyoGameplayTests" runstate="Runnable" seed="2146095182" result="Passed" start-time="2026-11-20 20:17:50Z" end-time="2026-11-20 20:17:50Z" duration="0.007212" asserts="0">
+              <properties />
+            </test-case>
+            <test-case id="1004" name="InvalidAndDisabledTargetsAreIgnored" fullname="Bosque.Tests.ArroyoGameplayTests.InvalidAndDisabledTargetsAreIgnored" methodname="InvalidAndDisabledTargetsAreIgnored" classname="Bosque.Tests.ArroyoGameplayTests" runstate="Runnable" seed="1217552543" result="Passed" start-time="2026-11-20 20:17:50Z" end-time="2026-11-20 20:17:50Z" duration="0.000922" asserts="0">
+              <properties />
+            </test-case>
+            <test-case id="1010" name="InvalidConfigurationIsRejected" fullname="Bosque.Tests.ArroyoGameplayTests.InvalidConfigurationIsRejected" methodname="InvalidConfigurationIsRejected" classname="Bosque.Tests.ArroyoGameplayTests" runstate="Runnable" seed="1342583980" result="Passed" start-time="2026-11-20 20:17:50Z" end-time="2026-11-20 20:17:50Z" duration="0.003049" asserts="0">
+              <properties />
+            </test-case>
+            <test-case id="1003" name="LeavingRangeCancelsTargetAndRejectsStaleInteraction" fullname="Bosque.Tests.ArroyoGameplayTests.LeavingRangeCancelsTargetAndRejectsStaleInteraction" methodname="LeavingRangeCancelsTargetAndRejectsStaleInteraction" classname="Bosque.Tests.ArroyoGameplayTests" runstate="Runnable" seed="386577811" result="Passed" start-time="2026-11-20 20:17:50Z" end-time="2026-11-20 20:17:50Z" duration="0.000739" asserts="0">
+              <properties />
+            </test-case>
+            <test-case id="1005" name="NearestAvailableSurfaceIsSelected" fullname="Bosque.Tests.ArroyoGameplayTests.NearestAvailableSurfaceIsSelected" methodname="NearestAvailableSurfaceIsSelected" classname="Bosque.Tests.ArroyoGameplayTests" runstate="Runnable" seed="1003706781" result="Passed" start-time="2026-11-20 20:17:50Z" end-time="2026-11-20 20:17:50Z" duration="0.000659" asserts="0">
+              <properties />
+            </test-case>
+            <test-case id="1009" name="ResetStartsAnotherCleanCycleAndPublishesChanges" fullname="Bosque.Tests.ArroyoGameplayTests.ResetStartsAnotherCleanCycleAndPublishesChanges" methodname="ResetStartsAnotherCleanCycleAndPublishesChanges" classname="Bosque.Tests.ArroyoGameplayTests" runstate="Runnable" seed="194226061" result="Passed" start-time="2026-11-20 20:17:50Z" end-time="2026-11-20 20:17:50Z" duration="0.000787" asserts="0">
+              <properties />
+            </test-case>
+            <test-case id="1007" name="UnknownAndRepeatedIdsNeverAdvanceProgress" fullname="Bosque.Tests.ArroyoGameplayTests.UnknownAndRepeatedIdsNeverAdvanceProgress" methodname="UnknownAndRepeatedIdsNeverAdvanceProgress" classname="Bosque.Tests.ArroyoGameplayTests" runstate="Runnable" seed="1171017406" result="Passed" start-time="2026-11-20 20:17:50Z" end-time="2026-11-20 20:17:50Z" duration="0.000498" asserts="0">
+              <properties />
+            </test-case>
+            <test-case id="1006" name="WallPreventsInteraction" fullname="Bosque.Tests.ArroyoGameplayTests.WallPreventsInteraction" methodname="WallPreventsInteraction" classname="Bosque.Tests.ArroyoGameplayTests" runstate="Runnable" seed="1528244146" result="Passed" start-time="2026-11-20 20:17:50Z" end-time="2026-11-20 20:17:50Z" duration="0.000814" asserts="0">
+              <properties />
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1011" name="ArroyoInputPlayTests" fullname="Bosque.Tests.ArroyoInputPlayTests" classname="Bosque.Tests.ArroyoInputPlayTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-20 20:17:55Z" end-time="2026-11-20 20:17:56Z" duration="0.691239" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1012" name="QueuedKeysFollowFocusAndCursorGuards" fullname="Bosque.Tests.ArroyoInputPlayTests.QueuedKeysFollowFocusAndCursorGuards" methodname="QueuedKeysFollowFocusAndCursorGuards" classname="Bosque.Tests.ArroyoInputPlayTests" runstate="Runnable" seed="1843480831" result="Passed" start-time="2026-11-20 20:17:50Z" end-time="2026-11-20 20:17:56Z" duration="5.752542" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[[InputV4] queued-events; focus=False; cursorLocked=False; help/reset=False; interaction=False
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1013" name="ArroyoPlaySmokeTests" fullname="Bosque.Tests.ArroyoPlaySmokeTests" classname="Bosque.Tests.ArroyoPlaySmokeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-20 20:18:01Z" end-time="2026-11-20 20:18:02Z" duration="0.598720" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1014" name="ActualExitVolumeCompletesOnlyAfterRestoringAndRestartIsClean" fullname="Bosque.Tests.ArroyoPlaySmokeTests.ActualExitVolumeCompletesOnlyAfterRestoringAndRestartIsClean" methodname="ActualExitVolumeCompletesOnlyAfterRestoringAndRestartIsClean" classname="Bosque.Tests.ArroyoPlaySmokeTests" runstate="Runnable" seed="1821690406" result="Passed" start-time="2026-11-20 20:17:56Z" end-time="2026-11-20 20:18:02Z" duration="5.567965" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1015" name="ArroyoSceneTests" fullname="Bosque.Tests.ArroyoSceneTests" classname="Bosque.Tests.ArroyoSceneTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-20 20:18:02Z" end-time="2026-11-20 20:18:03Z" duration="1.129368" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1016" name="PhysicalBarrierBlocksWalkingAndJumpingUntilRestored" fullname="Bosque.Tests.ArroyoSceneTests.PhysicalBarrierBlocksWalkingAndJumpingUntilRestored" methodname="PhysicalBarrierBlocksWalkingAndJumpingUntilRestored" classname="Bosque.Tests.ArroyoSceneTests" runstate="Runnable" seed="137747166" result="Passed" start-time="2026-11-20 20:18:02Z" end-time="2026-11-20 20:18:02Z" duration="0.553812" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1017" name="RealObstaclesRestoreAndCanBeResetWithoutDuplicatingComponents" fullname="Bosque.Tests.ArroyoSceneTests.RealObstaclesRestoreAndCanBeResetWithoutDuplicatingComponents" methodname="RealObstaclesRestoreAndCanBeResetWithoutDuplicatingComponents" classname="Bosque.Tests.ArroyoSceneTests" runstate="Runnable" seed="112493043" result="Passed" start-time="2026-11-20 20:18:02Z" end-time="2026-11-20 20:18:03Z" duration="0.574362" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1018" name="ArroyoSessionTests" fullname="Bosque.Tests.ArroyoSessionTests" classname="Bosque.Tests.ArroyoSessionTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-20 20:18:03Z" end-time="2026-11-20 20:18:03Z" duration="0.008756" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1019" name="EnvironmentAndBarrierFollowProgressAndRestart" fullname="Bosque.Tests.ArroyoSessionTests.EnvironmentAndBarrierFollowProgressAndRestart" methodname="EnvironmentAndBarrierFollowProgressAndRestart" classname="Bosque.Tests.ArroyoSessionTests" runstate="Runnable" seed="924104939" result="Passed" start-time="2026-11-20 20:18:03Z" end-time="2026-11-20 20:18:03Z" duration="0.004476" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1021" name="RemovedObstacleCannotCountTwiceOrAcceptForeignActorAtExit" fullname="Bosque.Tests.ArroyoSessionTests.RemovedObstacleCannotCountTwiceOrAcceptForeignActorAtExit" methodname="RemovedObstacleCannotCountTwiceOrAcceptForeignActorAtExit" classname="Bosque.Tests.ArroyoSessionTests" runstate="Runnable" seed="1675581788" result="Passed" start-time="2026-11-20 20:18:03Z" end-time="2026-11-20 20:18:03Z" duration="0.000770" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1020" name="StandingOnObstacleCannotRemoveItsSupport" fullname="Bosque.Tests.ArroyoSessionTests.StandingOnObstacleCannotRemoveItsSupport" methodname="StandingOnObstacleCannotRemoveItsSupport" classname="Bosque.Tests.ArroyoSessionTests" runstate="Runnable" seed="225464831" result="Passed" start-time="2026-11-20 20:18:03Z" end-time="2026-11-20 20:18:03Z" duration="0.000759" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1022" name="ArroyoTimingTests" fullname="Bosque.Tests.ArroyoTimingTests" classname="Bosque.Tests.ArroyoTimingTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-20 20:18:03Z" end-time="2026-11-20 20:18:03Z" duration="0.003753" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1024" name="InvalidFrameDurationsCannotPolluteTheReport" fullname="Bosque.Tests.ArroyoTimingTests.InvalidFrameDurationsCannotPolluteTheReport" methodname="InvalidFrameDurationsCannotPolluteTheReport" classname="Bosque.Tests.ArroyoTimingTests" runstate="Runnable" seed="1289897420" result="Passed" start-time="2026-11-20 20:18:03Z" end-time="2026-11-20 20:18:03Z" duration="0.001559" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1023" name="TimingSummaryUsesNearestRankAndCountsFramesOverBudget" fullname="Bosque.Tests.ArroyoTimingTests.TimingSummaryUsesNearestRankAndCountsFramesOverBudget" methodname="TimingSummaryUsesNearestRankAndCountsFramesOverBudget" classname="Bosque.Tests.ArroyoTimingTests" runstate="Runnable" seed="1156174916" result="Passed" start-time="2026-11-20 20:18:03Z" end-time="2026-11-20 20:18:03Z" duration="0.001206" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1025" name="ArroyoV4Tests" fullname="Bosque.Tests.ArroyoV4Tests" classname="Bosque.Tests.ArroyoV4Tests" runstate="Runnable" testcasecount="8" result="Passed" start-time="2026-11-20 20:18:03Z" end-time="2026-11-20 20:18:07Z" duration="4.568518" total="8" passed="8" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1035" name="CameraOrbitRemainsFiniteAndUnobstructedAlongV4Bank" fullname="Bosque.Tests.ArroyoV4Tests.CameraOrbitRemainsFiniteAndUnobstructedAlongV4Bank" methodname="CameraOrbitRemainsFiniteAndUnobstructedAlongV4Bank" classname="Bosque.Tests.ArroyoV4Tests" runstate="Runnable" seed="324847157" result="Passed" start-time="2026-11-20 20:18:03Z" end-time="2026-11-20 20:18:03Z" duration="0.621983" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1034" name="DecorationDoesNotHideTargetsFromNineBankApproaches" fullname="Bosque.Tests.ArroyoV4Tests.DecorationDoesNotHideTargetsFromNineBankApproaches" methodname="DecorationDoesNotHideTargetsFromNineBankApproaches" classname="Bosque.Tests.ArroyoV4Tests" runstate="Runnable" seed="1383955784" result="Passed" start-time="2026-11-20 20:18:03Z" end-time="2026-11-20 20:18:04Z" duration="0.546545" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1030" name="FallingAfterRestorationKeepsProgressAndAllowsExit" fullname="Bosque.Tests.ArroyoV4Tests.FallingAfterRestorationKeepsProgressAndAllowsExit" methodname="FallingAfterRestorationKeepsProgressAndAllowsExit" classname="Bosque.Tests.ArroyoV4Tests" runstate="Runnable" seed="572767417" result="Passed" start-time="2026-11-20 20:18:04Z" end-time="2026-11-20 20:18:04Z" duration="0.545219" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-suite type="ParameterizedMethod" id="1033" name="MovingInteractionDoesNotInterruptTheController" fullname="Bosque.Tests.ArroyoV4Tests.MovingInteractionDoesNotInterruptTheController" classname="Bosque.Tests.ArroyoV4Tests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-20 20:18:04Z" end-time="2026-11-20 20:18:06Z" duration="1.094265" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1031" name="MovingInteractionDoesNotInterruptTheController(False)" fullname="Bosque.Tests.ArroyoV4Tests.MovingInteractionDoesNotInterruptTheController(False)" methodname="MovingInteractionDoesNotInterruptTheController" classname="Bosque.Tests.ArroyoV4Tests" runstate="Runnable" seed="1839087420" result="Passed" start-time="2026-11-20 20:18:04Z" end-time="2026-11-20 20:18:05Z" duration="0.539909" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1032" name="MovingInteractionDoesNotInterruptTheController(True)" fullname="Bosque.Tests.ArroyoV4Tests.MovingInteractionDoesNotInterruptTheController(True)" methodname="MovingInteractionDoesNotInterruptTheController" classname="Bosque.Tests.ArroyoV4Tests" runstate="Runnable" seed="1694993216" result="Passed" start-time="2026-11-20 20:18:05Z" end-time="2026-11-20 20:18:06Z" duration="0.551912" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-suite type="ParameterizedMethod" id="1029" name="ResetBeforeExitRestoresWholePuzzle" fullname="Bosque.Tests.ArroyoV4Tests.ResetBeforeExitRestoresWholePuzzle" classname="Bosque.Tests.ArroyoV4Tests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-20 20:18:06Z" end-time="2026-11-20 20:18:07Z" duration="1.177088" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+              <properties />
+              <test-case id="1027" name="ResetBeforeExitRestoresWholePuzzle(1)" fullname="Bosque.Tests.ArroyoV4Tests.ResetBeforeExitRestoresWholePuzzle(1)" methodname="ResetBeforeExitRestoresWholePuzzle" classname="Bosque.Tests.ArroyoV4Tests" runstate="Runnable" seed="3829553" result="Passed" start-time="2026-11-20 20:18:06Z" end-time="2026-11-20 20:18:06Z" duration="0.551413" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+              <test-case id="1028" name="ResetBeforeExitRestoresWholePuzzle(3)" fullname="Bosque.Tests.ArroyoV4Tests.ResetBeforeExitRestoresWholePuzzle(3)" methodname="ResetBeforeExitRestoresWholePuzzle" classname="Bosque.Tests.ArroyoV4Tests" runstate="Runnable" seed="1933226510" result="Passed" start-time="2026-11-20 20:18:06Z" end-time="2026-11-20 20:18:07Z" duration="0.623103" asserts="0">
+                <properties>
+                  <property name="retryIteration" value="0" />
+                  <property name="repeatIteration" value="0" />
+                </properties>
+              </test-case>
+            </test-suite>
+            <test-case id="1026" name="V4MountAndFoamAreVisualOnlyTransparentAndAboveWater" fullname="Bosque.Tests.ArroyoV4Tests.V4MountAndFoamAreVisualOnlyTransparentAndAboveWater" methodname="V4MountAndFoamAreVisualOnlyTransparentAndAboveWater" classname="Bosque.Tests.ArroyoV4Tests" runstate="Runnable" seed="286620888" result="Passed" start-time="2026-11-20 20:18:07Z" end-time="2026-11-20 20:18:07Z" duration="0.581582" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1036" name="ArroyoVisualTests" fullname="Bosque.Tests.ArroyoVisualTests" classname="Bosque.Tests.ArroyoVisualTests" runstate="Runnable" testcasecount="4" result="Failed" site="Child" start-time="2026-11-20 20:18:07Z" end-time="2026-11-20 20:18:10Z" duration="2.260028" total="4" passed="3" failed="1" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <failure>
+              <message><![CDATA[One or more child tests had errors]]></message>
+            </failure>
+            <test-case id="1039" name="ActiveVisualBudgetStaysBoundedInBothStates" fullname="Bosque.Tests.ArroyoVisualTests.ActiveVisualBudgetStaysBoundedInBothStates" methodname="ActiveVisualBudgetStaysBoundedInBothStates" classname="Bosque.Tests.ArroyoVisualTests" runstate="Runnable" seed="515890388" result="Failed" start-time="2026-11-20 20:18:07Z" end-time="2026-11-20 20:18:08Z" duration="0.571782" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <failure>
+                <message><![CDATA[  Expected: less than 180
+  But was:  590
+]]></message>
+                <stack-trace><![CDATA[at Bosque.Tests.ArroyoVisualTests.ActiveVisualBudgetStaysBoundedInBothStates () [0x000e4] in C:\Users\vince\OneDrive\Documents\ChatGPT\Personal life\Bosque de regreso - V6\Game\Assets\_Bosque\Editor\CoreSetup\Tests\ArroyoVisualTests.cs:71
+]]></stack-trace>
+              </failure>
+              <output><![CDATA[[ArteV3] Estado 0: 590 renderers, 2036293 triángulos.
+]]></output>
+            </test-case>
+            <test-case id="1038" name="ArtMountsRemainVisualOnlyAndFollowExistingRestorationState" fullname="Bosque.Tests.ArroyoVisualTests.ArtMountsRemainVisualOnlyAndFollowExistingRestorationState" methodname="ArtMountsRemainVisualOnlyAndFollowExistingRestorationState" classname="Bosque.Tests.ArroyoVisualTests" runstate="Runnable" seed="1300446517" result="Passed" start-time="2026-11-20 20:18:08Z" end-time="2026-11-20 20:18:08Z" duration="0.577558" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1040" name="PolishedHudAndEffectHaveRequiredArtReferences" fullname="Bosque.Tests.ArroyoVisualTests.PolishedHudAndEffectHaveRequiredArtReferences" methodname="PolishedHudAndEffectHaveRequiredArtReferences" classname="Bosque.Tests.ArroyoVisualTests" runstate="Runnable" seed="2139766256" result="Passed" start-time="2026-11-20 20:18:08Z" end-time="2026-11-20 20:18:09Z" duration="0.557957" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1037" name="VisualPrefabsHaveMeshesUrpMaterialsAndNoGameplayComponents" fullname="Bosque.Tests.ArroyoVisualTests.VisualPrefabsHaveMeshesUrpMaterialsAndNoGameplayComponents" methodname="VisualPrefabsHaveMeshesUrpMaterialsAndNoGameplayComponents" classname="Bosque.Tests.ArroyoVisualTests" runstate="Runnable" seed="2070965296" result="Passed" start-time="2026-11-20 20:18:09Z" end-time="2026-11-20 20:18:10Z" duration="0.549223" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1041" name="MovementTests" fullname="Bosque.Tests.MovementTests" classname="Bosque.Tests.MovementTests" runstate="Runnable" testcasecount="6" result="Passed" start-time="2026-11-20 20:18:10Z" end-time="2026-11-20 20:18:10Z" duration="0.011333" total="6" passed="6" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1047" name="CameraStaysInFrontOfAnObstructingWall" fullname="Bosque.Tests.MovementTests.CameraStaysInFrontOfAnObstructingWall" methodname="CameraStaysInFrontOfAnObstructingWall" classname="Bosque.Tests.MovementTests" runstate="Runnable" seed="402762551" result="Passed" start-time="2026-11-20 20:18:10Z" end-time="2026-11-20 20:18:10Z" duration="0.003311" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1045" name="FallResetsToTheConfiguredSafePoint" fullname="Bosque.Tests.MovementTests.FallResetsToTheConfiguredSafePoint" methodname="FallResetsToTheConfiguredSafePoint" classname="Bosque.Tests.MovementTests" runstate="Runnable" seed="1642052046" result="Passed" start-time="2026-11-20 20:18:10Z" end-time="2026-11-20 20:18:10Z" duration="0.000826" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1044" name="JumpCannotBeRepeatedInTheAirAndReturnsToGround" fullname="Bosque.Tests.MovementTests.JumpCannotBeRepeatedInTheAirAndReturnsToGround" methodname="JumpCannotBeRepeatedInTheAirAndReturnsToGround" classname="Bosque.Tests.MovementTests" runstate="Runnable" seed="1108961191" result="Passed" start-time="2026-11-20 20:18:10Z" end-time="2026-11-20 20:18:10Z" duration="0.000779" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1042" name="MovementUsesCameraYawAndClampsDiagonalSpeed" fullname="Bosque.Tests.MovementTests.MovementUsesCameraYawAndClampsDiagonalSpeed" methodname="MovementUsesCameraYawAndClampsDiagonalSpeed" classname="Bosque.Tests.MovementTests" runstate="Runnable" seed="1350452745" result="Passed" start-time="2026-11-20 20:18:10Z" end-time="2026-11-20 20:18:10Z" duration="0.001480" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1043" name="SolidWallStopsTheCharacter" fullname="Bosque.Tests.MovementTests.SolidWallStopsTheCharacter" methodname="SolidWallStopsTheCharacter" classname="Bosque.Tests.MovementTests" runstate="Runnable" seed="1170480838" result="Passed" start-time="2026-11-20 20:18:10Z" end-time="2026-11-20 20:18:10Z" duration="0.001027" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1046" name="ZeroDeltaDoesNotMoveTheCharacter" fullname="Bosque.Tests.MovementTests.ZeroDeltaDoesNotMoveTheCharacter" methodname="ZeroDeltaDoesNotMoveTheCharacter" classname="Bosque.Tests.MovementTests" runstate="Runnable" seed="727745263" result="Passed" start-time="2026-11-20 20:18:10Z" end-time="2026-11-20 20:18:10Z" duration="0.000560" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1048" name="RestorationFeedbackTests" fullname="Bosque.Tests.RestorationFeedbackTests" classname="Bosque.Tests.RestorationFeedbackTests" runstate="Runnable" testcasecount="2" result="Passed" start-time="2026-11-20 20:18:10Z" end-time="2026-11-20 20:18:11Z" duration="1.151010" total="2" passed="2" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1050" name="DisablingAndRebindingDoesNotAccumulateEventSubscriptions" fullname="Bosque.Tests.RestorationFeedbackTests.DisablingAndRebindingDoesNotAccumulateEventSubscriptions" methodname="DisablingAndRebindingDoesNotAccumulateEventSubscriptions" classname="Bosque.Tests.RestorationFeedbackTests" runstate="Runnable" seed="396218052" result="Passed" start-time="2026-11-20 20:18:10Z" end-time="2026-11-20 20:18:10Z" duration="0.583499" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1049" name="EffectRunsOncePerCycleAndRestartClearsIt" fullname="Bosque.Tests.RestorationFeedbackTests.EffectRunsOncePerCycleAndRestartClearsIt" methodname="EffectRunsOncePerCycleAndRestartClearsIt" classname="Bosque.Tests.RestorationFeedbackTests" runstate="Runnable" seed="1870948117" result="Passed" start-time="2026-11-20 20:18:10Z" end-time="2026-11-20 20:18:11Z" duration="0.566346" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: C:/Users/vince/AppData/LocalLow/DefaultCompany/Bosque de regreso\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

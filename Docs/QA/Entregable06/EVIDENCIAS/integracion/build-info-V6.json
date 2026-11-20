@@ -1,0 +1,15 @@
+{
+    "identifier": "V6",
+    "commit": "2cc512cf1f8644abc3cba7b4517c04d0cdffb3d1",
+    "unity": "6000.3.22f1",
+    "builtAtUtc": "2026-11-20T20:08:05.7128650Z",
+    "target": "StandaloneWindows64",
+    "scene": "Assets/_Bosque/Scenes/Integration/ArroyoPlayable.unity",
+    "options": "None",
+    "development": false,
+    "optionalQaVerifier": true,
+    "errors": 0,
+    "warnings": 0,
+    "totalBytes": 328757434,
+    "buildSeconds": 26.5977881
+}

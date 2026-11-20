@@ -1,8 +1,74 @@
 # Informe de aceptación — Arte V6 realista
 
-**Decisión actual (20/11/2026, tras corregir las P1): APTO PARA PRUEBA MANUAL.** Las 2 incidencias P1 de colisión invisible (QA6-013 y QA6-014) están corregidas y la sonda da 0 FALLA. Ver [Revalidación tras la corrección](#revalidación-tras-la-corrección-de-las-p1-20112026). La aceptación final requiere los casos manuales y la prueba de UX.
+**Decisión actual (20/11/2026, integración): INTEGRACIÓN TÉCNICA COMPLETA. APTA PARA M15, NO APTA TODAVÍA PARA FUSIONAR A `develop`.**
 
-> Decisión anterior, sobre el ZIP de Juan: no apto para integrar por QA6-013 y QA6-014. Las secciones siguientes describen esa primera ejecución.
+Para fusionar faltan tres cosas:
+- la prueba manual M15 sobre la build integrada;
+- una decisión sobre QA6-016, el presupuesto visual heredado de V3;
+- la medición M13 en la PC de la presentación.
+
+## Integración en ArroyoPlayable (20/11/2026)
+
+| Dato | Valor |
+|---|---|
+| Rama | `feature/arroyo-v6-integration`: incluye `develop` (arte V6 `42041da` y QA V6 `41b2bee`), las correcciones P1 `afcbe4d` y RC1 (`a7984f3`) |
+| Build | `Builds/Windows/V6/BosqueDeRegreso.exe`, commit `2cc512c`, 0 errores y 0 avisos, 329 MB ([build-info](EVIDENCIAS/integracion/build-info-V6.json)) |
+| Escena | `ArroyoPlayable` vestida con `ArroyoArtV6Dresser.DressPlayableBatch` |
+
+Resultados automatizados (no sustituyen a M15):
+
+| Prueba | Resultado |
+|---|---|
+| Sonda V6 integrada (`-qa6-integrada`) | **43 OK, 0 AVISO, 0 FALLA.** C09: ArroyoPlayable vestida tiene 0 diferencias de colliders y componentes frente a la [línea base pre-V6](EVIDENCIAS/contrato-arroyoplayable-pre-v6.json) (sha `A4134AF6…`) |
+| Sonda V6 sobre la escena de muestra | 43 OK, 0 AVISO, 0 FALLA |
+| Verificador de builds (patrulla, 1080p) | `passed=True` en todas las ejecuciones: movimiento, salto, salida bloqueada, 3 retiradas, un solo efecto de restauración, salida y 3 reinicios |
+| Pruebas EditMode | **37 de 38.** Falla `ActiveVisualBudgetStaysBoundedInBothStates`, que exige el presupuesto de V3 (menos de 180 renderers y 20 000 triángulos); V6 tiene 590 y 2,0 M. **No se cambió el criterio** (QA6-016) |
+| HUD sobre el fondo V6 | Legible en todos los estados ([capturas reales `hud_*.jpg`](EVIDENCIAS/integracion/)). Los botones de la pantalla final usan el estilo por defecto (QA6-017) |
+| Git LFS | `*.hdr` está en LFS y los 2 HDRI son punteros cuyos objetos tiene el servidor (QA6-011 cerrada) |
+
+Correcciones de esta integración (commit `122b504`):
+
+- **QA6-001:** la maraña ya no sobresale por delante de la barrera.
+- **QA6-002:** los árboles de la orilla se orientan sin madera en el paso.
+- **QA6-003:** los tocones pasan a lo alto del muro.
+- **QA6-004:** el tronco termina en el borde de la orilla.
+- **QA6-009:** queda un solo efecto de restauración. `RestorationFeedback` reproduce una ola V6 local y el sistema V3 deja de verse.
+- K03 en degradado baja del 1,8 % al 0,3 %.
+
+**Cambios en la sonda**, para que QA los revise:
+
+- Nuevo modo `-qa6-integrada`, que prueba `ArroyoPlayable` en lugar de la escena de muestra.
+- C02–C04 y C09 comparan ahora contra una línea base exportada antes de vestir la escena (`ExportBaselineBatch`), en lugar de contra el hash de un archivo que la integración cambia a propósito.
+- No se quitó ni se relajó ninguna comprobación.
+
+**Rendimiento** ([RENDIMIENTO-V6.csv](RENDIMIENTO-V6.csv): 4 ejecuciones seguidas con el mismo verificador, 30 s por estado; el equipo se calienta entre ejecuciones):
+
+| Build | Degradado | Restaurado | Primer frame |
+|---|---|---|---|
+| V6 `2cc512c` (1.ª ejecución) | 84 FPS, p95 15,0 ms | 54 FPS, p95 24,6 ms | 3,45 s |
+| V6 `38acc1d`, sin optimizar | 59 FPS, p95 20,1 ms | 39 FPS, p95 31,6 ms | 3,78 s |
+| V6 `2cc512c` (3.ª ejecución, en caliente) | 66 FPS, p95 19,7 ms | 53 FPS, p95 22,8 ms | 3,76 s |
+| RC1 `8838ff5` (referencia) | 219 FPS | 193 FPS | 3,66 s |
+
+- **Qué se optimizó** (`2cc512c`):
+  - Se conservan la mitad de los árboles del valle y dos tercios de los de la meseta.
+  - La vegetación baja ya no proyecta sombra.
+- **Reparto del coste**, medido con fases alternadas ([reparto](EVIDENCIAS/integracion/reparto-coste-restaurado.json), [candidatas](EVIDENCIAS/integracion/optimizaciones-candidatas.json)):
+  - sombras ~30 %;
+  - escala de render ~28 %;
+  - árboles del fondo ~18 %;
+  - vegetación ~16 %.
+  Cambiar la calidad de la sombra suave solo da un 4–5 %, y forzar el LOD1 de los árboles no mejora nada.
+- **Qué queda pendiente:** el estado restaurado sigue por encima de 16,67 ms en p95 (QA6-006). Lo siguiente sería reducir las cascadas de sombra o la escala de render, pero ambas cosas cambian el asset URP compartido y hay que acordarlas con Codex.
+
+**QA6-005 (congelamiento inicial):**
+
+- **Diagnóstico:** no es un congelamiento durante el juego.
+  - El frame largo (2,7 s; antes 4,3 s) es el delta del primer frame e incluye la carga desde que arranca el proceso. Sale igual con DX11 y con DX12, así que no son los PSO de DX12.
+  - El primer render real tarda entre 0,6 y 1,0 s, antes de que el jugador pueda moverse.
+- **Medida:** el primer frame con contenido llega en 3,45–3,78 s, frente a 3,66 s de RC1 en la misma sesión.
+
+> Decisión anterior, sobre el ZIP de Juan: no apto para integrar por QA6-013 y QA6-014, que se corrigieron después (ver la revalidación). Las secciones siguientes describen esas ejecuciones.
 
 | Dato | Valor |
 |---|---|
