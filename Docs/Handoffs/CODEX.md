@@ -1,4 +1,15 @@
 # Relevo de Codex
+
+## M13 / Bloque 02 / preparación de Diego — 20/11/2026
+
+Encargo vigente: medir M13 y B2-M10 en esta PC (confirmada por el usuario como equipo de presentación) y preparar B2-M01–B2-M09/M15 porque Diego no está disponible. Rama `feature/character-animation-audio`; se conservan los archivos ajenos y no se cambian escenas, runtime ni ajustes Unity.
+
+Informe vigente: [VALIDACION-PC-PRESENTACION.md](../Character/VALIDACION-PC-PRESENTACION.md), con seis recorridos instrumentados alternando V6 `7b94a1d` y V7 `8a944c8`, 1080p, 30 s por estado. **M13 y B2-M10 FALLIDOS** por exceder p95 16,67 ms en restaurado; QA6-006 sigue abierto. La PC conectada resuelve la falta de equipo identificado, no el incumplimiento del rendimiento.
+
+[SESION-DIEGO.md](../Character/SESION-DIEGO.md) y fichas CSV por versión listas. `Tools/Iniciar-Sesion-Diego.ps1` abre sesiones manuales sin verificador y registra identidad/log/cierre; ambas preparaciones probadas sin abrir el jugador. Sintaxis, fichas inicialmente pendientes y protección contra sobrescritura comprobadas. `Tools/Medir-PC-Presentacion.ps1` permite repetir las mediciones con builds identificadas. Recolector térmico original dejó CSV vacíos; telemetría parcial independiente conservada y recolector futuro corregido/verificado, sin rellenar datos ausentes.
+
+B2-M01–B2-M09 y M15 permanecen **PENDIENTES de Diego**, especialmente escucha humana B2-M09. No declarar QA aprobado ni fusionar PR #7. Su formulario antiguo cita `2cc512c`; usar la ficha nueva para V6 `7b94a1d`, cuyo Game es idéntico al head `4c973e5`. El informe de aceptación anterior y CLAUDE.md permanecen como historial, sin ediciones del bloque ajeno.
+
 ## Entregable 05 — RC1 preparada para evaluación
 Entrega publicada: https://github.com/TemisDev/Return-of-the-forest/pull/6, abierto hacia develop y sin fusionar. Código de build 8838ff5; commits posteriores de herramientas externas/documentación no cambian el ejecutable. El trabajo V6 posterior permanece local y fuera de este PR.
 Rama feature/arroyo-release-candidate actualizada por avance rápido a develop 299a479, con Final Polish, Arte V5 y QA V5 confirmados. Main permanece en 56d2558. Código exacto de las builds: **8838ff5c74038a5399d15b141e30a6b60e5fc949**, desde copia limpia, Unity 6000.3.22f1. Objetivo RC1: 22/11; entrega final: 27/11. Informe vigente: Docs/ENTREGABLE-05-RC1.md.

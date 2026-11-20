@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-20T17:06:06.0501240-05:00",
+  "presentationPcConfirmedByUser": true,
+  "cpu": "Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz",
+  "physicalMemoryBytes": 17008955392,
+  "windows": "Microsoft Windows 11 Home Single Language",
+  "powerPlan": "Equilibrado",
+  "battery": [
+    {
+      "PowerOnline": true,
+      "Charging": false,
+      "Discharging": false
+    }
+  ],
+  "resolution": "1920x1080",
+  "mode": "Windowed",
+  "secondsPerState": 30,
+  "repetitionsPerBuild": 3,
+  "order": "V6,V7 alternadas; sin enfriamiento artificial",
+  "gpuTelemetry": "nvidia-smi cada 5s; temperatura, utilizacion y reloj",
+  "method": "Patrulla API; no es sesion manual de Diego; p95 de tiempos por frame, no 1% low",
+  "criterion": "Ambos estados deben tener p95 <= 1000/60 ms en todas las repeticiones",
+  "background": "Sin editor ni otro jugador de esta copia; aplicaciones de escritorio no controladas"
+}

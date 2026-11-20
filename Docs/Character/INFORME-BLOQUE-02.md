@@ -104,6 +104,8 @@ GTX 1650, 1080p, URP equilibrado, verificador con 30 s por estado en ejecuciones
 
 ## Pruebas manuales pendientes
 
+**Actualización Codex, 20/11/2026:** el usuario confirmó que esta es la PC de presentación y pidió preparar la sesión porque Diego no está disponible. Guía vigente: [SESION-DIEGO.md](SESION-DIEGO.md). Resultado de M13/B2-M10 y evidencias: [VALIDACION-PC-PRESENTACION.md](VALIDACION-PC-PRESENTACION.md). B2-M01–B2-M09 y M15 siguen sin ejecución humana; no interpretar las verificaciones automáticas como aprobación manual.
+
 Son para Diego, con la build V7. **No están ejecutadas.**
 
 | ID | Pasos | Esperado |
@@ -121,7 +123,7 @@ Son para Diego, con la build V7. **No están ejecutadas.**
 
 ## Pendiente
 
-- Las pruebas manuales B2-M01 a B2-M10, M13 (PC de la presentación) y M15 del PR #7.
+- Ejecutar B2-M01–B2-M09 y M15 con Diego. M13/B2-M10 se han medido en esta PC: consultar el informe vigente enlazado arriba para su resultado y el bloqueo de rendimiento QA6-006; una medición ejecutada no equivale a un criterio aprobado.
 - El sonido aún no se ha escuchado con oídos humanos. La elección se hizo por nombre, duración y nivel (ver [AUDIO-PROCESADO.json](AUDIO-PROCESADO.json)); B2-M09 puede pedir cambiar algún clip.
 - Animaciones de giro en el sitio (Turn): no hay clip en la librería gratuita. El motor gira a 720°/s con suavizado.
 - AudioMixer con snapshots: los buses actuales cubren los volúmenes del menú. Si hace falta ducking, crear el mixer a mano en el editor y conectarlo a `BosqueAudio`.
