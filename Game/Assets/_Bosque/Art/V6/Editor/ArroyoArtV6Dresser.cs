@@ -610,6 +610,12 @@ namespace Bosque.ArtV6.Editor
         // ------------------------------------------------------------------ vegetación
         private static float BankHeight(float x) => x > -0.95f && x < 5.95f ? 0f : (x < -4.05f && x > -5.45f ? 3f : float.NaN);
 
+        private static string PrefabRootName(Transform t)
+        {
+            var root = PrefabUtility.GetOutermostPrefabInstanceRoot(t.gameObject);
+            return root != null ? root.name : t.name;
+        }
+
         private static void Scatter(Transform parent, string[] prefabs, int count, Func<Vector3> sample, float minS, float maxS, bool alignRandom = true)
         {
             for (int i = 0; i < count; i++)
@@ -673,6 +679,13 @@ namespace Bosque.ArtV6.Editor
                 if (float.IsNaN(p.y)) continue;
                 Put(Pick(new[] { "VIS_V6_DryBranch_A", "VIS_V6_DryBranch_B", "VIS_V6_DryBranch_C" }), vd, p, new Vector3(0, Rand(0, 360), 0), Rand(0.8f, 1.4f));
             }
+            // Rendimiento: la vegetación baja (hierba, flores, helechos) no proyecta sombra; arbustos y árboles sí.
+            foreach (var r in vd.GetComponentsInChildren<Renderer>(true).Concat(vr.GetComponentsInChildren<Renderer>(true)))
+            {
+                var n = r.transform.root != null ? PrefabRootName(r.transform) : r.name;
+                if (n.Contains("Grass") || n.Contains("Flower") || n.Contains("Dandelion") || n.Contains("Fern"))
+                    r.shadowCastingMode = ShadowCastingMode.Off;
+            }
         }
 
         // ------------------------------------------------------------------ fondo de valle
@@ -694,8 +707,11 @@ namespace Bosque.ArtV6.Editor
             {
                 var p = new Vector3(Rand(14f, 36f), -11.5f, Rand(-12f, 50f));
                 string kind = _rng.NextDouble() < 0.5 ? "A" : "B"; float s = Rand(2.2f, 3.2f); float yaw = Rand(0, 360);
-                Put($"VIS_V6_Tree{kind}_Green", br, p, new Vector3(0, yaw, 0), s);
-                if (_rng.NextDouble() < 0.5) Put($"VIS_V6_Tree{kind}_Dead", bd, p, new Vector3(0, yaw, 0), s);
+                bool dead = _rng.NextDouble() < 0.5;
+                // Rendimiento (integración V6): las copas del fondo eran ~18 % del coste; se conserva uno de cada dos.
+                if (i % 2 == 1) continue;
+                Put($"VIS_V6_Tree{kind}_Green", br, p, new Vector3(0, yaw, 0), s * 1.1f);
+                if (dead) Put($"VIS_V6_Tree{kind}_Dead", bd, p, new Vector3(0, yaw, 0), s * 1.1f);
             }
             // Terreno alrededor del nivel (sin colliders): meseta oeste/norte/sur a la altura de los muros,
             // acantilado bajo el borde este y fondo del valle. Evita que el nivel parezca una isla flotante.
@@ -721,9 +737,11 @@ namespace Bosque.ArtV6.Editor
             {
                 var p = new Vector3(Rand(-26f, -7f), 3f, Rand(-14f, 52f));
                 string kind = _rng.NextDouble() < 0.5 ? "A" : "B"; float s = Rand(1.6f, 2.4f); float yaw = Rand(0, 360);
+                double r1 = _rng.NextDouble(), r2 = _rng.NextDouble(); float stumpScale = Rand(0.7f, 1f);
+                if (i % 3 == 2) continue; // rendimiento: dos de cada tres árboles de la meseta
                 Put($"VIS_V6_Tree{kind}_Green", br, p, new Vector3(0, yaw, 0), s);
-                if (_rng.NextDouble() < 0.45) Put($"VIS_V6_Tree{kind}_Dead", bd, p, new Vector3(0, yaw, 0), s);
-                else if (_rng.NextDouble() < 0.5) Put("VIS_V6_Stump_A", bd, p, new Vector3(0, yaw, 0), Rand(0.7f, 1f));
+                if (r1 < 0.45) Put($"VIS_V6_Tree{kind}_Dead", bd, p, new Vector3(0, yaw, 0), s);
+                else if (r2 < 0.5) Put("VIS_V6_Stump_A", bd, p, new Vector3(0, yaw, 0), stumpScale);
             }
         }
 

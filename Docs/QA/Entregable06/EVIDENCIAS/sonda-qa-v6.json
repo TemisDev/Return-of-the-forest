@@ -1,10 +1,10 @@
 {
   "unity": "6000.3.22f1",
-  "fecha_utc": "2026-11-20T19:19:34Z",
+  "fecha_utc": "2026-11-20T20:06:38Z",
   "resumen": {"OK": 43, "AVISO": 0, "FALLA": 0},
   "metricas": {
     "escena_probada": "Assets/_Bosque/Art/V6/Showcase/ArroyoV6_Showcase.unity",
-    "sha_ArroyoPlayable": "A4134AF6C8B0BF3B0BA442292A94AAD51D89DFC77D68137673B2DE4DFD707B84",
+    "sha_ArroyoPlayable": "127F4F06EF747CD3FCEC049E10A97DE9D5D174E2BAE7D02C03676A01D3B431B1",
     "sha_ArroyoGreybox": "617AD893A90A3784D633DDDCFDD1163545F9B2EF6B4FD0964A0A0D14A0F3BBD2",
     "sha_linea_base": "A4134AF6C8B0BF3B0BA442292A94AAD51D89DFC77D68137673B2DE4DFD707B84",
     "camara_degradado": {"muestras": 2736, "dentro_de_solido": 8, "a_menos_de_12cm_de_solido": 35, "linea_de_vista_cortada_por_solido": 13, "linea_de_vista_cortada_por_vegetacion": 25},
