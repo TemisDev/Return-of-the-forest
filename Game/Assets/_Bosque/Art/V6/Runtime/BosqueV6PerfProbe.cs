@@ -64,7 +64,32 @@ namespace Bosque.ArtV6
             var bdTrees = backdrop.SelectMany(g => g.GetComponentsInChildren<LODGroup>(true)).ToArray();
             var bdBlocks = backdrop.SelectMany(g => g.GetComponentsInChildren<MeshRenderer>(true)).Where(r => r.name.StartsWith("V6_")).ToArray();
             var bdRocks = backdrop.SelectMany(g => g.GetComponentsInChildren<MeshRenderer>(true)).Where(r => r.GetComponentInParent<LODGroup>() == null && !r.name.StartsWith("V6_")).ToArray();
-            var phases = new (string name, Action on, Action off)[]
+            int baseCascades = urp.shadowCascadeCount; int baseRes = urp.mainLightShadowmapResolution;
+            var baseFilter = urp.upscalingFilter;
+            Action reset = () =>
+            {
+                urp.shadowDistance = baseShadow; urp.shadowCascadeCount = baseCascades; urp.mainLightShadowmapResolution = baseRes;
+                urp.renderScale = baseScale; urp.upscalingFilter = baseFilter;
+            };
+            Action Cfg(int cascades, float dist, int res, float scale, UpscalingFilterSelection filter) => () =>
+            {
+                urp.shadowCascadeCount = cascades; urp.shadowDistance = dist; urp.mainLightShadowmapResolution = res;
+                urp.renderScale = scale; urp.upscalingFilter = filter;
+            };
+            var urpPhases = new (string name, Action on, Action off)[]
+            {
+                ("actual_c4_d50_1.0", reset, reset),
+                ("c2_d40", Cfg(2, 40f, baseRes, baseScale, baseFilter), reset),
+                ("c4_d35", Cfg(4, 35f, baseRes, baseScale, baseFilter), reset),
+                ("c2_d50", Cfg(2, 50f, baseRes, baseScale, baseFilter), reset),
+                ("sombra_1024", Cfg(baseCascades, baseShadow, 1024, baseScale, baseFilter), reset),
+                ("escala_085_bilineal", Cfg(baseCascades, baseShadow, baseRes, 0.85f, UpscalingFilterSelection.Auto), reset),
+                ("escala_085_fsr", Cfg(baseCascades, baseShadow, baseRes, 0.85f, UpscalingFilterSelection.FSR), reset),
+                ("escala_080_stp", Cfg(baseCascades, baseShadow, baseRes, 0.8f, UpscalingFilterSelection.STP), reset),
+                ("equilibrado_c2_d40_085_fsr", Cfg(2, 40f, baseRes, 0.85f, UpscalingFilterSelection.FSR), reset),
+                ("equilibrado_c3_d45_090_fsr", Cfg(3, 45f, baseRes, 0.9f, UpscalingFilterSelection.FSR), reset),
+            };
+            var costPhases = new (string name, Action on, Action off)[]
             {
                 ("completo", () => { }, () => { }),
                 ("sin_sombras", () => urp.shadowDistance = 0f, () => urp.shadowDistance = baseShadow),
@@ -76,6 +101,7 @@ namespace Bosque.ArtV6
                 ("fondo_sin_rocas", () => Array.ForEach(bdRocks, r => r.enabled = false), () => Array.ForEach(bdRocks, r => r.enabled = true)),
                 ("sin_vegetacion", () => Array.ForEach(veg, g => g.SetActive(false)), () => Array.ForEach(veg, g => g.SetActive(true))),
             };
+            var phases = args.Contains("-v6-perf-urp") ? urpPhases : costPhases;
             // Ciclos cortos alternados: el calentamiento del equipo afecta por igual a todas las fases.
             var perPhase = phases.ToDictionary(ph => ph.name, ph => new List<float>());
             for (int pass = 0; pass < 5; pass++)
