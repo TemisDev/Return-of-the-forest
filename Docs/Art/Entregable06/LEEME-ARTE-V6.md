@@ -7,6 +7,19 @@ Estado: **recursos y escena de muestra listos y verificados en Unity por lotes. 
 
 Izquierda: RC1 (`8838ff5`). Derecha: V6. Arriba, estado degradado; abajo, restaurado. Son capturas reales de Unity 6000.3.22f1 con URP y post-proceso, no arte conceptual.
 
+## Corrección de QA (20/11/2026)
+
+La QA V6 encontró dos colisiones invisibles (P1), corregidas en el vestidor sin tocar colliders ni gameplay:
+
+- **QA6-013:** el tronco opcional del sendero (`LowLog_Optional`, X 1,75 Z 30) tiene ahora un visual propio, `V6_LowLog_Optional`, ajustado a su collider.
+- **QA6-014:** los árboles con collider se enderezan y se centran sobre su tronco de juego. Los de lo alto del muro usan el modelo B, de tronco recto.
+
+También:
+
+- La escena de muestra conserva su GUID entre regeneraciones.
+- Las capturas dejan el cielo en estado degradado.
+- Hay una vista nueva, `08_tronco_opcional`, con lo que las capturas pasan a ser 16.
+
 ## Cómo verlo
 
 1. Abrir Unity con `Game/` y la escena **`Assets/_Bosque/Art/V6/Showcase/ArroyoV6_Showcase.unity`**.
@@ -48,7 +61,7 @@ Menú **Tools > Bosque > Arte > V6**:
 1. **Generar materiales, prefabs y partículas**: configura los importadores y regenera todo lo que hay en `V6`.
 2. **Crear escena de muestra (copia jugable)**: copia `ArroyoPlayable` a `Showcase/` y la viste.
 3. **Vestir la escena abierta con arte V6**: es el paso de integración. Es idempotente y se puede repetir.
-4. **Capturar escena de muestra**: genera las 14 capturas de `CAPTURAS/`.
+4. **Capturar escena de muestra**: genera las 16 capturas de `CAPTURAS/` (8 vistas por estado).
 
 En lote: `Unity.exe -batchmode -projectPath Game -executeMethod Bosque.ArtV6.Editor.ArroyoArtV6Capture.BuildAndCaptureBatch`.
 
