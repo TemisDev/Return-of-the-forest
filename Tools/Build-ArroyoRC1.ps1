@@ -1,5 +1,5 @@
 param(
-    [ValidateSet('Candidate','Diagnostics','V6','V6-Diagnostics')][string]$Configuration = 'Candidate',
+    [ValidateSet('Candidate','Diagnostics','V6','V6-Diagnostics','V7-Character-Audio')][string]$Configuration = 'Candidate',
     [string]$Unity = 'C:\Program Files\Unity\Hub\Editor\6000.3.22f1\Editor\Unity.exe',
     [string]$Git = 'git'
 )
@@ -23,6 +23,7 @@ $brMethod = switch ($Configuration) {
     'Diagnostics' { 'Bosque.CoreSetup.ArroyoBuild.BuildRC1DiagnosticsBatch' }
     'V6' { 'Bosque.CoreSetup.ArroyoBuild.BuildV6WindowsBatch' }
     'V6-Diagnostics' { 'Bosque.CoreSetup.ArroyoBuild.BuildV6DiagnosticsBatch' }
+    'V7-Character-Audio' { 'Bosque.CoreSetup.ArroyoBuild.BuildV7WindowsBatch' }
 }
 $brPreviousCommit = $env:BOSQUE_BUILD_COMMIT
 try {

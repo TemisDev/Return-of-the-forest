@@ -80,7 +80,7 @@ namespace Bosque.Session
                 Panel(new Rect(350, 250, 580, 260));
                 GUI.Label(new Rect(374, 270, 530, 35), "RECUPERA EL ARROYO", title);
                 GUI.Label(new Rect(374, 316, 530, 170),
-                    "WASD: moverte · Ratón: mirar\nEspacio: saltar · E: retirar un bloqueo\nAcércate desde la orilla, sin subir al obstáculo.\nR: reiniciar · Esc: liberar el cursor\nF1: cerrar ayuda\nEl progreso no se guarda al cerrar.", body);
+                    "WASD: moverte · Shift: caminar · Ratón: mirar\nEspacio: saltar · E: retirar un bloqueo\nAcércate desde la orilla, sin subir al obstáculo.\nR: reiniciar · Esc: liberar el cursor\nF1: cerrar ayuda\nEl progreso no se guarda al cerrar.", body);
             }
             if (p.IsCompleted && Cursor.lockState != CursorLockMode.Locked)
             {
