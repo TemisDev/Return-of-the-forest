@@ -1,0 +1,193 @@
+{
+ "nota": "Build Windows de la escena de muestra (no Development), 1920x1080 ventana, VSync 0. Recorrido autom\u00e1tico de c\u00e1mara por la orilla 20 s por fase tras 2 s de calentamiento. Misma PC port\u00e1til tras horas de compilaciones: hay calentamiento t\u00e9rmico (ver fases intercaladas de perf-final-3). perf-1080p es antes de LOD/sombras lejanas.",
+ "ejecuciones": {
+  "perf-1080p": {
+   "gpu": "NVIDIA GeForce GTX 1650",
+   "cpu": "Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz",
+   "resolution": "1920x1080",
+   "vsync": 0,
+   "quality": "PC",
+   "states": [
+    {
+     "state": "degraded",
+     "frames": 1643,
+     "avgFps": 76.4,
+     "avgMs": 13.09,
+     "p50Ms": 11.95,
+     "p95Ms": 16.86,
+     "p99Ms": 17.42,
+     "maxMs": 1517.29,
+     "over16_67ms": 114
+    },
+    {
+     "state": "restored",
+     "frames": 1156,
+     "avgFps": 57.7,
+     "avgMs": 17.32,
+     "p50Ms": 17.01,
+     "p95Ms": 22.29,
+     "p99Ms": 22.78,
+     "maxMs": 72.19,
+     "over16_67ms": 621
+    }
+   ]
+  },
+  "perf-1080p-b": {
+   "gpu": "NVIDIA GeForce GTX 1650",
+   "cpu": "Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz",
+   "resolution": "1920x1080",
+   "vsync": 0,
+   "quality": "PC",
+   "states": [
+    {
+     "state": "degraded",
+     "frames": 1684,
+     "avgFps": 84.1,
+     "avgMs": 11.89,
+     "p50Ms": 12.25,
+     "p95Ms": 14.76,
+     "p99Ms": 15.07,
+     "maxMs": 15.96,
+     "over16_67ms": 0
+    },
+    {
+     "state": "restored",
+     "frames": 1370,
+     "avgFps": 68.4,
+     "avgMs": 14.61,
+     "p50Ms": 15.16,
+     "p95Ms": 18.29,
+     "p99Ms": 20.69,
+     "maxMs": 23.98,
+     "over16_67ms": 276
+    }
+   ]
+  },
+  "perf-final-1": {
+   "gpu": "NVIDIA GeForce GTX 1650",
+   "cpu": "Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz",
+   "resolution": "1920x1080",
+   "vsync": 0,
+   "quality": "PC",
+   "states": [
+    {
+     "state": "degraded",
+     "frames": 1670,
+     "avgFps": 83.4,
+     "avgMs": 11.98,
+     "p50Ms": 12.34,
+     "p95Ms": 14.5,
+     "p99Ms": 14.71,
+     "maxMs": 15.56,
+     "over16_67ms": 0
+    },
+    {
+     "state": "restored",
+     "frames": 1207,
+     "avgFps": 60.3,
+     "avgMs": 16.59,
+     "p50Ms": 17.43,
+     "p95Ms": 20.97,
+     "p99Ms": 24.42,
+     "maxMs": 27.71,
+     "over16_67ms": 644
+    }
+   ]
+  },
+  "perf-final-2": {
+   "gpu": "NVIDIA GeForce GTX 1650",
+   "cpu": "Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz",
+   "resolution": "1920x1080",
+   "vsync": 0,
+   "quality": "PC",
+   "states": [
+    {
+     "state": "degraded",
+     "frames": 1491,
+     "avgFps": 74.5,
+     "avgMs": 13.42,
+     "p50Ms": 13.84,
+     "p95Ms": 16.74,
+     "p99Ms": 20.37,
+     "maxMs": 31.12,
+     "over16_67ms": 82
+    },
+    {
+     "state": "restored",
+     "frames": 1021,
+     "avgFps": 51.0,
+     "avgMs": 19.61,
+     "p50Ms": 20.81,
+     "p95Ms": 24.92,
+     "p99Ms": 31.17,
+     "maxMs": 38.29,
+     "over16_67ms": 665
+    }
+   ]
+  },
+  "perf-final-3": {
+   "gpu": "NVIDIA GeForce GTX 1650",
+   "cpu": "Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz",
+   "resolution": "1920x1080",
+   "vsync": 0,
+   "quality": "PC",
+   "states": [
+    {
+     "state": "degraded",
+     "frames": 1646,
+     "avgFps": 82.2,
+     "avgMs": 12.16,
+     "p50Ms": 12.65,
+     "p95Ms": 14.48,
+     "p99Ms": 14.75,
+     "maxMs": 15.93,
+     "over16_67ms": 0
+    },
+    {
+     "state": "restored",
+     "frames": 1143,
+     "avgFps": 57.1,
+     "avgMs": 17.51,
+     "p50Ms": 17.76,
+     "p95Ms": 22.69,
+     "p99Ms": 25.32,
+     "maxMs": 30.89,
+     "over16_67ms": 627
+    },
+    {
+     "state": "restored_shadowLite",
+     "frames": 1087,
+     "avgFps": 54.3,
+     "avgMs": 18.4,
+     "p50Ms": 19.37,
+     "p95Ms": 23.83,
+     "p99Ms": 28.3,
+     "maxMs": 38.94,
+     "over16_67ms": 644
+    },
+    {
+     "state": "degraded_shadowLite",
+     "frames": 1265,
+     "avgFps": 63.2,
+     "avgMs": 15.82,
+     "p50Ms": 16.55,
+     "p95Ms": 19.86,
+     "p99Ms": 22.5,
+     "maxMs": 31.6,
+     "over16_67ms": 629
+    },
+    {
+     "state": "restored",
+     "frames": 967,
+     "avgFps": 48.3,
+     "avgMs": 20.7,
+     "p50Ms": 21.83,
+     "p95Ms": 26.03,
+     "p99Ms": 28.22,
+     "maxMs": 31.31,
+     "over16_67ms": 760
+    }
+   ]
+  }
+ }
+}
