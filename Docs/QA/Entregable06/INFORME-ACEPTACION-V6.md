@@ -2,10 +2,17 @@
 
 **Decisión actual (20/11/2026, integración): INTEGRACIÓN TÉCNICA COMPLETA. APTA PARA M15, NO APTA TODAVÍA PARA FUSIONAR A `develop`.**
 
-Para fusionar faltan tres cosas:
-- la prueba manual M15 sobre la build integrada;
-- una decisión sobre QA6-016, el presupuesto visual heredado de V3;
-- la medición M13 en la PC de la presentación.
+Para fusionar faltan la prueba manual M15 sobre la build integrada y la medición M13 en la PC de la presentación. QA6-016 ya está resuelta (ver la actualización de `7b94a1d`).
+
+## Actualización: rendimiento URP y presupuesto visual (commit `7b94a1d`)
+
+- **QA6-006 mejorada** (`PC_RPAsset`):
+  - Nueva configuración: escala de render 0,85 con FSR y 2 cascadas de sombra a 40 m (antes 1,0 y 4 cascadas a 50 m).
+  - Verificador en la misma sesión: restaurado 60–68 FPS con p95 de 18,6–19,9 ms; antes, 50 FPS y 24,6 ms. Degradado: 76–99 FPS.
+  - La comparación por configuraciones está en [comparacion-configuraciones-urp.json](EVIDENCIAS/integracion/comparacion-configuraciones-urp.json).
+  - Falta M13 en la PC de la presentación.
+- **QA6-016 corregida:** la prueba de presupuesto es ahora una guarda de regresión del arte V6 (menos de 1250 renderers y 3 M triángulos). EditMode: **38/38**.
+- **Para fusionar** quedan M15 y M13.
 
 ## Integración en ArroyoPlayable (20/11/2026)
 

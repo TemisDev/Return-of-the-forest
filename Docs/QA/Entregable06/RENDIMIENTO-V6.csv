@@ -29,3 +29,12 @@ cmp-new-b,build integrada V6 2cc512c; 3.ª de 4 seguidas (equipo caliente),3,tra
 cmp-rc1,build RC1 8838ff5 (referencia sin V6); 4.ª de 4 seguidas,1,degraded,1920x1080,NVIDIA GeForce GTX 1650,Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz,6562,218.7,4.57,5.29,7.09,7.96,26.56,2
 cmp-rc1,build RC1 8838ff5 (referencia sin V6); 4.ª de 4 seguidas,2,restored,1920x1080,NVIDIA GeForce GTX 1650,Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz,5787,192.9,5.19,5.81,7.38,8.76,11.76,0
 cmp-rc1,build RC1 8838ff5 (referencia sin V6); 4.ª de 4 seguidas,3,transition,1920x1080,NVIDIA GeForce GTX 1650,Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz,594,197.6,5.06,5.74,7.37,7.67,8.09,0
+cmp-urp-new-a,"V6 7b94a1d URP equilibrado (0,85 FSR, 2 cascadas 40 m); 1.ª de 3",1,degraded,1920x1080,NVIDIA GeForce GTX 1650,Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz,2962,98.7,10.13,10.29,12.60,13.15,13.63,0
+cmp-urp-new-a,"V6 7b94a1d URP equilibrado (0,85 FSR, 2 cascadas 40 m); 1.ª de 3",2,restored,1920x1080,NVIDIA GeForce GTX 1650,Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz,2033,67.8,14.76,14.66,18.60,21.90,32.12,425
+cmp-urp-new-a,"V6 7b94a1d URP equilibrado (0,85 FSR, 2 cascadas 40 m); 1.ª de 3",3,transition,1920x1080,NVIDIA GeForce GTX 1650,Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz,217,72.0,13.88,13.78,14.52,17.12,20.67,4
+cmp-urp-old,V6 2cc512c URP original; 2.ª de 3,1,degraded,1920x1080,NVIDIA GeForce GTX 1650,Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz,2111,70.3,14.22,14.06,18.11,19.40,63.22,448
+cmp-urp-old,V6 2cc512c URP original; 2.ª de 3,2,restored,1920x1080,NVIDIA GeForce GTX 1650,Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz,1490,49.7,20.13,20.23,24.63,28.95,48.70,1280
+cmp-urp-old,V6 2cc512c URP original; 2.ª de 3,3,transition,1920x1080,NVIDIA GeForce GTX 1650,Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz,172,57.3,17.46,17.33,18.69,23.62,23.86,168
+cmp-urp-new-b,V6 7b94a1d URP equilibrado; 3.ª de 3,1,degraded,1920x1080,NVIDIA GeForce GTX 1650,Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz,2271,75.7,13.21,13.06,16.92,23.08,34.24,138
+cmp-urp-new-b,V6 7b94a1d URP equilibrado; 3.ª de 3,2,restored,1920x1080,NVIDIA GeForce GTX 1650,Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz,1802,60.0,16.65,16.75,19.88,22.07,27.50,948
+cmp-urp-new-b,V6 7b94a1d URP equilibrado; 3.ª de 3,3,transition,1920x1080,NVIDIA GeForce GTX 1650,Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz,201,66.7,15.00,14.83,16.28,19.47,21.64,8
