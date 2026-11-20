@@ -1,0 +1,6 @@
+﻿id,origen,descripcion,severidad_preliminar,estado,version,pasos,esperado,obtenido,evidencia,resolucion
+I-01,Incidencia documentada anterior,Retirar obstáculos 1 y 3 con jugador encima,P2,PENDIENTE DE REVALIDACIÓN,,,,,,
+I-02,Incidencia documentada anterior,Saltos obligatorios entre obstáculos,P3,PENDIENTE DE REVALIDACIÓN,,,,,,
+I-03,Incidencia documentada anterior,Tronco opcional se supera caminando,P3,PENDIENTE DE REVALIDACIÓN,,,,,,
+I-04,Incidencia documentada anterior,Respawn siempre al inicio,P3,PENDIENTE DE REVALIDACIÓN,,,,,,
+I-05,Incidencia documentada anterior,Cámara cerca del cuerpo contra paredes,P2,PENDIENTE DE REVALIDACIÓN,,,,,,

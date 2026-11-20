@@ -1,0 +1,45 @@
+QA V6 - subir la entrega de Diego a GitHub
+=========================================
+Ejecutar en CMD desde la raiz de su copia del repositorio Return-of-the-forest. Cerrar Unity.
+Esta QA revisa la rama de arte de Juan: primero Juan debe haber subido feature/arroyo-art-v6.
+Si hay trabajo sin guardar, detenerse. No cambiar de rama con cambios pendientes.
+
+1) Partir de la rama de arte de Juan
+git status
+git fetch origin
+git switch --track origin/feature/arroyo-art-v6
+   (si ya la tienes: git switch feature/arroyo-art-v6  y luego  git pull --ff-only)
+git switch -c feature/arroyo-qa-v6
+   (si la rama QA ya existe: git switch feature/arroyo-qa-v6  y luego  git merge origin/feature/arroyo-art-v6)
+
+2) Descomprimir el ZIP en la raiz del repositorio
+tar -xf "%USERPROFILE%\Downloads\BosqueDeRegreso-QAV6-para-Diego.zip"
+
+3) Verificar la copia (PowerShell, desde la raiz; debe decir "0 diferencias")
+powershell -NoProfile -Command "$m = Get-Content Docs\QA\Entregable06\MANIFIESTO-SHA256.txt; $b = 0; foreach ($l in $m) { $h, $p = $l -split '  ', 2; if ((Get-FileHash -LiteralPath $p -Algorithm SHA256).Hash -ne $h) { $b++; 'DIFERENTE: ' + $p } }; \"$b diferencias\""
+
+4) (Recomendado) Repetir la sonda en tu equipo: abre PowerShell en la raiz y ejecuta
+   & .\Docs\QA\Entregable06\Tools\ejecutar_qa_v6.ps1
+   Hoy devuelve FALLA en C12 (QA6-013 y QA6-014) hasta que arte corrija: es el resultado esperado.
+   La sonda reescribe EVIDENCIAS\sonda-qa-v6.*; si cambian, el manifiesto ya no coincidira (normal).
+
+5) Agregar solo la entrega de QA y la sonda
+git add Docs/QA/Entregable06 Game/Assets/_Bosque/Tests/Acceptance/Editor/ArroyoQAV6Probe.cs Game/Assets/_Bosque/Tests/Acceptance/Editor/ArroyoQAV6Probe.cs.meta
+git status --short
+git diff --cached --stat
+git diff --cached --check
+
+   Solo deben aparecer archivos de Docs/QA/Entregable06 y los 2 de la sonda.
+
+6) Commit y push
+git commit -m "pruebas: agregar QA del arte V6 con sonda automatizada, matriz e incidencias"
+git push -u origin feature/arroyo-qa-v6
+
+7) Pull Request
+   En GitHub: Compare & pull request con base  feature/arroyo-art-v6  (asi solo se ven los cambios de QA).
+   Cuando el arte se fusione a develop, cambiar la base del PR a develop. No fusionar automaticamente.
+   Titulo sugerido: QA V6: revision del arte realista (sonda 41 OK / 1 AVISO / 1 FALLA)
+   En la descripcion, enlazar INFORME-ACEPTACION-V6.md y listar QA6-013 y QA6-014 (P1) para Juan.
+
+Despues de la sesion manual: rellenar FORMULARIO-PRUEBA-MANUAL-V6.md, actualizar MATRIZ-QA-V6.csv,
+INCIDENCIAS-V6.csv e INFORME-ACEPTACION-V6.md; guardar evidencias en EVIDENCIAS/ y repetir 5) y 6).

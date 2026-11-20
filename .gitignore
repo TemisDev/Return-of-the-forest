@@ -21,7 +21,10 @@ Game/*.VC.db
 # Local generation and presentation artifacts
 .slides-build/
 .dev-logs/
+/Builds/
 # Local secrets
 .env
 .env.*
 !.env.example
+
+/Builds/

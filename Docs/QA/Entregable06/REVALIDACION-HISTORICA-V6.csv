@@ -1,0 +1,6 @@
+﻿incidencia,descripcion_original,situacion_con_V6,decision
+I-01,Retirar un obstáculo con el jugador encima,"Protección de RemovableObstacle conservada (colliders idénticos, Q02); visuales V6 más altos que el collider en O1/O3 (L01)",Sin cambios de lógica; revalidar M02 a mano
+I-02,Salir del cauce solo saltando entre obstáculos,Rampas y colliders idénticos (Q02); rocas decorativas sin collider en los bordes,Sin cambio; revalidar a mano
+I-03,Tronco opcional subible andando,LowLog_Optional conserva su collider; su visual antiguo está oculto y V6 no lo reemplaza,"EMPEORA: ahora es un obstáculo invisible (QA6-013, P1)"
+I-04,Respawn siempre al inicio,Igual (F10),Sin cambio
+I-05,Cámara cerca de muros,"Losas de roca V6 sin collider: 0,3% de posiciones dentro de sólido; 1,0% a menos de 12 cm",Mejor que temido; confirmar M04

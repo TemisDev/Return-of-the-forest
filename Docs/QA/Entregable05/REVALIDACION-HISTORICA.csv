@@ -1,0 +1,6 @@
+﻿id,observacion_historica,estado,sha_build,resultado,evidencia
+I-01,Caminar sobre obstáculos 1 y 3; retirada podría causar caída,NO EJECUTADO,,,
+I-02,Salir del cauce saltando en lugar de caminar,NO EJECUTADO,,,
+I-03,Tronco opcional superable sin salto,NO EJECUTADO,,,
+I-04,Respawn al inicio con retroceso,NO EJECUTADO,,,
+I-05,Cámara demasiado cercana junto a paredes,NO EJECUTADO,,,

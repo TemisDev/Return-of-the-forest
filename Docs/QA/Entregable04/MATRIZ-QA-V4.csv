@@ -1,0 +1,42 @@
+﻿ID,suite,prioridad,plataforma,pasos,resultado_esperado,estado,resultado_obtenido,commit_probado,fecha_hora,responsable,evidencia_requerida
+R01,REGRESION,P0,Editor y build,Mover WASD; saltar en suelo y en borde,El personaje se mueve y salta sin bloqueo,NO EJECUTADO,,,,,video_movimiento
+R02,REGRESION,P1,Editor y build,Orbitar cámara; acercarse a pared y vegetación,Cámara sigue al jugador sin ocultarlo de forma impeditiva,NO EJECUTADO,,,,,video_camara
+R03,REGRESION,P0,Editor y build,Acercarse a obstáculo y pulsar E,Interacción funciona dentro de rango,NO EJECUTADO,,,,,video_interaccion
+R04,REGRESION,P0,Editor y build,Retirar los tres obstáculos,Cada uno desaparece/queda inactivo exactamente una vez,NO EJECUTADO,,,,,video_obstaculos
+R05,REGRESION,P0,Editor y build,Retirar obstáculos y observar HUD,Contador progresa de 0/3 a 3/3,NO EJECUTADO,,,,,captura_hud
+R06,REGRESION,P0,Editor y build,Completar 3/3 y observar cauce,Estado restaurado activado exactamente una vez,NO EJECUTADO,,,,,video_restauracion
+R07,REGRESION,P0,Editor y build,Visitar salida antes y después de restaurar,Salida se bloquea antes y habilita después,NO EJECUTADO,,,,,video_salida
+R08,REGRESION,P0,Editor y build,"Completar el nivel, pulsar R y repetir",Se restablece el estado inicial completo,NO EJECUTADO,,,,,video_reinicio
+R09,REGRESION,P1,Editor y build,Ejecutar recorrido completo y revisar consola,No hay errores rojos de ejecución durante recorrido,NO EJECUTADO,,,,,captura_consola
+N01,NEGATIVA,P1,Editor y build,Pulsar E desde fuera del rango,No se retira el obstáculo,NO EJECUTADO,,,,,captura_o_video_n01
+N02,NEGATIVA,P1,Editor y build,Mirar al suelo / no tener objetivo y pulsar E,No se produce progreso ni excepción,NO EJECUTADO,,,,,captura_o_video_n02
+N03,NEGATIVA,P1,Editor y build,Mantener E o pulsarla repetidas veces sobre un obstáculo retirado,Solo cuenta una retirada,NO EJECUTADO,,,,,captura_o_video_n03
+N04,NEGATIVA,P1,Editor y build,Interactuar con tres obstáculos en orden alternativo si diseño lo permite,Progreso coherente; sin bloqueo o duplicados,NO EJECUTADO,,,,,captura_o_video_n04
+N05,NEGATIVA,P1,Editor y build,Moverse o saltar mientras se dispara la interacción,No se bloquea el controlador ni aparecen estados inválidos,NO EJECUTADO,,,,,captura_o_video_n05
+N06,NEGATIVA,P1,Editor y build,Reiniciar tras retirar 1 de 3,Todos los obstáculos vuelven y progreso 0/3,NO EJECUTADO,,,,,captura_o_video_n06
+N07,NEGATIVA,P1,Editor y build,Reiniciar inmediatamente después de 3/3,Se restablece salida bloqueada y entorno degradado,NO EJECUTADO,,,,,captura_o_video_n07
+N08,NEGATIVA,P1,Editor y build,Caer del nivel después de restaurar,Retorno coherente sin perder estado de forma incorrecta,NO EJECUTADO,,,,,captura_o_video_n08
+N09,NEGATIVA,P1,Editor y build,Intentar activar salida antes de 3/3,No termina el nivel,NO EJECUTADO,,,,,captura_o_video_n09
+N10,NEGATIVA,P2,Editor y build,Interactuar con cámara junto a un objeto decorativo,Raycast/objetivo de interacción no es tapado accidentalmente,NO EJECUTADO,,,,,captura_o_video_n10
+V01,VISUAL,P1,Editor,Revisar todos los elementos desde spawn,Sin materiales rosados ni meshes invisibles,NO EJECUTADO,,,,,captura_v01
+V02,VISUAL,P2,Editor,Inspeccionar suelo/piedras/barrancos,Sin objetos flotantes o intersecciones visibles,NO EJECUTADO,,,,,captura_v02
+V03,VISUAL,P1,Editor,Comparar pantalla estado degradado/restaurado mismo encuadre,"Diferencia clara y coherente, sin saturación excesiva",NO EJECUTADO,,,,,captura_v03
+V04,VISUAL,P1,Editor,Orbitar cámara junto a vegetación nueva,Decoración no impide seguimiento,NO EJECUTADO,,,,,captura_v04
+V05,VISUAL,P1,Editor,Recorrer pasos/rampas tras colocar nuevos props,Ninguna decoración bloquea el recorrido,NO EJECUTADO,,,,,captura_v05
+V06,VISUAL,P2,Editor,Revisar escala de modelos en relación con cápsula,Proporciones consistentes,NO EJECUTADO,,,,,captura_v06
+V07,VISUAL,P2,Editor,Revisar texto HUD en fondo claro/oscuro,Contraste y legibilidad apropiados,NO EJECUTADO,,,,,captura_v07
+V08,VISUAL,P2,Editor,Verificar indicador E y progreso en diferentes resoluciones,No se cortan iconos o textos,NO EJECUTADO,,,,,captura_v08
+V09,VISUAL,P2,Editor,Comprobar agua/espuma en diferentes ángulos,Sin z-fighting ni alfa incorrecta perceptible,NO EJECUTADO,,,,,captura_v09
+V10,VISUAL,P2,Editor,"Comparar iconos, luz y colores del recorrido",Dirección low poly mate consistente,NO EJECUTADO,,,,,captura_v10
+B01,BUILD_RENDIMIENTO,P0,Build Windows,Iniciar build Windows desde .exe,Se abre y muestra escena correcta,NO EJECUTADO,,,,,captura_log_b01
+B02,BUILD_RENDIMIENTO,P0,Build Windows,Completar las tres interacciones y salida en build,Recorrido completo fuera del Editor,NO EJECUTADO,,,,,captura_log_b02
+B03,BUILD_RENDIMIENTO,P1,Build Windows,Pulsar R y repetir nivel en build,Reinicio sin estados residuales,NO EJECUTADO,,,,,captura_log_b03
+B04,BUILD_RENDIMIENTO,P1,Build Windows,Cerrar ventana y relanzar build,Cierre y apertura normales,NO EJECUTADO,,,,,captura_log_b04
+B05,BUILD_RENDIMIENTO,P1,Build Windows,Registrar mínimo/medio FPS durante recorrido reproducible,"Métricas reales anotadas, no estimaciones",NO EJECUTADO,,,,,captura_log_b05
+B06,BUILD_RENDIMIENTO,P2,Build Windows,Monitorizar RAM aproximada en recorrido,Consumo registrado con herramienta y entorno,NO EJECUTADO,,,,,captura_log_b06
+B07,BUILD_RENDIMIENTO,P1,Build Windows,Revisar Player.log de build tras recorrido,Sin excepciones bloqueantes,NO EJECUTADO,,,,,captura_log_b07
+B08,BUILD_RENDIMIENTO,P1,Build Windows,Inspeccionar paquetes y DLLs de build,No faltan datos necesarios para iniciar,NO EJECUTADO,,,,,captura_log_b08
+U01,UX,P2,Editor o build,Pedir a jugador no participante completar nivel sin ayuda,Se entiende objetivo general; registrar dudas,NO EJECUTADO,,,,,notas_ux_u01
+U02,UX,P2,Editor o build,Cronometrar el primer recorrido completo,Duración real registrada,NO EJECUTADO,,,,,notas_ux_u02
+U03,UX,P2,Editor o build,Consultar al jugador qué cambió al recuperar el arroyo,Reconoce transformación ambiental,NO EJECUTADO,,,,,notas_ux_u03
+U04,UX,P2,Editor o build,Preguntar qué significan los iconos del HUD,Indicadores interpretables,NO EJECUTADO,,,,,notas_ux_u04
