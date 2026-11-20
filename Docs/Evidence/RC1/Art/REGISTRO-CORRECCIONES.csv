@@ -1,0 +1,2 @@
+"id","revision_id","severidad","sha_detectado","ubicacion","defecto_observado","evidencia_antes","cambio_realizado","archivos","sha_correccion","evidencia_despues","estado","responsable"
+"RC1-UI-01","AV07","P2","e692340","HUD inicial","La linea inicial de controles no explicaba E: retirar","CAPTURAS/obstaculo_base.png","Texto E: retirar en controles existentes; sin nuevo sistema","Game/Assets/_Bosque/Runtime/Session/ArroyoPrototypeHud.cs","e5a3877","CAPTURAS/obstaculo_rc1.png","CORREGIDA TECNICAMENTE; aceptacion Juan pendiente","Codex"

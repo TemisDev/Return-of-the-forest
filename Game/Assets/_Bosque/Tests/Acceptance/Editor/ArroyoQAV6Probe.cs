@@ -29,7 +29,18 @@ namespace Bosque.Acceptance
         private const string ArtRoot = "Assets/_Bosque/Art/V6";
         private const int ProbeLayer = 31;
 
+        private const string BaselineFile = "../../Docs/QA/Entregable06/EVIDENCIAS/contrato-arroyoplayable-pre-v6.json";
+
+        /// <summary>Contrato de ArroyoPlayable antes de vestirla con V6 (colliders y componentes de gameplay).</summary>
+        [Serializable] private sealed class Baseline
+        {
+            public string escena, sha, fecha_utc;
+            public List<string> colliders = new List<string>();
+            public List<string> componentes = new List<string>();
+        }
+
         private sealed class Result { public string id, area, status, detail; }
+        private static bool _integrated;
         private static readonly List<Result> Results = new List<Result>();
         private static readonly Dictionary<string, object> Metrics = new Dictionary<string, object>();
 
@@ -40,12 +51,37 @@ namespace Bosque.Acceptance
         }
         private static void Check(string id, string area, bool ok, string detail) => Rec(id, area, ok ? "OK" : "FALLA", detail);
 
+        /// <summary>Guarda la línea base del contrato a partir de ArroyoPlayable sin vestir. Solo antes de integrar V6.</summary>
+        public static void ExportBaselineBatch()
+        {
+            int code = 0;
+            try
+            {
+                var scene = EditorSceneManager.OpenScene(Integration, OpenSceneMode.Single);
+                if (scene.GetRootGameObjects().Any(g => g.name == "ArtV6")) throw new Exception("ArroyoPlayable ya está vestida con V6: la línea base debe salir de la escena sin vestir.");
+                var b = new Baseline { escena = Integration, sha = Sha(Integration), fecha_utc = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ") };
+                foreach (var kv in Colliders(scene).OrderBy(k => k.Key)) b.colliders.Add(kv.Key + "=" + kv.Value);
+                b.componentes.AddRange(Behaviours(scene).OrderBy(x => x));
+                File.WriteAllText(System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath, BaselineFile)), JsonUtility.ToJson(b, true), new UTF8Encoding(false));
+                Debug.Log($"[QA6] Línea base: {b.colliders.Count} colliders, {b.componentes.Count} componentes, sha {b.sha}");
+            }
+            catch (Exception e) { Debug.LogException(e); code = 1; }
+            EditorApplication.Exit(code);
+        }
+
+        private static Baseline LoadBaseline()
+        {
+            string f = System.IO.Path.GetFullPath(System.IO.Path.Combine(Application.dataPath, BaselineFile));
+            if (!File.Exists(f)) throw new FileNotFoundException("Falta la línea base del contrato: " + f);
+            return JsonUtility.FromJson<Baseline>(File.ReadAllText(f));
+        }
+
         public static void RunBatch()
         {
             int code = 0;
             try
             {
-                Run();
+                Run(Array.IndexOf(Environment.GetCommandLineArgs(), "-qa6-integrada") >= 0);
                 if (Results.Any(r => r.status == "FALLA")) code = 2;
             }
             catch (Exception e) { Debug.LogException(e); code = 1; }
@@ -53,25 +89,40 @@ namespace Bosque.Acceptance
         }
 
         [MenuItem("Tools/Bosque/QA/V6 - Ejecutar sonda de QA del arte V6")]
-        public static void Run()
+        public static void RunShowcase() => Run(false);
+
+        [MenuItem("Tools/Bosque/QA/V6 - Ejecutar sonda sobre ArroyoPlayable integrada")]
+        public static void RunIntegrated() => Run(true);
+
+        /// <param name="integrated">false: escena de muestra V6; true: ArroyoPlayable ya vestida (integración).</param>
+        public static void Run(bool integrated)
         {
-            Results.Clear(); Metrics.Clear();
+            Results.Clear(); Metrics.Clear(); _integrated = integrated;
+            string target = integrated ? Integration : Showcase;
+            Metrics["escena_probada"] = target;
             ShaderUtil.allowAsyncCompilation = false;
 
             // ---------------------------------------------------------------- Integridad de archivos
             Metrics["sha_ArroyoPlayable"] = Sha(Integration);
             Metrics["sha_ArroyoGreybox"] = Sha(Greybox);
-            Check("C09", "Contrato", (string)Metrics["sha_ArroyoPlayable"] == "A4134AF6C8B0BF3B0BA442292A94AAD51D89DFC77D68137673B2DE4DFD707B84",
-                  "ArroyoPlayable sin cambios: " + Metrics["sha_ArroyoPlayable"]);
+            var baseline = LoadBaseline();
+            Metrics["sha_linea_base"] = baseline.sha;
+            var baseColliders = baseline.colliders.ToDictionary(s => s.Substring(0, s.IndexOf('=')), s => s.Substring(s.IndexOf('=') + 1));
+            var baseBehaviours = new HashSet<string>(baseline.componentes);
             Check("C10", "Contrato", (string)Metrics["sha_ArroyoGreybox"] == "617AD893A90A3784D633DDDCFDD1163545F9B2EF6B4FD0964A0A0D14A0F3BBD2",
                   "ArroyoGreybox con hash histórico: " + Metrics["sha_ArroyoGreybox"]);
             AssetChecks();
 
             // ---------------------------------------------------------------- Contrato de escena
-            var baseScene = EditorSceneManager.OpenScene(Integration, OpenSceneMode.Single);
-            var baseColliders = Colliders(baseScene);
-            var baseBehaviours = Behaviours(baseScene);
-            var showcase = EditorSceneManager.OpenScene(Showcase, OpenSceneMode.Single);
+            // C09: ArroyoPlayable (vestida o no) conserva exactamente el contrato de la línea base pre-V6.
+            var integrationScene = EditorSceneManager.OpenScene(Integration, OpenSceneMode.Single);
+            var liveColliders = Colliders(integrationScene); var liveBehaviours = Behaviours(integrationScene);
+            int liveDiff = baseColliders.Count(kv => !liveColliders.TryGetValue(kv.Key, out var v) || v != kv.Value) +
+                           liveColliders.Keys.Count(k => !baseColliders.ContainsKey(k)) + baseBehaviours.Count(b => !liveBehaviours.Contains(b));
+            bool dressed = integrationScene.GetRootGameObjects().Any(g => g.name == "ArtV6");
+            Check("C09", "Contrato", liveDiff == 0,
+                  $"ArroyoPlayable ({(dressed ? "vestida con V6" : "sin vestir")}, sha {Metrics["sha_ArroyoPlayable"]}) frente a la línea base pre-V6 (sha {baseline.sha}): {liveDiff} diferencias de colliders/componentes");
+            var showcase = EditorSceneManager.OpenScene(target, OpenSceneMode.Single);
             var v6Colliders = Colliders(showcase);
             var v6Behaviours = Behaviours(showcase);
 
@@ -317,8 +368,10 @@ namespace Bosque.Acceptance
             for (float x = -0.6f; x <= 5.6f; x += 0.4f)
                 for (float z = -3.5f; z <= 34.5f; z += 0.5f)
                 {
-                    cells++;
                     var a = new Vector3(x, 0.35f + 0.05f, z); var b = new Vector3(x, 1.8f - 0.35f, z);
+                    // Solo celdas transitables: si un collider de juego ya ocupa la celda, el jugador no puede estar ahí.
+                    if (Physics.OverlapCapsule(a, b, .3f, ~probeMask, QueryTriggerInteraction.Ignore).Any(c => !(c is CharacterController))) continue;
+                    cells++;
                     var hitsC = Physics.OverlapCapsule(a, b, .3f, probeMask).Where(c => owner[c].StartsWith("S:")).ToArray();
                     if (hitsC.Length > 0)
                     {
@@ -333,7 +386,7 @@ namespace Bosque.Acceptance
                 }
             Metrics[$"paso_{state}"] = new Dictionary<string, object> { ["celdas"] = cells, ["atraviesa_solido_visual"] = blocked };
             Rec($"K03-{state}", "Nivel", 100f * blocked / cells <= 2f ? "OK" : "AVISO",
-                $"Orilla transitable ({cells} celdas de 0,4×0,5 m): el cuerpo del jugador atraviesa sólidos V6 sin collider en {blocked} ({100f * blocked / cells:F1}%). Objetos: {Top(walk)}. Zonas: " +
+                $"Orilla transitable ({cells} celdas libres de colliders de juego, rejilla 0,4×0,5 m): el cuerpo del jugador atraviesa sólidos V6 sin collider en {blocked} ({100f * blocked / cells:F1}%). Objetos: {Top(walk)}. Zonas: " +
                 string.Join("; ", where.Select(kv => $"{kv.Key} X[{kv.Value.min.x:F1},{kv.Value.max.x:F1}] Z[{kv.Value.min.z:F1},{kv.Value.max.z:F1}]")));
 
             // Abertura del arco de salida (solo restaurado: la maraña es la barrera en degradado).
@@ -460,7 +513,8 @@ namespace Bosque.Acceptance
                 lum.Add($"{System.IO.Path.GetFileNameWithoutExtension(f).Replace("v6_", "")}={mean:F2}");
                 UnityEngine.Object.DestroyImmediate(t);
             }
-            Check("V01", "Visual", files.Length == 14 && magentaFiles == 0 && flatFiles == 0,
+            int deg = files.Count(f => f.Contains("_degradado_")), res = files.Count(f => f.Contains("_restaurado_"));
+            Check("V01", "Visual", deg >= 7 && deg == res && magentaFiles == 0 && flatFiles == 0,
                   $"{files.Length} capturas: con magenta (shader roto) {magentaFiles}, planas/vacías {flatFiles}. Luminancia media: {string.Join(", ", lum)}");
         }
 
@@ -504,7 +558,8 @@ namespace Bosque.Acceptance
             var sb = new StringBuilder();
             sb.AppendLine("id,area,estado,detalle");
             foreach (var r in Results) sb.AppendLine($"{r.id},{r.area},{r.status},\"{r.detail.Replace("\"", "'")}\"");
-            File.WriteAllText(System.IO.Path.Combine(dir, "sonda-qa-v6.csv"), sb.ToString(), new UTF8Encoding(true));
+            string name = _integrated ? "sonda-qa-v6-integrada" : "sonda-qa-v6";
+            File.WriteAllText(System.IO.Path.Combine(dir, name + ".csv"), sb.ToString(), new UTF8Encoding(true));
             var js = new StringBuilder("{\n");
             js.AppendLine($"  \"unity\": \"{Application.unityVersion}\",");
             js.AppendLine($"  \"fecha_utc\": \"{DateTime.UtcNow:yyyy-MM-ddTHH:mm:ssZ}\",");
@@ -512,7 +567,7 @@ namespace Bosque.Acceptance
             js.AppendLine("  \"metricas\": {");
             js.AppendLine(string.Join(",\n", Metrics.Select(kv => $"    \"{kv.Key}\": {Json(kv.Value)}")));
             js.AppendLine("  }\n}");
-            File.WriteAllText(System.IO.Path.Combine(dir, "sonda-qa-v6.json"), js.ToString(), new UTF8Encoding(false));
+            File.WriteAllText(System.IO.Path.Combine(dir, name + ".json"), js.ToString(), new UTF8Encoding(false));
             Debug.Log($"[QA6] RESUMEN OK={Results.Count(r => r.status == "OK")} AVISO={Results.Count(r => r.status == "AVISO")} FALLA={Results.Count(r => r.status == "FALLA")}");
         }
 

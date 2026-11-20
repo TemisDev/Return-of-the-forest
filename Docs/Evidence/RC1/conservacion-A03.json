@@ -1,0 +1,19 @@
+{
+  "source": ".dev-logs/rc1-preservation.log",
+  "exitCode": 0,
+  "checks": [
+    "[A03] Resumen: CORRECTA",
+    "[A03] OK | Objeto ajeno bajo Geometry se conserva",
+    "[A03] OK | Componente ajeno (AudioSource) en Obstacle_01 se conserva",
+    "[A03] OK | Hijo ajeno bajo Obstacle_01 se conserva",
+    "[A03] OK | Raíz ajena en la escena se conserva",
+    "[A03] OK | Objeto ajeno dentro de DegradedVisuals se conserva",
+    "[A03] OK | SafePoint_02 reubicado no se duplica (encontrados 1)",
+    "[A03] OK | SafePoint_02 mantiene su nuevo padre (Geometry)",
+    "[A03] OK | SafePoint_02 reubicado conserva su posición manual (1.00, 0.00, 21.00)",
+    "[A03] INFO | Ajuste manual de posición en Obstacle_01 (+0.5 Z): sobrescrito por el generador (comportamiento documentado)",
+    "[A03] OK | Sin objetos nuevos ni perdidos bajo la raíz (144 → 144)",
+    "[A03] OK | Validador del contrato tras regenerar: CORRECTA",
+    "[A03] INFO | Copia temporal eliminada: True"
+  ]
+}

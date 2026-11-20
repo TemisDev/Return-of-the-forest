@@ -37,7 +37,7 @@ Comprobar que el arte V6:
 | Gameplay | Sonda: conduce `ThirdPersonMotor`, `PlayerInteractor` y `ArroyoSession` reales por API | Q06–Q10 |
 | Cámara y nivel | Sonda: 2736 posiciones de cámara por estado y barrido de la cápsula del jugador contra mallas V6 | Q11–Q13 |
 | Legibilidad | Sonda: collider frente a visual de cada obstáculo | Q14 |
-| Visual | Análisis de las 14 capturas reales | Q15 |
+| Visual | Análisis de las capturas reales (16 desde la corrección de las P1) | Q15 |
 | Rendimiento | Build de muestra con `-v6-perf`, 1080p, fases de 20 s intercaladas | Q17 |
 | Manual | Teclado y ratón, persona | M01–M15 |
 | UX | Persona ajena al proyecto | U01–U04 |

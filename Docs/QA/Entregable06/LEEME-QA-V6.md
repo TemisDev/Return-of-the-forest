@@ -4,9 +4,9 @@
 
 ## Estado
 
-- La parte automatizada está ejecutada: **41 OK, 1 AVISO y 1 FALLA** en la sonda, y 6 mediciones de rendimiento.
+- La parte automatizada está ejecutada: **41 OK, 1 AVISO y 1 FALLA** en la sonda sobre el ZIP de Juan; tras corregir las P1, **43 OK, 0 AVISO, 0 FALLA**, y 6 mediciones de rendimiento.
 - La parte manual y la de UX están **NO EJECUTADO**.
-- Decisión actual: **no apto para integrar** hasta corregir 2 incidencias P1 de colisión invisible (QA6-013 y QA6-014). Ver [INFORME-ACEPTACION-V6.md](INFORME-ACEPTACION-V6.md).
+- Decisión actual: **apto para prueba manual**. Las 2 incidencias P1 de colisión invisible (QA6-013 y QA6-014) están corregidas en `feature/arroyo-art-v6-fix-p1`. Ver [INFORME-ACEPTACION-V6.md](INFORME-ACEPTACION-V6.md).
 
 ## Contenido
 

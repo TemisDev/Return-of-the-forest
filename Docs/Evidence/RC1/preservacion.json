@@ -1,0 +1,14 @@
+{
+  "base": "299a479",
+  "branch": "feature/arroyo-release-candidate",
+  "integratedAncestors": {
+    "1afe557": true,
+    "f5a1b6b": true,
+    "f942ce3": true
+  },
+  "sceneSha256": "A4134AF6C8B0BF3B0BA442292A94AAD51D89DFC77D68137673B2DE4DFD707B84",
+  "physicsBefore": 26,
+  "physicsAfter": 26,
+  "physicsIdentical": true,
+  "greyboxSha256": "617AD893A90A3784D633DDDCFDD1163545F9B2EF6B4FD0964A0A0D14A0F3BBD2"
+}

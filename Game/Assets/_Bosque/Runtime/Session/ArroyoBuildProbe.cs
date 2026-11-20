@@ -1,6 +1,7 @@
-#if DEVELOPMENT_BUILD || UNITY_EDITOR
+#if DEVELOPMENT_BUILD || UNITY_EDITOR || BOSQUE_RC1_QA
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using Bosque.Interaction;
 using Bosque.Player;
@@ -9,7 +10,7 @@ using UnityEngine;
 
 namespace Bosque.Session
 {
-    // Opt-in development-build verification. Never creates another gameplay state.
+    // Opt-in verification in diagnostic builds and the review candidate. Inactive in normal play.
     public sealed class ArroyoBuildProbe : MonoBehaviour
     {
         [Serializable] public sealed class Sample
@@ -18,6 +19,33 @@ namespace Bosque.Session
             public float seconds, meanFps, worstFrameMs, meanDrawCalls, minFps, maxFps, routeMetres;
             public float peakWorkingSetMb, peakUnityAllocatedMb;
             public bool drawCallsAvailable;
+            public bool workingSetAvailable, unityMemoryAvailable;
+            public float p50FrameMs, p95FrameMs, p99FrameMs;
+            public int framesOver60Budget;
+            [NonSerialized] private readonly List<float> frameTimes = new List<float>(32768);
+            public void RecordFrame(float dt)
+            {
+                if (dt <= 0 || float.IsNaN(dt) || float.IsInfinity(dt)) return;
+                frames++; float ms = dt * 1000; frameTimes.Add(ms);
+                worstFrameMs = Mathf.Max(worstFrameMs, ms);
+                maxFps = Mathf.Max(maxFps, 1 / dt);
+                if (ms > 1000f / 60) framesOver60Budget++;
+            }
+            public void Finish(float elapsed)
+            {
+                if (elapsed <= 0 || float.IsNaN(elapsed) || float.IsInfinity(elapsed))
+                    throw new ArgumentOutOfRangeException(nameof(elapsed));
+                seconds = elapsed; meanFps = frames / seconds;
+                minFps = worstFrameMs > 0 ? 1000 / worstFrameMs : 0;
+                frameTimes.Sort();
+                p50FrameMs = Percentile(.5f); p95FrameMs = Percentile(.95f); p99FrameMs = Percentile(.99f);
+            }
+            private float Percentile(float p) => frameTimes.Count == 0 ? 0 :
+                frameTimes[Mathf.Clamp(Mathf.CeilToInt(frameTimes.Count * p) - 1, 0, frameTimes.Count - 1)];
+        }
+        [Serializable] public sealed class VisualStats
+        {
+            public int renderers, triangles, distinctMaterials;
         }
         [Serializable] public sealed class Report
         {
@@ -27,7 +55,13 @@ namespace Bosque.Session
             public bool moved, jumped, rejectedEarlyExit, restored, completed, feedbackOnce;
             public string graphicsApi, sampleMode;
             public int requestedSampleSeconds;
-            public Sample degraded, recovered;
+            public bool development, focusedOnStart, cursorLockedOnStart, fullscreen;
+            public int qualityLevel, vsync, targetFrameRate;
+            public string qualityName, fullscreenMode;
+            public float firstRenderedFrameSeconds, restoreCallCpuMs;
+            public int[] progressAfterRemoval = new int[3];
+            public Sample degraded, recovered, restorationTransition;
+            public VisualStats degradedStats, recoveredStats;
         }
         private string output;
         private readonly Report report = new Report();
@@ -39,7 +73,7 @@ namespace Bosque.Session
             var args = Environment.GetCommandLineArgs();
             if (Array.IndexOf(args, "-arroyo-verify") < 0) return;
             Application.runInBackground = true;
-            new GameObject("DevelopmentBuildVerification").AddComponent<ArroyoBuildProbe>();
+            new GameObject("OptionalBuildVerification").AddComponent<ArroyoBuildProbe>();
         }
         private IEnumerator Start()
         {
@@ -61,9 +95,16 @@ namespace Bosque.Session
             report.graphicsApi = SystemInfo.graphicsDeviceType.ToString();
             report.sampleMode = movingSample ? "automatic-bank-patrol-z3-z32" : "stationary";
             report.requestedSampleSeconds = sampleSeconds;
+            report.development = Debug.isDebugBuild; report.focusedOnStart = Application.isFocused;
+            report.cursorLockedOnStart = Cursor.lockState == CursorLockMode.Locked;
+            report.fullscreen = Screen.fullScreen; report.fullscreenMode = Screen.fullScreenMode.ToString();
+            report.qualityLevel = QualitySettings.GetQualityLevel(); report.qualityName = QualitySettings.names[report.qualityLevel];
+            report.vsync = QualitySettings.vSyncCount; report.targetFrameRate = Application.targetFrameRate;
             var player = session.Player;
             var input = player.GetComponent<ThirdPersonInput>(); input.enabled = false;
             var actor = player.GetComponent<PlayerInteractor>();
+            yield return new WaitForEndOfFrame(); report.firstRenderedFrameSeconds = Time.realtimeSinceStartup;
+            yield return Capture("00-spawn.png");
             var start = player.transform.position;
             for (int i = 0; i < 10; i++) { player.Simulate(Vector2.up, false, 0, .02f); yield return null; }
             report.moved = Vector3.Distance(start, player.transform.position) > .3f;
@@ -71,14 +112,20 @@ namespace Bosque.Session
             { player.Simulate(Vector2.zero, i == 0, 0, .02f); report.jumped |= player.transform.position.y > .3f; yield return null; }
             report.rejectedEarlyExit = !session.TryExit(player);
             if (!Check(report.moved && report.jumped && report.rejectedEarlyExit, "Regresión de movimiento/salto/salida inicial.")) yield break;
+            yield return BankPose(player, "state-degraded.png");
+            player.Teleport(new Vector3(-.6f, 0, 18), Quaternion.identity); Physics.SyncTransforms();
+            yield return new WaitForSecondsRealtime(.4f); yield return Capture("06-camera-bank.png");
             player.Teleport(new Vector3(-.6f, 0, 10), Quaternion.identity); Physics.SyncTransforms();
             yield return new WaitForSecondsRealtime(.4f); actor.Scan();
             yield return Capture("01-degraded-interaction.png");
+            report.degradedStats = CollectVisualStats();
             report.degraded = new Sample(); yield return SampleFrames(report.degraded, player);
+            int removal = 0;
             foreach (int z in new[] { 10, 18, 26 })
             {
                 player.Teleport(new Vector3(-.6f, 0, z), Quaternion.identity); Physics.SyncTransforms();
                 if (!Check(actor.TryInteract(), "No se retiró el obstáculo Z=" + z)) yield break;
+                report.progressAfterRemoval[removal++] = session.Progress.RemovedCount;
                 input.enabled = false; yield return null;
             }
             report.restored = session.Progress.IsRestored && session.Progress.RemovedCount == 3;
@@ -86,9 +133,8 @@ namespace Bosque.Session
             report.feedbackOnce = feedback != null && feedback.PresentationCount == 1;
             if (!Check(report.restored && report.feedbackOnce, "Restauración o efecto duplicado/ausente.")) yield break;
             yield return Capture("02-restoration-effect.png");
-            player.Teleport(new Vector3(3, 0, 8), Quaternion.identity); Physics.SyncTransforms();
-            yield return new WaitForSecondsRealtime(.4f);
-            yield return Capture("03-restored.png");
+            yield return BankPose(player, "03-restored.png");
+            report.recoveredStats = CollectVisualStats();
             report.recovered = new Sample(); yield return SampleFrames(report.recovered, player);
             player.Teleport(new Vector3(3, 0, 33), Quaternion.identity); Physics.SyncTransforms();
             for (int i = 0; i < 60 && !session.Progress.IsCompleted; i++)
@@ -103,7 +149,16 @@ namespace Bosque.Session
                     foreach (int z in new[] { 10, 18, 26 })
                     {
                         player.Teleport(new Vector3(-.6f, 0, z), Quaternion.identity); Physics.SyncTransforms();
+                        double callStarted = Time.realtimeSinceStartupAsDouble;
                         if (!Check(actor.TryInteract(), "Retirada fallida después de reiniciar.")) yield break;
+                        input.enabled = false;
+                        if (cycle == 2 && z == 26)
+                        {
+                            report.restoreCallCpuMs = (float)((Time.realtimeSinceStartupAsDouble - callStarted) * 1000);
+                            report.restorationTransition = new Sample();
+                            // Separate repeat: no screenshot encoding during this three-second window.
+                            yield return SampleFrames(report.restorationTransition, player, 3, false);
+                        }
                         input.enabled = false; yield return null;
                     }
                     player.Teleport(new Vector3(3, 0, 33), Quaternion.identity); Physics.SyncTransforms();
@@ -118,7 +173,7 @@ namespace Bosque.Session
                 report.resets++; yield return null;
             }
             yield return Capture("05-restarted.png");
-            if (!Check(report.degraded.drawCallsAvailable && report.recovered.drawCallsAvailable,
+            if (!Check(!Debug.isDebugBuild || (report.degraded.drawCallsAvailable && report.recovered.drawCallsAvailable),
                 "No hay render verificable. Ejecuta la prueba con una ventana visible.")) yield break;
             report.passed = true; Save();
             Debug.Log("[BuildProbe] Verificación completada: " + output);
@@ -130,10 +185,31 @@ namespace Bosque.Session
             ScreenCapture.CaptureScreenshot(Path.Combine(output, name));
             yield return new WaitForSecondsRealtime(.15f);
         }
-        private IEnumerator SampleFrames(Sample sample, ThirdPersonMotor player)
+        private IEnumerator BankPose(ThirdPersonMotor player, string name)
+        {
+            player.Teleport(new Vector3(3, 0, 8), Quaternion.identity); Physics.SyncTransforms();
+            FindFirstObjectByType<ThirdPersonCamera>().Configure(player.transform);
+            yield return new WaitForSecondsRealtime(.5f);
+            yield return Capture(name);
+        }
+        private static VisualStats CollectVisualStats()
+        {
+            var stats = new VisualStats(); var materials = new HashSet<Material>();
+            foreach (var renderer in FindObjectsByType<MeshRenderer>(FindObjectsSortMode.None))
+            {
+                if (!renderer.enabled) continue;
+                stats.renderers++;
+                foreach (var material in renderer.sharedMaterials) if (material != null) materials.Add(material);
+                var mesh = renderer.GetComponent<MeshFilter>()?.sharedMesh;
+                if (mesh != null) for (int i = 0; i < mesh.subMeshCount; i++) stats.triangles += (int)mesh.GetIndexCount(i) / 3;
+            }
+            stats.distinctMaterials = materials.Count; return stats;
+        }
+        private IEnumerator SampleFrames(Sample sample, ThirdPersonMotor player, int duration = 0, bool allowRoute = true)
         {
             // Opt-in automatic route: does not claim keyboard input or a human QA playthrough.
-            if (movingSample)
+            bool patrol = movingSample && allowRoute;
+            if (patrol)
             {
                 player.Teleport(new Vector3(3, 0, 3), Quaternion.identity); Physics.SyncTransforms();
                 yield return new WaitForSecondsRealtime(.5f);
@@ -141,17 +217,15 @@ namespace Bosque.Session
             using (var process = System.Diagnostics.Process.GetCurrentProcess())
             using (var calls = ProfilerRecorder.StartNew(ProfilerCategory.Render, "Draw Calls Count"))
             {
-                double finish = Time.realtimeSinceStartupAsDouble + sampleSeconds;
+                double finish = Time.realtimeSinceStartupAsDouble + (duration > 0 ? duration : sampleSeconds);
                 double start = Time.realtimeSinceStartupAsDouble;
                 double nextMemorySample = start;
                 long sum = 0; int counted = 0;
                 bool forward = true;
                 while (Time.realtimeSinceStartupAsDouble < finish)
                 {
-                    yield return null; sample.frames++;
-                    sample.worstFrameMs = Mathf.Max(sample.worstFrameMs, Time.unscaledDeltaTime * 1000);
-                    if (Time.unscaledDeltaTime > 0) sample.maxFps = Mathf.Max(sample.maxFps, 1f / Time.unscaledDeltaTime);
-                    if (movingSample)
+                    yield return null; sample.RecordFrame(Time.unscaledDeltaTime);
+                    if (patrol)
                     {
                         var before = player.transform.position;
                         var target = new Vector3(3, before.y, forward ? 32 : 3);
@@ -171,9 +245,9 @@ namespace Bosque.Session
                     }
                     if (calls.Valid && calls.LastValue > 0) { sum += calls.LastValue; counted++; }
                 }
-                sample.seconds = (float)(Time.realtimeSinceStartupAsDouble - start);
-                sample.meanFps = sample.frames / sample.seconds;
-                sample.minFps = sample.worstFrameMs > 0 ? 1000f / sample.worstFrameMs : 0;
+                sample.Finish((float)(Time.realtimeSinceStartupAsDouble - start));
+                sample.workingSetAvailable = sample.peakWorkingSetMb > 0;
+                sample.unityMemoryAvailable = sample.peakUnityAllocatedMb > 0;
                 sample.drawCallsAvailable = counted > 0;
                 sample.meanDrawCalls = counted > 0 ? (float)sum / counted : 0;
             }

@@ -1,5 +1,22 @@
 # Relevo de Claude Code
 
+# Bloque 01.2: integración del arte V6 en ArroyoPlayable (20/11/2026)
+
+- **Rama:** `feature/arroyo-v6-integration` (sin fusionar). Contiene `develop` (arte V6 y QA V6), las correcciones P1 `afcbe4d` y RC1.
+- **Commits del bloque:**
+  - `122b504`: QA6-001 a QA6-004, efecto único y modo integrado de la sonda;
+  - `38acc1d`: escena vestida y build V6;
+  - `2cc512c`: rendimiento;
+  - además, un commit de documentación.
+- **Escena:** `ArroyoPlayable` vestida con `Bosque.ArtV6.Editor.ArroyoArtV6Dresser.DressPlayableBatch`. Colliders y componentes son idénticos a `EVIDENCIAS/contrato-arroyoplayable-pre-v6.json`.
+- **Build:** `Tools/Build-ArroyoRC1.ps1 -Configuration V6` → `Builds/Windows/V6`. Se verifica con `Tools/Verify-ArroyoV4.ps1 -Executable Builds/Windows/V6/BosqueDeRegreso.exe -AllowMissingReleaseCounters`.
+- **Sonda integrada:** `-executeMethod Bosque.Acceptance.ArroyoQAV6Probe.RunBatch -qa6-integrada`.
+- **Reparto de rendimiento:** `BosqueV6Preview.exe -v6-perf -v6-perf-breakdown`.
+- **Necesita a Codex:**
+  - QA6-016: la prueba `ActiveVisualBudgetStaysBoundedInBothStates` aplica el presupuesto de V3; no se cambió el criterio.
+  - QA6-006: para llegar a 60 FPS en restaurado haría falta tocar las cascadas de sombra o la escala de render del asset URP compartido.
+- **Detalle:** `Docs/QA/Entregable06/INFORME-ACEPTACION-V6.md`, sección "Integración en ArroyoPlayable".
+
 # C-02: revisión del recorrido con T06 integrado
 Fecha: 12 de noviembre de 2026. Estado: terminado salvo las pruebas manuales, que quedan pendientes para Diego.
 
