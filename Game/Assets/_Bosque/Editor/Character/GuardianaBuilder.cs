@@ -36,6 +36,13 @@ namespace Bosque.CharacterEditor
         // Velocidad propia de cada clip (m/s), medida en la versión con root motion de la librería.
         public const float WalkClipSpeed = .97f, JogClipSpeed = 5.36f, SprintClipSpeed = 8.25f;
 
+        /// <summary>Desfase de giro por clip (grados) medido en modo juego: pecho y cadera respecto a la dirección de avance.</summary>
+        private static readonly Dictionary<string, float> ClipYawCorrection = new Dictionary<string, float>
+        {
+            ["Jog_Fwd_Loop"] = 32f,
+            ["Walk_Loop"] = 8f,
+        };
+
         [MenuItem("Tools/Bosque/Personaje/Construir Guardiana y audio, e integrar en ArroyoPlayable")]
         public static void BuildAll()
         {
@@ -135,7 +142,10 @@ namespace Bosque.CharacterEditor
                 bool loop = c.name.EndsWith("_Loop");
                 c.loopTime = loop; c.loopPose = loop;
                 // Sin root motion: el CharacterController mueve al personaje; la raíz se queda en la pose.
-                c.lockRootRotation = true; c.keepOriginalOrientation = false; // orientación del cuerpo: la librería mira a -Z
+                // Orientación del cuerpo ("Body Orientation"); el trote de la librería queda desviado ~19° a la derecha con
+                // ese criterio, así que se compensa con un desfase medido (prueba PostureFacesMovementWithoutSideLean).
+                c.lockRootRotation = true; c.keepOriginalOrientation = false;
+                c.rotationOffset = ClipYawCorrection.TryGetValue(c.name, out float yaw) ? yaw : 0f;
                 c.lockRootHeightY = true; c.keepOriginalPositionY = true; c.heightFromFeet = false;
                 c.lockRootPositionXZ = true; c.keepOriginalPositionXZ = true;
                 return c;

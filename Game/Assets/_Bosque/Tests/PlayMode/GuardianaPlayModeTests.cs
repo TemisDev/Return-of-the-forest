@@ -35,6 +35,9 @@ namespace Bosque.Tests.PlayMode
         public IEnumerator Load()
         {
             BosqueAudio.ResetToDefaults();
+            // Frecuencia real de juego: a miles de FPS (modo batch) cada paso de 1,35 m/s queda por debajo de la
+            // distancia mínima del CharacterController y el personaje no avanza al caminar.
+            QualitySettings.vSyncCount = 0; Application.targetFrameRate = 60;
             SceneManager.LoadScene("ArroyoPlayable");
             yield return null; yield return null;
             session = Object.FindFirstObjectByType<ArroyoSession>();
@@ -214,6 +217,47 @@ namespace Bosque.Tests.PlayMode
             int steps = played.Count(p => p == "footstep");
             Assert.That(steps, Is.InRange(3, 12), "Pasos al trotar 2 s: " + steps);
             Assert.That(sfx.ActiveVoices, Is.LessThanOrEqualTo(14));
+        }
+
+        /// <summary>Desvío del pecho y la cadera respecto a la dirección de avance y ladeo lateral de la columna.</summary>
+        private (float chestYaw, float hipYaw, float roll, float pitch) Posture()
+        {
+            Vector3 Flat(Vector3 v) { v.y = 0; return v.normalized; }
+            var up = Vector3.up; var fwd = motor.transform.forward; var right = motor.transform.right;
+            var chestRight = animator.GetBoneTransform(HumanBodyBones.RightUpperArm).position - animator.GetBoneTransform(HumanBodyBones.LeftUpperArm).position;
+            var hipRight = animator.GetBoneTransform(HumanBodyBones.RightUpperLeg).position - animator.GetBoneTransform(HumanBodyBones.LeftUpperLeg).position;
+            float chestYaw = Vector3.SignedAngle(fwd, Flat(Vector3.Cross(chestRight, up)), up);
+            float hipYaw = Vector3.SignedAngle(fwd, Flat(Vector3.Cross(hipRight, up)), up);
+            var spine = animator.GetBoneTransform(HumanBodyBones.Head).position - animator.GetBoneTransform(HumanBodyBones.Hips).position;
+            float roll = Mathf.Atan2(Vector3.Dot(spine, right), Vector3.Dot(spine, up)) * Mathf.Rad2Deg;
+            float pitch = Mathf.Atan2(Vector3.Dot(spine, fwd), Vector3.Dot(spine, up)) * Mathf.Rad2Deg;
+            return (chestYaw, hipYaw, roll, pitch);
+        }
+
+        [UnityTest]
+        public IEnumerator PostureFacesMovementWithoutSideLean()
+        {
+            var report = new System.Text.StringBuilder();
+            foreach (var (name, walk, speed) in new[] { ("reposo", false, 0f), ("caminar", true, 1f), ("trotar", false, 1f) })
+            {
+                motor.Teleport(new Vector3(3, 0, -2), Quaternion.identity);
+                var from = motor.transform.position; float maxSpeed = 0;
+                float cy = 0, hy = 0, r = 0, p = 0; int n = 0;
+                for (float t = 0; t < 2.2f; t += Time.deltaTime)
+                {
+                    input.enabled = false;
+                    motor.Simulate(Vector2.up * speed, false, 0, Time.deltaTime, walk); yield return null;
+                    maxSpeed = Mathf.Max(maxSpeed, animator.GetFloat("Speed"));
+                    if (t < .8f) continue; // tras la mezcla de entrada
+                    var s = Posture(); cy += s.chestYaw; hy += s.hipYaw; r += s.roll; p += s.pitch; n++;
+                }
+                cy /= n; hy /= n; r /= n; p /= n;
+                report.Append($"{name} (Speed máx {maxSpeed:F2}, recorrido {Vector3.Distance(from, motor.transform.position):F2} m): pecho {cy:F1}°, cadera {hy:F1}°, ladeo {r:F1}°, inclinación adelante {p:F1}° | ");
+                Assert.That(Mathf.Abs((cy + hy) * .5f), Is.LessThan(5f), $"{name}: el cuerpo no mira hacia donde avanza ({report})");
+                Assert.That(Mathf.Abs(r), Is.LessThan(4f), $"{name}: ladeo lateral ({report})");
+                if (speed > 0) Assert.That(maxSpeed, Is.GreaterThan(walk ? 1f : 4f), $"{name}: se desplaza ({report})");
+            }
+            Debug.Log("[Guardiana][Postura] " + report);
         }
 
         [UnityTest]
