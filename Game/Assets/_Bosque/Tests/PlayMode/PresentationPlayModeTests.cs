@@ -163,30 +163,12 @@ namespace Bosque.Tests.PlayMode
         }
 
         [UnityTest]
-        public IEnumerator RefugeEndsWithTheLastNoteThenTheEndingAndCredits()
+        public IEnumerator EndingOffersCreditsReplayAndMenu()
         {
-            GameProgress.CompleteZone(GameProgress.Arroyo); GameProgress.CompleteZone(GameProgress.Claro);
-            yield return Load(GameFlow.RefugioScene);
-            var s = Object.FindFirstObjectByType<RefugioSession>();
-            var m = s.Player; var input = m.GetComponent<ThirdPersonInput>(); input.enabled = false;
-            var actor = m.GetComponent<PlayerInteractor>();
-            var good = s.Spots.Where(x => x.Suitable).ToArray();
-            for (int i = 0; i < s.Items.Length; i++)
-            {
-                m.Teleport(s.Items[i].transform.position + new Vector3(0, 0, -1.3f), Quaternion.identity); yield return null;
-                Assert.That(actor.TryInteract());
-                m.Teleport(good[i].transform.position + new Vector3(0, 0, -1.3f), Quaternion.identity); yield return null;
-                Assert.That(actor.TryInteract());
-            }
-            var bed = s.GrowthPoints.First(p => p.Suitable);
-            m.Teleport(bed.transform.position + new Vector3(0, 0, -1.2f), Quaternion.identity);
-            yield return new WaitForSeconds(.7f);
-            Assert.That(m.GetComponent<Bosque.Abilities.GrowthAbility>().TryGrow());
-            s.Fauna.TimeScale = 8f;
-            for (float t = 0; t < 12f && !P.Notebook.Visible; t += Time.unscaledDeltaTime) yield return null;
-            Assert.That(P.Notebook.Visible, "Última nota del cuaderno");
-            Assert.That(P.Notebook.Current.heading, Is.EqualTo(GameFlow.NoteFor(GameProgress.Refugio).heading));
-            P.Notebook.Continue(); yield return null; yield return null;
+            GameProgress.CompleteZone(GameProgress.Arroyo);
+            yield return Load(GameFlow.ArroyoScene);
+            P.Ending.SetExtra("Valle limpio en 9:30 · medalla de oro");
+            P.Ending.Show(); yield return null; yield return null;
             Assert.That(P.Ending.Visible, "Pantalla final");
             Assert.That(FindButton("Jugar de nuevo"), Is.Not.Null); Assert.That(FindButton("Menú principal"), Is.Not.Null);
             FindButton("Créditos").onClick.Invoke(); yield return null;

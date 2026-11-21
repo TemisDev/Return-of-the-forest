@@ -8,8 +8,8 @@ namespace Bosque.UI
     /// <summary>Escenas del juego, flujo entre ellas (con fundido) y textos de presentación de cada zona.</summary>
     public static class GameFlow
     {
-        public const string MenuScene = "MenuPrincipal", ArroyoScene = "ArroyoPlayable", ClaroScene = "ClaroVacio", RefugioScene = "RefugioPerdido";
-        public const string Version = "V10";
+        public const string MenuScene = "MenuPrincipal", ArroyoScene = "ArroyoPlayable", ClaroScene = "ClaroVacio", RefugioScene = "RefugioPerdido", ValleScene = "ValleOlvidado";
+        public const string Version = "V11";
 
         public sealed class ZoneInfo
         {
@@ -28,6 +28,7 @@ namespace Bosque.UI
                 case ArroyoScene: return new ZoneInfo { number = 1, title = "El arroyo dormido", subtitle = "Devuelve el agua al cauce" };
                 case ClaroScene: return new ZoneInfo { number = 2, title = "El claro vacío", subtitle = "Haz brotar plantas nativas donde haya humedad" };
                 case RefugioScene: return new ZoneInfo { number = 3, title = "El refugio perdido", subtitle = "Devuelve un refugio a la fauna" };
+                case ValleScene: return new ZoneInfo { number = 4, title = "El valle olvidado", subtitle = "Limpia todo el valle: residuos al reciclaje y troncos fuera del paso" };
                 default: return null;
             }
         }
@@ -53,12 +54,20 @@ namespace Bosque.UI
                         lesson = "Recuperaste la vegetación adecuada: plantas en el lugar correcto.",
                         reward = "Las raíces abrieron un paso hacia el refugio.",
                     };
-                default:
+                case GameProgress.Refugio:
                     return new Note
                     {
                         zone = "Zona 3 · El refugio perdido", heading = "Un lugar donde volver",
                         body = "Un tronco hueco, piedras y matorrales: sombra para descansar y escondite para criar. Si el refugio está en su camino, los animales regresan.",
                         lesson = "Recuperaste el refugio: el corredor vuelve a estar conectado.",
+                        reward = "Más allá del refugio espera el valle grande, el más castigado de todos.",
+                    };
+                default:
+                    return new Note
+                    {
+                        zone = "Zona 4 · El valle olvidado", heading = "Lo que dejamos atrás",
+                        body = "Plástico, latas, llantas y troncos tirados ahogaban el valle. Cada residuo en su contenedor es un pedazo de suelo que vuelve a respirar.",
+                        lesson = "Recuperaste el valle: sin basura, el agua corre limpia y la fauna regresa.",
                         reward = "",
                     };
             }

@@ -88,7 +88,7 @@ namespace Bosque.Session
         public bool HelpVisible => helpVisible;
         public string HelpTitle => "Devuelve el refugio";
         public string HelpText => "E: recoger un elemento y colocarlo en un lugar indicado\nLos lugares buenos están en el paso del animal: huellas, sombra y rocas\nQ: hacer crecer un matorral en suelo húmedo\nE sin objetivo: soltar lo que llevas\nR: reiniciar · Esc: pausa · F1: cerrar ayuda";
-        public bool ShowEnding => session != null && session.GameFinished;
+        public bool ShowEnding => false; // el final llega tras el valle (zona 4)
         public void RestartZone() { if (session != null) session.Restart(); helpVisible = false; }
 
         private void OnGUI()

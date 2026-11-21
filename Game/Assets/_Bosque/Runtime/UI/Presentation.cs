@@ -28,6 +28,7 @@ namespace Bosque.UI
         public EndingView Ending { get; private set; }
         public PauseView Pause { get; private set; }
         public TitleCardView TitleCard { get; private set; }
+        public MapView Map { get; private set; }
         public bool Fading => fading != null;
         public bool InZone => Hud != null && Hud.Model != null;
 
@@ -54,6 +55,7 @@ namespace Bosque.UI
             Notebook = new NotebookView(overlayCanvas.transform);
             Ending = new EndingView(overlayCanvas.transform);
             Pause = new PauseView(overlayCanvas.transform, Resume, RestartFromPause);
+            Map = new MapView(overlayCanvas.transform);
             var black = Ui.Image(fadeCanvas.transform, "Negro", Color.black, null, true); black.rectTransform.Stretch();
             fade = black.gameObject.AddComponent<CanvasGroup>(); fade.alpha = 0; fade.blocksRaycasts = false;
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -71,7 +73,7 @@ namespace Bosque.UI
         {
             if (mode != LoadSceneMode.Single) return;
             GamePause.Set(false);
-            Pause.Hide(); Notebook.Hide(); Ending.Hide(); TitleCard.Hide(); endingNoteShown = false;
+            Pause.Hide(); Notebook.Hide(); Ending.Hide(); TitleCard.Hide(); Map.Hide(); endingNoteShown = false;
             Hud.Bind(FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IZoneHud>().FirstOrDefault());
             var zone = GameFlow.Zone(scene.name);
             if (zone != null && !GameFlow.VerifierRunning) TitleCard.Show(zone);
@@ -80,7 +82,8 @@ namespace Bosque.UI
         private void Update()
         {
             var kb = Keyboard.current;
-            bool overlay = Notebook.Visible || Ending.Visible || Pause.Visible;
+            bool overlay = Notebook.Visible || Ending.Visible || Pause.Visible || Map.Visible;
+            Map.Tick(Hud.Model as IZoneMap);
             Hud.Tick(InZone && !overlay);
             TitleCard.Tick();
 
@@ -90,7 +93,7 @@ namespace Bosque.UI
                 // Final: primero la última nota del cuaderno y después la pantalla de cierre.
                 if (model.ShowEnding && !Ending.Visible && !Notebook.Visible)
                 {
-                    if (!endingNoteShown) { endingNoteShown = true; ShowNote(GameFlow.NoteFor(World.GameProgress.Refugio), Ending.Show, "Ver el final  [E]"); }
+                    if (!endingNoteShown) { endingNoteShown = true; Ending.SetExtra((model as IZoneHudExtra)?.EndingExtra); ShowNote(GameFlow.NoteFor(World.GameProgress.Valle), Ending.Show, "Ver el final  [E]"); }
                     else { Pause.Hide(); GamePause.Set(false); Ending.Show(); }
                 }
                 else if (!model.ShowEnding && endingNoteShown)
@@ -103,6 +106,8 @@ namespace Bosque.UI
             if (Notebook.Visible && Time.unscaledTime - Notebook.ShownAt > .8f &&
                 (kb.eKey.wasPressedThisFrame || kb.enterKey.wasPressedThisFrame || kb.spaceKey.wasPressedThisFrame))
                 Notebook.Continue();
+            if (Map.Visible && (kb.mKey.wasPressedThisFrame || kb.escapeKey.wasPressedThisFrame)) { CloseMap(); return; }
+            if (kb.mKey.wasPressedThisFrame && Hud.Model is IZoneMap && !Notebook.Visible && !Ending.Visible && !Pause.Visible) { OpenMap(); return; }
             if (kb.escapeKey.wasPressedThisFrame && InZone && !Notebook.Visible && !Ending.Visible)
             {
                 if (!Pause.Visible) OpenPause();
@@ -118,6 +123,19 @@ namespace Bosque.UI
             GamePause.Set(true);
             Pause.Show();
             Cursor.lockState = CursorLockMode.None; Cursor.visible = true;
+        }
+
+        public void OpenMap()
+        {
+            if (!(Hud.Model is IZoneMap) || Map.Visible) return;
+            GamePause.Set(true); Map.Show();
+        }
+
+        public void CloseMap()
+        {
+            if (!Map.Visible) return;
+            Map.Hide(); GamePause.Set(false);
+            Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false;
         }
 
         public void Resume()

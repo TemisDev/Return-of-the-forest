@@ -30536,6 +30536,7 @@ MonoBehaviour:
   restoredFogDensity: 0.011
   restoredSun: {r: 1, g: 0.95, b: 0.86, a: 1}
   restoredSunIntensity: 1.9
+  partial: 0
   transitionSeconds: 3.5
   restorationBurst: {fileID: 826037893880728006, guid: ccf60506d4785234da4298417a7844fc, type: 3}
   burstPosition: {x: 2, y: 0, z: 26}
@@ -49653,6 +49654,7 @@ GameObject:
   - component: {fileID: 1569684698}
   - component: {fileID: 1569684699}
   - component: {fileID: 1569684697}
+  - component: {fileID: 1569684700}
   m_Layer: 0
   m_Name: RefugioSession
   m_TagString: Untagged
@@ -49743,6 +49745,21 @@ MonoBehaviour:
   player: {fileID: 1680555452}
   playerSpawn: {fileID: 1221159552}
   faunaDelay: 1.8
+--- !u!114 &1569684700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569684695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ed310192a8bd5f47b8553fb96d90dff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Bosque.Runtime::Bosque.Session.RefugioZoneTransition
+  session: {fileID: 1569684699}
+  nextScene: ValleOlvidado
+  delaySeconds: 4.5
 --- !u!1 &1576399280
 GameObject:
   m_ObjectHideFlags: 0

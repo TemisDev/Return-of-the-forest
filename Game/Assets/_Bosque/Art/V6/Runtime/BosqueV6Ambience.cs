@@ -34,6 +34,9 @@ namespace Bosque.ArtV6
         public Color restoredSun = new Color(1.00f, 0.95f, 0.86f);
         public float restoredSunIntensity = 1.9f;
 
+        [Header("Recuperación parcial (0..1) mientras no esté restaurado; la usa la zona 4 por sectores")]
+        public float partial;
+
         [Header("Transición")]
         public float transitionSeconds = 3.5f;
         public GameObject restorationBurst;
@@ -74,7 +77,7 @@ namespace Bosque.ArtV6
 
             // Restaurar es una transición lenta; reiniciar vuelve rápido al estado inicial.
             float speed = 1f / Mathf.Max(0.05f, target ? transitionSeconds : 0.6f);
-            float goal = target ? 1f : 0f;
+            float goal = target ? 1f : Mathf.Clamp01(partial);
             if (!Mathf.Approximately(_blend, goal))
             {
                 _blend = Mathf.MoveTowards(_blend, goal, Time.unscaledDeltaTime * speed);

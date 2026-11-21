@@ -11,7 +11,9 @@ namespace Bosque.UI
     {
         private readonly CanvasGroup group;
         private readonly TextMeshProUGUI zoneLabel, objective, progress, promptKey, promptText, hintTitle, hintText, tip, helpTitle, helpText;
-        private readonly RectTransform pips, prompt, hint, help;
+        private readonly RectTransform pips, prompt, hint, help, side, workBar;
+        private readonly TextMeshProUGUI sideTitle, sideText;
+        private readonly Image workFill;
         private readonly List<Image> pipImages = new List<Image>();
         private IZoneHud model;
         private int lastDone = -1, lastTotal = -1;
@@ -21,6 +23,7 @@ namespace Bosque.UI
         public string ObjectiveText => objective.text;
         public string PromptShown => prompt.gameObject.activeSelf ? promptText.text : null;
         public string HintShown => hint.gameObject.activeSelf ? hintText.text : null;
+        public string SideShown => side.gameObject.activeSelf ? sideText.text : null;
 
         public ZoneHudView(Transform root)
         {
@@ -58,6 +61,22 @@ namespace Bosque.UI
             var keys = Ui.Text(rt, "Teclas", "Esc: pausa   ·   F1: ayuda   ·   R: reiniciar zona", 22, t?.body, new Color(1, 1, 1, .6f), TextAlignmentOptions.BottomRight);
             keys.rectTransform.Place(new Vector2(1, 0), new Vector2(1, 0), new Vector2(-40, 30), new Vector2(700, 40));
 
+            side = Ui.Panel(rt, "Lateral").rectTransform;
+            side.Place(new Vector2(1, 1), new Vector2(1, 1), new Vector2(-36, -36), new Vector2(470, 330));
+            var sAccent = Ui.Image(side, "Acento", UiTheme.Moss); sAccent.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(28, -30), new Vector2(5, 30));
+            sideTitle = Ui.Text(side, "Titulo", "", 24, t?.bold, UiTheme.Moss); sideTitle.characterSpacing = 4;
+            sideTitle.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(46, -28), new Vector2(400, 36));
+            sideText = Ui.Text(side, "Texto", "", 25, t?.body, UiTheme.Cream); sideText.richText = true; sideText.lineSpacing = 4;
+            sideText.rectTransform.Stretch(30, 24, 74, 18);
+            side.gameObject.SetActive(false);
+
+            workBar = Ui.Image(prompt, "Barra", new Color(1, 1, 1, .15f), t?.pill).rectTransform;
+            workBar.Place(new Vector2(.5f, 0), new Vector2(.5f, 1), new Vector2(0, -8), new Vector2(700, 12));
+            workFill = Ui.Image(workBar, "Relleno", UiTheme.Amber, t?.pill);
+            workFill.rectTransform.anchorMin = Vector2.zero; workFill.rectTransform.anchorMax = new Vector2(0, 1); workFill.rectTransform.pivot = new Vector2(0, .5f);
+            workFill.rectTransform.offsetMin = workFill.rectTransform.offsetMax = Vector2.zero;
+            workBar.gameObject.SetActive(false);
+
             help = Ui.Panel(rt, "Ayuda", UiTheme.PanelSolid).rectTransform;
             help.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), new Vector2(0, 40), new Vector2(900, 470));
             helpTitle = Ui.Text(help, "Titulo", "", 40, t?.title, UiTheme.Cream, TextAlignmentOptions.Top); helpTitle.rectTransform.Stretch(40, 40, 30, 380);
@@ -76,18 +95,20 @@ namespace Bosque.UI
             if (model.ProgressDone != lastDone || model.ProgressTotal != lastTotal)
             {
                 lastDone = model.ProgressDone; lastTotal = model.ProgressTotal;
-                while (pipImages.Count < lastTotal)
+                // Con totales grandes (zona 4) solo se muestra la cuenta: los puntos no caben.
+                int shownPips = lastTotal <= 12 ? lastTotal : 0;
+                while (pipImages.Count < shownPips)
                 {
                     var p = Ui.Image(pips, "Pip", Color.white, Ui.Theme?.pill); p.rectTransform.sizeDelta = new Vector2(26, 26);
                     pipImages.Add(p);
                 }
                 for (int i = 0; i < pipImages.Count; i++)
                 {
-                    pipImages[i].gameObject.SetActive(i < lastTotal);
+                    pipImages[i].gameObject.SetActive(i < shownPips);
                     pipImages[i].color = i < lastDone ? UiTheme.Moss : new Color(1f, 1f, 1f, .18f);
                 }
                 progress.text = lastDone + " / " + lastTotal + "  " + model.ProgressLabel;
-                progress.rectTransform.anchoredPosition = new Vector2(30 + lastTotal * 34 + 14, 24);
+                progress.rectTransform.anchoredPosition = new Vector2(30 + shownPips * 34 + (shownPips > 0 ? 14 : 0), 24);
             }
             bool hasPrompt = !string.IsNullOrEmpty(model.PromptKey);
             prompt.gameObject.SetActive(hasPrompt);
@@ -96,6 +117,16 @@ namespace Bosque.UI
             hint.gameObject.SetActive(hasHint);
             if (hasHint) { hintTitle.text = model.HintTitle; hintText.text = model.HintText; hint.anchoredPosition = new Vector2(0, hasPrompt ? 254 : 150); }
             tip.text = model.Tip;
+            var extra = model as IZoneHudExtra;
+            side.gameObject.SetActive(extra != null);
+            if (extra != null)
+            {
+                sideTitle.text = extra.SideTitle; sideText.text = extra.SideText;
+                float w = extra.WorkProgress;
+                workBar.gameObject.SetActive(hasPrompt && w > 0f);
+                if (w > 0f) workFill.rectTransform.anchorMax = new Vector2(Mathf.Clamp01(w), 1);
+            }
+            else workBar.gameObject.SetActive(false);
             help.gameObject.SetActive(model.HelpVisible);
             if (model.HelpVisible) { helpTitle.text = model.HelpTitle; helpText.text = model.HelpText; }
         }
@@ -168,6 +199,10 @@ namespace Bosque.UI
             "Aquí la recuperación fue instantánea; en la realidad toma años, seguimiento y el conocimiento de las comunidades locales. " +
             "Cuidar y mantener el bosque importa tanto como repararlo.";
 
+        private TextMeshProUGUI extra;
+        /// <summary>Línea adicional (tiempo y medalla del valle).</summary>
+        public void SetExtra(string text) { if (extra != null) extra.text = text ?? ""; }
+
         public EndingView(Transform parent)
         {
             var t = Ui.Theme;
@@ -176,23 +211,26 @@ namespace Bosque.UI
             card = Ui.Panel(root, "Tarjeta", UiTheme.PanelSolid).rectTransform;
             card.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), Vector2.zero, new Vector2(1320, 900));
             var title = Ui.Text(card, "Titulo", "El bosque regresa", 84, t?.title, UiTheme.Cream, TextAlignmentOptions.Top); title.rectTransform.Stretch(40, 40, 40, 760);
-            var sub = Ui.Text(card, "Subtitulo", "LAS TRES ZONAS ESTÁN RECUPERADAS  ·  ODS 15 · VIDA DE ECOSISTEMAS TERRESTRES", 23, t?.bold, UiTheme.Moss, TextAlignmentOptions.Top);
+            var sub = Ui.Text(card, "Subtitulo", "LAS CUATRO ZONAS ESTÁN RECUPERADAS  ·  ODS 15 · VIDA DE ECOSISTEMAS TERRESTRES", 23, t?.bold, UiTheme.Moss, TextAlignmentOptions.Top);
             sub.characterSpacing = 4; sub.rectTransform.Stretch(40, 40, 150, 700);
             (string z, string what)[] rows =
             {
                 ("El arroyo dormido", "el agua vuelve a correr cuando se retiran los obstáculos del cauce."),
                 ("El claro vacío", "las plantas nativas prosperan en el suelo húmedo adecuado."),
                 ("El refugio perdido", "troncos, piedras y matorrales dan cobijo en el paso de la fauna."),
+                ("El valle olvidado", "sin residuos ni troncos en el paso, el agua y la vida vuelven al valle."),
             };
             for (int i = 0; i < rows.Length; i++)
             {
                 var ic = Ui.Icon(card, "Icono", t?.restorationIcon, UiTheme.Moss);
-                ic.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(120, -232 - i * 76), new Vector2(48, 48));
+                ic.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(120, -216 - i * 66), new Vector2(44, 44));
                 var tx = Ui.Text(card, "Fila", "<b>" + rows[i].z + "</b> — " + rows[i].what, 30, t?.body, UiTheme.Cream, TextAlignmentOptions.MidlineLeft);
-                tx.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(190, -228 - i * 76), new Vector2(1020, 56));
+                tx.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(190, -212 - i * 66), new Vector2(1020, 56));
             }
-            var msg = Ui.Text(card, "Mensaje", Message, 30, t?.italic, UiTheme.CreamDim, TextAlignmentOptions.Top);
-            msg.rectTransform.Stretch(120, 120, 480, 200);
+            var msg = Ui.Text(card, "Mensaje", Message, 28, t?.italic, UiTheme.CreamDim, TextAlignmentOptions.Top);
+            msg.rectTransform.Stretch(120, 120, 500, 190);
+            extra = Ui.Text(card, "Extra", "", 28, t?.bold, UiTheme.Amber, TextAlignmentOptions.Top);
+            extra.rectTransform.Stretch(120, 120, 640, 140);
             var buttons = Ui.Rect("Botones", card); buttons.Place(new Vector2(.5f, 0), new Vector2(.5f, 0), new Vector2(0, 50), new Vector2(1200, 70));
             var h = buttons.gameObject.AddComponent<HorizontalLayoutGroup>(); h.spacing = 24; h.childAlignment = TextAnchor.MiddleCenter;
             h.childControlWidth = h.childControlHeight = false; h.childForceExpandWidth = false;
@@ -300,6 +338,75 @@ namespace Bosque.UI
         {
             float k = Time.unscaledTime - start;
             group.alpha = k < 0 || k > Duration ? 0 : Mathf.Min(Mathf.Clamp01(k / .9f), Mathf.Clamp01((Duration - k) / 1.1f));
+        }
+    }
+}
+
+namespace Bosque.UI
+{
+    /// <summary>Mapa de la zona (M): imagen cenital con la posición de la Guardiana y marcadores.</summary>
+    public sealed class MapView
+    {
+        private readonly RectTransform root, frame, playerMark;
+        private readonly RawImage image;
+        private readonly RectTransform markersRoot;
+        private readonly System.Collections.Generic.List<(Image dot, TextMeshProUGUI label)> marks = new System.Collections.Generic.List<(Image, TextMeshProUGUI)>();
+        public bool Visible => root.gameObject.activeSelf;
+        private const float Size = 860f;
+
+        public MapView(Transform parent)
+        {
+            var t = Ui.Theme;
+            root = Ui.Rect("Mapa", parent).Stretch();
+            Ui.Image(root, "Velo", new Color(0, 0, 0, .55f), null, false).rectTransform.Stretch();
+            var card = Ui.Panel(root, "Tarjeta", UiTheme.PanelSolid).rectTransform;
+            card.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), Vector2.zero, new Vector2(Size + 80, Size + 150));
+            var title = Ui.Text(card, "Titulo", "Mapa del valle", 40, t?.title, UiTheme.Cream, TextAlignmentOptions.Top); title.rectTransform.Stretch(20, 20, 22, Size + 70);
+            frame = Ui.Rect("Marco", card); frame.Place(new Vector2(.5f, 0), new Vector2(.5f, 0), new Vector2(0, 70), new Vector2(Size, Size));
+            image = frame.gameObject.AddComponent<RawImage>(); image.raycastTarget = false;
+            markersRoot = Ui.Rect("Marcadores", frame).Stretch();
+            playerMark = Ui.Image(frame, "Guardiana", UiTheme.Amber, t?.pill).rectTransform; playerMark.sizeDelta = new Vector2(26, 26);
+            var arrow = Ui.Image(playerMark, "Flecha", UiTheme.Amber, null); arrow.rectTransform.Place(new Vector2(.5f, 1), new Vector2(.5f, 0), new Vector2(0, -2), new Vector2(8, 22));
+            var legend = Ui.Text(card, "Leyenda", "M o Esc: cerrar   ·   <color=#F7C76E>●</color> tú   ·   ■ punto de reciclaje", 22, t?.body, UiTheme.CreamDim, TextAlignmentOptions.Bottom);
+            legend.rectTransform.Stretch(20, 20, Size + 90, 18);
+            root.gameObject.SetActive(false);
+        }
+
+        public void Show() => root.gameObject.SetActive(true);
+        public void Hide() => root.gameObject.SetActive(false);
+
+        private Vector2 ToMap(Rect world, Vector3 p) =>
+            new Vector2((p.x - world.x) / world.width * Size - Size * .5f, (p.z - world.y) / world.height * Size - Size * .5f);
+
+        public void Tick(IZoneMap map)
+        {
+            if (!Visible || map == null) return;
+            image.texture = map.MapTexture;
+            var w = map.MapWorldRect;
+            if (map.MapPlayer != null)
+            {
+                playerMark.anchoredPosition = ToMap(w, map.MapPlayer.position);
+                playerMark.localRotation = Quaternion.Euler(0, 0, -map.MapPlayer.eulerAngles.y);
+            }
+            int i = 0;
+            foreach (var m in map.MapMarkers)
+            {
+                if (i >= marks.Count)
+                {
+                    var dot = Ui.Image(markersRoot, "Marca", Color.white, null);
+                    var label = Ui.Text(dot.transform, "Texto", "", 20, Ui.Theme?.bold, UiTheme.Cream, TextAlignmentOptions.Center);
+                    label.rectTransform.Place(new Vector2(.5f, 0), new Vector2(.5f, 1), new Vector2(0, -4), new Vector2(260, 30));
+                    label.outlineWidth = .2f; label.outlineColor = Color.black;
+                    marks.Add((dot, label));
+                }
+                var (d, l) = marks[i++];
+                d.gameObject.SetActive(true);
+                d.color = m.color; d.rectTransform.sizeDelta = m.big ? new Vector2(20, 20) : new Vector2(10, 10);
+                d.rectTransform.anchoredPosition = ToMap(w, m.position);
+                l.text = m.label ?? "";
+            }
+            for (; i < marks.Count; i++) marks[i].dot.gameObject.SetActive(false);
+            playerMark.SetAsLastSibling();
         }
     }
 }

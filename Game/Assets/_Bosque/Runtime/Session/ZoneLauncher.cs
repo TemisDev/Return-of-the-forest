@@ -23,6 +23,12 @@ namespace Bosque.Session
                     GameProgress.CompleteZone(GameProgress.Arroyo);
                     if (SceneManager.GetActiveScene().name != "ClaroVacio") SceneManager.LoadScene("ClaroVacio");
                     break;
+                case "valle":
+                    GameProgress.CompleteZone(GameProgress.Arroyo);
+                    GameProgress.CompleteZone(GameProgress.Claro);
+                    GameProgress.CompleteZone(GameProgress.Refugio);
+                    if (SceneManager.GetActiveScene().name != "ValleOlvidado") SceneManager.LoadScene("ValleOlvidado");
+                    break;
                 case "refugio":
                     GameProgress.CompleteZone(GameProgress.Arroyo);
                     GameProgress.CompleteZone(GameProgress.Claro);

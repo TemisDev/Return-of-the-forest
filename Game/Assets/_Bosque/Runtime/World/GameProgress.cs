@@ -5,11 +5,11 @@ namespace Bosque.World
 {
     /// <summary>
     /// Progreso de la partida entre zonas (solo en memoria: el GDD no contempla guardado persistente).
-    /// Completar el arroyo concede la habilidad de crecimiento; la escena final exigirá las tres zonas.
+    /// Completar el arroyo concede la habilidad de crecimiento; el final exige las cuatro zonas.
     /// </summary>
     public static class GameProgress
     {
-        public const string Arroyo = "arroyo", Claro = "claro", Refugio = "refugio";
+        public const string Arroyo = "arroyo", Claro = "claro", Refugio = "refugio", Valle = "valle";
         private static readonly HashSet<string> completed = new HashSet<string>(StringComparer.Ordinal);
 
         public static bool GrowthUnlocked { get; private set; }
