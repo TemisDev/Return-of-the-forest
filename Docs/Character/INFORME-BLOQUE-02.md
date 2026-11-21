@@ -2,7 +2,9 @@
 
 **Rama:** `feature/character-animation-audio`, que sale de la integración V6 `4c973e5` (PR #7, sin fusionar).
 
-**Build:** `Builds/Windows/V7-Character-Audio/BosqueDeRegreso.exe`, commit `8a944c8`, 0 errores, 383 MB ([build-info](EVIDENCIAS/build-info-V7.json)). La carpeta no está en Git: se regenera con `Tools/Build-ArroyoRC1.ps1 -Configuration V7-Character-Audio` desde una copia limpia.
+**Build:** `Builds/Windows/V7-Character-Audio/BosqueDeRegreso.exe`, commit `ea19aad` (Guardiana realista), 0 errores, 382 MB ([build-info](EVIDENCIAS/build-info-V7.json)). La build anterior, con el personaje de Quaternius (`8a944c8`), se conserva en `Builds/Windows/V7-Character-Audio-8a944c8`. Ninguna está en Git: se regeneran con `Tools/Build-ArroyoRC1.ps1 -Configuration V7-Character-Audio` desde una copia limpia.
+
+**Rendimiento del personaje realista** (misma sesión, ejecuciones alternas): restaurado 70 y 65 FPS (p95 18,1 y 18,6 ms) frente a 61 FPS (p95 20,0 ms) con el personaje anterior, así que no tiene coste medible. Verificación funcional completa en las 3 ejecuciones.
 
 ## Qué hay en el juego
 
