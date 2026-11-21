@@ -69,7 +69,7 @@ namespace Bosque.PresentationEditor
             Debug.Log("[Presentacion] Recursos esenciales de TextMeshPro importados.");
         }
 
-        private static TMP_FontAsset FontAsset(string ttf, string name, int size)
+        internal static TMP_FontAsset FontAsset(string ttf, string name, int size)
         {
             string fontPath = $"{UiRoot}/Fonts/{ttf}.ttf", assetPath = $"{UiRoot}/Fonts/{name}.asset";
             var font = AssetDatabase.LoadAssetAtPath<Font>(fontPath) ?? throw new FileNotFoundException(fontPath);
@@ -85,6 +85,16 @@ namespace Bosque.PresentationEditor
             EditorUtility.SetDirty(fa);
             AssetDatabase.SaveAssets();
             return AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(assetPath);
+        }
+
+        /// <summary>Tipografías del mapa (Alegreya serif y versalitas, OFL). Se puede llamar desde otros constructores.</summary>
+        internal static void MapFonts(UiTheme theme)
+        {
+            theme.mapSerif = FontAsset("Alegreya-Regular", "TMP_Alegreya", 64);
+            theme.mapSerifItalic = FontAsset("Alegreya-Italic", "TMP_Alegreya_Italic", 64);
+            theme.mapCaps = FontAsset("AlegreyaSC-Regular", "TMP_AlegreyaSC", 64);
+            theme.mapCapsBold = FontAsset("AlegreyaSC-Bold", "TMP_AlegreyaSC_Bold", 64);
+            EditorUtility.SetDirty(theme);
         }
 
         // ------------------------------------------------------------------ fondos generados
@@ -125,6 +135,7 @@ namespace Bosque.PresentationEditor
             theme.title = FontAsset("AlegreyaSans-ExtraBold", "TMP_AlegreyaSans_ExtraBold", 72);
             theme.italic = FontAsset("AlegreyaSans-Italic", "TMP_AlegreyaSans_Italic", 64);
             theme.handwriting = FontAsset("Kalam-Regular", "TMP_Kalam", 64);
+            MapFonts(theme);
 
             theme.panel = SpriteAsset("UI_Panel", 96, 96, (x, y) => new Color(1, 1, 1, RoundedAlpha(x, y, 96, 96, 22)), 30);
             theme.pill = SpriteAsset("UI_Pastilla", 64, 64, (x, y) => new Color(1, 1, 1, RoundedAlpha(x, y, 64, 64, 32)), 31);

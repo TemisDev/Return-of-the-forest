@@ -63,18 +63,20 @@ namespace Bosque.UI
             needle.Place(new Vector2(.5f, 0), new Vector2(.5f, .5f), new Vector2(0, 2), new Vector2(28, 6));
 
             // Minimapa.
-            var ring = Ui.Image(rt, "Minimapa", UiTheme.PanelSolid, Circle()).rectTransform;
+            var ring = Ui.Image(rt, "Minimapa", new Color(0, 0, 0, .45f), MapIcons.Disc).rectTransform;
             ring.Place(new Vector2(1, 0), new Vector2(1, 0), new Vector2(-34, 80), new Vector2(MiniSize + 16, MiniSize + 16));
-            var maskImg = Ui.Image(ring, "Mascara", new Color(.1f, .12f, .1f, 1f), Circle());
+            // Fondo de papel: fuera del mapa se ve papel, no un hueco oscuro.
+            var maskImg = Ui.Image(ring, "Mascara", MapIcons.Paper, MapIcons.Disc);
             mini = maskImg.rectTransform; mini.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), Vector2.zero, new Vector2(MiniSize, MiniSize));
             mini.gameObject.AddComponent<Mask>().showMaskGraphic = true;
             rotor = Ui.Rect("Giro", mini); rotor.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), Vector2.zero, Vector2.zero);
             var mapRt = Ui.Rect("Mapa", rotor); mapRt.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), Vector2.zero, new Vector2(100, 100));
             miniMap = mapRt.gameObject.AddComponent<RawImage>(); miniMap.raycastTarget = false;
-            playerArrow = Ui.Rect("Guardiana", mini); playerArrow.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), Vector2.zero, new Vector2(22, 22));
-            var dot = Ui.Image(playerArrow, "Punto", UiTheme.Amber, Circle()); dot.rectTransform.Stretch();
-            var nose = Ui.Image(playerArrow, "Frente", UiTheme.Amber, t?.pill); nose.rectTransform.Place(new Vector2(.5f, 1), new Vector2(.5f, 0), new Vector2(0, -4), new Vector2(8, 20));
-            var nBg = Ui.Image(ring, "Norte", UiTheme.PanelSolid, Circle()); north = nBg.rectTransform;
+            playerArrow = Ui.Image(mini, "Guardiana", Color.white, MapIcons.Player).rectTransform;
+            playerArrow.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), Vector2.zero, new Vector2(30, 30));
+            // Marco: borde oscuro con filete crema, encima del mapa (tapa el borde dentado de la máscara).
+            Ui.Image(ring, "Marco", Color.white, MapIcons.MiniFrame).rectTransform.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), Vector2.zero, new Vector2(MiniSize + 16, MiniSize + 16));
+            var nBg = Ui.Image(ring, "Norte", new Color(.07f, .09f, .07f), MapIcons.Disc); north = nBg.rectTransform;
             north.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), Vector2.zero, new Vector2(34, 34));
             var nTxt = Ui.Text(north, "N", "N", 24, t?.bold, UiTheme.Amber, TextAlignmentOptions.Center); nTxt.rectTransform.Stretch();
             caption = Ui.Text(rt, "Ubicados", "", 22, t?.body, UiTheme.CreamDim, TextAlignmentOptions.Bottom);
@@ -159,17 +161,18 @@ namespace Bosque.UI
             int k = 0;
             foreach (var m in buffer)
             {
-                if (m.kind == MarkerKind.Label || m.kind == MarkerKind.Point) continue;
+                if (m.kind == MarkerKind.Label || m.kind == MarkerKind.Point || m.kind == MarkerKind.Region) continue;
                 var off = new Vector2(m.position.x - p.x, m.position.z - p.z);
                 if (off.magnitude > MiniRange * 1.05f) continue;
                 if (k >= miniMarks.Count) { var img = Ui.Image(rotor, "Marca", Color.white, Circle()); miniMarks.Add(img); }
                 var mk = miniMarks[k++];
                 mk.gameObject.SetActive(true);
-                mk.sprite = m.kind == MarkerKind.Station || m.kind == MarkerKind.Bridge ? null : Circle();
-                mk.color = MarkerColor(m);
-                mk.rectTransform.sizeDelta = Vector2.one * (m.kind == MarkerKind.Station ? 18f : m.kind == MarkerKind.Bridge ? 12f : 12f);
+                mk.sprite = MapIcons.For(m.kind); mk.color = Color.white;
+                mk.rectTransform.sizeDelta = Vector2.one * (m.kind == MarkerKind.Station ? 26f : m.kind == MarkerKind.Bridge ? 24f : m.kind == MarkerKind.Ford ? 22f : 16f);
                 mk.rectTransform.anchoredPosition = off * ppm;
-                mk.rectTransform.localRotation = Quaternion.Euler(0, 0, -Heading);
+                // Puentes y vados giran con el mapa (marcan la dirección del cruce); el resto queda derecho.
+                bool aligned = m.kind == MarkerKind.Bridge || m.kind == MarkerKind.Ford;
+                mk.rectTransform.localRotation = Quaternion.Euler(0, 0, aligned ? m.angle : -Heading);
             }
             for (int i = k; i < miniMarks.Count; i++) miniMarks[i].gameObject.SetActive(false);
             MinimapMarkersShown = k;
@@ -209,9 +212,9 @@ namespace Bosque.UI
             bool edge = Mathf.Abs(delta) > HalfFov;
             float x = Mathf.Clamp(delta / HalfFov, -1f, 1f) * (CompassWidth * .5f - (edge ? 14f : 0f));
             rt.anchoredPosition = new Vector2(x, 0);
-            ic.sprite = m.kind == MarkerKind.Station ? null : Circle();
-            var c = MarkerColor(m); c.a = edge ? .5f : alpha; ic.color = c;
-            ic.rectTransform.sizeDelta = Vector2.one * (m.kind == MarkerKind.Station ? 16f : 14f);
+            ic.sprite = MapIcons.For(m.kind);
+            ic.color = new Color(1, 1, 1, edge ? .5f : alpha);
+            ic.rectTransform.sizeDelta = Vector2.one * (m.kind == MarkerKind.Station ? 22f : 16f);
             lb.text = edge ? "" : text; lb.color = new Color(1, 1, 1, alpha);
         }
 

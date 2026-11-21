@@ -2,7 +2,7 @@
 
 **Rama:** `feature/valle-olvidado`, que sale de `feature/presentation-menus` e incluye el Bloque 05.
 
-**Build:** `Builds/Windows/V12-Rios/BosqueDeRegreso.exe` (V12 añade los ríos, la brújula y el minimapa; la V11 anterior sigue en `Builds/Windows/V11-Valle`).
+**Build:** `Builds/Windows/V13-Acabado/BosqueDeRegreso.exe` (V13 da acabado realista al agua, los puentes, los puntos de reciclaje y el mapa; la V12 sigue en `Builds/Windows/V12-Rios` y la V11 en `Builds/Windows/V11-Valle`).
 - Partida completa: menú → arroyo → claro → refugio → **valle** → final.
 - Para entrar directamente en el valle: `-zona valle`.
 
@@ -41,7 +41,7 @@ El diseño sigue el mapa de referencia que pasaste (los grandes ríos y lagos de
 
 - **El área:** todo el valle jugable (unos 210 × 210 m); los ríos siguen dentro de las montañas del borde, que no se pueden cruzar.
 - **Agua honda:** la Guardiana vadea hasta la cintura y va más lenta cuanto más hondo; donde pasa de unos 95 cm no avanza (como una pared) y aparece una pista: «Cruza por un puente o un vado». No cuenta como intento fallido.
-- **Puentes:** de troncos, con barandas (no se cae al agua). **Vados:** piedras que asoman en el agua baja.
+- **Puentes:** pasarelas de tablas sobre pilotes, con barandas de rollizos (no se cae al agua). **Vados:** piedras que asoman en el agua baja.
 - **El agua cambia:** turbia y marrón mientras el sector está sucio, más clara al limpiarlo y cristalina cuando el valle revive.
 - **Sonido:** el río suena siempre (más fuerte al revivir) y el sonido viene del agua más cercana.
 - **Residuos en el agua:** 6 flotan en lagunas, ríos y bofedal (se alcanzan vadeando) y 5 troncos tapan canales y ríos.
@@ -53,6 +53,31 @@ El diseño sigue el mapa de referencia que pasaste (los grandes ríos y lagos de
 - **Minimapa** (abajo a la derecha): mapa redondo que gira con la cámara, la Guardiana en el centro, la **N** en el borde, los puntos de reciclaje, puentes, vados y lo ubicado. Debajo dice cuántos objetivos ubicados faltan.
 - **Ubicar:** lo que pasa a menos de **24 m** de la Guardiana, o lo que marca el rastreo (T), queda ubicado y aparece en la brújula, el minimapa y el mapa. Lo no visto **no** aparece, para que siga habiendo que explorar; el mapa dice cuántos faltan por ubicar en cada sector.
 - **Mapa (M):** ahora muestra los nombres de los ríos y lagunas, puentes y vados, lo ubicado y una rosa con el norte.
+
+## Acabado realista (V13)
+
+Tras probar la V12, el pedido fue que lo hecho a mano tuviera el mismo realismo que el ambiente (árboles, rocas y suelo escaneados) y que el mapa se viera profesional, tomando como referencia otros juegos.
+
+| Qué | Antes (V12) | Ahora (V13) |
+|---|---|---|
+| **Puentes** | Ramitas finas escaladas, con huecos | Tramos del muelle modular de Poly Haven (tablas, vigas y pilotes que se hunden en el lecho) y barandas de rollizos del mismo kit |
+| **Puntos de reciclaje** | Disco liso, textos flotando en el aire y dos troncos como postes | Explanada de grava pintada en el terreno; panel de madera con el rótulo pintado y una chapa de color por contenedor (NTP 900.058) con su nombre |
+| **Agua** | Lagunas circulares, orilla recortada, costuras entre trozos y tablero a distancia | Orillas irregulares; corriente por vértice (técnica de *flow map* en dos fases, sin costuras); olas propias con ~70 ondas por repetición; la turbidez crece con la profundidad (orilla transparente); borde suave con espuma |
+| **Orillas** | Suelo seco agrietado hasta el agua | Guijarros húmedos en cauce y orillas (borde irregular), ~200 juncos y ~70 piedras medio hundidas en la línea del agua |
+| **Vados** | Piedras pequeñas casi cubiertas | 9 piedras más grandes que asoman 14 cm |
+| **Mapa (M)** | Fondo beige plano, ríos con borde blanco, puntos negros como árboles, nombres encimados | Hoja de papel topográfico (ver abajo) |
+
+**El mapa nuevo.** Referencias: el mapa de papel de *Firewatch* (topográfico, como un mapa real del servicio forestal) y el de *Red Dead Redemption 2* (dibujado a mano, de época, legible).
+- **Papel:** fibra, manchas suaves, viñeta, pliegues en cruz y marco doble.
+- **Relieve:** sombreado desde el noroeste (suave en el llano, marcado en la montaña), curvas de nivel cada 1 m y maestras cada 5 m, cuadrícula de 25 m.
+- **Agua:** acuarela más oscura donde es hondo, línea de orilla en tinta azul y líneas de costa paralelas.
+- **Árboles:** copas irregulares con luz, borde y sombra, como en los mapas dibujados.
+- **Nombres:** tipografía de cartografía Alegreya (OFL). Ríos en cursiva azul siguiendo el cauce, lagunas sobre el agua, regiones en versalitas espaciadas, puestos en versalitas. Todos llevan un halo de papel para leerse sobre las curvas.
+- **Iconos de cartografía** dibujados por código: punto de reciclaje, residuo (rombo), tronco (corte del tronco), puente (dos trazos con los extremos abiertos), vado (hilera de piedras) y la flecha de la Guardiana con un pulso.
+- **Cartela** con el título, el subtítulo y una escala gráfica de 0–50 m; **rosa de los vientos** abajo a la derecha.
+- **Panel lateral:** avance de cada sector con su barra (limpios, por ubicar) y la leyenda.
+
+El **minimapa** usa la misma hoja: papel fuera del mapa, marco con filete, los mismos iconos (puentes y vados giran con el mapa) y la misma flecha.
 
 ## Mecánicas y dificultad
 
@@ -116,6 +141,10 @@ El diseño sigue el mapa de referencia que pasaste (los grandes ríos y lagos de
 | Color del agua por sector | `Runtime/World/Valle/ValleWaterLook.cs` |
 | Sonido del río | `Runtime/World/Valle/WaterSoundAnchor.cs` |
 | Brújula y minimapa | `Runtime/UI/NavigationViews.cs` |
+| Iconos del mapa (dibujados por código) | `Runtime/UI/MapIcons.cs` |
+| Mapa (M): hoja, panel y nombres | `Runtime/UI/PresentationViews.cs` (`MapView`); textura en `ValleBuilder.RenderMap` |
+| Puentes y panel de reciclaje | `ValleBuilder.BuildBridge` y `BuildStationPanel`; piezas de `Docs/Valle/pipeline/convertir_muelle.py` |
+| Olas del agua del valle | `Docs/Valle/pipeline/generar_normales_agua.py` → `M_Valle_Agua` |
 | HUD lateral, barra de trabajo y mapa | `Runtime/UI/PresentationViews.cs` |
 | Medición en builds | `Runtime/Session/FpsProbe.cs` (`-medir-fps N -salir`) |
 | Construcción de la escena | `Editor/Levels/Valle/ValleBuilder.cs`: idempotente, `Bosque.LevelEditor.ValleBuilder.BuildAllBatch` |

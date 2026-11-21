@@ -136,5 +136,13 @@
     ],
     "licencia": "CC0 1.0",
     "url": "https://polyhaven.com/a/metal_trash_can"
+  },
+  "modular_wooden_pier": {
+    "nombre": "Modular Wooden Pier",
+    "autores": [
+      "Rico Cilliers"
+    ],
+    "licencia": "CC0 1.0",
+    "url": "https://polyhaven.com/a/modular_wooden_pier"
   }
 }

@@ -49,7 +49,7 @@ namespace Bosque.LevelEditor
             ("Vertiente", "", Vector2.zero, new[] { new Vector2(70, 140), new Vector2(66, 110), new Vector2(62, 94), new Vector2(58, 82) }, .45f, 1f, 3.5f),
             ("CanalAM", "", Vector2.zero, new[] { new Vector2(58, 82), new Vector2(80, 62) }, .55f, 1.5f, 4f),
             ("CanalMB", "", Vector2.zero, new[] { new Vector2(80, 62), new Vector2(90, 38) }, .55f, 1.5f, 4f),
-            ("Salida", "Río de la Salida", new Vector2(98, 20), new[] { new Vector2(90, 38), new Vector2(104, 32), new Vector2(140, 26) }, .7f, 2f, 5f),
+            ("Salida", "Río de la Salida", new Vector2(94, 24), new[] { new Vector2(90, 38), new Vector2(104, 32), new Vector2(140, 26) }, .7f, 2f, 5f),
             ("Sur", "Río del Sur", new Vector2(-70, -94), new[] { new Vector2(-30, -40), new Vector2(-44, -60), new Vector2(-64, -74), new Vector2(-86, -84), new Vector2(-110, -100), new Vector2(-140, -118) }, .45f, 1f, 3.5f),
         };
         private static readonly (string label, Vector2 c, float r, float depth)[] LakeDefs =
@@ -60,6 +60,7 @@ namespace Bosque.LevelEditor
         private static readonly Vector2[] Fords = { new Vector2(17, 90), new Vector2(31, -8), new Vector2(21, -45), new Vector2(13, -90) };
         private static readonly (string stream, Vector2 at)[] Bridges = { ("Mayu", new Vector2(32, 9)), ("Mayu", new Vector2(32, 47)), ("Chico", new Vector2(-16, -23)) };
         private static WaterStream[] wStreams = new WaterStream[0];
+        private static Dictionary<string, GameObject> woodPrefabs;
         private static WaterLake[] wLakes = new WaterLake[0];
         private static Vector2[] streamMin, streamMax;
 
@@ -84,6 +85,7 @@ namespace Bosque.LevelEditor
             var mats = ImportModels();
             var prefabs = ItemPrefabs(mats);
             var icons = ReadIcons();
+            Bosque.PresentationEditor.PresentationBuilder.MapFonts(AssetDatabase.LoadAssetAtPath<Bosque.UI.UiTheme>("Assets/_Bosque/UI/Resources/BosqueUiTheme.asset"));
             BuildScene(prefabs, mats);
             IntegrateRefugio();
             var scenes = EditorBuildSettings.scenes.Where(s => s.path != ScenePath).ToList();
@@ -113,42 +115,59 @@ namespace Bosque.LevelEditor
             "Aerosol", "CajaCarton", "BolsaPapel", "BolsaBasura", "Llanta", "TroncoDelgado", "TroncoGrueso", "Ramas", "Contenedor",
         };
 
+        /// <summary>Piezas de madera del muelle modular de Poly Haven: tramos de puente, tablas y postes (V13).</summary>
+        private static readonly string[] WoodModels = { "PuenteTramoA", "PuenteTramoB", "PuenteTramoC", "Tablas", "Poste" };
+
+        private static Material LitMaterial(string n)
+        {
+            foreach (var (suffix, normal) in new[] { ("BaseColor", false), ("Normal", true), ("MetalSmooth", false) })
+            {
+                var path = $"{Root}/Textures/T_Valle_{n}_{suffix}" + (suffix == "MetalSmooth" ? ".png" : ".jpg");
+                var ti = (TextureImporter)AssetImporter.GetAtPath(path);
+                if (ti == null) continue;
+                bool changed = false;
+                var type = normal ? TextureImporterType.NormalMap : TextureImporterType.Default;
+                if (ti.textureType != type) { ti.textureType = type; changed = true; }
+                bool srgb = suffix == "BaseColor";
+                if (ti.sRGBTexture != srgb) { ti.sRGBTexture = srgb; changed = true; }
+                if (ti.maxTextureSize != 1024) { ti.maxTextureSize = 1024; changed = true; }
+                if (changed) ti.SaveAndReimport();
+            }
+            string mp = $"{Root}/Materials/M_Valle_{n}.mat";
+            var m = AssetDatabase.LoadAssetAtPath<Material>(mp);
+            if (m == null) { m = new Material(Shader.Find("Universal Render Pipeline/Lit")) { name = "M_Valle_" + n }; AssetDatabase.CreateAsset(m, mp); }
+            m.SetTexture("_BaseMap", AssetDatabase.LoadAssetAtPath<Texture2D>($"{Root}/Textures/T_Valle_{n}_BaseColor.jpg"));
+            m.SetTexture("_BumpMap", AssetDatabase.LoadAssetAtPath<Texture2D>($"{Root}/Textures/T_Valle_{n}_Normal.jpg")); m.EnableKeyword("_NORMALMAP");
+            m.SetTexture("_MetallicGlossMap", AssetDatabase.LoadAssetAtPath<Texture2D>($"{Root}/Textures/T_Valle_{n}_MetalSmooth.png")); m.EnableKeyword("_METALLICSPECGLOSSMAP");
+            m.SetFloat("_Smoothness", 1f); m.SetFloat("_SmoothnessTextureChannel", 0f);
+            // La madera del muelle viene muy oscura (madera mojada); en el valle seco se aclara un poco.
+            m.SetColor("_BaseColor", n == "BotellaVidrio" ? new Color(.55f, .78f, .5f) : n.StartsWith("Madera") ? new Color(1.35f, 1.25f, 1.12f) : Color.white);
+            m.enableInstancing = true;
+            EditorUtility.SetDirty(m);
+            return m;
+        }
+
+        private static void Remap(string model, params (string source, Material m)[] remaps)
+        {
+            var mi = (ModelImporter)AssetImporter.GetAtPath($"{Root}/Models/SM_Valle_{model}.fbx");
+            mi.materialImportMode = ModelImporterMaterialImportMode.ImportViaMaterialDescription;
+            foreach (var (source, m) in remaps) mi.AddRemap(new AssetImporter.SourceAssetIdentifier(typeof(Material), source), m);
+            mi.importAnimation = false; mi.animationType = ModelImporterAnimationType.None; mi.importCameras = mi.importLights = false;
+            mi.SaveAndReimport();
+        }
+
         private static Dictionary<string, Material> ImportModels()
         {
             Directory.CreateDirectory(Root + "/Materials");
             var mats = new Dictionary<string, Material>();
             foreach (var n in ModelNames)
             {
-                foreach (var (suffix, normal) in new[] { ("BaseColor", false), ("Normal", true), ("MetalSmooth", false) })
-                {
-                    var path = $"{Root}/Textures/T_Valle_{n}_{suffix}" + (suffix == "MetalSmooth" ? ".png" : ".jpg");
-                    var ti = (TextureImporter)AssetImporter.GetAtPath(path);
-                    if (ti == null) continue;
-                    bool changed = false;
-                    var type = normal ? TextureImporterType.NormalMap : TextureImporterType.Default;
-                    if (ti.textureType != type) { ti.textureType = type; changed = true; }
-                    bool srgb = suffix == "BaseColor";
-                    if (ti.sRGBTexture != srgb) { ti.sRGBTexture = srgb; changed = true; }
-                    if (ti.maxTextureSize != 1024) { ti.maxTextureSize = 1024; changed = true; }
-                    if (changed) ti.SaveAndReimport();
-                }
-                string mp = $"{Root}/Materials/M_Valle_{n}.mat";
-                var m = AssetDatabase.LoadAssetAtPath<Material>(mp);
-                if (m == null) { m = new Material(Shader.Find("Universal Render Pipeline/Lit")) { name = "M_Valle_" + n }; AssetDatabase.CreateAsset(m, mp); }
-                m.SetTexture("_BaseMap", AssetDatabase.LoadAssetAtPath<Texture2D>($"{Root}/Textures/T_Valle_{n}_BaseColor.jpg"));
-                m.SetTexture("_BumpMap", AssetDatabase.LoadAssetAtPath<Texture2D>($"{Root}/Textures/T_Valle_{n}_Normal.jpg")); m.EnableKeyword("_NORMALMAP");
-                m.SetTexture("_MetallicGlossMap", AssetDatabase.LoadAssetAtPath<Texture2D>($"{Root}/Textures/T_Valle_{n}_MetalSmooth.png")); m.EnableKeyword("_METALLICSPECGLOSSMAP");
-                m.SetFloat("_Smoothness", 1f); m.SetFloat("_SmoothnessTextureChannel", 0f);
-                m.SetColor("_BaseColor", n == "BotellaVidrio" ? new Color(.55f, .78f, .5f) : Color.white);
-                m.enableInstancing = true;
-                EditorUtility.SetDirty(m);
-                mats[n] = m;
-                var mi = (ModelImporter)AssetImporter.GetAtPath($"{Root}/Models/SM_Valle_{n}.fbx");
-                mi.materialImportMode = ModelImporterMaterialImportMode.ImportViaMaterialDescription;
-                mi.AddRemap(new AssetImporter.SourceAssetIdentifier(typeof(Material), "M_Valle_" + n), m);
-                mi.importAnimation = false; mi.animationType = ModelImporterAnimationType.None; mi.importCameras = mi.importLights = false;
-                mi.SaveAndReimport();
+                mats[n] = LitMaterial(n);
+                Remap(n, ("M_Valle_" + n, mats[n]));
             }
+            mats["MaderaTablas"] = LitMaterial("MaderaTablas"); mats["MaderaPostes"] = LitMaterial("MaderaPostes");
+            foreach (var n in WoodModels)
+                Remap(n, ("M_Valle_MaderaTablas", mats["MaderaTablas"]), ("M_Valle_MaderaPostes", mats["MaderaPostes"]));
             foreach (var k in WasteKinds.All)
             {
                 string mp = $"{Root}/Materials/M_Valle_Contenedor_{k}.mat";
@@ -165,8 +184,9 @@ namespace Bosque.LevelEditor
         {
             Directory.CreateDirectory(Root + "/Prefabs");
             var dict = new Dictionary<string, GameObject>();
-            foreach (var n in ModelNames)
+            foreach (var n in ModelNames.Concat(WoodModels))
                 dict[n] = AssetDatabase.LoadAssetAtPath<GameObject>($"{Root}/Models/SM_Valle_{n}.fbx");
+            woodPrefabs = dict;
             // Baliza del rastreo: columna de luz ámbar.
             var beaconMatPath = Root + "/Materials/M_Valle_Baliza.mat";
             var bm = AssetDatabase.LoadAssetAtPath<Material>(beaconMatPath);
@@ -206,7 +226,7 @@ namespace Bosque.LevelEditor
                 ValleWater.Nearest(s, p, out float d, out _, out _, out _, out _);
                 best = Mathf.Min(best, d - s.bank);
             }
-            foreach (var l in wLakes) best = Mathf.Min(best, Vector2.Distance(p, new Vector2(l.center.x, l.center.z)) - (l.radius + 3f));
+            foreach (var l in wLakes) best = Mathf.Min(best, Vector2.Distance(p, new Vector2(l.center.x, l.center.z)) - (ValleWater.RadiusToward(l, p) + 3f));
             return best;
         }
 
@@ -234,7 +254,7 @@ namespace Bosque.LevelEditor
             {
                 float level = Natural(c.x, c.y) - .5f;
                 if (label != "Bofedal") { level = Mathf.Min(level, prev - .5f); prev = level; } // la cadena baja escalón a escalón
-                lakes.Add(new WaterLake { name = label, center = new Vector3(c.x, level, c.y), radius = r, depth = depth });
+                lakes.Add(new WaterLake { name = label, center = new Vector3(c.x, level, c.y), radius = r, depth = depth, shapeSeed = lakes.Count * 1.9f + .7f });
             }
             WaterLake Lake(string n) => lakes.First(l => l.name == n);
             var streams = new List<WaterStream>();
@@ -326,8 +346,8 @@ namespace Bosque.LevelEditor
             }
             foreach (var l in wLakes)
             {
-                float r = Vector2.Distance(p, new Vector2(l.center.x, l.center.z)), reach = l.radius + 3f;
-                if (r < reach) { inside = true; inner = Mathf.Min(inner, l.center.y + ValleWater.LakeBed(r, l.radius, l.depth)); }
+                float lr = ValleWater.RadiusToward(l, p), r = Vector2.Distance(p, new Vector2(l.center.x, l.center.z)), reach = lr + 3f;
+                if (r < reach) { inside = true; inner = Mathf.Min(inner, l.center.y + ValleWater.LakeBed(r, lr, l.depth)); }
                 else if (r < reach + 24f)
                 {
                     carve = Mathf.Min(carve, Mathf.Lerp(l.center.y + ValleWater.BankRise, n, Mathf.SmoothStep(0, 1, (r - reach) / Mathf.Clamp((n - l.center.y) * 2.2f, 8f, 22f))));
@@ -367,7 +387,7 @@ namespace Bosque.LevelEditor
 
         private static float Height0(Vector2 p) => 8f + Fbm(p.x / 60f, p.y / 60f, 4) * 3.2f;
 
-        private static TerrainLayer Layer(string name, string tex, float tile)
+        private static TerrainLayer Layer(string name, string tex, float tile, float tint = 1f, float smoothness = 1f)
         {
             string path = $"{Root}/Terreno/TL_Valle_{name}.terrainlayer";
             Directory.CreateDirectory(Root + "/Terreno");
@@ -376,7 +396,8 @@ namespace Bosque.LevelEditor
             l.diffuseTexture = AssetDatabase.LoadAssetAtPath<Texture2D>($"{B.Root}/Textures/Ground/{tex}_BaseMap.jpg");
             l.normalMapTexture = AssetDatabase.LoadAssetAtPath<Texture2D>($"{B.Root}/Textures/Ground/{tex}_Normal.jpg");
             l.maskMapTexture = AssetDatabase.LoadAssetAtPath<Texture2D>($"{B.Root}/Textures/Ground/{tex}_Mask.png");
-            l.maskMapRemapMin = Vector4.zero; l.maskMapRemapMax = new Vector4(0, 1, 1, 1); // sin metal
+            l.maskMapRemapMin = Vector4.zero; l.maskMapRemapMax = new Vector4(0, 1, 1, smoothness); // sin metal
+            l.diffuseRemapMin = Vector4.zero; l.diffuseRemapMax = new Vector4(tint, tint * .98f, tint * .95f, 1f);
             l.tileSize = new Vector2(tile, tile); l.normalScale = 1f;
             EditorUtility.SetDirty(l);
             return l;
@@ -440,7 +461,7 @@ namespace Bosque.LevelEditor
                 }
             td.SetHeights(0, 0, hs);
 
-            td.terrainLayers = new[] { Layer("SueloSeco", "T_DryGroundRocks", 11f), Layer("Pasto", "T_LeafyGrass", 7f), Layer("Roca", "T_RockyTerrain", 7f), Layer("Cauce", "T_DryRiverbed", 5f) };
+            td.terrainLayers = new[] { Layer("SueloSeco", "T_DryGroundRocks", 11f), Layer("Pasto", "T_LeafyGrass", 7f), Layer("Roca", "T_RockyTerrain", 7f), Layer("Cauce", "T_RiverPebbles", 3.2f, .78f, 1.6f) };   // cauce y orillas: guijarros húmedos (V13)
             int aw = td.alphamapWidth;
             var al = new float[aw, aw, 4];
             for (int y = 0; y < aw; y++)
@@ -452,7 +473,13 @@ namespace Bosque.LevelEditor
                     float rock = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(26f, 38f, steep));
                     // Manchas pedregosas en lo llano: rompen la repetición del suelo seco.
                     rock = Mathf.Max(rock, Mathf.Clamp01((Fbm(wx / 21f + 7f, wz / 21f - 3f, 3) - .2f) * 1.3f) * .45f);
-                    float river = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(2.5f, -1f, DistanceToWater(new Vector2(wx, wz)))) * (1 - rock);
+                    // Orilla húmeda irregular: el borde del cauce ondula con ruido para no verse recortado.
+                    float edge = 3.2f + Fbm(wx / 7f + 11f, wz / 7f - 5f, 2) * 2.2f;
+                    float river = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(edge, -.6f, DistanceToWater(new Vector2(wx, wz))));
+                    // Explanada de grava bajo cada punto de reciclaje.
+                    foreach (var st in Stations)
+                        river = Mathf.Max(river, Mathf.SmoothStep(0, 1, Mathf.InverseLerp(5.6f + Fbm(wx / 3f, wz / 3f, 2) * 1.5f, 3.8f, Vector2.Distance(new Vector2(wx, wz), st.pos))));
+                    river *= 1 - rock;
                     float grass = Mathf.Clamp01((Fbm(wx / 18f, wz / 18f, 2) - .35f) * 2f) * .35f * (1 - rock - river);
                     float dry = Mathf.Max(0, 1 - rock - river - grass);
                     al[y, x, 0] = dry; al[y, x, 1] = grass; al[y, x, 2] = rock; al[y, x, 3] = river;
@@ -594,6 +621,7 @@ namespace Bosque.LevelEditor
             var crossRoot = new GameObject("Cruces").transform; crossRoot.SetParent(waterGo.transform, false);
             foreach (var (id, at) in Bridges) BuildBridge(crossRoot, terrain, wStreams[Array.FindIndex(StreamDefs, d => d.id == id)], at);
             foreach (var f in Fords) BuildFord(crossRoot, terrain, wStreams[0], f);
+            BuildBanks(waterGo.transform, terrain);
 
             // Muros invisibles del área jugable (las montañas ya lo impiden; esto es seguridad).
             foreach (var (c, s) in new[] { (new Vector3(Playable + 4, 20, 0), new Vector3(2, 60, 240)), (new Vector3(-Playable - 4, 20, 0), new Vector3(2, 60, 240)),
@@ -779,9 +807,7 @@ namespace Bosque.LevelEditor
                 var st = new GameObject(name).transform; st.SetParent(stRoot, false);
                 var basePos = OnGround(terrain, pos);
                 st.SetPositionAndRotation(basePos, Quaternion.Euler(0, yaw, 0));
-                var pad = GameObject.CreatePrimitive(PrimitiveType.Cylinder); Object.DestroyImmediate(pad.GetComponent<Collider>());
-                pad.name = "V6_Explanada"; pad.transform.SetParent(st, false); pad.transform.localPosition = new Vector3(0, .02f, 0); pad.transform.localScale = new Vector3(7f, .02f, 5f);
-                pad.GetComponent<MeshRenderer>().sharedMaterial = B.M("M_Ground_Path_Restored");
+                // La explanada de grava está pintada en el terreno (capa del cauce): sin disco.
                 for (int i = 0; i < 4; i++)
                 {
                     var k = WasteKinds.All[i];
@@ -791,28 +817,10 @@ namespace Bosque.LevelEditor
                     vis.transform.localScale = Vector3.one * 1.25f;
                     foreach (var r in vis.GetComponentsInChildren<Renderer>()) r.sharedMaterial = mats["Contenedor_" + k];
                     var col = bgo.AddComponent<BoxCollider>(); col.center = new Vector3(0, .57f, 0); col.size = new Vector3(1f, 1.15f, .8f);
-                    var label = new GameObject("Rotulo"); label.transform.SetParent(bgo.transform, false);
-                    label.transform.localPosition = new Vector3(0, 1.45f, -.05f); label.transform.localRotation = Quaternion.Euler(0, 180, 0);
-                    var tmp = label.AddComponent<TextMeshPro>(); tmp.text = k == WasteKind.NoAprovechable ? "NO\nAPROVECHABLE" : WasteKinds.Name(k).ToUpperInvariant().Replace(" Y ", "\nY ");
-                    tmp.font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/_Bosque/UI/Fonts/TMP_AlegreyaSans_ExtraBold.asset");
-                    tmp.enableAutoSizing = true; tmp.fontSizeMin = .9f; tmp.fontSizeMax = 2.2f; tmp.textWrappingMode = TextWrappingModes.NoWrap;
-                    tmp.alignment = TextAlignmentOptions.Center; tmp.color = Color.white;
-                    tmp.outlineWidth = .25f; tmp.outlineColor = Color.black;
-                    tmp.rectTransform.sizeDelta = new Vector2(1.15f, .62f);
                     var bin = bgo.AddComponent<RecycleBin>(); bin.Configure(k, col, name);
                     bins.Add(bin);
                 }
-                var sign = new GameObject("Cartel"); sign.transform.SetParent(st, false);
-                sign.transform.localPosition = new Vector3(0, 2.4f, .3f); sign.transform.localRotation = Quaternion.Euler(0, 180, 0);
-                var st3 = sign.AddComponent<TextMeshPro>(); st3.text = "PUNTO DE RECICLAJE\n<size=70%>" + name + "</size>";
-                st3.font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/_Bosque/UI/Fonts/TMP_AlegreyaSans_ExtraBold.asset");
-                st3.fontSize = 3f; st3.alignment = TextAlignmentOptions.Center; st3.color = new Color(.96f, .94f, .87f); st3.outlineWidth = .25f; st3.outlineColor = Color.black;
-                st3.rectTransform.sizeDelta = new Vector2(6f, 1.4f);
-                foreach (var x in new[] { -2.6f, 2.6f })
-                {
-                    var post = Put("VIS_V6_DeadLog_A", st, Vector3.zero, 0, 1f);
-                    post.transform.localPosition = new Vector3(x, 0, .3f); post.transform.localRotation = Quaternion.Euler(0, 0, 90); post.transform.localScale = new Vector3(.9f, .25f, .25f);
-                }
+                BuildStationPanel(st, name, prefabs, mats);
             }
 
             // Agua del río (solo restaurado) y polvo/hojas secas (solo degradado).
@@ -952,6 +960,63 @@ namespace Bosque.LevelEditor
         }
 
         /// <summary>
+        /// Panel del punto de reciclaje, como en un parque: dos postes de madera, un tablero con el rótulo pintado y,
+        /// debajo, una placa de metal del color de cada contenedor con su nombre. Todo el texto va sobre una superficie.
+        /// </summary>
+        /// <summary>Chapa pintada (color liso del contenedor, semimate) para las placas del panel.</summary>
+        private static Material PlateMaterial(WasteKind k)
+        {
+            string path = $"{Root}/Materials/M_Valle_Placa_{k}.mat";
+            var m = AssetDatabase.LoadAssetAtPath<Material>(path);
+            if (m == null) { m = new Material(Shader.Find("Universal Render Pipeline/Lit")); AssetDatabase.CreateAsset(m, path); }
+            m.SetColor("_BaseColor", WasteKinds.BinColor(k) * .92f); m.SetFloat("_Smoothness", .38f); m.SetFloat("_Metallic", 0f);
+            m.enableInstancing = true; EditorUtility.SetDirty(m);
+            return m;
+        }
+
+        private static void BuildStationPanel(Transform st, string name, Dictionary<string, GameObject> prefabs, Dictionary<string, Material> mats)
+        {
+            const float z = -.78f, thick = .08f;
+            var font = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/_Bosque/UI/Fonts/TMP_AlegreyaSans_ExtraBold.asset");
+            var panel = new GameObject("Panel").transform; panel.SetParent(st, false);
+            foreach (var x in new[] { -2.75f, 2.75f })
+            {
+                var post = (GameObject)PrefabUtility.InstantiatePrefab(prefabs["Poste"], panel);
+                post.transform.localPosition = new Vector3(x, -.3f, z); post.transform.localRotation = Quaternion.Euler(0, R(0, 360), 0);
+                post.transform.localScale = new Vector3(.62f, 3.05f / 3.8f, .62f);
+            }
+            void Board(string n, float y, float h)
+            {
+                var b = (GameObject)PrefabUtility.InstantiatePrefab(prefabs["Tablas"], panel); b.name = n;
+                b.transform.localPosition = new Vector3(0, y, z); b.transform.localRotation = Quaternion.Euler(90, 0, 0);
+                b.transform.localScale = new Vector3(5.3f / 2.52f, 1f, h / 2.2f);
+            }
+            Board("Tablero", 2.3f, .78f);
+            Board("Repisa", 1.42f, .5f);
+            var title = new GameObject("Rotulo").AddComponent<TextMeshPro>(); title.transform.SetParent(panel, false);
+            title.transform.localPosition = new Vector3(0, 2.3f, z + thick * .5f + .012f); title.transform.localRotation = Quaternion.Euler(0, 180, 0);
+            title.text = "PUNTO DE RECICLAJE\n<size=62%><b>" + name.ToUpperInvariant() + "</b></size>"; title.font = font;
+            title.enableAutoSizing = true; title.fontSizeMin = 1f; title.fontSizeMax = 3.2f; title.lineSpacing = -18f;
+            title.alignment = TextAlignmentOptions.Center; title.color = new Color(.9f, .86f, .74f, .92f); title.characterSpacing = 6f;
+            title.rectTransform.sizeDelta = new Vector2(4.7f, .66f); title.textWrappingMode = TextWrappingModes.NoWrap;
+            for (int i = 0; i < 4; i++)
+            {
+                var k = WasteKinds.All[i];
+                var plate = GameObject.CreatePrimitive(PrimitiveType.Cube); Object.DestroyImmediate(plate.GetComponent<Collider>());
+                plate.name = "Placa_" + k; plate.transform.SetParent(panel, false);
+                plate.transform.localPosition = new Vector3((i - 1.5f) * 1.25f, 1.42f, z + thick * .5f + .012f);
+                plate.transform.localScale = new Vector3(1.1f, .4f, .018f);
+                plate.GetComponent<MeshRenderer>().sharedMaterial = PlateMaterial(k);
+                var t = new GameObject("Texto").AddComponent<TextMeshPro>(); t.transform.SetParent(panel, false);
+                t.transform.localPosition = plate.transform.localPosition + new Vector3(0, 0, .014f); t.transform.localRotation = Quaternion.Euler(0, 180, 0);
+                t.text = k == WasteKind.NoAprovechable ? "NO\nAPROVECHABLE" : WasteKinds.Name(k).ToUpperInvariant().Replace(" Y ", "\nY ");
+                t.font = font; t.enableAutoSizing = true; t.fontSizeMin = .5f; t.fontSizeMax = 1.6f; t.lineSpacing = -22f;
+                t.alignment = TextAlignmentOptions.Center; t.color = k == WasteKind.Plastico || k == WasteKind.VidrioMetal ? new Color(.12f, .12f, .12f) : new Color(.97f, .96f, .92f);
+                t.rectTransform.sizeDelta = new Vector2(.98f, .32f); t.textWrappingMode = TextWrappingModes.NoWrap;
+            }
+        }
+
+        /// <summary>
         /// Puente de troncos sobre el agua honda: tablero de troncos atravesados sobre dos vigas, postes y barandas.
         /// Colisión: una caja para el tablero y dos barandas invisibles (no se cae al agua).
         /// </summary>
@@ -963,26 +1028,95 @@ namespace Bosque.LevelEditor
             float deck = Mathf.Max(c.y + .75f, Mathf.Min(gA, gB) + .12f);
             var root = new GameObject("Puente_" + (s.name ?? "")).transform; root.SetParent(parent, false);
             root.SetPositionAndRotation(new Vector3(c.x, deck, c.z), Quaternion.LookRotation(new Vector3(across.x, 0, across.y)));
-            var col = root.gameObject.AddComponent<BoxCollider>(); col.center = new Vector3(0, -.15f, 0); col.size = new Vector3(2.6f, .3f, half * 2f);
-            foreach (var side in new[] { -1.4f, 1.4f })
+            var col = root.gameObject.AddComponent<BoxCollider>(); col.center = new Vector3(0, -.15f, 0); col.size = new Vector3(2.5f, .3f, half * 2f);
+            foreach (var side in new[] { -1.25f, 1.25f })
             {
                 var rail = new GameObject("Baranda").transform; rail.SetParent(root, false);
                 var rc = rail.gameObject.AddComponent<BoxCollider>(); rc.center = new Vector3(side, .6f, 0); rc.size = new Vector3(.15f, 1.2f, half * 2f - 4f);
             }
-            for (float z = -half + .2f; z <= half - .2f; z += .34f)
-                Log(root, new Vector3(-1.35f, -.15f, z), new Vector3(1.35f, -.15f, z), .3f);
-            foreach (var x in new[] { -.95f, .95f }) Log(root, new Vector3(x, -.45f, -half), new Vector3(x, -.45f, half), .38f);
-            float span = half * 2f - 4f;
-            int posts = Mathf.Max(2, Mathf.RoundToInt(span / 3f) + 1);
-            foreach (var x in new[] { -1.4f, 1.4f })
+            // Tablero: tramos del muelle modular (tablas, vigas y pilotes que se hunden en el lecho), con los de
+            // cuatro pilotes en las orillas.
+            const float step = 2.9f;
+            int n = Mathf.CeilToInt(half * 2f / step);
+            for (int i = 0; i < n; i++)
             {
+                string model = i == 0 || i == n - 1 ? "PuenteTramoC" : i % 2 == 1 ? "PuenteTramoA" : "PuenteTramoB";
+                var go = (GameObject)PrefabUtility.InstantiatePrefab(woodPrefabs[model], root);
+                go.transform.localPosition = new Vector3(0, 0, -(n - 1) * step * .5f + i * step);
+                go.transform.localRotation = Quaternion.Euler(0, rng.Next(2) * 180f + R(-1.5f, 1.5f), 0);
+            }
+            // Baranda: postes y pasamanos de rollizos.
+            float span = half * 2f - 4f;
+            int posts = Mathf.Max(2, Mathf.RoundToInt(span / 2.9f) + 1);
+            foreach (var x in new[] { -1.18f, 1.18f })
                 for (int i = 0; i < posts; i++)
                 {
                     float z = -span * .5f + span * i / (posts - 1);
-                    Log(root, new Vector3(x, -.6f, z), new Vector3(x, 1.05f, z), .16f);
-                    if (i > 0) Log(root, new Vector3(x, .95f, z - span / (posts - 1)), new Vector3(x, .95f, z), .12f);
+                    var post = (GameObject)PrefabUtility.InstantiatePrefab(woodPrefabs["Poste"], root);
+                    post.transform.localPosition = new Vector3(x, -.45f, z); post.transform.localRotation = Quaternion.Euler(R(-2, 2), R(0, 360), R(-2, 2));
+                    post.transform.localScale = new Vector3(.52f, 1.55f / 3.8f, .52f);
+                    if (i == 0) continue;
+                    float len = span / (posts - 1) + .3f;
+                    var bar = (GameObject)PrefabUtility.InstantiatePrefab(woodPrefabs["Poste"], root);
+                    bar.transform.localPosition = new Vector3(x, .98f, z - len + .15f); bar.transform.localRotation = Quaternion.Euler(90f, 0, 0) * Quaternion.Euler(0, R(0, 360), 0);
+                    bar.transform.localScale = new Vector3(.4f, len / 3.8f, .4f);
+                }
+        }
+
+        /// <summary>
+        /// Orillas: juncos (pasto alto verde: junto al agua hay vida aun en el valle seco) y piedras medio hundidas en
+        /// la línea del agua. Sin colisión; evita puentes, vados y puntos de reciclaje.
+        /// </summary>
+        private static void BuildBanks(Transform parent, Terrain terrain)
+        {
+            var root = new GameObject("Orillas").transform; root.SetParent(parent, false);
+            string[] reeds = { "VIS_V6_GrassA_TallA", "VIS_V6_GrassA_TallB", "VIS_V6_GrassA_TallC", "VIS_V6_GrassA_LargeA", "VIS_V6_GrassA_LargeB" };
+            int reedCount = 0, stoneCount = 0;
+            bool BankFree(Vector2 p) =>
+                Mathf.Max(Mathf.Abs(p.x), Mathf.Abs(p.y)) < Playable - 2 && p.magnitude > 12f &&
+                Bridges.All(b => Vector2.Distance(b.at, p) > 7f) && Fords.All(f => Vector2.Distance(f, p) > 6f) && Stations.All(st => Vector2.Distance(st.pos, p) > 7f);
+            void Edge(Vector2 p, float waterY)
+            {
+                if (!BankFree(p)) return;
+                var g = OnGround(terrain, p);
+                if (g.y < waterY - .25f || g.y > waterY + .6f) return;      // justo en la línea del agua
+                if (rng.NextDouble() < .72)
+                {
+                    var r = Put(reeds[rng.Next(reeds.Length)], root, g + Vector3.down * .05f, R(0, 360), R(2.6f, 3.8f));
+                    foreach (var rr in r.GetComponentsInChildren<Renderer>()) rr.shadowCastingMode = ShadowCastingMode.Off;
+                    reedCount++;
+                }
+                else
+                {
+                    var r = Put("VIS_V6_RockMoss_" + "ABCDEFG"[rng.Next(7)], root, g + Vector3.down * R(.08f, .2f), R(0, 360), R(.35f, .8f));
+                    r.transform.rotation = Quaternion.Euler(R(-12, 12), R(0, 360), R(-12, 12));
+                    stoneCount++;
                 }
             }
+            foreach (var st in wStreams)
+                for (int i = 1; i < st.points.Length; i += 2)
+                {
+                    var a = st.points[i - 1]; var b = st.points[i];
+                    var flow = new Vector2(b.x - a.x, b.z - a.z).normalized; var side = new Vector2(-flow.y, flow.x);
+                    foreach (var sgn in new[] { -1f, 1f })
+                    {
+                        if (rng.NextDouble() < .2) continue;
+                        float d = R(st.flat + .6f, st.bank + .4f);
+                        Edge(new Vector2(b.x, b.z) + side * sgn * d + flow * R(-1f, 1f), b.y);
+                    }
+                }
+            foreach (var l in wLakes)
+            {
+                int n = Mathf.RoundToInt(l.radius * 5f);
+                for (int i = 0; i < n; i++)
+                {
+                    float ang = (i + R(-.3f, .3f)) / n * Mathf.PI * 2; var dir = new Vector2(Mathf.Cos(ang), Mathf.Sin(ang));
+                    var c = new Vector2(l.center.x, l.center.z);
+                    float lr = ValleWater.RadiusToward(l, c + dir);
+                    Edge(c + dir * (lr + R(-.5f, 2.2f)), l.center.y);
+                }
+            }
+            Debug.Log($"[Valle] Orillas: {reedCount} juncos, {stoneCount} piedras.");
         }
 
         /// <summary>Vado: piedras planas que asoman en el agua baja, de orilla a orilla (solo visuales).</summary>
@@ -990,18 +1124,40 @@ namespace Bosque.LevelEditor
         {
             var c = SnapTo(s, at, out var flow); var across = new Vector2(-flow.y, flow.x); var c2 = new Vector2(c.x, c.z);
             var root = new GameObject("Vado").transform; root.SetParent(parent, false); root.position = c;
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 9; i++)
             {
-                float t = Mathf.Lerp(-4.6f, 4.6f, i / 6f) + R(-.25f, .25f);
+                float t = Mathf.Lerp(-4.8f, 4.8f, i / 8f) + R(-.2f, .2f);
                 var p = c2 + across * t + flow * R(-.7f, .7f);
                 var g = OnGround(terrain, p);
-                var r = Put("VIS_V6_RockMoss_" + "ABCDEFG"[rng.Next(7)], root, g, R(0, 360), R(.45f, .65f));
+                var r = Put("VIS_V6_RockMoss_" + "ABCDEFG"[rng.Next(7)], root, g, R(0, 360), R(.75f, 1f));
                 var b = BoundsOf(r);
-                float want = Mathf.Max(b.size.y, c.y + .07f - g.y + .25f);
+                float want = Mathf.Max(b.size.y, c.y + .14f - g.y + .25f);
                 var ls = r.transform.localScale; ls.y *= want / b.size.y; r.transform.localScale = ls;
-                b = BoundsOf(r); r.transform.position += Vector3.up * (c.y + .07f - b.max.y);
+                b = BoundsOf(r); r.transform.position += Vector3.up * (c.y + .14f - b.max.y);
                 foreach (var rr in r.GetComponentsInChildren<Renderer>()) rr.shadowCastingMode = ShadowCastingMode.Off;
             }
+        }
+
+        /// <summary>
+        /// Material del agua del valle: el del arroyo V6 con olas propias (Docs/Valle/pipeline/generar_normales_agua.py):
+        /// muchas ondas por repetición, así a distancia no se forma un tablero.
+        /// </summary>
+        private static Material WaterMaterial()
+        {
+            string path = Root + "/Materials/M_Valle_Agua.mat";
+            Texture2D Normal(string n)
+            {
+                string tp = $"{Root}/Textures/{n}.png";
+                var ti = (TextureImporter)AssetImporter.GetAtPath(tp);
+                if (ti.textureType != TextureImporterType.NormalMap) { ti.textureType = TextureImporterType.NormalMap; ti.SaveAndReimport(); }
+                return AssetDatabase.LoadAssetAtPath<Texture2D>(tp);
+            }
+            var m = AssetDatabase.LoadAssetAtPath<Material>(path);
+            if (m == null) { m = new Material(B.M("M_Water_Stream")) { name = "M_Valle_Agua" }; AssetDatabase.CreateAsset(m, path); }
+            else m.CopyPropertiesFromMaterial(B.M("M_Water_Stream"));
+            m.SetTexture("_NormalA", Normal("T_Valle_AguaNormalA")); m.SetTexture("_NormalB", Normal("T_Valle_AguaNormalB"));
+            EditorUtility.SetDirty(m);
+            return m;
         }
 
         /// <summary>Superficie, trozo, corriente y tipo (laguna o río) del agua en un punto.</summary>
@@ -1010,7 +1166,10 @@ namespace Bosque.LevelEditor
             surface = 0; key = -1; flow = Vector2.up; still = false; float best = float.MaxValue;
             for (int i = 0; i < wLakes.Length; i++)
             {
-                var l = wLakes[i]; float r = Vector2.Distance(p, new Vector2(l.center.x, l.center.z)), reach = l.radius + 3f;
+                var l = wLakes[i]; float r = Vector2.Distance(p, new Vector2(l.center.x, l.center.z)), lr = ValleWater.RadiusToward(l, p);
+                // Dentro de la laguna manda la laguna: la frontera con el canal es la orilla, no un tablero de celdas.
+                if (r < lr + 1f) { surface = l.center.y; key = 100000 + i; flow = new Vector2(.3f, 1f).normalized; still = true; return true; }
+                float reach = lr + 3f;
                 if (r < reach && r / reach < best) { best = r / reach; surface = l.center.y; key = 100000 + i; flow = new Vector2(.3f, 1f).normalized; still = true; }
             }
             for (int i = 0; i < wStreams.Length; i++)
@@ -1031,11 +1190,11 @@ namespace Bosque.LevelEditor
         {
             const float ext = 152f; const int n = 304; const float step = 2 * ext / n;
             float H(float x, float z) => terrain.SampleHeight(new Vector3(x, 0, z)) + terrain.transform.position.y;
-            var vs = new float[n + 1, n + 1]; var has = new bool[n + 1, n + 1];
+            var vs = new float[n + 1, n + 1]; var has = new bool[n + 1, n + 1]; var fv = new Vector2[n + 1, n + 1];
             for (int j = 0; j <= n; j++)
                 for (int i = 0; i <= n; i++)
-                    has[j, i] = WaterAt(new Vector2(-ext + i * step, -ext + j * step), out vs[j, i], out _, out _, out _);
-            var chunks = new Dictionary<int, (List<Vector3> v, List<int> t, Dictionary<int, int> map, Vector2 flow, bool still, Vector2 sum, int cells)>();
+                    has[j, i] = WaterAt(new Vector2(-ext + i * step, -ext + j * step), out vs[j, i], out _, out fv[j, i], out _);
+            var chunks = new Dictionary<int, (List<Vector3> v, List<int> t, Dictionary<int, int> map, Vector2 flow, bool still, Vector2 sum, int cells, List<Vector2> f)>();
             for (int j = 0; j < n; j++)
                 for (int i = 0; i < n; i++)
                 {
@@ -1043,13 +1202,14 @@ namespace Bosque.LevelEditor
                     if (!WaterAt(new Vector2(x, z), out float sy, out int key, out var flow, out bool still)) continue;
                     float lowest = Mathf.Min(Mathf.Min(H(x - step * .5f, z - step * .5f), H(x + step * .5f, z - step * .5f)), Mathf.Min(H(x - step * .5f, z + step * .5f), H(x + step * .5f, z + step * .5f)));
                     if (lowest > sy + .02f) continue;
-                    if (!chunks.TryGetValue(key, out var ch)) ch = (new List<Vector3>(), new List<int>(), new Dictionary<int, int>(), flow, still, Vector2.zero, 0);
+                    if (!chunks.TryGetValue(key, out var ch)) ch = (new List<Vector3>(), new List<int>(), new Dictionary<int, int>(), flow, still, Vector2.zero, 0, new List<Vector2>());
                     int V(int vi, int vj)
                     {
                         int id = vj * (n + 1) + vi;
                         if (ch.map.TryGetValue(id, out int idx)) return idx;
                         float y = has[vj, vi] ? vs[vj, vi] : sy;
-                        ch.v.Add(new Vector3(-ext + vi * step, y, -ext + vj * step)); ch.map[id] = ch.v.Count - 1; return ch.v.Count - 1;
+                        ch.v.Add(new Vector3(-ext + vi * step, y, -ext + vj * step)); ch.f.Add(has[vj, vi] ? fv[vj, vi] : flow);
+                        ch.map[id] = ch.v.Count - 1; return ch.v.Count - 1;
                     }
                     int a = V(i, j), b = V(i + 1, j), c = V(i, j + 1), d = V(i + 1, j + 1);
                     ch.t.AddRange(new[] { a, c, b, b, c, d });
@@ -1064,12 +1224,12 @@ namespace Bosque.LevelEditor
             {
                 var ch = kv.Value;
                 var mesh = new Mesh { name = $"Agua_{k++:00}", indexFormat = ch.v.Count > 65000 ? IndexFormat.UInt32 : IndexFormat.UInt16 };
-                mesh.SetVertices(ch.v); mesh.SetUVs(0, ch.v.Select(p => new Vector2(p.x, p.z) / 6.8f).ToList()); mesh.SetTriangles(ch.t, 0);
+                mesh.SetVertices(ch.v); mesh.SetUVs(0, ch.v.Select(p => new Vector2(p.x, p.z) / 6.8f).ToList()); mesh.SetUVs(1, ch.f); mesh.SetTriangles(ch.t, 0);
                 mesh.SetNormals(Enumerable.Repeat(Vector3.up, ch.v.Count).ToList()); mesh.RecalculateBounds();
                 if (first) { AssetDatabase.CreateAsset(mesh, path); first = false; } else AssetDatabase.AddObjectToAsset(mesh, path);
                 var go = new GameObject("V6_Agua_" + mesh.name, typeof(MeshFilter), typeof(MeshRenderer)); go.transform.SetParent(parent, false);
                 go.GetComponent<MeshFilter>().sharedMesh = mesh;
-                var r = go.GetComponent<MeshRenderer>(); r.sharedMaterial = B.M("M_Water_Stream"); r.shadowCastingMode = ShadowCastingMode.Off;
+                var r = go.GetComponent<MeshRenderer>(); r.sharedMaterial = WaterMaterial(); r.shadowCastingMode = ShadowCastingMode.Off;
                 var centroid = ch.sum / ch.cells;
                 result.Add((r, TerrainRestorer.SectorOf(new Vector3(centroid.x, 0, centroid.y), Vector3.zero), ch.flow, ch.still));
             }
@@ -1079,55 +1239,208 @@ namespace Bosque.LevelEditor
         }
 
         /// <summary>
-        /// Mapa ilustrado a partir de los datos del terreno: relieve sombreado, suelo seco, roca, cauce, árboles y
-        /// montañas. Más legible que una foto cenital (el suelo visto desde arriba es plano y repetitivo).
+        /// Mapa topográfico en papel (referencias: el mapa de Firewatch y el de Red Dead Redemption 2): papel con fibra y
+        /// desgaste, relieve sombreado desde el noroeste, curvas de nivel cada 2 m (maestras cada 10 m), agua en acuarela
+        /// con línea de orilla y líneas de costa, copas de árboles con sombra, cuadrícula de 25 m, pliegues y marco.
+        /// Los nombres, iconos, escala y rosa de los vientos se dibujan encima en la interfaz (texto nítido).
         /// </summary>
         private static Texture2D RenderMap(Terrain terrain, List<Vector2> trees, ValleWater waterModel)
         {
-            const int N = 1024;
-            float half = Playable + 4;
+            const int N = 2048;
+            float half = Playable + 4, mpp = 2 * half / N;
             var td = terrain.terrainData;
-            var px = new Color[N * N];
-            Color dry = new Color(.78f, .66f, .46f), rock = new Color(.56f, .53f, .5f), river = new Color(.45f, .66f, .8f), deepWater = new Color(.2f, .38f, .58f), mountain = new Color(.42f, .4f, .38f);
-            var light = new Vector3(-.5f, .8f, .35f).normalized;
+            float WX(float i) => -half + (i + .5f) * mpp;
+            float S(float a, float b, float x) { float t = Mathf.Clamp01((x - a) / (b - a)); return t * t * (3 - 2 * t); }
+
+            // Alturas.
+            var H = new float[N * N];
+            for (int y = 0; y < N; y++)
+                for (int x = 0; x < N; x++)
+                    H[y * N + x] = td.GetInterpolatedHeight((WX(x) + TerrainSize / 2) / TerrainSize, (WX(y) + TerrainSize / 2) / TerrainSize);
+
+            // Agua: superficie en una rejilla de medio metro, interpolada; la orilla sale de cruzar el terreno.
+            const int M = 440; float ms = 2 * half / M;
+            var surf = new float[(M + 1) * (M + 1)]; var has = new bool[(M + 1) * (M + 1)];
+            for (int j = 0; j <= M; j++)
+                for (int i = 0; i <= M; i++)
+                    has[j * (M + 1) + i] = waterModel.SurfaceAt(new Vector3(-half + i * ms, 0, -half + j * ms), out surf[j * (M + 1) + i]);
+            var sd = new float[N * N]; var near = new bool[N * N]; var wet = new bool[N * N];
             for (int y = 0; y < N; y++)
                 for (int x = 0; x < N; x++)
                 {
-                    float wx = -half + (x + .5f) / N * 2 * half, wz = -half + (y + .5f) / N * 2 * half;
-                    float u = (wx + TerrainSize / 2) / TerrainSize, v = (wz + TerrainSize / 2) / TerrainSize;
-                    var n = td.GetInterpolatedNormal(u, v);
-                    float shade = Mathf.Clamp01(Vector3.Dot(n, light)) * .55f + .55f;
-                    float steep = td.GetSteepness(u, v), h = td.GetInterpolatedHeight(u, v);
-                    var c = Color.Lerp(dry, rock, Mathf.SmoothStep(0, 1, Mathf.InverseLerp(24f, 36f, steep)));
-                    c = Color.Lerp(c, mountain, Mathf.SmoothStep(0, 1, Mathf.InverseLerp(14f, 30f, h)));
-                    if (waterModel.SurfaceAt(new Vector3(wx, 0, wz), out float ws) && ws > h + .02f)
-                        c = Color.Lerp(river, deepWater, Mathf.InverseLerp(.1f, 1.8f, ws - h)) / Mathf.Max(.6f, shade) * .95f;
-                    // curvas de nivel cada 3 m
-                    float contour = Mathf.Abs(Mathf.Repeat(h, 3f) - 1.5f);
-                    if (contour > 1.42f && steep < 40f) c *= .9f;
-                    px[y * N + x] = c * shade;
-                }
-            var tex = new Texture2D(N, N, TextureFormat.RGB24, false);
-            tex.SetPixels(px);
-            // Árboles: puntos verde oscuro.
-            foreach (var t in trees)
-            {
-                int cx = (int)((t.x + half) / (2 * half) * N), cy = (int)((t.y + half) / (2 * half) * N);
-                for (int dy = -3; dy <= 3; dy++)
-                    for (int dx = -3; dx <= 3; dx++)
+                    float gx = (WX(x) + half) / ms, gy = (WX(y) + half) / ms;
+                    int i0 = Mathf.Clamp((int)gx, 0, M - 1), j0 = Mathf.Clamp((int)gy, 0, M - 1);
+                    float fx = gx - i0, fy = gy - j0, sum = 0, wsum = 0;
+                    for (int c = 0; c < 4; c++)
                     {
-                        if (dx * dx + dy * dy > 9) continue;
-                        int X = cx + dx, Y = cy + dy;
-                        if (X < 0 || Y < 0 || X >= N || Y >= N) continue;
-                        tex.SetPixel(X, Y, Color.Lerp(tex.GetPixel(X, Y), new Color(.22f, .3f, .17f), .75f));
+                        int ii = i0 + (c & 1), jj = j0 + (c >> 1); int k = jj * (M + 1) + ii;
+                        if (!has[k]) continue;
+                        float w = ((c & 1) == 1 ? fx : 1 - fx) * ((c >> 1) == 1 ? fy : 1 - fy) + 1e-4f;
+                        sum += surf[k] * w; wsum += w;
+                    }
+                    int idx = y * N + x;
+                    if (wsum <= 0) continue;
+                    near[idx] = true; sd[idx] = sum / wsum - H[idx]; wet[idx] = sd[idx] > .02f;
+                }
+            var distOut = Chamfer(wet, N, true);   // píxeles secos: distancia al agua
+            var distIn = Chamfer(wet, N, false);   // píxeles de agua: distancia a la orilla
+
+            // Copas de árboles (y su sombra hacia el sureste).
+            var canopy = new float[N * N]; var rim = new float[N * N]; var shade = new float[N * N];
+            void Stamp(float[] dst, float cx, float cy, float r, Func<float, float> f)
+            {
+                for (int y = Mathf.Max(0, (int)(cy - r - 1)); y <= Mathf.Min(N - 1, (int)(cy + r + 1)); y++)
+                    for (int x = Mathf.Max(0, (int)(cx - r - 1)); x <= Mathf.Min(N - 1, (int)(cx + r + 1)); x++)
+                    {
+                        float d = Mathf.Sqrt((x - cx) * (x - cx) + (y - cy) * (y - cy)) / r;
+                        if (d < 1.05f) dst[y * N + x] = Mathf.Max(dst[y * N + x], f(d));
                     }
             }
-            tex.Apply();
+            var lightC = new float[N * N];
+            void Blob(float[] dst, float cx, float cy, float r, float seed, Func<float, float> f)
+            {
+                // Copa irregular: el radio ondula con el ángulo (no un círculo perfecto).
+                for (int y = Mathf.Max(0, (int)(cy - r * 1.3f)); y <= Mathf.Min(N - 1, (int)(cy + r * 1.3f)); y++)
+                    for (int x = Mathf.Max(0, (int)(cx - r * 1.3f)); x <= Mathf.Min(N - 1, (int)(cx + r * 1.3f)); x++)
+                    {
+                        float dx = x - cx, dy = y - cy, a = Mathf.Atan2(dy, dx);
+                        float rr = r * (1f + .13f * Mathf.Sin(5f * a + seed) + .08f * Mathf.Sin(9f * a + seed * 2.3f) + .05f * Mathf.Sin(13f * a + seed * 3.1f));
+                        float d = Mathf.Sqrt(dx * dx + dy * dy) / rr;
+                        if (d < 1.05f) dst[y * N + x] = Mathf.Max(dst[y * N + x], f(d));
+                    }
+            }
+            foreach (var t in trees)
+            {
+                float cx = (t.x + half) / mpp - .5f, cy = (t.y + half) / mpp - .5f, seed = t.x * 1.7f + t.y * 3.1f;
+                float r = 2.1f / mpp * (.75f + .55f * Mathf.PerlinNoise(t.x * .37f, t.y * .37f));
+                Blob(shade, cx + r * .4f, cy - r * .4f, r * 1.05f, seed, d => 1 - S(.6f, 1.05f, d));
+                Blob(canopy, cx, cy, r, seed, d => 1 - S(.84f, 1.02f, d));
+                Blob(rim, cx, cy, r, seed, d => S(.6f, .9f, d) * (1 - S(.92f, 1.02f, d)));
+                Stamp(lightC, cx - r * .28f, cy + r * .28f, r * .55f, d => (1 - S(0f, 1f, d)) * .8f);
+            }
+            // Relieve suavizado (el mapa de alturas tiene facetas de 0,6 m que se verían como escalones).
+            var Hs = new float[N * N];
+            for (int y = 0; y < N; y++)
+                for (int x = 0; x < N; x++)
+                {
+                    float acc = 0; int cnt = 0;
+                    for (int k = -3; k <= 3; k += 3) for (int l = -3; l <= 3; l += 3)
+                        { int xx = Mathf.Clamp(x + l, 0, N - 1), yy = Mathf.Clamp(y + k, 0, N - 1); acc += H[yy * N + xx]; cnt++; }
+                    Hs[y * N + x] = acc / cnt;
+                }
+
+            var paper = new Color(.93f, .89f, .79f);
+            var ink = new Color(.32f, .22f, .14f); var waterInk = new Color(.2f, .36f, .49f);
+            var forest = new Color(.68f, .74f, .52f); var forestInk = new Color(.3f, .36f, .22f);
+            var L = new Vector3(-.55f, .95f, .55f).normalized;
+            var px = new Color[N * N];
+            for (int y = 0; y < N; y++)
+                for (int x = 0; x < N; x++)
+                {
+                    int i = y * N + x;
+                    float wx = WX(x), wz = WX(y), h = H[i];
+                    // Papel: fibra estirada, manchas suaves.
+                    float fiber = Mathf.PerlinNoise(x * .9f, y * .06f) * .5f + Mathf.PerlinNoise(x * .07f + 13f, y * .8f) * .5f;
+                    float blot = Mathf.PerlinNoise(x / 230f + 3f, y / 230f + 7f) * .7f + Mathf.PerlinNoise(x / 60f, y / 60f) * .3f;
+                    var c = paper * (.96f + .045f * fiber - .07f * blot);
+                    // Tinte por altura (llanura cálida, cumbres grisáceas) y relieve sombreado.
+                    c *= Color.Lerp(new Color(1f, .99f, .94f), new Color(.9f, .88f, .85f), S(12f, 30f, h));
+                    float hx = (Hs[y * N + Mathf.Min(N - 1, x + 2)] - Hs[y * N + Mathf.Max(0, x - 2)]) / (4 * mpp);
+                    float hz = (Hs[Mathf.Min(N - 1, y + 2) * N + x] - Hs[Mathf.Max(0, y - 2) * N + x]) / (4 * mpp);
+                    var n = new Vector3(-hx, 1f, -hz).normalized;
+                    float lit = Vector3.Dot(n, L) / L.y;
+                    // Sombreado suave en el llano (orillas sin "bajorrelieve") y más marcado en la montaña.
+                    c *= Mathf.Lerp(1f, Mathf.Clamp(lit, .5f, 1.15f), Mathf.Lerp(.38f, .7f, S(12f, 22f, h)));
+                    float slope = Mathf.Sqrt(hx * hx + hz * hz);
+                    c *= 1f - S(.6f, 1.2f, slope) * .1f * Mathf.PerlinNoise(x * .3f, y * .3f);
+                    // Curvas de nivel (se apagan donde se amontonan).
+                    float g = Mathf.Max(slope * mpp, 1e-4f);
+                    if (!wet[i])
+                    {
+                        float hc = Hs[i];
+                        float dMinor = Mathf.Abs(Mathf.Repeat(hc + .5f, 1f) - .5f) / g;
+                        float dIndex = Mathf.Abs(Mathf.Repeat(hc / 5f + .5f, 1f) - .5f) * 5f / g;
+                        float aC = (1 - S(.35f, 1.1f, dMinor)) * .26f * S(2.5f, 6f, 1f / g);
+                        aC = Mathf.Max(aC, (1 - S(.6f, 1.5f, dIndex)) * .5f * S(3f, 7f, 5f / g));
+                        c = Color.Lerp(c, ink, aC);
+                    }
+                    // Sombra y copas de los árboles.
+                    if (!wet[i])
+                    {
+                        c *= 1f - .2f * shade[i] * (1 - canopy[i]);
+                        float leaf = .86f + .28f * Mathf.PerlinNoise(x * .5f, y * .5f);
+                        c = Color.Lerp(c, c * forest * leaf * 1.1f, canopy[i] * .78f);
+                        c = Color.Lerp(c, c * 1.12f, lightC[i] * canopy[i] * .6f);
+                        c = Color.Lerp(c, forestInk, rim[i] * canopy[i] * .45f);
+                    }
+                    // Agua: acuarela más oscura en lo hondo, reflejo interior, línea de orilla y líneas de costa.
+                    if (wet[i])
+                    {
+                        var wc = Color.Lerp(new Color(.67f, .79f, .81f), new Color(.43f, .61f, .71f), S(.1f, 2.2f, sd[i])) * (.97f + .04f * fiber);
+                        c = wc * Mathf.Lerp(1f, Mathf.Clamp(lit, .85f, 1.08f), .5f);
+                        float inner = 1 - S(.4f, 1.1f, Mathf.Abs(distIn[i] - 5.5f));
+                        c = Color.Lerp(c, wc * 1.09f, inner * .55f);
+                    }
+                    else if (distOut[i] < 14f && canopy[i] < .5f)
+                    {
+                        float ripple = (1 - S(.3f, .95f, Mathf.Abs(distOut[i] - 4.5f))) * .32f + (1 - S(.3f, .95f, Mathf.Abs(distOut[i] - 9f))) * .16f;
+                        c = Color.Lerp(c, waterInk, ripple);
+                    }
+                    if (near[i])
+                    {
+                        float shore = 1 - S(.55f, 1.5f, Mathf.Abs(sd[i] - .02f) / g);
+                        c = Color.Lerp(c, waterInk, shore * .85f);
+                    }
+                    // Cuadrícula de 25 m.
+                    float gl = Mathf.Min(Mathf.Abs(Mathf.Repeat(wx / 25f + .5f, 1f) - .5f), Mathf.Abs(Mathf.Repeat(wz / 25f + .5f, 1f) - .5f)) * 25f / mpp;
+                    c = Color.Lerp(c, new Color(.35f, .42f, .5f), (1 - S(.3f, .9f, gl)) * .11f);
+                    // Desgaste: viñeta, pliegues en cruz y marco doble.
+                    float u = (x + .5f) / N, v = (y + .5f) / N, edge = Mathf.Max(Mathf.Abs(u - .5f), Mathf.Abs(v - .5f)) * 2f;
+                    c *= 1f - .2f * S(.8f, 1f, edge) * (.7f + .3f * blot);
+                    float fx2 = x + .5f - N * .5f, fy2 = y + .5f - N * .5f;
+                    if (Mathf.Abs(fx2) < 4f) c *= fx2 < 0 ? 1f + .035f * (1 - Mathf.Abs(fx2) / 4f) : 1f - .07f * (1 - fx2 / 4f);
+                    if (Mathf.Abs(fy2) < 4f) c *= fy2 > 0 ? 1f + .03f * (1 - Mathf.Abs(fy2) / 4f) : 1f - .06f * (1 + fy2 / 4f);
+                    float inset = Mathf.Min(Mathf.Min(x, N - 1 - x), Mathf.Min(y, N - 1 - y));
+                    float frame = (1 - S(.5f, 1.4f, Mathf.Abs(inset - 26f))) * .85f + (1 - S(.3f, .9f, Mathf.Abs(inset - 33f))) * .55f;
+                    if (inset < 26f) c = Color.Lerp(c, paper * (.97f + .03f * fiber), .55f);
+                    c = Color.Lerp(c, ink, frame);
+                    c.a = 1;
+                    px[i] = c;
+                }
+            var tex = new Texture2D(N, N, TextureFormat.RGB24, false);
+            tex.SetPixels(px); tex.Apply();
             string path = Root + "/T_Valle_Mapa.png";
             File.WriteAllBytes(path, tex.EncodeToPNG()); Object.DestroyImmediate(tex);
             AssetDatabase.ImportAsset(path, ImportAssetOptions.ForceUpdate);
-            var ti = (TextureImporter)AssetImporter.GetAtPath(path); ti.mipmapEnabled = false; ti.wrapMode = TextureWrapMode.Clamp; ti.SaveAndReimport();
+            var ti = (TextureImporter)AssetImporter.GetAtPath(path);
+            ti.mipmapEnabled = true; ti.wrapMode = TextureWrapMode.Clamp; ti.filterMode = FilterMode.Trilinear; ti.anisoLevel = 4;
+            ti.maxTextureSize = 2048; ti.textureCompression = TextureImporterCompression.CompressedHQ; ti.SaveAndReimport();
             return AssetDatabase.LoadAssetAtPath<Texture2D>(path);
+        }
+
+        /// <summary>Distancia aproximada (en píxeles, chaflán 1-√2) de cada píxel al más cercano con <c>mask == target</c>.</summary>
+        private static float[] Chamfer(bool[] mask, int n, bool target)
+        {
+            const float a = 1f, b = 1.4142f;
+            var d = new float[n * n];
+            for (int i = 0; i < d.Length; i++) d[i] = mask[i] == target ? 0f : 1e6f;
+            for (int y = 0; y < n; y++)
+                for (int x = 0; x < n; x++)
+                {
+                    int i = y * n + x; float v = d[i];
+                    if (x > 0) v = Mathf.Min(v, d[i - 1] + a);
+                    if (y > 0) { v = Mathf.Min(v, d[i - n] + a); if (x > 0) v = Mathf.Min(v, d[i - n - 1] + b); if (x < n - 1) v = Mathf.Min(v, d[i - n + 1] + b); }
+                    d[i] = v;
+                }
+            for (int y = n - 1; y >= 0; y--)
+                for (int x = n - 1; x >= 0; x--)
+                {
+                    int i = y * n + x; float v = d[i];
+                    if (x < n - 1) v = Mathf.Min(v, d[i + 1] + a);
+                    if (y < n - 1) { v = Mathf.Min(v, d[i + n] + a); if (x < n - 1) v = Mathf.Min(v, d[i + n + 1] + b); if (x > 0) v = Mathf.Min(v, d[i + n - 1] + b); }
+                    d[i] = v;
+                }
+            return d;
         }
 
         private static void Fx(string name, Transform parent, Vector3 pos)

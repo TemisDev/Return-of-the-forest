@@ -345,37 +345,150 @@ namespace Bosque.UI
 
 namespace Bosque.UI
 {
-    /// <summary>Mapa de la zona (M): imagen cenital con la posición de la Guardiana y marcadores.</summary>
+    /// <summary>
+    /// Mapa de la zona (M), como una hoja de papel topográfico sobre la mesa (referencias: Firewatch, Red Dead
+    /// Redemption 2): cartela con el título, rosa de los vientos, escala gráfica, nombres en tipografía de
+    /// cartografía (ríos en cursiva azul siguiendo el cauce, regiones en versalitas), iconos de cartografía y, al lado,
+    /// un panel con el avance de cada sector y la leyenda.
+    /// </summary>
     public sealed class MapView
     {
-        private readonly RectTransform root, frame, playerMark;
+        private const float Size = 900f, PanelWidth = 500f, Gap = 30f;
+        private readonly RectTransform root, frame, playerMark, pulse;
         private readonly RawImage image;
         private readonly RectTransform markersRoot;
-        private readonly System.Collections.Generic.List<(Image dot, TextMeshProUGUI label)> marks = new System.Collections.Generic.List<(Image, TextMeshProUGUI)>();
+        private readonly TextMeshProUGUI title, subtitle, panelTitle, panelSubtitle, scaleMid, scaleEnd;
+        private readonly RectTransform scaleBar;
+        private readonly List<(RectTransform root, Image icon, TextMeshProUGUI label)> marks = new List<(RectTransform, Image, TextMeshProUGUI)>();
+        private readonly List<(GameObject root, Image swatch, TextMeshProUGUI name, TextMeshProUGUI count, Image fill, TextMeshProUGUI note)> sectorRows =
+            new List<(GameObject, Image, TextMeshProUGUI, TextMeshProUGUI, Image, TextMeshProUGUI)>();
+        private readonly RectTransform sectorList;
+        private Rect lastWorld;
         public bool Visible => root.gameObject.activeSelf;
         public int MarkersShown { get; private set; }
-        private const float Size = 860f;
 
         public MapView(Transform parent)
         {
             var t = Ui.Theme;
             root = Ui.Rect("Mapa", parent).Stretch();
-            Ui.Image(root, "Velo", new Color(0, 0, 0, .55f), null, false).rectTransform.Stretch();
-            var card = Ui.Panel(root, "Tarjeta", UiTheme.PanelSolid).rectTransform;
-            card.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), Vector2.zero, new Vector2(Size + 80, Size + 150));
-            var title = Ui.Text(card, "Titulo", "Mapa del valle", 40, t?.title, UiTheme.Cream, TextAlignmentOptions.Top); title.rectTransform.Stretch(20, 20, 22, Size + 70);
-            frame = Ui.Rect("Marco", card); frame.Place(new Vector2(.5f, 0), new Vector2(.5f, 0), new Vector2(0, 70), new Vector2(Size, Size));
+            Ui.Image(root, "Velo", new Color(.02f, .03f, .02f, .8f), null, false).rectTransform.Stretch();
+            float total = Size + Gap + PanelWidth;
+            var sheetPos = new Vector2(-total * .5f + Size * .5f, -6f);
+
+            // Hoja de papel con sombra.
+            var shadow = Ui.Image(root, "Sombra", new Color(0, 0, 0, .55f), t?.panel).rectTransform;
+            shadow.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), sheetPos + new Vector2(10, -14), new Vector2(Size + 26, Size + 26));
+            frame = Ui.Rect("Hoja", root); frame.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), sheetPos, new Vector2(Size, Size));
             image = frame.gameObject.AddComponent<RawImage>(); image.raycastTarget = false;
             markersRoot = Ui.Rect("Marcadores", frame).Stretch();
-            playerMark = Ui.Image(frame, "Guardiana", UiTheme.Amber, t?.pill).rectTransform; playerMark.sizeDelta = new Vector2(26, 26);
-            var arrow = Ui.Image(playerMark, "Flecha", UiTheme.Amber, null); arrow.rectTransform.Place(new Vector2(.5f, 1), new Vector2(.5f, 0), new Vector2(0, -2), new Vector2(8, 22));
-            var legend = Ui.Text(card, "Leyenda", "M o Esc: cerrar   ·   <color=#F7C76E>▲</color> tú   ·   <color=#B0D180>■</color> reciclaje   ·   <color=#F7C76E>■</color> residuo ubicado   ·   <color=#C78C52>■</color> tronco ubicado   ·   <color=#9E7347>■</color> puente   ·   <color=#9ED9FF>■</color> vado", 21, t?.body, UiTheme.CreamDim, TextAlignmentOptions.Bottom);
-            legend.rectTransform.Stretch(20, 20, Size + 90, 18);
-            var rose = Ui.Image(frame, "Norte", UiTheme.PanelSolid, NavigationView.Circle()).rectTransform;
-            rose.Place(new Vector2(1, 1), new Vector2(1, 1), new Vector2(-16, -16), new Vector2(64, 64));
-            var roseTxt = Ui.Text(rose, "N", "▲\nN", 24, t?.bold, UiTheme.Amber, TextAlignmentOptions.Center); roseTxt.rectTransform.Stretch(0, 0, 2, 2);
-            roseTxt.lineSpacing = -28;
+
+            // Cartela del título (arriba a la izquierda, sobre el papel).
+            var cartouche = Ui.Image(frame, "Cartela", new Color(.95f, .91f, .81f, .82f), t?.panel).rectTransform;
+            cartouche.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(44, -44), new Vector2(430, 150));
+            Ui.Image(cartouche, "Filete", new Color(MapIcons.Ink.r, MapIcons.Ink.g, MapIcons.Ink.b, .55f)).rectTransform
+                .Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(18, -66), new Vector2(394, 1.5f));
+            title = MapText(cartouche, "Titulo", "", 33, t?.mapCapsBold, MapIcons.Ink, TextAlignmentOptions.TopLeft);
+            title.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(18, -14), new Vector2(400, 44));
+            title.characterSpacing = 5f;
+            subtitle = MapText(cartouche, "Subtitulo", "", 16, t?.mapSerifItalic, new Color(.33f, .25f, .17f), TextAlignmentOptions.TopLeft);
+            subtitle.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(19, -72), new Vector2(400, 24));
+
+            // Rosa de los vientos (arriba a la derecha).
+            var rose = Ui.Image(frame, "Rosa", Color.white, MapIcons.Rose).rectTransform;
+            rose.Place(new Vector2(1, 0), new Vector2(.5f, .5f), new Vector2(-104, 104), new Vector2(140, 140));
+            var n = MapText(rose, "N", "N", 28, t?.mapCapsBold, new Color(.5f, .14f, .08f), TextAlignmentOptions.Center);
+            n.rectTransform.Place(new Vector2(.5f, 1), new Vector2(.5f, 0), new Vector2(0, 0), new Vector2(60, 34));
+
+            // Escala gráfica (abajo a la izquierda): 0-50 m en cinco tramos alternos.
+            scaleBar = Ui.Rect("Escala", cartouche); scaleBar.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(22, -104), new Vector2(200, 8));
+            Ui.Image(scaleBar, "Borde", MapIcons.Ink).rectTransform.Stretch(-2, -2, -2, -2);
+            for (int i = 0; i < 5; i++)
+            {
+                var seg = Ui.Image(scaleBar, "Tramo", i % 2 == 0 ? MapIcons.Ink : MapIcons.Paper).rectTransform;
+                seg.anchorMin = new Vector2(i / 5f, 0); seg.anchorMax = new Vector2((i + 1) / 5f, 1); seg.offsetMin = seg.offsetMax = Vector2.zero;
+            }
+            var zero = MapText(scaleBar, "0", "0", 17, t?.mapSerif, MapIcons.Ink, TextAlignmentOptions.Bottom);
+            zero.rectTransform.Place(new Vector2(0, 0), new Vector2(.5f, 1), new Vector2(0, -3), new Vector2(40, 22));
+            scaleMid = MapText(scaleBar, "Medio", "25", 17, t?.mapSerif, MapIcons.Ink, TextAlignmentOptions.Bottom);
+            scaleMid.rectTransform.Place(new Vector2(.5f, 0), new Vector2(.5f, 1), new Vector2(0, -3), new Vector2(40, 22));
+            scaleEnd = MapText(scaleBar, "Fin", "50 m", 17, t?.mapSerif, MapIcons.Ink, TextAlignmentOptions.Bottom);
+            scaleEnd.rectTransform.Place(new Vector2(1, 0), new Vector2(.5f, 1), new Vector2(8, -3), new Vector2(60, 22));
+            var grid = MapText(scaleBar, "Cuadricula", "cuadrícula 25 m\ncurvas cada 1 m", 14, t?.mapSerifItalic, new Color(.33f, .25f, .17f), TextAlignmentOptions.Left);
+            grid.rectTransform.Place(new Vector2(1, .5f), new Vector2(0, .5f), new Vector2(40, -6), new Vector2(160, 40));
+            grid.lineSpacing = -12f;
+
+            // La Guardiana: flecha con un pulso.
+            pulse = Ui.Image(frame, "Pulso", new Color(1f, .78f, .35f, .6f), MapIcons.Ring).rectTransform; pulse.sizeDelta = new Vector2(40, 40);
+            playerMark = Ui.Image(frame, "Guardiana", Color.white, MapIcons.Player).rectTransform; playerMark.sizeDelta = new Vector2(34, 34);
+
+            // Panel lateral: sectores y leyenda.
+            var panel = Ui.Panel(root, "Panel", UiTheme.PanelSolid).rectTransform;
+            panel.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), new Vector2(total * .5f - PanelWidth * .5f, -6f), new Vector2(PanelWidth, Size));
+            var kicker = Ui.Text(panel, "Seccion", "MAPA", 19, t?.bold, UiTheme.Moss); kicker.characterSpacing = 18f;
+            kicker.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(38, -34), new Vector2(PanelWidth - 76, 26));
+            panelTitle = Ui.Text(panel, "Zona", "", 38, t?.title, UiTheme.Cream);
+            panelTitle.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(38, -62), new Vector2(PanelWidth - 76, 48));
+            panelSubtitle = Ui.Text(panel, "Detalle", "", 18, t?.italic, UiTheme.CreamDim);
+            panelSubtitle.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(38, -112), new Vector2(PanelWidth - 76, 50));
+            Divider(panel, -170);
+            Header(panel, "Sectores", -188);
+            sectorList = Ui.Rect("Sectores", panel); sectorList.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(38, -224), new Vector2(PanelWidth - 76, 340));
+            Divider(panel, -560);
+            Header(panel, "Leyenda", -578);
+            var legend = new (Sprite icon, string text, Color tint, float size)[]
+            {
+                (MapIcons.Player, "Tú", Color.white, 30), (MapIcons.Station, "Punto de reciclaje", Color.white, 30),
+                (MapIcons.Litter, "Residuo ubicado", Color.white, 24), (MapIcons.Wood, "Tronco caído ubicado", Color.white, 24),
+                (MapIcons.Bridge, "Puente", Color.white, 34), (MapIcons.Ford, "Vado (agua baja)", Color.white, 34),
+            };
+            for (int i = 0; i < legend.Length; i++)
+            {
+                float x = 38 + (i % 2) * 214, y = -620 - (i / 2) * 46;
+                var ic = Ui.Image(panel, "Icono", legend[i].tint, legend[i].icon).rectTransform;
+                ic.Place(new Vector2(0, 1), new Vector2(.5f, .5f), new Vector2(x + 16, y), new Vector2(legend[i].size, legend[i].size));
+                var lt = Ui.Text(panel, "Texto", legend[i].text, 19, t?.body, UiTheme.Cream, TextAlignmentOptions.Left);
+                lt.rectTransform.Place(new Vector2(0, 1), new Vector2(0, .5f), new Vector2(x + 40, y), new Vector2(176, 40));
+                lt.textWrappingMode = TextWrappingModes.Normal; lt.lineSpacing = -14;
+            }
+            var hint = Ui.Text(panel, "Ayuda", "Lo que ves de cerca o marcas con el rastreo (T) queda ubicado en el mapa.", 17, t?.italic, UiTheme.CreamDim);
+            hint.rectTransform.Place(new Vector2(0, 0), new Vector2(0, 0), new Vector2(38, 70), new Vector2(PanelWidth - 76, 48));
+            var close = Ui.Text(panel, "Cerrar", "<b>M</b> o <b>Esc</b>  cerrar el mapa", 19, t?.body, UiTheme.Moss);
+            close.rectTransform.Place(new Vector2(0, 0), new Vector2(0, 0), new Vector2(38, 30), new Vector2(PanelWidth - 76, 30));
             root.gameObject.SetActive(false);
+        }
+
+        private static TextMeshProUGUI MapText(Transform parent, string name, string text, float size, TMP_FontAsset font, Color color, TextAlignmentOptions align)
+        {
+            var tx = Ui.Text(parent, name, text, size, font, color, align);
+            tx.textWrappingMode = TextWrappingModes.NoWrap;
+            Halo(tx);
+            return tx;
+        }
+
+        /// <summary>Halo de papel: los nombres se leen sobre curvas, copas y agua (como en los mapas impresos).</summary>
+        private static void Halo(TextMeshProUGUI tx)
+        {
+            var m = tx.fontMaterial;
+            m.EnableKeyword(ShaderUtilities.Keyword_Underlay);
+            m.SetColor(ShaderUtilities.ID_UnderlayColor, new Color(.95f, .91f, .81f, .9f));
+            m.SetFloat(ShaderUtilities.ID_UnderlayDilate, .55f);
+            m.SetFloat(ShaderUtilities.ID_UnderlaySoftness, .45f);
+        }
+
+        private static void SetFont(TextMeshProUGUI l, TMP_FontAsset f)
+        {
+            if (f == null) f = Ui.Theme?.body;
+            if (f == null || l.font == f) return;
+            l.font = f; Halo(l);
+        }
+
+        private static void Divider(RectTransform panel, float y) =>
+            Ui.Image(panel, "Linea", new Color(1, 1, 1, .12f)).rectTransform.Place(new Vector2(.5f, 1), new Vector2(.5f, .5f), new Vector2(0, y), new Vector2(PanelWidth - 76, 2));
+
+        private static void Header(RectTransform panel, string text, float y)
+        {
+            var h = Ui.Text(panel, "Titulo_" + text, text.ToUpperInvariant(), 17, Ui.Theme?.bold, UiTheme.CreamDim); h.characterSpacing = 14f;
+            h.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(38, y), new Vector2(PanelWidth - 76, 24));
         }
 
         public void Show() => root.gameObject.SetActive(true);
@@ -389,48 +502,117 @@ namespace Bosque.UI
             if (!Visible || map == null) return;
             image.texture = map.MapTexture;
             var w = map.MapWorldRect;
+            if (w != lastWorld)
+            {
+                // Escala gráfica de 50 m (o 20 m si la zona es pequeña) al tamaño real de la hoja.
+                lastWorld = w;
+                float len = w.width > 120 ? 50f : 20f;
+                scaleBar.sizeDelta = new Vector2(len / w.width * Size, 10);
+                scaleMid.text = (len / 2).ToString("0"); scaleEnd.text = len.ToString("0") + " m";
+            }
             if (map.MapPlayer != null)
             {
-                playerMark.anchoredPosition = ToMap(w, map.MapPlayer.position);
+                var pp = ToMap(w, map.MapPlayer.position);
+                playerMark.anchoredPosition = pp; pulse.anchoredPosition = pp;
                 playerMark.localRotation = Quaternion.Euler(0, 0, -map.MapPlayer.eulerAngles.y);
+                float k = Mathf.Repeat(Time.unscaledTime / 1.4f, 1f);
+                pulse.sizeDelta = Vector2.one * Mathf.Lerp(30f, 86f, k);
+                pulse.GetComponent<Image>().color = new Color(1f, .78f, .35f, .7f * (1 - k));
             }
+            TickInfo(map as IZoneMapInfo);
+            var t = Ui.Theme;
             int i = 0;
             foreach (var m in map.MapMarkers)
             {
                 if (i >= marks.Count)
                 {
-                    var dot = Ui.Image(markersRoot, "Marca", Color.white, null);
-                    var label = Ui.Text(dot.transform, "Texto", "", 20, Ui.Theme?.bold, UiTheme.Cream, TextAlignmentOptions.Center);
-                    label.rectTransform.Place(new Vector2(.5f, 0), new Vector2(.5f, 1), new Vector2(0, -4), new Vector2(260, 30));
-                    label.outlineWidth = .2f; label.outlineColor = Color.black;
-                    marks.Add((dot, label));
+                    var r = Ui.Rect("Marca", markersRoot); r.sizeDelta = Vector2.zero;
+                    var icon = Ui.Image(r, "Icono", Color.white, null);
+                    var label = MapText(r, "Texto", "", 20, t?.mapSerif, MapIcons.Ink, TextAlignmentOptions.Center);
+                    label.rectTransform.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), Vector2.zero, new Vector2(320, 40));
+                    marks.Add((r, icon, label));
                 }
-                var (d, l) = marks[i++];
-                d.gameObject.SetActive(true);
-                d.rectTransform.anchoredPosition = ToMap(w, m.position);
-                l.text = m.label ?? "";
-                l.fontStyle = FontStyles.Normal; l.fontSize = 20; l.color = UiTheme.Cream;
+                var (mr, ic, l) = marks[i++];
+                mr.gameObject.SetActive(true);
+                mr.anchoredPosition = ToMap(w, m.position);
+                mr.localRotation = Quaternion.identity;
+                l.text = m.label ?? ""; l.characterSpacing = 0; l.rectTransform.anchoredPosition = Vector2.zero; l.rectTransform.localRotation = Quaternion.identity;
+                ic.rectTransform.localRotation = Quaternion.identity; ic.color = Color.white;
                 switch (m.kind)
                 {
+                    case MarkerKind.Region:
+                        ic.enabled = false;
+                        SetFont(l, t?.mapCaps); l.fontSize = 27; l.characterSpacing = 16; l.fontStyle = FontStyles.Normal;
+                        var rc = m.color.a > 0 ? m.color : MapIcons.Ink; rc.a = .78f; l.color = rc;
+                        break;
                     case MarkerKind.Label:
-                        d.color = Color.clear; d.rectTransform.sizeDelta = new Vector2(2, 2);
-                        l.fontStyle = FontStyles.Italic; l.fontSize = 21; l.color = new Color(.72f, .88f, 1f);
+                        ic.enabled = false;
+                        SetFont(l, t?.mapSerifItalic); l.fontSize = m.big ? 19 : 22; l.color = MapIcons.WaterInk; l.characterSpacing = m.big ? 2 : 6;
+                        l.rectTransform.localRotation = Quaternion.Euler(0, 0, m.angle);
                         break;
-                    case MarkerKind.Litter: case MarkerKind.Wood: case MarkerKind.Ford:
-                        d.sprite = NavigationView.Circle(); d.color = NavigationView.MarkerColor(m);
-                        d.rectTransform.sizeDelta = new Vector2(13, 13); l.fontSize = 16;
+                    case MarkerKind.Station:
+                        ic.enabled = true; ic.sprite = MapIcons.Station; ic.rectTransform.sizeDelta = new Vector2(34, 34);
+                        SetFont(l, t?.mapCapsBold); l.fontSize = 18; l.color = MapIcons.Ink; l.characterSpacing = 3;
+                        l.text = Short(m.label); l.rectTransform.anchoredPosition = new Vector2(0, -30);
                         break;
-                    case MarkerKind.Bridge:
-                        d.sprite = null; d.color = NavigationView.MarkerColor(m); d.rectTransform.sizeDelta = new Vector2(14, 14); l.fontSize = 16;
+                    case MarkerKind.Bridge: case MarkerKind.Ford:
+                        ic.enabled = true; ic.sprite = MapIcons.For(m.kind); ic.rectTransform.sizeDelta = m.kind == MarkerKind.Bridge ? new Vector2(34, 34) : new Vector2(30, 30);
+                        ic.rectTransform.localRotation = Quaternion.Euler(0, 0, m.angle); l.text = "";
+                        break;
+                    case MarkerKind.Litter: case MarkerKind.Wood:
+                        ic.enabled = true; ic.sprite = MapIcons.For(m.kind); ic.rectTransform.sizeDelta = new Vector2(20, 20); l.text = "";
                         break;
                     default:
-                        d.sprite = null; d.color = m.color; d.rectTransform.sizeDelta = m.big ? new Vector2(20, 20) : new Vector2(10, 10);
+                        ic.enabled = true; ic.sprite = MapIcons.Dot; ic.color = m.color; ic.rectTransform.sizeDelta = m.big ? new Vector2(20, 20) : new Vector2(12, 12);
+                        SetFont(l, t?.mapSerif); l.fontSize = 18; l.color = MapIcons.Ink; l.rectTransform.anchoredPosition = new Vector2(0, -20);
                         break;
                 }
+                // Orden de dibujo: nombres debajo, iconos encima.
+                if (m.kind == MarkerKind.Region || m.kind == MarkerKind.Label) mr.SetAsFirstSibling(); else mr.SetAsLastSibling();
             }
             MarkersShown = i;
-            for (; i < marks.Count; i++) marks[i].dot.gameObject.SetActive(false);
-            playerMark.SetAsLastSibling();
+            for (; i < marks.Count; i++) marks[i].root.gameObject.SetActive(false);
+            pulse.SetAsLastSibling(); playerMark.SetAsLastSibling();
+        }
+
+        private static string Short(string station) => string.IsNullOrEmpty(station) ? "" : station.Replace("Puesto de la ", "").Replace("Puesto del ", "");
+
+        private void TickInfo(IZoneMapInfo info)
+        {
+            panelTitle.text = info?.MapTitle ?? "Mapa"; panelSubtitle.text = info?.MapSubtitle ?? "";
+            title.text = (info?.MapTitle ?? "").ToUpperInvariant(); subtitle.text = info?.MapSubtitle ?? "";
+            int i = 0;
+            if (info != null)
+                foreach (var s in info.MapSectors)
+                {
+                    if (i >= sectorRows.Count) sectorRows.Add(SectorRow(i));
+                    var (go, sw, nm, ct, fill, note) = sectorRows[i++];
+                    go.SetActive(true);
+                    sw.color = s.color; nm.text = s.name;
+                    bool clean = s.total > 0 && s.cleaned >= s.total;
+                    ct.text = clean ? "<color=#B0D180>limpio</color>" : $"{s.cleaned}<color=#9A9A8C>/{s.total}</color>";
+                    fill.rectTransform.anchorMax = new Vector2(s.total > 0 ? (float)s.cleaned / s.total : 0, 1);
+                    fill.color = clean ? UiTheme.Moss : s.color;
+                    note.text = clean ? "Sector recuperado" : s.hidden > 0 ? (s.hidden == 1 ? "1 por ubicar" : $"{s.hidden} por ubicar") : "Todo ubicado: falta recoger";
+                }
+            for (; i < sectorRows.Count; i++) sectorRows[i].root.SetActive(false);
+        }
+
+        private (GameObject, Image, TextMeshProUGUI, TextMeshProUGUI, Image, TextMeshProUGUI) SectorRow(int index)
+        {
+            var t = Ui.Theme;
+            var row = Ui.Rect("Sector_" + index, sectorList); row.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, -index * 82), new Vector2(PanelWidth - 76, 76));
+            var sw = Ui.Image(row, "Color", Color.white, MapIcons.Dot); sw.rectTransform.Place(new Vector2(0, 1), new Vector2(0, .5f), new Vector2(0, -16), new Vector2(14, 14));
+            var nm = Ui.Text(row, "Nombre", "", 24, t?.bold, UiTheme.Cream, TextAlignmentOptions.Left);
+            nm.rectTransform.Place(new Vector2(0, 1), new Vector2(0, .5f), new Vector2(24, -16), new Vector2(260, 32));
+            var ct = Ui.Text(row, "Cuenta", "", 22, t?.bold, UiTheme.Cream, TextAlignmentOptions.Right);
+            ct.rectTransform.Place(new Vector2(1, 1), new Vector2(1, .5f), new Vector2(0, -16), new Vector2(140, 32));
+            var bg = Ui.Image(row, "Barra", new Color(1, 1, 1, .1f), t?.pill).rectTransform; bg.Place(new Vector2(0, 1), new Vector2(0, .5f), new Vector2(24, -42), new Vector2(PanelWidth - 100, 8));
+            var fill = Ui.Image(bg, "Relleno", Color.white, t?.pill); fill.rectTransform.anchorMin = Vector2.zero; fill.rectTransform.anchorMax = new Vector2(0, 1);
+            fill.rectTransform.offsetMin = fill.rectTransform.offsetMax = Vector2.zero;
+            var note = Ui.Text(row, "Nota", "", 17, t?.italic, UiTheme.CreamDim, TextAlignmentOptions.Left);
+            note.rectTransform.Place(new Vector2(0, 1), new Vector2(0, .5f), new Vector2(24, -62), new Vector2(PanelWidth - 100, 24));
+            return (row.gameObject, sw, nm, ct, fill, note);
         }
     }
 }

@@ -16,6 +16,12 @@ namespace Bosque.UI
         public TMP_FontAsset title;
         public TMP_FontAsset italic;
         public TMP_FontAsset handwriting;
+        [Tooltip("Serif de cartografía (Alegreya): nombres del mapa.")]
+        public TMP_FontAsset mapSerif;
+        public TMP_FontAsset mapSerifItalic;
+        [Tooltip("Versalitas (Alegreya SC): regiones y títulos del mapa.")]
+        public TMP_FontAsset mapCaps;
+        public TMP_FontAsset mapCapsBold;
         [Header("Fondos")]
         public Sprite panel;
         public Sprite paper;

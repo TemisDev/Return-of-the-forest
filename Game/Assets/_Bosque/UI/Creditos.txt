@@ -28,6 +28,7 @@ Malla suavizada y pelaje repintado por el equipo
 Residuos, troncos y contenedores: Poly Haven (CC0) — Rahul Chaudhary, James Ray Cock,
 Ulan Cabanilla, Rico Cilliers, Jurita Burger, Niklas, Sean Buckley, PierreB3D, Benny Weimer,
 MP, Rob Tuytel, Jenelle van Heerden, GurJas Studios
+Puentes y paneles de madera: «Modular Wooden Pier», Poly Haven (CC0) — Rico Cilliers
 
 
 <color=#B0D180><b>AUDIO</b></color>
@@ -40,6 +41,7 @@ Síntesis de quena, brotes y restauración: propia del proyecto
 <color=#B0D180><b>TIPOGRAFÍAS</b></color>
 Alegreya Sans — The Alegreya Sans Project Authors (SIL Open Font License 1.1)
 Kalam — Indian Type Foundry (SIL Open Font License 1.1)
+Alegreya y Alegreya SC (mapa) — The Alegreya Project Authors (SIL Open Font License 1.1)
 
 
 <color=#B0D180><b>TECNOLOGÍA</b></color>

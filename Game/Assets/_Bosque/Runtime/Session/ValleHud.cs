@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 namespace Bosque.Session
 {
     /// <summary>Datos de la interfaz de "El valle olvidado" (HUD común, tarjeta lateral, mapa y final).</summary>
-    public sealed class ValleHud : MonoBehaviour, IZoneHud, IZoneHudExtra, IZoneMap
+    public sealed class ValleHud : MonoBehaviour, IZoneHud, IZoneHudExtra, IZoneMap, IZoneMapInfo
     {
         [SerializeField] private ValleSession session;
         [SerializeField] private PlayerInteractor interactor;
@@ -23,6 +23,37 @@ namespace Bosque.Session
         private float nextScan;
         private readonly HashSet<Component> discovered = new HashSet<Component>();
         private static readonly string[] SectorColors = { "#8FC7E8", "#9CCB7A", "#E3C07A", "#D8A0C8" };
+        /// <summary>Dónde va el nombre de cada región en el mapa (zonas despejadas de ríos y puestos).</summary>
+        private static readonly Vector3[] RegionLabels = { new Vector3(84, 0, 103), new Vector3(-62, 0, 58), new Vector3(-92, 0, -50), new Vector3(72, 0, -20) };
+
+        /// <summary>Nombre de cada laguna junto a ella, donde no pisa ríos ni puestos.</summary>
+        private static Vector3 LakeLabel(WaterLake l) => l.name switch
+        {
+            // Las lagunas grandes llevan el nombre sobre el agua, como en los mapas impresos.
+            "Laguna Alta" => l.center,
+            "Laguna del Medio" => l.center,
+            "Laguna Baja" => l.center + new Vector3(0, 0, 1f),
+            "Bofedal" => new Vector3(-17, 0, -44),
+            _ => l.center + new Vector3(0, 0, -(l.radius + 4.5f)),
+        };
+
+        private static float Upright(float a) { a = Mathf.Repeat(a + 180f, 360f) - 180f; return a > 90f ? a - 180f : a < -90f ? a + 180f : a; }
+
+        public string MapTitle => "El valle olvidado";
+        public string MapSubtitle => "Cuenca del río Mayu  ·  levantamiento de la Guardiana";
+        public IEnumerable<MapSector> MapSectors
+        {
+            get
+            {
+                if (session == null) yield break;
+                for (int i = 0; i < session.Sectors.Length; i++)
+                {
+                    var s = session.Sectors[i];
+                    ColorUtility.TryParseHtmlString(SectorColors[i % SectorColors.Length], out var c);
+                    yield return new MapSector { name = s.SectorName, cleaned = s.Cleaned, total = s.Total, hidden = s.IsClean ? 0 : UndiscoveredIn(s), color = c };
+                }
+            }
+        }
 
         public void Configure(ValleSession owner, PlayerInteractor actor, Texture2D map, Rect world, ValleWater riverSystem = null)
         { session = owner; interactor = actor; mapTexture = map; mapWorld = world; water = riverSystem; }
@@ -145,25 +176,34 @@ namespace Bosque.Session
                     var c = g.Aggregate(Vector3.zero, (a, b) => a + b.transform.position) / g.Count();
                     yield return new MapMarker { position = c, label = g.Key, color = UiTheme.Moss, big = true, kind = MarkerKind.Station };
                 }
-                string[] names = { "La quebrada", "El bosque", "La pampa", "El mirador" };
-                Vector3[] centers = { new Vector3(50, 0, 50), new Vector3(-50, 0, 50), new Vector3(-50, 0, -50), new Vector3(50, 0, -50) };
+                // Regiones: solo el nombre, como en un mapa impreso (el avance va en el panel lateral).
                 for (int i = 0; i < 4 && i < session.Sectors.Length; i++)
-                {
-                    var s = session.Sectors[i];
-                    int hidden = UndiscoveredIn(s);
-                    string extra = s.IsClean ? "" : hidden > 0 ? $"\n<size=80%>{hidden} sin ubicar</size>" : "\n<size=80%>todo ubicado</size>";
-                    yield return new MapMarker { position = centers[i], label = $"{names[i]} {s.Cleaned}/{s.Total}{extra}", color = s.IsClean ? UiTheme.Moss : new Color(0, 0, 0, 0), big = false };
-                }
+                    yield return new MapMarker { position = RegionLabels[i], label = session.Sectors[i].SectorName, kind = MarkerKind.Region,
+                        color = session.Sectors[i].IsClean ? UiTheme.MossDark : UiTheme.Ink };
                 foreach (var c in PendingThings())
                     if (discovered.Contains(c))
                         yield return new MapMarker { position = c.transform.position, label = "", color = UiTheme.Amber, kind = c is FallenWood ? MarkerKind.Wood : MarkerKind.Litter };
                 if (water == null) yield break;
                 foreach (var st in water.Streams)
-                    if (!string.IsNullOrEmpty(st.name)) yield return new MapMarker { position = st.labelPosition, label = st.name, kind = MarkerKind.Label };
+                    if (!string.IsNullOrEmpty(st.name))
+                    {
+                        // El nombre sigue la dirección del río (sin quedar cabeza abajo).
+                        ValleWater.Nearest(st, new Vector2(st.labelPosition.x, st.labelPosition.z), out _, out _, out _, out var f, out _);
+                        yield return new MapMarker { position = st.labelPosition, label = st.name, kind = MarkerKind.Label, angle = Upright(Mathf.Atan2(f.y, f.x) * Mathf.Rad2Deg) };
+                    }
                 foreach (var l in water.Lakes)
-                    if (!string.IsNullOrEmpty(l.name)) yield return new MapMarker { position = l.center, label = l.name, kind = MarkerKind.Label };
+                    if (!string.IsNullOrEmpty(l.name))
+                        yield return new MapMarker { position = LakeLabel(l), label = l.name, kind = MarkerKind.Label, big = true };
                 foreach (var x in water.Crossings)
-                    yield return new MapMarker { position = x.position, label = x.bridge ? "Puente" : "Vado", kind = x.bridge ? MarkerKind.Bridge : MarkerKind.Ford };
+                {
+                    float across = 0;
+                    foreach (var st in water.Streams)
+                    {
+                        ValleWater.Nearest(st, new Vector2(x.position.x, x.position.z), out float d, out _, out _, out var f, out _);
+                        if (d < 2f) { across = Mathf.Atan2(f.x, -f.y) * Mathf.Rad2Deg; break; }
+                    }
+                    yield return new MapMarker { position = x.position, label = x.bridge ? "Puente" : "Vado", kind = x.bridge ? MarkerKind.Bridge : MarkerKind.Ford, angle = across };
+                }
             }
         }
     }

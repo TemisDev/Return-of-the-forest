@@ -21,7 +21,8 @@ namespace Bosque.World
         private static readonly int ShallowId = Shader.PropertyToID("_ShallowColor"), DeepId = Shader.PropertyToID("_DeepColor"),
             MurkId = Shader.PropertyToID("_Murkiness"), FoamId = Shader.PropertyToID("_FoamColor"), FlowDirId = Shader.PropertyToID("_FlowDirection"),
             FlowSpeedId = Shader.PropertyToID("_FlowSpeed"), FlowFoamId = Shader.PropertyToID("_FlowFoam"), ReflId = Shader.PropertyToID("_ReflectionStrength"),
-            CausticId = Shader.PropertyToID("_CausticStrength"), TilingId = Shader.PropertyToID("_NormalTiling"), NormalId = Shader.PropertyToID("_NormalStrength");
+            CausticId = Shader.PropertyToID("_CausticStrength"), TilingId = Shader.PropertyToID("_NormalTiling"), NormalId = Shader.PropertyToID("_NormalStrength"),
+            FlowMapId = Shader.PropertyToID("_FlowMap"), EdgeId = Shader.PropertyToID("_EdgeFade"), FoamDistId = Shader.PropertyToID("_FoamDistance");
 
         public int Count => renderers.Length;
         /// <summary>Claridad media (0 turbia, 1 cristalina).</summary>
@@ -57,15 +58,19 @@ namespace Bosque.World
                 r.GetPropertyBlock(block);
                 block.SetColor(ShallowId, Color.Lerp(new Color(.66f, .58f, .42f), new Color(.6f, .82f, .76f), k));
                 block.SetColor(DeepId, Color.Lerp(new Color(.34f, .29f, .19f), new Color(.04f, .2f, .22f), k));
-                block.SetFloat(MurkId, Mathf.Lerp(.68f, .06f, k));
+                block.SetFloat(MurkId, Mathf.Lerp(.62f, .06f, k));
                 block.SetColor(FoamId, Color.Lerp(new Color(.62f, .58f, .5f, .3f), new Color(.92f, .95f, .93f, .6f), k));
                 block.SetVector(FlowDirId, new Vector4(flows[i].x, flows[i].y, 0, 0));
                 block.SetFloat(FlowSpeedId, lake ? .04f : Mathf.Lerp(.28f, .55f, k));
+                // Ríos: la corriente sigue el cauce vértice a vértice (sin costuras entre trozos); lagunas: deriva suave.
+                block.SetFloat(FlowMapId, lake ? 0f : 1f);
+                // Orilla: el agua se desvanece en los últimos centímetros y hace espuma al tocar piedras y bordes.
+                block.SetFloat(EdgeId, .28f); block.SetFloat(FoamDistId, lake ? .35f : .5f);
                 // Ondas más grandes y suaves que en el arroyo: a distancia, una repetición corta se ve como cuadrícula.
-                block.SetFloat(TilingId, lake ? 7f : 5.5f);
-                block.SetFloat(NormalId, Mathf.Lerp(.3f, .5f, k));
+                block.SetFloat(TilingId, lake ? 9f : 7f);
+                block.SetFloat(NormalId, Mathf.Lerp(.14f, .22f, k));   // olas finas: más fuerza se ve como agua picada
                 block.SetFloat(FlowFoamId, lake ? 0f : Mathf.Lerp(.06f, .1f, k));
-                block.SetFloat(ReflId, Mathf.Lerp(.22f, .45f, k));
+                block.SetFloat(ReflId, Mathf.Lerp(.42f, .55f, k));
                 block.SetFloat(CausticId, Mathf.Lerp(0f, .9f, k));
                 r.SetPropertyBlock(block);
             }

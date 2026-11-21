@@ -486,6 +486,8 @@ namespace Bosque.Tests.PlayMode
             yield return Shot("12_vado_mayu", G(22, -36, 3), G(21, -45, 0));
             yield return Shot("13_afluente_chico", G(-40, -6, 4), G(-16, -23, 0));
             yield return Shot("14_rio_del_sur_bofedal", G(-20, -30, 5), G(-44, -60, 0));
+            yield return Shot("15_panel_reciclaje", G(-1.5f, 3.6f, 1.7f), G(0, 8.6f, 1.4f));
+            yield return Shot("16_orilla_laguna", G(78, 28, 2.2f), G(90, 40, 0));
             // Sector de la pampa limpio para ver el contraste.
             foreach (var x in s.Sectors[2].Litter) { if (!bag.CanFit(x)) bag.Clear(); bag.Add(x); x.SetCollected(true); }
             foreach (var w in s.Sectors[2].Wood) { w.BeginWork(actor); }

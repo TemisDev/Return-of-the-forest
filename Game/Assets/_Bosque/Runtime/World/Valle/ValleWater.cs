@@ -21,6 +21,8 @@ namespace Bosque.World
         public string name;
         public Vector3 center;
         public float radius, depth;
+        /// <summary>Fase de la forma irregular de la orilla (cada laguna distinta).</summary>
+        public float shapeSeed;
     }
 
     [Serializable]
@@ -62,6 +64,18 @@ namespace Bosque.World
             return -depth * (1f - Mathf.SmoothStep(0, 1, Mathf.InverseLerp(.45f, 1f, r / radius)));
         }
 
+        /// <summary>
+        /// Radio de una laguna hacia un punto: la orilla no es un círculo, ondula con tres armónicos (entre ~0,75 y
+        /// ~1,25 veces el radio nominal), como una laguna natural.
+        /// </summary>
+        public static float RadiusToward(WaterLake l, Vector2 p)
+        {
+            var d = p - new Vector2(l.center.x, l.center.z);
+            if (d.sqrMagnitude < 1e-6f) return l.radius;
+            float a = Mathf.Atan2(d.y, d.x), s = l.shapeSeed;
+            return l.radius * (1f + .13f * Mathf.Sin(2f * a + s) + .08f * Mathf.Sin(3f * a + s * 1.7f + 1f) + .05f * Mathf.Sin(5f * a + s * 2.3f + 2f));
+        }
+
         /// <summary>Punto más cercano del eje de un río: distancia lateral, superficie, profundidad y dirección de la corriente.</summary>
         public static void Nearest(WaterStream s, Vector2 p, out float distance, out float surface, out float depth, out Vector2 flow, out int segment)
         {
@@ -89,7 +103,7 @@ namespace Bosque.World
             var p = new Vector2(world.x, world.z);
             foreach (var l in lakes)
             {
-                float r = Vector2.Distance(p, new Vector2(l.center.x, l.center.z)), reach = l.radius + 3f;
+                float r = Vector2.Distance(p, new Vector2(l.center.x, l.center.z)), reach = RadiusToward(l, p) + 3f;
                 if (r < reach && r / reach < best) { best = r / reach; surface = l.center.y; }
             }
             foreach (var s in streams)
@@ -119,7 +133,8 @@ namespace Bosque.World
             foreach (var l in lakes)
             {
                 var c = new Vector2(l.center.x, l.center.z); var dir = p - c;
-                var q = dir.magnitude > l.radius ? c + dir.normalized * l.radius : p;
+                float lr = RadiusToward(l, p);
+                var q = dir.magnitude > lr ? c + dir.normalized * lr : p;
                 float d = (q - p).sqrMagnitude;
                 if (d < best) { best = d; result = new Vector3(q.x, l.center.y, q.y); }
             }
