@@ -314,6 +314,9 @@ namespace Bosque.CharacterEditor
                 Cue("restore", "SFX_Restauracion", .85f, 0f, 1f, 50f, 2f, new Vector2(1f, 1f)),
                 Cue("exit.unlock", "SFX_Salida_Desbloqueo", .8f, 1f, 4f, 60f, 2f, new Vector2(.9f, .95f)),
                 Cue("complete", "SFX_Nivel_Completado", .8f, 0f, 1f, 50f, 2f, new Vector2(1f, 1f)),
+                Cue("grow", "SFX_Brote_0", .85f, 1f, 2f, 30f, .4f, new Vector2(.97f, 1.04f)),
+                Cue("grow.fail", "SFX_Brote_Fallido", .7f, 1f, 2f, 20f, .5f, new Vector2(.92f, 1f)),
+                Cue("bridge", "SFX_Puente_Raices", .9f, .6f, 4f, 50f, 2f, new Vector2(1f, 1f)),
             };
             foreach (var c in lib.cues) if (c.clips.Length == 0) throw new Exception("Efecto sin clips: " + c.id);
             EditorUtility.SetDirty(lib);

@@ -129,3 +129,36 @@ MonoBehaviour:
     maxDistance: 50
     cooldown: 2
     bus: 3
+  - id: grow
+    clips:
+    - {fileID: 8300000, guid: 9b8a382a089f5cf4ea82a322d5a6094d, type: 3}
+    - {fileID: 8300000, guid: 9f772e21e2592294aa41d5a15fe777f8, type: 3}
+    - {fileID: 8300000, guid: 4a0ac3deb7a95c84da760b1966d00c65, type: 3}
+    volume: 0.85
+    pitch: {x: 0.97, y: 1.04}
+    spatialBlend: 1
+    minDistance: 2
+    maxDistance: 30
+    cooldown: 0.4
+    bus: 3
+  - id: grow.fail
+    clips:
+    - {fileID: 8300000, guid: a076687a82a13f449b15faef0001dbed, type: 3}
+    - {fileID: 8300000, guid: 92a15740fc04ed54ca8282b5d310c9d0, type: 3}
+    volume: 0.7
+    pitch: {x: 0.92, y: 1}
+    spatialBlend: 1
+    minDistance: 2
+    maxDistance: 20
+    cooldown: 0.5
+    bus: 3
+  - id: bridge
+    clips:
+    - {fileID: 8300000, guid: c8ffe1db2b621954b8a63c6f96f2137f, type: 3}
+    volume: 0.9
+    pitch: {x: 1, y: 1}
+    spatialBlend: 0.6
+    minDistance: 4
+    maxDistance: 50
+    cooldown: 2
+    bus: 3

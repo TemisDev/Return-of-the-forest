@@ -10,6 +10,9 @@ namespace Bosque.Session
         [SerializeField] private ArroyoSession session;
         [SerializeField] private PlayerInteractor interactor;
         [SerializeField] private Texture2D interactionIcon, progressIcon, restorationIcon, exitIcon;
+        [SerializeField, Tooltip("Si hay una zona siguiente, al completar se anuncia la habilidad nueva en vez del final.")]
+        private string nextZoneTitle;
+        public void ConfigureNextZone(string title) => nextZoneTitle = title;
         private GUIStyle title, body, small, interaction;
         private bool helpVisible;
         private int lastShownRemoved = -1, lastShownTotal = -1;
@@ -68,7 +71,15 @@ namespace Bosque.Session
             Panel(new Rect(24, 670, 900, 32));
             GUI.Label(new Rect(36, 676, 880, 24),
                 "Desde la orilla, sin subir al bloqueo.   R: reiniciar · F1: ayuda · Esc: cursor · Clic: volver", small);
-            if (p.IsCompleted)
+            if (p.IsCompleted && !string.IsNullOrEmpty(nextZoneTitle))
+            {
+                Panel(new Rect(300, 470, 680, 150));
+                GUI.Label(new Rect(320, 486, 640, 32), "Nueva habilidad: CRECIMIENTO  [Q]", interaction);
+                GUI.Label(new Rect(320, 524, 636, 65),
+                    "El agua volvió al arroyo. Ahora puedes hacer brotar plantas nativas donde el suelo tenga humedad.", body);
+                GUI.Label(new Rect(320, 593, 636, 22), "Siguiente zona: " + nextZoneTitle + "…", small);
+            }
+            else if (p.IsCompleted)
             {
                 Panel(new Rect(300, 470, 680, 150));
                 GUI.Label(new Rect(320, 486, 640, 32), "ODS 15 · Vida de ecosistemas terrestres", interaction);

@@ -5,7 +5,7 @@ A02,Recursos,OK,"91 prefabs VIS_V6: con collider 0, material nulo 0, shader no s
 A03,Rendimiento,OK,"Prefabs VIS_V6 sin LODGroup/corte por distancia: 0 de 91"
 A04,Recursos,OK,"111 texturas: normales mal importadas 0, máscaras en sRGB 0, >2048 px 0"
 A05,Partículas,OK,"19 sistemas en 14 prefabs: sin material 0, bucles >500 partículas 0, ráfagas que no se destruyen 0 "
-C09,Contrato,OK,"ArroyoPlayable (vestida con V6, sha 6E7A4CA7EDAF442EB4F762498FBDAC89EB61B02044DC994459AB8C09553194B7) frente a la línea base pre-V6 (sha A4134AF6C8B0BF3B0BA442292A94AAD51D89DFC77D68137673B2DE4DFD707B84): 0 diferencias de colliders/componentes"
+C09,Contrato,OK,"ArroyoPlayable (vestida con V6, sha F99ABB79582015843BD1D1FBCC1DF06F4BB9C0EC9D1B877E1677545B352F66DF) frente a la línea base pre-V6 (sha A4134AF6C8B0BF3B0BA442292A94AAD51D89DFC77D68137673B2DE4DFD707B84): 0 diferencias de colliders/componentes"
 C02,Contrato,OK,"26 colliders de integración; ausentes 0, cambiados 0 "
 C03,Contrato,OK,"Colliders añadidos por V6: 0 "
 C04,Contrato,OK,"11 componentes de gameplay/escena conservados; perdidos 0 "

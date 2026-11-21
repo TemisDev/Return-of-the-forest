@@ -1,0 +1,32 @@
+[
+ {
+  "archivo": "Sfx/SFX_Brote_01.ogg",
+  "fuente": "síntesis propia + https://opengameart.org/content/50-rpg-sound-effects",
+  "segundos": 1.6
+ },
+ {
+  "archivo": "Sfx/SFX_Brote_02.ogg",
+  "fuente": "síntesis propia + https://opengameart.org/content/50-rpg-sound-effects",
+  "segundos": 1.6
+ },
+ {
+  "archivo": "Sfx/SFX_Brote_03.ogg",
+  "fuente": "síntesis propia + https://opengameart.org/content/50-rpg-sound-effects",
+  "segundos": 1.6
+ },
+ {
+  "archivo": "Sfx/SFX_Brote_Fallido_01.ogg",
+  "fuente": "síntesis propia + https://opengameart.org/content/fantozzis-footsteps-grasssand-stone",
+  "segundos": 1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Brote_Fallido_02.ogg",
+  "fuente": "síntesis propia + https://opengameart.org/content/fantozzis-footsteps-grasssand-stone",
+  "segundos": 1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Puente_Raices_01.ogg",
+  "fuente": "síntesis propia + https://opengameart.org/content/50-rpg-sound-effects + 35-wooden-crackshitsdestructions",
+  "segundos": 3.2
+ }
+]

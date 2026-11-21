@@ -18,6 +18,7 @@ namespace Bosque.CoreSetup
         public static void BuildV6WindowsBatch() => BuildCandidate(false, "V6");
         public static void BuildV6DiagnosticsBatch() => BuildCandidate(true, "V6-Diagnostics");
         public static void BuildV7WindowsBatch() => BuildCandidate(false, "V7-Character-Audio");
+        public static void BuildV8WindowsBatch() => BuildCandidate(false, "V8-Zona2-Claro");
         [Serializable] private sealed class CandidateInfo
         {
             public string identifier, commit, unity, builtAtUtc, target, scene, options;
@@ -41,7 +42,10 @@ namespace Bosque.CoreSetup
                 var options = diagnostics ? BuildOptions.Development : BuildOptions.None;
                 var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
                 {
-                    scenes = new[] { ArroyoPlayableSetup.ScenePath },
+                    // Todas las zonas activas en Build Settings (Arroyo primero); antes solo el arroyo.
+                    scenes = Array.FindAll(EditorBuildSettings.scenes, s => s.enabled).Length > 0
+                        ? Array.ConvertAll(Array.FindAll(EditorBuildSettings.scenes, s => s.enabled), s => s.path)
+                        : new[] { ArroyoPlayableSetup.ScenePath },
                     locationPathName = Path.Combine(folder, "BosqueDeRegreso.exe"),
                     target = BuildTarget.StandaloneWindows64,
                     options = options,
