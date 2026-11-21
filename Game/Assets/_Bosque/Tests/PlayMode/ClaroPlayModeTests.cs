@@ -166,6 +166,12 @@ namespace Bosque.Tests.PlayMode
             for (int i = 0; i < 120 && !arroyo.Progress.IsCompleted; i++) { inp.enabled = false; m.Simulate(Vector2.up, false, 0, Time.deltaTime); yield return null; }
             Assert.That(arroyo.Progress.IsCompleted);
             Assert.That(GameProgress.GrowthUnlocked, "Completar el arroyo concede el crecimiento");
+            var pres = Bosque.UI.Presentation.Instance;
+            for (float t = 0; t < 4f && !pres.Notebook.Visible; t += Time.unscaledDeltaTime) yield return null;
+            Assert.That(pres.Notebook.Visible, "Al completar aparece la nota del cuaderno");
+            Assert.That(pres.Notebook.Current.reward, Does.Contain("CRECIMIENTO"));
+            Assert.That(SceneManager.GetActiveScene().name, Is.EqualTo("ArroyoPlayable"), "No cambia de zona hasta continuar");
+            pres.Notebook.Continue();
             for (float t = 0; t < 7f && SceneManager.GetActiveScene().name != "ClaroVacio"; t += Time.unscaledDeltaTime) yield return null;
             Assert.That(SceneManager.GetActiveScene().name, Is.EqualTo("ClaroVacio"), "Transición a la zona 2");
             yield return null;

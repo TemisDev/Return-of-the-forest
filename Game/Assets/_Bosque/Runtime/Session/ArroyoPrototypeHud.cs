@@ -1,11 +1,12 @@
 using Bosque.Interaction;
+using Bosque.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Bosque.Session
 {
     // Replaceable prototype view. All state and commands belong to ArroyoSession.
-    public sealed class ArroyoPrototypeHud : MonoBehaviour
+    public sealed class ArroyoPrototypeHud : MonoBehaviour, IZoneHud
     {
         [SerializeField] private ArroyoSession session;
         [SerializeField] private PlayerInteractor interactor;
@@ -26,13 +27,40 @@ namespace Bosque.Session
         { interactionIcon = interact; progressIcon = progress; restorationIcon = restore; exitIcon = exit; }
         private void Update()
         {
-            if (!Application.isFocused || Keyboard.current == null) return;
+            if (!Application.isFocused || Keyboard.current == null || GamePause.IsPaused) return;
             if (Keyboard.current.f1Key.wasPressedThisFrame) helpVisible = !helpVisible;
             if (Keyboard.current.rKey.wasPressedThisFrame) { session.Restart(); helpVisible = false; }
         }
+        // ---- IZoneHud (interfaz común uGUI; el dibujo IMGUI de abajo queda como respaldo sin la capa de presentación)
+        public int ZoneNumber => 1;
+        public string ZoneTitle => "El arroyo dormido";
+        public string Objective
+        {
+            get
+            {
+                var p = session != null ? session.Progress : null;
+                if (p == null) return "";
+                return p.IsCompleted ? "Arroyo recuperado. ¡Gracias por cuidarlo!" :
+                    p.IsRestored ? "El agua volvió. Sigue el sendero hasta el arco." : "Retira los tres bloqueos del cauce para devolver el agua.";
+            }
+        }
+        public int ProgressDone => session != null && session.Progress != null ? session.Progress.RemovedCount : 0;
+        public int ProgressTotal => session != null && session.Progress != null ? session.Progress.TotalCount : 0;
+        public string ProgressLabel => "obstáculos retirados";
+        public string PromptKey => interactor != null && interactor.Target != null ? "E" : null;
+        public string PromptText => interactor != null ? interactor.Prompt : null;
+        public string HintTitle => null;
+        public string HintText => null;
+        public string Tip => "Acércate a los bloqueos desde la orilla, sin subirte encima.";
+        public bool HelpVisible => helpVisible;
+        public string HelpTitle => "Recupera el arroyo";
+        public string HelpText => "E: retirar un bloqueo del cauce (ramas, rocas, tronco)\nAcércate desde la orilla, sin subir al obstáculo\nCon el agua de vuelta, sigue el sendero hasta el arco\nWASD · Shift: caminar · Ratón: mirar · Espacio: saltar\nR: reiniciar · Esc: pausa · F1: cerrar ayuda";
+        public bool ShowEnding => false;
+        public void RestartZone() { if (session != null) session.Restart(); helpVisible = false; }
+
         private void OnGUI()
         {
-            if (session == null || session.Progress == null) return;
+            if (session == null || session.Progress == null || Presentation.HudActive) return;
             if (title == null)
             {
                 title = new GUIStyle(GUI.skin.label) { fontSize = 24, fontStyle = FontStyle.Bold, wordWrap = true };

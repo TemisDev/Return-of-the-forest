@@ -1,4 +1,5 @@
 using Bosque.Abilities;
+using Bosque.UI;
 using Bosque.Interaction;
 using Bosque.World;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.InputSystem;
 namespace Bosque.Session
 {
     /// <summary>Interfaz de "El refugio perdido" y mensaje final del juego (mismo estilo que el arroyo y el claro).</summary>
-    public sealed class RefugioHud : MonoBehaviour
+    public sealed class RefugioHud : MonoBehaviour, IZoneHud
     {
         [SerializeField] private RefugioSession session;
         [SerializeField] private PlayerInteractor interactor;
@@ -35,7 +36,7 @@ namespace Bosque.Session
 
         private void Update()
         {
-            if (!Application.isFocused || Keyboard.current == null || session == null) return;
+            if (!Application.isFocused || Keyboard.current == null || session == null || GamePause.IsPaused) return;
             if (Keyboard.current.f1Key.wasPressedThisFrame) helpVisible = !helpVisible;
             if (Keyboard.current.rKey.wasPressedThisFrame) { session.Restart(); helpVisible = false; }
         }
@@ -53,9 +54,46 @@ namespace Bosque.Session
             }
         }
 
+        // ---- IZoneHud
+        public int ZoneNumber => 3;
+        public string ZoneTitle => "El refugio perdido";
+        public int ProgressDone => session != null && session.Progress != null ? session.Progress.RemovedCount : 0;
+        public int ProgressTotal => session != null && session.Progress != null ? session.Progress.TotalCount : 0;
+        public string ProgressLabel => "refugios";
+        public string PromptKey
+        {
+            get
+            {
+                if (session == null || session.Progress == null || session.Progress.IsRestored) return null;
+                if (interactor != null && interactor.Target != null) return "E";
+                if (ability != null && ability.Target != null) return "Q";
+                if (carrier != null && carrier.Holding != null) return "E";
+                return null;
+            }
+        }
+        public string PromptText
+        {
+            get
+            {
+                if (interactor != null && interactor.Target != null) return interactor.Target.Prompt;
+                if (ability != null && ability.Target != null) return ability.Target.Prompt;
+                if (carrier != null && carrier.Holding != null) return "Soltar " + carrier.Holding.Label;
+                return null;
+            }
+        }
+        public string HintTitle => "Aquí no sirve";
+        public string HintText => session != null && session.Progress != null && !session.Progress.IsRestored &&
+            !string.IsNullOrEmpty(session.LastHint) && Time.time - session.LastHintTime < hintSeconds ? session.LastHint : null;
+        public string Tip => "Sigue las huellas: el animal busca sombra y cobertura.";
+        public bool HelpVisible => helpVisible;
+        public string HelpTitle => "Devuelve el refugio";
+        public string HelpText => "E: recoger un elemento y colocarlo en un lugar indicado\nLos lugares buenos están en el paso del animal: huellas, sombra y rocas\nQ: hacer crecer un matorral en suelo húmedo\nE sin objetivo: soltar lo que llevas\nR: reiniciar · Esc: pausa · F1: cerrar ayuda";
+        public bool ShowEnding => session != null && session.GameFinished;
+        public void RestartZone() { if (session != null) session.Restart(); helpVisible = false; }
+
         private void OnGUI()
         {
-            if (session == null || session.Progress == null) return;
+            if (session == null || session.Progress == null || Presentation.HudActive) return;
             if (title == null)
             {
                 title = new GUIStyle(GUI.skin.label) { fontSize = 24, fontStyle = FontStyle.Bold, wordWrap = true };

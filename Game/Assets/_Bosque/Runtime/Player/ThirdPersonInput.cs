@@ -1,3 +1,4 @@
+using Bosque.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,7 +24,9 @@ namespace Bosque.Player
         {
             var keyboard = Keyboard.current;
             var mouse = Mouse.current;
-            if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame) SetCursor(false);
+            // Esc abre la pausa (Presentation), que libera el cursor; en pausa no hay control ni se recaptura.
+            if (GamePause.IsPaused) return;
+            if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame && !Presentation.HudActive) SetCursor(false);
             else if (mouse != null && mouse.leftButton.wasPressedThisFrame && Application.isFocused)
                 SetCursor(true);
             Vector2 move = Vector2.zero;

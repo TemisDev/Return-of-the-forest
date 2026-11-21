@@ -1,11 +1,12 @@
 using Bosque.Abilities;
+using Bosque.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Bosque.Session
 {
     /// <summary>Interfaz de la zona "El claro vacío" (mismo estilo que la del arroyo). Solo muestra estado.</summary>
-    public sealed class ClaroHud : MonoBehaviour
+    public sealed class ClaroHud : MonoBehaviour, IZoneHud
     {
         [SerializeField] private ClaroSession session;
         [SerializeField] private GrowthAbility ability;
@@ -30,14 +31,43 @@ namespace Bosque.Session
 
         private void Update()
         {
-            if (!Application.isFocused || Keyboard.current == null || session == null) return;
+            if (!Application.isFocused || Keyboard.current == null || session == null || GamePause.IsPaused) return;
             if (Keyboard.current.f1Key.wasPressedThisFrame) helpVisible = !helpVisible;
             if (Keyboard.current.rKey.wasPressedThisFrame) { session.Restart(); helpVisible = false; }
         }
 
+        // ---- IZoneHud
+        public int ZoneNumber => 2;
+        public string ZoneTitle => "El claro vacío";
+        public string Objective
+        {
+            get
+            {
+                var p = session != null ? session.Progress : null;
+                if (p == null) return "";
+                return p.IsCompleted ? "Claro recuperado. ¡Las semillas encontraron su lugar!" :
+                    p.IsRestored ? "El claro revive. Cruza el puente de raíces hasta el arco." :
+                    "Haz brotar plantas nativas (Q) donde el suelo tenga humedad.";
+            }
+        }
+        public int ProgressDone => session != null && session.Progress != null ? session.Progress.RemovedCount : 0;
+        public int ProgressTotal => session != null && session.Progress != null ? session.Progress.TotalCount : 0;
+        public string ProgressLabel => "brotes nativos";
+        public string PromptKey => ability != null && ability.Target != null && session != null && session.Progress != null && !session.Progress.IsCompleted ? "Q" : null;
+        public string PromptText => ability != null && ability.Target != null ? ability.Target.Prompt : null;
+        public string HintTitle => "Aquí no prospera";
+        public string HintText => session != null && session.Progress != null && !session.Progress.IsRestored &&
+            !string.IsNullOrEmpty(session.LastHint) && Time.time - session.LastHintTime < hintSeconds ? session.LastHint : null;
+        public string Tip => "Observa el suelo: oscuro y con musgo es húmedo.";
+        public bool HelpVisible => helpVisible;
+        public string HelpTitle => "Devuelve la vida al claro";
+        public string HelpText => "Q: hacer crecer una planta en el lecho cercano\nSolo prospera en suelo húmedo (oscuro, con musgo)\nTres brotes nativos devuelven el claro y crean un paso\nWASD · Shift: caminar · Espacio: saltar\nR: reiniciar · Esc: pausa · F1: cerrar ayuda";
+        public bool ShowEnding => false;
+        public void RestartZone() { if (session != null) session.Restart(); helpVisible = false; }
+
         private void OnGUI()
         {
-            if (session == null || session.Progress == null) return;
+            if (session == null || session.Progress == null || Presentation.HudActive) return;
             if (title == null)
             {
                 title = new GUIStyle(GUI.skin.label) { fontSize = 24, fontStyle = FontStyle.Bold, wordWrap = true };

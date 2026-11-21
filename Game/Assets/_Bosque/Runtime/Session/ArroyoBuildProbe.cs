@@ -73,6 +73,20 @@ namespace Bosque.Session
             var args = Environment.GetCommandLineArgs();
             if (Array.IndexOf(args, "-arroyo-verify") < 0) return;
             Application.runInBackground = true;
+            // La build arranca en el menú principal: el verificador mide el arroyo, así que lo carga primero.
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "ArroyoPlayable")
+            {
+                UnityEngine.Events.UnityAction<UnityEngine.SceneManagement.Scene, UnityEngine.SceneManagement.LoadSceneMode> onLoaded = null;
+                onLoaded = (scene, mode) =>
+                {
+                    if (scene.name != "ArroyoPlayable") return;
+                    UnityEngine.SceneManagement.SceneManager.sceneLoaded -= onLoaded;
+                    new GameObject("OptionalBuildVerification").AddComponent<ArroyoBuildProbe>();
+                };
+                UnityEngine.SceneManagement.SceneManager.sceneLoaded += onLoaded;
+                UnityEngine.SceneManagement.SceneManager.LoadScene("ArroyoPlayable");
+                return;
+            }
             new GameObject("OptionalBuildVerification").AddComponent<ArroyoBuildProbe>();
         }
         private IEnumerator Start()

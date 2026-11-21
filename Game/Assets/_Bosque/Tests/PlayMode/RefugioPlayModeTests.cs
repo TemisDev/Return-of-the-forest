@@ -254,6 +254,10 @@ namespace Bosque.Tests.PlayMode
             for (float t = 0; t < 8f && !claro.Progress.IsCompleted; t += Time.deltaTime) { inp.enabled = false; m.Simulate(Vector2.up, false, 0, Time.deltaTime); yield return null; }
             Assert.That(claro.Progress.IsCompleted);
             Assert.That(GameProgress.IsZoneComplete(GameProgress.Claro));
+            var pres = Bosque.UI.Presentation.Instance;
+            for (float t = 0; t < 4f && !pres.Notebook.Visible; t += Time.unscaledDeltaTime) yield return null;
+            Assert.That(pres.Notebook.Visible, "Nota del cuaderno del claro");
+            pres.Notebook.Continue();
             for (float t = 0; t < 7f && SceneManager.GetActiveScene().name != "RefugioPerdido"; t += Time.unscaledDeltaTime) yield return null;
             Assert.That(SceneManager.GetActiveScene().name, Is.EqualTo("RefugioPerdido"), "Transición a la zona 3");
         }

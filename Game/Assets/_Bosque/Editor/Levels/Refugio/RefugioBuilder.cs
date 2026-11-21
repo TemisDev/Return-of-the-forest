@@ -57,11 +57,12 @@ namespace Bosque.LevelEditor
             var icons = ReadArroyoIcons();
             BuildScene(icons, fox);
             IntegrateClaro();
-            EditorBuildSettings.scenes = new[]
-            {
-                new EditorBuildSettingsScene(ClaroBuilder.ArroyoScene, true), new EditorBuildSettingsScene(ClaroBuilder.ScenePath, true),
-                new EditorBuildSettingsScene(ScenePath, true),
-            };
+            // Con el menú principal (Bloque 05) generado, va primero.
+            var scenes = new List<EditorBuildSettingsScene>();
+            if (System.IO.File.Exists("Assets/_Bosque/Scenes/MenuPrincipal.unity")) scenes.Add(new EditorBuildSettingsScene("Assets/_Bosque/Scenes/MenuPrincipal.unity", true));
+            scenes.Add(new EditorBuildSettingsScene(ClaroBuilder.ArroyoScene, true)); scenes.Add(new EditorBuildSettingsScene(ClaroBuilder.ScenePath, true));
+            scenes.Add(new EditorBuildSettingsScene(ScenePath, true));
+            EditorBuildSettings.scenes = scenes.ToArray();
             AssetDatabase.SaveAssets();
             Debug.Log("[Refugio] Zona construida e integrada.");
         }

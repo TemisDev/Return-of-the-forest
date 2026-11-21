@@ -2,7 +2,9 @@
   "name": "Bosque.PlayMode.Tests",
   "references": [
     "Bosque.Runtime",
-    "Unity.InputSystem"
+    "Unity.InputSystem",
+    "UnityEngine.UI",
+    "Unity.TextMeshPro"
   ],
   "includePlatforms": [],
   "optionalUnityReferences": [

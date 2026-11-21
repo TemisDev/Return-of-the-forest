@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Bosque.UI;
 using Bosque.World;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -53,15 +54,29 @@ namespace Bosque.Session
                 if (!SuppressSceneLoad && !string.IsNullOrEmpty(nextScene) && isActiveAndEnabled)
                     pending = StartCoroutine(LoadNext());
             }
-            else if (!done && pending != null) { StopCoroutine(pending); pending = null; }
+            else if (!done)
+            {
+                if (pending != null) { StopCoroutine(pending); pending = null; }
+                if (Presentation.Instance != null && Presentation.Instance.Notebook.Visible) Presentation.Instance.HideNote();
+            }
             wasCompleted = done;
         }
 
+        /// <summary>
+        /// Tras una pausa breve aparece la nota del cuaderno de la zona; "Continuar" carga la siguiente con fundido.
+        /// Sin la capa de presentación (escenas de prueba antiguas) carga sola tras <c>delaySeconds</c>.
+        /// </summary>
         private IEnumerator LoadNext()
         {
-            yield return new WaitForSecondsRealtime(delaySeconds);
+            yield return new WaitForSecondsRealtime(Presentation.Instance != null ? 1.2f : delaySeconds);
             pending = null;
-            if (session != null && session.Progress != null && session.Progress.IsCompleted) SceneManager.LoadScene(nextScene);
+            if (session == null || session.Progress == null || !session.Progress.IsCompleted) yield break;
+            if (Presentation.Instance != null)
+                Presentation.Instance.ShowNote(GameFlow.NoteFor(GameProgress.Claro), () =>
+                {
+                    if (session != null && session.Progress != null && session.Progress.IsCompleted) GameFlow.LoadScene(nextScene);
+                });
+            else SceneManager.LoadScene(nextScene);
         }
     }
 }
