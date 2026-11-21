@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 namespace Bosque.Session
 {
     /// <summary>
-    /// Atajo para pruebas manuales: <c>BosqueDeRegreso.exe -zona claro</c> abre directamente la zona 2 con el
-    /// crecimiento desbloqueado (como si el arroyo ya estuviera completado). Sin el argumento no hace nada.
+    /// Atajo para pruebas manuales: <c>-zona claro</c> abre la zona 2 y <c>-zona refugio</c> la zona 3, con el
+    /// progreso previo dado por hecho (crecimiento desbloqueado). Sin el argumento no hace nada.
     /// </summary>
     public static class ZoneLauncher
     {
@@ -22,6 +22,11 @@ namespace Bosque.Session
                 case "claro":
                     GameProgress.CompleteZone(GameProgress.Arroyo);
                     if (SceneManager.GetActiveScene().name != "ClaroVacio") SceneManager.LoadScene("ClaroVacio");
+                    break;
+                case "refugio":
+                    GameProgress.CompleteZone(GameProgress.Arroyo);
+                    GameProgress.CompleteZone(GameProgress.Claro);
+                    if (SceneManager.GetActiveScene().name != "RefugioPerdido") SceneManager.LoadScene("RefugioPerdido");
                     break;
             }
         }

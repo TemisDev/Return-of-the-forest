@@ -19,6 +19,7 @@ namespace Bosque.CoreSetup
         public static void BuildV6DiagnosticsBatch() => BuildCandidate(true, "V6-Diagnostics");
         public static void BuildV7WindowsBatch() => BuildCandidate(false, "V7-Character-Audio");
         public static void BuildV8WindowsBatch() => BuildCandidate(false, "V8-Zona2-Claro");
+        public static void BuildV9WindowsBatch() => BuildCandidate(false, "V9-Zona3-Refugio");
         [Serializable] private sealed class CandidateInfo
         {
             public string identifier, commit, unity, builtAtUtc, target, scene, options;

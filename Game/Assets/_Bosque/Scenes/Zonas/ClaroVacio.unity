@@ -49337,6 +49337,7 @@ GameObject:
   - component: {fileID: 1531606504}
   - component: {fileID: 1531606506}
   - component: {fileID: 1531606505}
+  - component: {fileID: 1531606507}
   m_Layer: 0
   m_Name: ClaroSession
   m_TagString: Untagged
@@ -49378,6 +49379,7 @@ MonoBehaviour:
   restorationIcon: {fileID: 2800000, guid: c3599dfc72418534fa5a9214fa55294b, type: 3}
   exitIcon: {fileID: 2800000, guid: eb660d99267d6fe4eab634095eaef1df, type: 3}
   hintSeconds: 6
+  nextZoneTitle: El refugio perdido
 --- !u!114 &1531606506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49402,6 +49404,21 @@ MonoBehaviour:
   bridgeGrowSeconds: 2.4
   player: {fileID: 323557769}
   playerSpawn: {fileID: 978287283}
+--- !u!114 &1531606507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531606503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5935fe0d13443d45b089f2c10f1b651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Bosque.Runtime::Bosque.Session.ClaroZoneTransition
+  session: {fileID: 1531606506}
+  nextScene: RefugioPerdido
+  delaySeconds: 4.5
 --- !u!1 &1531637300
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,6 +27,8 @@ namespace Bosque.Player
         public float VerticalSpeed => verticalSpeed;
         public bool IsGrounded => controller != null && (controller.isGrounded || groundTimer > 0f);
         public float RunSpeed => speed;
+        /// <summary>Multiplicador de velocidad horizontal (p. ej., al cargar un elemento de refugio).</summary>
+        public float SpeedFactor { get; set; } = 1f;
         /// <summary>Momento (Time.time) del último Simulate; si el motor deja de simularse, la animación vuelve a reposo.</summary>
         public float LastStepTime { get; private set; } = -1f;
         public event Action Jumped;
@@ -61,7 +63,7 @@ namespace Bosque.Player
             }
             float impact = -verticalSpeed;
             verticalSpeed += gravity * dt;
-            var planar = direction * speed * (walk ? walkFactor : 1f);
+            var planar = direction * speed * SpeedFactor * (walk ? walkFactor : 1f);
             var before = transform.position;
             controller.Move((planar + Vector3.up * verticalSpeed) * dt);
             Velocity = (transform.position - before) / dt;

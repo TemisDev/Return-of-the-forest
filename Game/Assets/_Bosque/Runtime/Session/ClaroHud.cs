@@ -11,6 +11,7 @@ namespace Bosque.Session
         [SerializeField] private GrowthAbility ability;
         [SerializeField] private Texture2D interactionIcon, progressIcon, restorationIcon, exitIcon;
         [SerializeField] private float hintSeconds = 6f;
+        [SerializeField] private string nextZoneTitle;
         private GUIStyle title, body, small, interaction;
         private bool helpVisible;
         public const string EducationalMessage = "Las plantas nativas necesitan el suelo y la humedad adecuados. Recuperar un hábitat es devolverle sus condiciones, no solo plantar.";
@@ -23,6 +24,9 @@ namespace Bosque.Session
             session = owner; ability = growth;
             interactionIcon = interact; progressIcon = progress; restorationIcon = restore; exitIcon = exit;
         }
+
+        /// <summary>Con una siguiente zona, el mensaje final anuncia el paso a ella en lugar de "próximamente".</summary>
+        public void ConfigureNextZone(string title) => nextZoneTitle = title;
 
         private void Update()
         {
@@ -79,7 +83,8 @@ namespace Bosque.Session
                 Panel(new Rect(300, 470, 680, 150));
                 GUI.Label(new Rect(320, 486, 640, 32), "ODS 15 · Vida de ecosistemas terrestres", interaction);
                 GUI.Label(new Rect(320, 524, 636, 65), EducationalMessage, body);
-                GUI.Label(new Rect(320, 593, 636, 22), "Siguiente zona: El refugio perdido (próximamente) · R: volver a jugar el claro", small);
+                GUI.Label(new Rect(320, 593, 636, 22), string.IsNullOrEmpty(nextZoneTitle) ? "Siguiente zona: El refugio perdido (próximamente) · R: volver a jugar el claro"
+                    : "Siguiente zona: " + nextZoneTitle + "… (R antes cancela y reinicia el claro)", small);
             }
             if (helpVisible)
             {
