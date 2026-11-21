@@ -1,5 +1,14 @@
 # Relevo de Claude Code
 
+# Bloque 03: Zona 2, "El claro vacío" (21/11/2026)
+
+- **Rama:** `feature/character-animation-audio`, commits `7855cdd` y `40b863c`.
+- **Build:** `Builds/Windows/V8-Zona2-Claro`. Para entrar directamente en la zona 2: `-zona claro`.
+- **Escena:** `Scenes/Zonas/ClaroVacio.unity`, generada con `Bosque.LevelEditor.ClaroBuilder.BuildAllBatch`, que además integra la transición en `ArroyoPlayable`.
+- **Habilidad Q:** `Runtime/Abilities/GrowthAbility.cs`, con lechos `GrowthPoint`. El progreso entre zonas vive en `GameProgress`, solo en memoria.
+- **Pruebas:** PlayMode 18/18, EditMode 38/38 y sonda 43 OK.
+- **Informe y pruebas manuales:** `Docs/Zonas/Claro/INFORME-ZONA-2.md`.
+
 # Bloque 02: personaje, animaciones y audio (20/11/2026)
 
 - **Rama:** `feature/character-animation-audio`, que sale de la integración V6 `4c973e5`.
