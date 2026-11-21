@@ -17,10 +17,18 @@
 | **Efectos** | `Audio/SFX_Biblioteca.asset` | Pasos, salto, aterrizaje, interacción válida, retirar tronco, retirar rocas, retirar ramas, restauración, desbloqueo de la salida y final del nivel. Tienen variación de tono y distancia 3D. |
 | **Música** | `Audio_Arroyo/Musica` | Orquestal. Suena baja en degradado y crece al restaurar. |
 
-**Guardiana:**
-- Base: traje Ranger y cabeza del personaje base de Quaternius (CC0), con rig Humanoid.
-- Coste: 30 770 triángulos, 5 materiales URP Lit y texturas a 2K.
+**Guardiana (realista, desde el 21/11/2026):**
+- **Generación:** humana de proporciones reales hecha con MPFB (MakeHuman para Blender). Mujer joven de rasgos andinos y 1,53 m.
+- **Aspecto:** piel de tono medio, trenza, suéter de lana verde oliva, pantalón cargo y botines de cuero.
+- **Licencias:** todos los recursos de MakeHuman son CC0; la herramienta MPFB es GPL, pero el modelo que genera no hereda esa licencia.
+- **Sustituye** al personaje estilizado de Quaternius, que no encajaba con la calidad del entorno V6.
+- **Regeneración:** `Docs/Character/pipeline/mpfb/` (configuración, generación, preparación de texturas y descarga parcial de los packs).
+- **Coste:** 33 218 triángulos, 8 mallas y 8 materiales URP Lit con texturas a 2K. Rig `game_engine` de 53 huesos, importado como Humanoid. La piel tapada por la ropa se elimina para que no asome.
 - Sustituye a la cápsula: el objeto `ProvisionalBody` y su collider se conservan, solo se oculta su render.
+- **Orientación** (corregida el 21/11):
+  - Al trotar, el cuerpo iba girado unos 19° a la derecha de la dirección de avance.
+  - Se compensa por clip (trote +32°, caminar +8°, con "Body Orientation").
+  - Medido en juego: desvío menor de 3° y ladeo menor de 1,1° en reposo, al caminar y al trotar. Lo vigila la prueba `PostureFacesMovementWithoutSideLean`.
 
 **Animator:**
 - Mezcla de locomoción Idle/Walk/Jog/Sprint según la velocidad real del motor. Los umbrales son la velocidad propia de cada clip (0,97, 5,36 y 8,25 m/s), así que los pies no patinan.

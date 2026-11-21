@@ -32,7 +32,7 @@ namespace Bosque.Character
         private Animator animator;
         private float airTime;
         private Transform leftFoot, rightFoot;
-        private float leftPrevY, rightPrevY, leftLast, rightLast;
+        private float leftPrevY, rightPrevY, leftLast, rightLast, leftContact, rightContact;
         private bool leftDown, rightDown;
 
         /// <summary>Apoyo de un pie: (esIzquierdo, intensidad 0..1 según la velocidad).</summary>
@@ -50,6 +50,9 @@ namespace Bosque.Character
             {
                 leftFoot = animator.GetBoneTransform(HumanBodyBones.LeftFoot);
                 rightFoot = animator.GetBoneTransform(HumanBodyBones.RightFoot);
+                // Cada rig tiene el tobillo a una altura distinta: el apoyo se mide desde la altura del pie en reposo.
+                if (leftFoot != null) leftContact = Mathf.Max(footContactHeight, leftFoot.position.y - transform.position.y + .05f);
+                if (rightFoot != null) rightContact = Mathf.Max(footContactHeight, rightFoot.position.y - transform.position.y + .05f);
             }
         }
 
@@ -99,20 +102,21 @@ namespace Bosque.Character
             float speed = motor.HorizontalSpeed;
             bool moving = motor.IsGrounded && speed > .4f && Time.time - motor.LastStepTime < .15f;
             float baseY = transform.position.y;
-            Contact(leftFoot, ref leftPrevY, ref leftDown, ref leftLast, true, baseY, moving, speed);
-            Contact(rightFoot, ref rightPrevY, ref rightDown, ref rightLast, false, baseY, moving, speed);
+            Contact(leftFoot, ref leftPrevY, ref leftDown, ref leftLast, true, baseY, moving, speed, leftContact);
+            Contact(rightFoot, ref rightPrevY, ref rightDown, ref rightLast, false, baseY, moving, speed, rightContact);
         }
 
-        private void Contact(Transform foot, ref float prevY, ref bool down, ref float last, bool left, float baseY, bool moving, float speed)
+        private void Contact(Transform foot, ref float prevY, ref bool down, ref float last, bool left, float baseY, bool moving, float speed, float contact)
         {
             float y = foot.position.y - baseY;
-            bool falling = y < prevY - .0005f;
-            if (!down && moving && y < footContactHeight && !falling && prevY > y - .002f && Time.time - last > .2f)
+            // Apoyo = el pie deja de bajar estando cerca del suelo (mínimo local), con independencia de los FPS.
+            bool stopped = y >= prevY - .0005f;
+            if (!down && moving && Mathf.Min(y, prevY) < contact && stopped && Time.time - last > .2f)
             {
                 down = true; last = Time.time;
                 Footstep?.Invoke(left, Mathf.Clamp01(speed / Mathf.Max(.1f, motor.RunSpeed)));
             }
-            if (y > footContactHeight + .04f) down = false;
+            if (y > contact + .04f) down = false;
             prevY = y;
         }
     }

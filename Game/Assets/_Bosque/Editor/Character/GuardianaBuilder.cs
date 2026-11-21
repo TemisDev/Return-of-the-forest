@@ -15,19 +15,20 @@ namespace Bosque.CharacterEditor
 {
     /// <summary>
     /// Construye a la Guardiana (personaje jugable) y el audio de la zona a partir de recursos CC0:
-    /// traje Ranger + cabeza del personaje base (Quaternius), animaciones de la Universal Animation Library,
+    /// humana realista generada con MPFB/MakeHuman (Docs/Character/pipeline/generar_guardiana.py), animaciones de la
+    /// Universal Animation Library (Quaternius),
     /// materiales URP, Animator Controller con mezcla de locomoción y capa de gestos, prefab reutilizable,
     /// biblioteca de efectos y la integración en ArroyoPlayable. Idempotente: puede ejecutarse varias veces.
     /// </summary>
     public static class GuardianaBuilder
     {
         public const string Root = "Assets/_Bosque/Characters/Guardiana";
-        public const string RangerFbx = Root + "/Source/Models/Female_Ranger.fbx";
-        public const string BaseFbx = Root + "/Source/Models/Superhero_Female_FullBody.fbx";
+        public const string ModelFbx = Root + "/Source/MPFB/SK_Guardiana.fbx";
+        public const string UrpManifest = Root + "/Source/MPFB/guardiana-urp.json";
+        public const string TexturesDir = Root + "/Textures/MPFB";
         public const string AnimFbx = Root + "/Source/Animations/UAL1_Standard.fbx";
         public const string ControllerPath = Root + "/Animation/AC_Guardiana.controller";
         public const string MaskPath = Root + "/Animation/AM_Guardiana_TorsoBrazos.mask";
-        public const string HeadMeshPath = Root + "/Meshes/SM_Guardiana_Cabeza.asset";
         public const string PrefabPath = Root + "/Prefabs/PF_Guardiana.prefab";
         public const string AudioRoot = "Assets/_Bosque/Audio";
         public const string SfxLibraryPath = AudioRoot + "/SFX_Biblioteca.asset";
@@ -49,10 +50,9 @@ namespace Bosque.CharacterEditor
             ConfigureTextures();
             var mats = Materials();
             ConfigureModels(mats);
-            var head = HeadMesh();
             var mask = UpperBodyMask();
             var controller = Controller(mask);
-            var prefab = Prefab(head, controller);
+            var prefab = Prefab(controller);
             ConfigureAudioImports();
             var library = SfxLibraryAsset();
             Integrate(prefab, library);
@@ -69,59 +69,61 @@ namespace Bosque.CharacterEditor
         }
 
         // ------------------------------------------------------------------ texturas y materiales
+        [Serializable] private sealed class UrpEntry { public string material, parte, @base, normal; public float smoothness, alphaClip; public bool doubleSided; }
+        [Serializable] private sealed class UrpManifestData { public List<UrpEntry> materiales = new List<UrpEntry>(); }
+
+        private static UrpManifestData Manifest() =>
+            JsonUtility.FromJson<UrpManifestData>(System.IO.File.ReadAllText(UrpManifest));
+
         private static void ConfigureTextures()
         {
-            foreach (var guid in AssetDatabase.FindAssets("t:Texture2D", new[] { Root + "/Textures" }))
+            foreach (var guid in AssetDatabase.FindAssets("t:Texture2D", new[] { TexturesDir }))
             {
                 var path = AssetDatabase.GUIDToAssetPath(guid);
                 var ti = (TextureImporter)AssetImporter.GetAtPath(path);
-                bool normal = path.Contains("_Normal"), data = path.Contains("_MetalSmooth") || path.Contains("_Occlusion");
-                var type = normal ? TextureImporterType.NormalMap : TextureImporterType.Default;
-                if (ti.textureType == type && ti.sRGBTexture == !(normal || data) && ti.maxTextureSize == 2048) continue;
-                ti.textureType = type; ti.sRGBTexture = !(normal || data); ti.maxTextureSize = 2048;
+                bool normal = path.Contains("_Normal");
+                ti.textureType = normal ? TextureImporterType.NormalMap : TextureImporterType.Default;
+                ti.sRGBTexture = !normal; ti.maxTextureSize = 2048;
+                ti.alphaIsTransparency = !normal && ti.DoesSourceTextureHaveAlpha();
                 ti.textureCompression = TextureImporterCompression.CompressedHQ; ti.mipmapEnabled = true;
                 ti.SaveAndReimport();
             }
         }
 
-        private static Texture2D Tex(string name) => AssetDatabase.LoadAssetAtPath<Texture2D>($"{Root}/Textures/{name}.png");
+        private static Texture2D Tex(string file) =>
+            string.IsNullOrEmpty(file) ? null : AssetDatabase.LoadAssetAtPath<Texture2D>($"{TexturesDir}/{file}");
 
-        private static Material Mat(string name, string baseMap, string normal, string metalSmooth, string occlusion, float smoothness = 1f)
+        private static Material Mat(UrpEntry e)
         {
-            string path = $"{Root}/Materials/{name}.mat";
+            string path = $"{Root}/Materials/M_Guardiana_{e.parte}.mat";
             var m = AssetDatabase.LoadAssetAtPath<Material>(path);
             if (m == null)
             {
                 System.IO.Directory.CreateDirectory(Root + "/Materials");
-                m = new Material(Shader.Find("Universal Render Pipeline/Lit")) { name = name };
+                m = new Material(Shader.Find("Universal Render Pipeline/Lit")) { name = "M_Guardiana_" + e.parte };
                 AssetDatabase.CreateAsset(m, path);
             }
-            m.SetTexture("_BaseMap", Tex(baseMap)); m.SetColor("_BaseColor", Color.white);
-            if (normal != null) { m.SetTexture("_BumpMap", Tex(normal)); m.EnableKeyword("_NORMALMAP"); }
-            if (metalSmooth != null)
-            {
-                m.SetTexture("_MetallicGlossMap", Tex(metalSmooth)); m.EnableKeyword("_METALLICSPECGLOSSMAP");
-                m.SetFloat("_Smoothness", smoothness); m.SetFloat("_SmoothnessTextureChannel", 0);
-            }
-            else { m.SetFloat("_Metallic", 0); m.SetFloat("_Smoothness", .35f); }
-            if (occlusion != null) { m.SetTexture("_OcclusionMap", Tex(occlusion)); m.EnableKeyword("_OCCLUSIONMAP"); m.SetFloat("_OcclusionStrength", 1); }
+            m.SetTexture("_BaseMap", Tex(e.@base)); m.SetColor("_BaseColor", Color.white);
+            var n = Tex(e.normal);
+            if (n != null) { m.SetTexture("_BumpMap", n); m.SetFloat("_BumpScale", 1f); m.EnableKeyword("_NORMALMAP"); }
+            else { m.SetTexture("_BumpMap", null); m.DisableKeyword("_NORMALMAP"); }
+            m.SetFloat("_Metallic", 0f); m.SetFloat("_Smoothness", e.smoothness);
+            bool clip = e.alphaClip > 0f;
+            m.SetFloat("_AlphaClip", clip ? 1f : 0f); m.SetFloat("_Cutoff", clip ? e.alphaClip : .5f);
+            if (clip) m.EnableKeyword("_ALPHATEST_ON"); else m.DisableKeyword("_ALPHATEST_ON");
+            m.SetFloat("_Cull", e.doubleSided ? 0f : 2f);
+            m.renderQueue = clip ? (int)UnityEngine.Rendering.RenderQueue.AlphaTest : -1;
             EditorUtility.SetDirty(m);
             return m;
         }
 
-        private static Dictionary<string, Material> Materials() => new Dictionary<string, Material>
-        {
-            ["MI_Ranger"] = Mat("M_Guardiana_Traje", "T_Guardiana_Outfit_BaseColor", "T_Guardiana_Outfit_Normal", "T_Guardiana_Outfit_MetalSmooth", "T_Guardiana_Outfit_Occlusion"),
-            ["MI_Regular_Female"] = Mat("M_Guardiana_PielCuerpo", "T_Guardiana_SkinBody_BaseColor", "T_Guardiana_SkinBody_Normal", "T_Guardiana_SkinBody_MetalSmooth", null, .8f),
-            ["MI_Superhero_Female"] = Mat("M_Guardiana_PielCabeza", "T_Guardiana_SkinHead_BaseColor", "T_Guardiana_SkinHead_Normal", "T_Guardiana_SkinHead_MetalSmooth", null, .8f),
-            ["MI_Eyes"] = Mat("M_Guardiana_Ojos", "T_Guardiana_Eye_BaseColor", null, null, null),
-            ["MI_Hair_2"] = Mat("M_Guardiana_Pelo", "T_Guardiana_Hair_BaseColor", null, null, null),
-        };
+        /// <summary>Material de Blender (por nombre, p. ej. "Human.body") -> material URP.</summary>
+        private static Dictionary<string, Material> Materials() => Manifest().materiales.ToDictionary(e => e.material, Mat);
 
         // ------------------------------------------------------------------ modelos y animaciones (Humanoid)
         private static void ConfigureModels(Dictionary<string, Material> mats)
         {
-            foreach (var path in new[] { RangerFbx, BaseFbx })
+            foreach (var path in new[] { ModelFbx })
             {
                 var mi = (ModelImporter)AssetImporter.GetAtPath(path);
                 mi.animationType = ModelImporterAnimationType.Human;
@@ -152,7 +154,7 @@ namespace Bosque.CharacterEditor
             }).ToArray();
             ai.clipAnimations = clips;
             ai.SaveAndReimport();
-            foreach (var path in new[] { RangerFbx, BaseFbx, AnimFbx })
+            foreach (var path in new[] { ModelFbx, AnimFbx })
             {
                 var avatar = AssetDatabase.LoadAllAssetsAtPath(path).OfType<Avatar>().FirstOrDefault();
                 if (avatar == null || !avatar.isValid || !avatar.isHuman) throw new Exception("Avatar humanoide no válido en " + path);
@@ -162,41 +164,6 @@ namespace Bosque.CharacterEditor
         private static AnimationClip Clip(string name) =>
             AssetDatabase.LoadAllAssetsAtPath(AnimFbx).OfType<AnimationClip>().FirstOrDefault(c => c.name == name)
             ?? throw new Exception("Falta el clip " + name);
-
-        // ------------------------------------------------------------------ cabeza (del personaje base)
-        private static Mesh HeadMesh()
-        {
-            var model = AssetDatabase.LoadAssetAtPath<GameObject>(BaseFbx);
-            var inst = Object.Instantiate(model);
-            try
-            {
-                var smr = inst.GetComponentsInChildren<SkinnedMeshRenderer>().First(r => r.name == "Superhero_Female");
-                var neck = inst.GetComponentsInChildren<Transform>().First(t => t.name == "neck_01");
-                var baked = new Mesh(); smr.BakeMesh(baked, true);
-                var world = baked.vertices.Select(v => smr.transform.TransformPoint(v)).ToArray();
-                float cut = neck.position.y - .05f;
-                var src = smr.sharedMesh; var tris = src.triangles;
-                var keepTris = new List<int>();
-                for (int i = 0; i < tris.Length; i += 3)
-                    if (world[tris[i]].y > cut && world[tris[i + 1]].y > cut && world[tris[i + 2]].y > cut)
-                        keepTris.AddRange(new[] { tris[i], tris[i + 1], tris[i + 2] });
-                var remap = new Dictionary<int, int>(); var order = new List<int>();
-                foreach (int v in keepTris) if (!remap.ContainsKey(v)) { remap[v] = order.Count; order.Add(v); }
-                var mesh = new Mesh { name = "SM_Guardiana_Cabeza" };
-                T[] Pick<T>(T[] a) => a.Length == 0 ? a : order.Select(i => a[i]).ToArray();
-                mesh.vertices = Pick(src.vertices); mesh.normals = Pick(src.normals); mesh.tangents = Pick(src.tangents);
-                mesh.uv = Pick(src.uv); mesh.boneWeights = Pick(src.boneWeights); mesh.bindposes = src.bindposes;
-                mesh.triangles = keepTris.Select(v => remap[v]).ToArray();
-                mesh.RecalculateBounds();
-                System.IO.Directory.CreateDirectory(Root + "/Meshes");
-                var existing = AssetDatabase.LoadAssetAtPath<Mesh>(HeadMeshPath);
-                if (existing != null) { EditorUtility.CopySerialized(mesh, existing); mesh = existing; }
-                else AssetDatabase.CreateAsset(mesh, HeadMeshPath);
-                Debug.Log($"[Guardiana] Cabeza: {mesh.vertexCount} vértices, {mesh.triangles.Length / 3} triángulos (corte en y={cut:F2}).");
-                return mesh;
-            }
-            finally { Object.DestroyImmediate(inst); }
-        }
 
         // ------------------------------------------------------------------ máscara y controlador
         private static AvatarMask UpperBodyMask()
@@ -274,53 +241,33 @@ namespace Bosque.CharacterEditor
         }
 
         // ------------------------------------------------------------------ prefab
-        private static GameObject Prefab(Mesh head, AnimatorController controller)
+        private static GameObject Prefab(AnimatorController controller)
         {
-            var rangerModel = AssetDatabase.LoadAssetAtPath<GameObject>(RangerFbx);
-            var baseModel = AssetDatabase.LoadAssetAtPath<GameObject>(BaseFbx);
-            var go = (GameObject)PrefabUtility.InstantiatePrefab(rangerModel);
+            var model = AssetDatabase.LoadAssetAtPath<GameObject>(ModelFbx);
+            var go = (GameObject)PrefabUtility.InstantiatePrefab(model);
             PrefabUtility.UnpackPrefabInstance(go, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
             go.name = "PF_Guardiana";
             try
             {
-                // Explorador, no guerrero: sin hombreras y con un solo cinturón.
-                foreach (var t in go.GetComponentsInChildren<Transform>(true).Where(t => t.name.Contains("Pauldron") || t.name.EndsWith("Belt_2")).ToList())
-                    Object.DestroyImmediate(t.gameObject);
-                var bones = go.GetComponentsInChildren<Transform>(true).GroupBy(t => t.name).ToDictionary(g => g.Key, g => g.First());
-                var baseInst = Object.Instantiate(baseModel);
-                try
-                {
-                    foreach (var src in baseInst.GetComponentsInChildren<SkinnedMeshRenderer>(true))
-                    {
-                        var part = new GameObject(src.name == "Superhero_Female" ? "Guardiana_Cabeza" : "Guardiana_" + src.name);
-                        part.transform.SetParent(go.transform, false);
-                        var smr = part.AddComponent<SkinnedMeshRenderer>();
-                        smr.sharedMesh = src.name == "Superhero_Female" ? head : src.sharedMesh;
-                        smr.bones = src.bones.Select(b => bones[b.name]).ToArray();
-                        smr.rootBone = bones[src.rootBone.name];
-                        smr.sharedMaterials = src.sharedMaterials;
-                        smr.localBounds = src.localBounds;
-                    }
-                }
-                finally { Object.DestroyImmediate(baseInst); }
                 foreach (var r in go.GetComponentsInChildren<SkinnedMeshRenderer>(true))
                 {
                     r.updateWhenOffscreen = false; r.skinnedMotionVectors = false;
-                    r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
-                    if (r.name.Contains("Eyes") || r.name.Contains("Eyebrows")) r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+                    bool small = r.name.Contains("eyebrow") || r.name.Contains("eyelash") || r.name.Contains("high-poly");
+                    r.shadowCastingMode = small ? UnityEngine.Rendering.ShadowCastingMode.Off : UnityEngine.Rendering.ShadowCastingMode.On;
                 }
                 var animator = go.GetComponent<Animator>() ?? go.AddComponent<Animator>();
-                animator.avatar = AssetDatabase.LoadAllAssetsAtPath(RangerFbx).OfType<Avatar>().First();
+                animator.avatar = AssetDatabase.LoadAllAssetsAtPath(ModelFbx).OfType<Avatar>().First();
                 animator.runtimeAnimatorController = controller;
                 animator.applyRootMotion = false;
                 animator.cullingMode = AnimatorCullingMode.AlwaysAnimate; // un solo personaje: los pasos y la cámara dependen de sus huesos
                 if (go.GetComponent<CharacterAnimationDriver>() == null) go.AddComponent<CharacterAnimationDriver>();
                 System.IO.Directory.CreateDirectory(Root + "/Prefabs");
                 var prefab = PrefabUtility.SaveAsPrefabAsset(go, PrefabPath);
-                int tris = go.GetComponentsInChildren<SkinnedMeshRenderer>().Sum(r => r.sharedMesh.triangles.Length / 3);
-                var b0 = go.GetComponentsInChildren<SkinnedMeshRenderer>().Select(r => r.bounds).Aggregate((a, c) => { a.Encapsulate(c); return a; });
-                Debug.Log($"[Guardiana] Prefab: {go.GetComponentsInChildren<SkinnedMeshRenderer>().Length} mallas, {tris} triángulos, altura {b0.size.y:F2} m, " +
-                          $"materiales {go.GetComponentsInChildren<SkinnedMeshRenderer>().SelectMany(r => r.sharedMaterials).Distinct().Count()}.");
+                var smrs = go.GetComponentsInChildren<SkinnedMeshRenderer>();
+                int tris = smrs.Sum(r => r.sharedMesh.triangles.Length / 3);
+                var b0 = smrs.Select(r => r.bounds).Aggregate((a, c) => { a.Encapsulate(c); return a; });
+                Debug.Log($"[Guardiana] Prefab MPFB: {smrs.Length} mallas, {tris} triángulos, altura {b0.size.y:F2} m, " +
+                          $"materiales {smrs.SelectMany(r => r.sharedMaterials).Distinct().Count()}, huesos {smrs.SelectMany(r => r.bones).Distinct().Count()}.");
                 return prefab;
             }
             finally { Object.DestroyImmediate(go); }
