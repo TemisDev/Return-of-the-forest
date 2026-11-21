@@ -1,5 +1,27 @@
 # Relevo de Claude Code
 
+# Zona 4 V13: acabado realista y mapa topográfico (21/11/2026)
+
+- **Rama:** `feature/valle-olvidado`. Sin fusionar.
+- **Build:** `Builds/Windows/V13-Acabado` (commit `da0cfe5`); `Tools/Build-ArroyoRC1.ps1 -Configuration V13-Acabado`.
+- **Pedido:** que lo hecho a mano tenga el realismo del ambiente y que el mapa se vea profesional, con referencias de otros juegos.
+- **Cambios:**
+  - Puentes con tramos del muelle modular de Poly Haven (CC0, Rico Cilliers) y barandas de rollizos.
+  - Puntos de reciclaje: panel de madera con rótulo pintado y chapas de color; grava pintada en el terreno; sin textos flotantes.
+  - Agua:
+    - lagunas irregulares (`ValleWater.RadiusToward`);
+    - corriente por vértice (UV2 + flow map en dos fases en `BosqueV6Water.shader`, propiedad `_FlowMap`);
+    - olas propias (`M_Valle_Agua`);
+    - turbidez según la profundidad;
+    - orillas de guijarros con juncos y piedras; vados más visibles.
+  - Mapa topográfico en papel (referencias: Firewatch y RDR2):
+    - tipografía Alegreya (OFL) en `UiTheme.mapSerif*`/`mapCaps*`;
+    - iconos en `Runtime/UI/MapIcons.cs`;
+    - panel de sectores mediante `IZoneMapInfo`;
+    - marcadores con `MarkerKind.Region` y ángulo `MapMarker.angle`.
+- **Pruebas:** PlayMode 48/48 y EditMode 38/38. FPS en la build: 57,0 de media, p95 17,8 ms (GTX 1650, 1080p). Las pruebas manuales Z4-M14..M16 **no se han ejecutado**.
+- **Incidencia previa:** el cierre con D3D12 falla a veces después del apagado limpio de Unity. También pasa en V11 y V12. Detalle en el informe.
+
 # Zona 4 V12: ríos, brújula y minimapa (21/11/2026)
 
 - **Rama:** `feature/valle-olvidado`. Sin fusionar.

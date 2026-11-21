@@ -162,6 +162,8 @@ Esto no sustituye a las pruebas manuales.
 | FPS en la build V11, refugio, mismas condiciones | 81,7 FPS de media, p95 16,8 ms |
 | FPS en la build **V12** (con ríos y lagunas), valle, 1080p, GTX 1650 | **60,7 FPS** de media, p95 19,0 ms |
 | PlayMode V12 (con ríos, vadeo, cruces, brújula y minimapa) | **48/48**; EditMode **38/38** |
+| FPS en la build **V13** (acabado realista), valle, 1080p, GTX 1650, 25 s | **57,0 FPS** de media, p95 17,8 ms (con `-force-d3d11`: 58,7 FPS) |
+| PlayMode V13 completo | **48/48**; EditMode **38/38** |
 
 Qué cubren las pruebas del valle:
 - **Trazado:** 4 sectores de 14, 3 puntos con los 4 contenedores, residuos de cada tipo, llantas de 3 espacios, nada enterrado y dos residuos en salientes.
@@ -195,8 +197,13 @@ Son para Diego. **No están ejecutadas.**
 | Z4-M11 | Jugar 5 minutos solo con la brújula y el minimapa (sin abrir el mapa). | Se sabe dónde está el norte, el reciclaje más cercano y lo ya visto. |
 | Z4-M12 | Recoger los residuos que flotan en las lagunas. | Se alcanzan vadeando sin quedar atascado. |
 | Z4-M13 | Mirar el agua de un sector antes y después de limpiarlo. | El agua pasa de turbia a clara y se nota. |
+| Z4-M14 | Abrir el mapa (M) en distintos puntos y leer nombres, iconos, escala y panel de sectores. | Nada se pisa, todo se lee y el panel coincide con el HUD. |
+| Z4-M15 | Cruzar los tres puentes y mirar de cerca un punto de reciclaje. | Se ven como madera real y el rótulo de cada contenedor se lee. |
+| Z4-M16 | Recorrer las orillas de lagunas y ríos. | Sin costuras ni cuadros en el agua; orillas húmedas con juncos. |
 
 ## Limitaciones conocidas
+
+- **Cierre de la build con D3D12 (anterior a V13):** al salir con `-salir`, el proceso termina a veces con un acceso inválido *después* de que Unity cerró todo limpio (el registro acaba en «Input System … Shutdown»). Pasa también en V11 y V12 (unas 2 de cada 5 veces) y no con `-force-d3d11`. No afecta a la partida ni deja volcado; queda pendiente de investigar.
 
 - **Árboles:** el valle usa los árboles V6 (copas y troncos genéricos), no queñuas modeladas.
 - **Filtro gris:** mientras no esté todo limpio, el valle sigue algo grisáceo. Cada sector lo aclara un 20 % y la recuperación completa lo quita.
