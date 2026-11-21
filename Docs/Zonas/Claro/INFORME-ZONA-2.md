@@ -96,6 +96,6 @@ Son para Diego. **No están ejecutadas.**
 
 ## Pendiente
 
-- La zona 3 ("El refugio perdido") y la fauna. Hasta entonces, el claro termina con el mensaje ODS 15 y un aviso.
+- ~~La zona 3 ("El refugio perdido") y la fauna~~. Hecho en el Bloque 04: el claro ya lleva a la zona 3. Ver `Docs/Zonas/Refugio/INFORME-ZONA-3.md`.
 - No se midió el rendimiento del claro en la build con el verificador, porque este solo recorre el arroyo. Tiene la mitad de renderers que el arroyo restaurado.
 - La animación de crecimiento es un escalado con rebote. Hace falta validarla con jugadores (Z2-M04).

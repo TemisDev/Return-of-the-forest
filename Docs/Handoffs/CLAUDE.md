@@ -1,5 +1,19 @@
 # Relevo de Claude Code
 
+# Bloque 04: Zona 3, "El refugio perdido", fauna y final (21/11/2026)
+
+- **Rama:** `feature/character-animation-audio`, commit `5cc5a98`.
+- **Build:** `Builds/Windows/V9-Zona3-Refugio`, con las tres zonas encadenadas. Para entrar directamente en la zona 3: `-zona refugio`.
+- **Escena:** `Scenes/Zonas/RefugioPerdido.unity`, generada con `Bosque.LevelEditor.RefugioBuilder.BuildAllBatch`.
+  - También construye el zorro (`FaunaBuilder`), integra la transición en el claro y registra las tres escenas.
+- **Mecánicas:**
+  - E recoge y coloca elementos (`RefugeItem`, `RefugeSpot`, `ItemCarrier`) y Q hace crecer el matorral.
+  - El zorro de neblina recorre una ruta fija (`FaunaRoute`) con plano de cámara (`FaunaCinematic`).
+  - Con las tres zonas aparece el final en `RefugioHud`.
+- **Animal:** el modelo Fox de Khronos (CC0 + CC-BY 4.0, **requiere atribución en los créditos**), procesado con `Docs/Fauna/pipeline/preparar_zorro.py`.
+- **Pruebas:** PlayMode 26/26 y EditMode 38/38. El verificador sobre V9 da `passed=True`.
+- **Informe y pruebas manuales Z3-M01..M08:** `Docs/Zonas/Refugio/INFORME-ZONA-3.md`.
+
 # Bloque 03: Zona 2, "El claro vacío" (21/11/2026)
 
 - **Rama:** `feature/character-animation-audio`, commits `7855cdd` y `40b863c`.
