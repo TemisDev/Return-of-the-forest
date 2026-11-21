@@ -1,0 +1,721 @@
+{
+ "DryRiverbed": "ground 2k",
+ "SM_RockMoss_A": {
+  "src": "rock_moss_set_02",
+  "tris_before": 9826,
+  "tris": 3000,
+  "dims_m": [
+   1.692,
+   1.215,
+   0.744
+  ],
+  "material": "M_RockMoss",
+  "foliage": false
+ },
+ "SM_RockMoss_B": {
+  "src": "rock_moss_set_02",
+  "tris_before": 8000,
+  "tris": 3000,
+  "dims_m": [
+   1.204,
+   0.984,
+   0.526
+  ],
+  "material": "M_RockMoss",
+  "foliage": false
+ },
+ "SM_RockMoss_C": {
+  "src": "rock_moss_set_02",
+  "tris_before": 7894,
+  "tris": 3000,
+  "dims_m": [
+   1.626,
+   1.015,
+   0.609
+  ],
+  "material": "M_RockMoss",
+  "foliage": false
+ },
+ "SM_RockMoss_D": {
+  "src": "rock_moss_set_02",
+  "tris_before": 8000,
+  "tris": 3000,
+  "dims_m": [
+   2.202,
+   1.554,
+   0.766
+  ],
+  "material": "M_RockMoss",
+  "foliage": false
+ },
+ "SM_RockMoss_E": {
+  "src": "rock_moss_set_02",
+  "tris_before": 8000,
+  "tris": 3000,
+  "dims_m": [
+   1.954,
+   1.527,
+   1.304
+  ],
+  "material": "M_RockMoss",
+  "foliage": false
+ },
+ "SM_RockMoss_F": {
+  "src": "rock_moss_set_02",
+  "tris_before": 7999,
+  "tris": 2999,
+  "dims_m": [
+   1.576,
+   1.444,
+   0.734
+  ],
+  "material": "M_RockMoss",
+  "foliage": false
+ },
+ "SM_RockMoss_G": {
+  "src": "rock_moss_set_02",
+  "tris_before": 7928,
+  "tris": 3000,
+  "dims_m": [
+   2.088,
+   1.142,
+   1.253
+  ],
+  "material": "M_RockMoss",
+  "foliage": false
+ },
+ "ForestGround": "ground 2k",
+ "MudLeaves": "ground 2k",
+ "DryGroundRocks": "ground 2k",
+ "RiverPebbles": "ground 2k",
+ "MossyRock": "ground 2k",
+ "RockDry": "ground 2k",
+ "LeafyGrass": "ground 2k",
+ "Bark": "ground 2k",
+ "RockyTerrain": "ground 2k",
+ "SM_RockMossLarge_A": {
+  "src": "rock_moss_set_01",
+  "tris_before": 11000,
+  "tris": 4000,
+  "dims_m": [
+   2.24,
+   3.369,
+   1.468
+  ],
+  "material": "M_RockMossLarge",
+  "foliage": false
+ },
+ "SM_RockMossLarge_B": {
+  "src": "rock_moss_set_01",
+  "tris_before": 10996,
+  "tris": 4000,
+  "dims_m": [
+   2.654,
+   3.264,
+   1.263
+  ],
+  "material": "M_RockMossLarge",
+  "foliage": false
+ },
+ "SM_RockMossLarge_C": {
+  "src": "rock_moss_set_01",
+  "tris_before": 5000,
+  "tris": 4000,
+  "dims_m": [
+   2.109,
+   2.08,
+   1.1
+  ],
+  "material": "M_RockMossLarge",
+  "foliage": false
+ },
+ "SM_RockMossLarge_D": {
+  "src": "rock_moss_set_01",
+  "tris_before": 10589,
+  "tris": 3999,
+  "dims_m": [
+   2.126,
+   1.965,
+   1.768
+  ],
+  "material": "M_RockMossLarge",
+  "foliage": false
+ },
+ "SM_RockMossLarge_E": {
+  "src": "rock_moss_set_01",
+  "tris_before": 16548,
+  "tris": 4000,
+  "dims_m": [
+   1.817,
+   2.999,
+   1.207
+  ],
+  "material": "M_RockMossLarge",
+  "foliage": false
+ },
+ "SM_RockMossLarge_F": {
+  "src": "rock_moss_set_01",
+  "tris_before": 8994,
+  "tris": 4000,
+  "dims_m": [
+   2.125,
+   2.757,
+   1.26
+  ],
+  "material": "M_RockMossLarge",
+  "foliage": false
+ },
+ "SM_BoulderDry_A": {
+  "src": "boulder_01",
+  "tris_before": 8264,
+  "tris": 8264,
+  "dims_m": [
+   1.27,
+   1.829,
+   1.002
+  ],
+  "material": "M_BoulderDryA",
+  "foliage": false
+ },
+ "SM_BoulderDry_B": {
+  "src": "namaqualand_boulder_02",
+  "tris_before": 97964,
+  "tris": 8000,
+  "dims_m": [
+   2.533,
+   1.234,
+   0.879
+  ],
+  "material": "M_BoulderDryB",
+  "foliage": false
+ },
+ "SM_DeadLog_A": {
+  "src": "dead_tree_trunk_02",
+  "tris_before": 10390,
+  "tris": 10390,
+  "dims_m": [
+   4.053,
+   1.057,
+   1.054
+  ],
+  "material": "M_DeadLog",
+  "foliage": false
+ },
+ "SM_DryBranch_A": {
+  "src": "dry_branches_medium_01",
+  "tris_before": 5933,
+  "tris": 2499,
+  "dims_m": [
+   0.323,
+   1.298,
+   0.34
+  ],
+  "material": "M_DryBranches",
+  "foliage": false
+ },
+ "SM_DryBranch_B": {
+  "src": "dry_branches_medium_01",
+  "tris_before": 5254,
+  "tris": 2500,
+  "dims_m": [
+   0.151,
+   1.038,
+   0.142
+  ],
+  "material": "M_DryBranches",
+  "foliage": false
+ },
+ "SM_DryBranch_C": {
+  "src": "dry_branches_medium_01",
+  "tris_before": 5616,
+  "tris": 2500,
+  "dims_m": [
+   0.129,
+   0.776,
+   0.143
+  ],
+  "material": "M_DryBranches",
+  "foliage": false
+ },
+ "SM_Stump_A": {
+  "src": "tree_stump_01",
+  "tris_before": 41046,
+  "tris": 6000,
+  "dims_m": [
+   1.424,
+   1.59,
+   0.572
+  ],
+  "material": "M_Stump",
+  "foliage": false
+ },
+ "SM_RootCluster_A": {
+  "src": "root_cluster_01",
+  "tris_before": 225261,
+  "tris": 8999,
+  "dims_m": [
+   4.123,
+   2.685,
+   1.507
+  ],
+  "material": "M_RootCluster",
+  "foliage": false
+ },
+ "SM_PineRoots_A": {
+  "src": "pine_roots",
+  "tris_before": 81625,
+  "tris": 6000,
+  "dims_m": [
+   1.74,
+   0.826,
+   0.143
+  ],
+  "material": "M_PineRootsA",
+  "foliage": false
+ },
+ "SM_PineRoots_B": {
+  "src": "pine_roots",
+  "tris_before": 81068,
+  "tris": 6000,
+  "dims_m": [
+   1.629,
+   0.993,
+   0.148
+  ],
+  "material": "M_PineRootsB",
+  "foliage": false
+ },
+ "SM_Fern_A": {
+  "src": "fern_02",
+  "tris_before": 784,
+  "tris": 784,
+  "dims_m": [
+   0.552,
+   0.613,
+   0.287
+  ],
+  "material": "M_Fern",
+  "foliage": true
+ },
+ "SM_Fern_B": {
+  "src": "fern_02",
+  "tris_before": 2384,
+  "tris": 2384,
+  "dims_m": [
+   0.99,
+   0.894,
+   0.428
+  ],
+  "material": "M_Fern",
+  "foliage": true
+ },
+ "SM_Fern_C": {
+  "src": "fern_02",
+  "tris_before": 2248,
+  "tris": 2248,
+  "dims_m": [
+   0.874,
+   0.765,
+   0.349
+  ],
+  "material": "M_Fern",
+  "foliage": true
+ },
+ "SM_Fern_D": {
+  "src": "fern_02",
+  "tris_before": 816,
+  "tris": 816,
+  "dims_m": [
+   0.573,
+   0.593,
+   0.213
+  ],
+  "material": "M_Fern",
+  "foliage": true
+ },
+ "SM_GrassA_LargeA": {
+  "src": "grass_medium_01",
+  "tris_before": 6422,
+  "tris": 2000,
+  "dims_m": [
+   0.317,
+   0.327,
+   0.146
+  ],
+  "material": "M_GrassA",
+  "foliage": true
+ },
+ "SM_GrassA_LargeB": {
+  "src": "grass_medium_01",
+  "tris_before": 4626,
+  "tris": 2000,
+  "dims_m": [
+   0.279,
+   0.272,
+   0.169
+  ],
+  "material": "M_GrassA",
+  "foliage": true
+ },
+ "SM_GrassA_LargeC": {
+  "src": "grass_medium_01",
+  "tris_before": 5945,
+  "tris": 1999,
+  "dims_m": [
+   0.279,
+   0.255,
+   0.142
+  ],
+  "material": "M_GrassA",
+  "foliage": true
+ },
+ "SM_GrassA_MidA": {
+  "src": "grass_medium_01",
+  "tris_before": 2287,
+  "tris": 2000,
+  "dims_m": [
+   0.216,
+   0.221,
+   0.218
+  ],
+  "material": "M_GrassA",
+  "foliage": true
+ },
+ "SM_GrassA_MidB": {
+  "src": "grass_medium_01",
+  "tris_before": 1257,
+  "tris": 1257,
+  "dims_m": [
+   0.188,
+   0.201,
+   0.178
+  ],
+  "material": "M_GrassA",
+  "foliage": true
+ },
+ "SM_GrassA_MidC": {
+  "src": "grass_medium_01",
+  "tris_before": 1466,
+  "tris": 1466,
+  "dims_m": [
+   0.192,
+   0.203,
+   0.145
+  ],
+  "material": "M_GrassA",
+  "foliage": true
+ },
+ "SM_GrassA_SmallA": {
+  "src": "grass_medium_01",
+  "tris_before": 833,
+  "tris": 833,
+  "dims_m": [
+   0.185,
+   0.162,
+   0.14
+  ],
+  "material": "M_GrassA",
+  "foliage": true
+ },
+ "SM_GrassA_SmallB": {
+  "src": "grass_medium_01",
+  "tris_before": 653,
+  "tris": 653,
+  "dims_m": [
+   0.166,
+   0.19,
+   0.1
+  ],
+  "material": "M_GrassA",
+  "foliage": true
+ },
+ "SM_GrassA_TallA": {
+  "src": "grass_medium_01",
+  "tris_before": 290,
+  "tris": 290,
+  "dims_m": [
+   0.161,
+   0.159,
+   0.323
+  ],
+  "material": "M_GrassA",
+  "foliage": true
+ },
+ "SM_GrassA_TallB": {
+  "src": "grass_medium_01",
+  "tris_before": 310,
+  "tris": 310,
+  "dims_m": [
+   0.15,
+   0.135,
+   0.286
+  ],
+  "material": "M_GrassA",
+  "foliage": true
+ },
+ "SM_GrassA_TallC": {
+  "src": "grass_medium_01",
+  "tris_before": 340,
+  "tris": 340,
+  "dims_m": [
+   0.153,
+   0.128,
+   0.236
+  ],
+  "material": "M_GrassA",
+  "foliage": true
+ },
+ "SM_GrassB_A": {
+  "src": "grass_medium_02",
+  "tris_before": 714,
+  "tris": 714,
+  "dims_m": [
+   0.119,
+   0.12,
+   0.157
+  ],
+  "material": "M_GrassB",
+  "foliage": true
+ },
+ "SM_GrassB_B": {
+  "src": "grass_medium_02",
+  "tris_before": 1760,
+  "tris": 1760,
+  "dims_m": [
+   0.179,
+   0.199,
+   0.18
+  ],
+  "material": "M_GrassB",
+  "foliage": true
+ },
+ "SM_GrassB_C": {
+  "src": "grass_medium_02",
+  "tris_before": 1215,
+  "tris": 1215,
+  "dims_m": [
+   0.262,
+   0.25,
+   0.232
+  ],
+  "material": "M_GrassB",
+  "foliage": true
+ },
+ "SM_GrassB_D": {
+  "src": "grass_medium_02",
+  "tris_before": 2489,
+  "tris": 2000,
+  "dims_m": [
+   0.317,
+   0.362,
+   0.26
+  ],
+  "material": "M_GrassB",
+  "foliage": true
+ },
+ "SM_GrassB_E": {
+  "src": "grass_medium_02",
+  "tris_before": 1664,
+  "tris": 1664,
+  "dims_m": [
+   0.356,
+   0.433,
+   0.403
+  ],
+  "material": "M_GrassB",
+  "foliage": true
+ },
+ "SM_Shrub_A": {
+  "src": "shrub_04",
+  "tris_before": 3726,
+  "tris": 2499,
+  "dims_m": [
+   0.136,
+   0.109,
+   0.195
+  ],
+  "material": "M_Shrub",
+  "foliage": true
+ },
+ "SM_Shrub_B": {
+  "src": "shrub_04",
+  "tris_before": 6589,
+  "tris": 2499,
+  "dims_m": [
+   0.143,
+   0.166,
+   0.208
+  ],
+  "material": "M_Shrub",
+  "foliage": true
+ },
+ "SM_Shrub_C": {
+  "src": "shrub_04",
+  "tris_before": 6177,
+  "tris": 2500,
+  "dims_m": [
+   0.156,
+   0.169,
+   0.28
+  ],
+  "material": "M_Shrub",
+  "foliage": true
+ },
+ "SM_Shrub_D": {
+  "src": "shrub_04",
+  "tris_before": 10835,
+  "tris": 2499,
+  "dims_m": [
+   0.218,
+   0.187,
+   0.274
+  ],
+  "material": "M_Shrub",
+  "foliage": true
+ },
+ "SM_FlowerYellow_A": {
+  "src": "celandine_01",
+  "tris_before": 622,
+  "tris": 622,
+  "dims_m": [
+   0.276,
+   0.228,
+   0.186
+  ],
+  "material": "M_FlowerYellow",
+  "foliage": true
+ },
+ "SM_FlowerYellow_B": {
+  "src": "celandine_01",
+  "tris_before": 599,
+  "tris": 599,
+  "dims_m": [
+   0.252,
+   0.307,
+   0.145
+  ],
+  "material": "M_FlowerYellow",
+  "foliage": true
+ },
+ "SM_FlowerYellow_C": {
+  "src": "celandine_01",
+  "tris_before": 4301,
+  "tris": 1500,
+  "dims_m": [
+   0.257,
+   0.186,
+   0.175
+  ],
+  "material": "M_FlowerYellow",
+  "foliage": true
+ },
+ "SM_FlowerYellow_D": {
+  "src": "celandine_01",
+  "tris_before": 3002,
+  "tris": 1500,
+  "dims_m": [
+   0.187,
+   0.223,
+   0.149
+  ],
+  "material": "M_FlowerYellow",
+  "foliage": true
+ },
+ "SM_FlowerYellow_E": {
+  "src": "celandine_01",
+  "tris_before": 442,
+  "tris": 442,
+  "dims_m": [
+   0.188,
+   0.216,
+   0.124
+  ],
+  "material": "M_FlowerYellow",
+  "foliage": true
+ },
+ "SM_Dandelion_A": {
+  "src": "dandelion_01",
+  "tris_before": 1933,
+  "tris": 1933,
+  "dims_m": [
+   0.22,
+   0.258,
+   0.162
+  ],
+  "material": "M_Dandelion",
+  "foliage": true
+ },
+ "SM_Dandelion_B": {
+  "src": "dandelion_01",
+  "tris_before": 1873,
+  "tris": 1873,
+  "dims_m": [
+   0.202,
+   0.218,
+   0.114
+  ],
+  "material": "M_Dandelion",
+  "foliage": true
+ },
+ "SM_Dandelion_C": {
+  "src": "dandelion_01",
+  "tris_before": 998,
+  "tris": 998,
+  "dims_m": [
+   0.17,
+   0.167,
+   0.101
+  ],
+  "material": "M_Dandelion",
+  "foliage": true
+ },
+ "SM_Dandelion_D": {
+  "src": "dandelion_01",
+  "tris_before": 880,
+  "tris": 880,
+  "dims_m": [
+   0.122,
+   0.144,
+   0.056
+  ],
+  "material": "M_Dandelion",
+  "foliage": true
+ },
+ "SM_Dandelion_E": {
+  "src": "dandelion_01",
+  "tris_before": 520,
+  "tris": 520,
+  "dims_m": [
+   0.214,
+   0.205,
+   0.049
+  ],
+  "material": "M_Dandelion",
+  "foliage": true
+ },
+ "T_LeafClusterGreen": "procedural leaf cluster from island_tree_02 leaf photos (CC0)",
+ "T_LeafClusterLush": "procedural leaf cluster from island_tree_02 leaf photos (CC0)",
+ "T_LeafClusterDry": "procedural leaf cluster from island_tree_02 leaf photos (CC0)",
+ "SM_TreeBroadleaf_A": {
+  "src": "island_tree_02",
+  "wood_tris": 13999,
+  "canopy_cards": 241,
+  "canopy_tris": 964,
+  "dims_m": [
+   4.21,
+   4.07,
+   3.41
+  ]
+ },
+ "SM_TreeBroadleaf_B": {
+  "src": "tree_small_02",
+  "wood_tris": 12999,
+  "canopy_cards": 205,
+  "canopy_tris": 820,
+  "dims_m": [
+   2.92,
+   4.29,
+   4.56
+  ]
+ }
+}

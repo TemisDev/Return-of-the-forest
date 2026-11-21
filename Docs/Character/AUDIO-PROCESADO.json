@@ -1,0 +1,398 @@
+[
+ {
+  "archivo": "Ambience/AMB_Viento_Seco.ogg",
+  "tipo": "bucle 2D degradado",
+  "fuente": "https://opengameart.org/content/windy-ambient-noise",
+  "segundos": 62.0,
+  "canales": 2,
+  "rms_dbfs": -18.4,
+  "pico_dbfs": -6.9
+ },
+ {
+  "archivo": "Ambience/AMB_Brisa_Hojas.ogg",
+  "tipo": "bucle 2D restaurado",
+  "fuente": "https://opengameart.org/content/park-ambiences",
+  "segundos": 62.0,
+  "canales": 2,
+  "rms_dbfs": -25.2,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Ambience/AMB_Rio.ogg",
+  "tipo": "bucle 2D restaurado",
+  "fuente": "https://opengameart.org/content/park-ambiences",
+  "segundos": 62.0,
+  "canales": 2,
+  "rms_dbfs": -19.8,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Ambience/AMB_Aves.ogg",
+  "tipo": "bucle 2D restaurado",
+  "fuente": "https://opengameart.org/content/park-ambiences",
+  "segundos": 62.0,
+  "canales": 2,
+  "rms_dbfs": -21.9,
+  "pico_dbfs": -3.0
+ },
+ {
+  "archivo": "Ambience/AMB_Corriente_3D.ogg",
+  "tipo": "bucle 3D restaurado (cauce)",
+  "fuente": "https://opengameart.org/content/30-cc0-sfx-loops",
+  "segundos": 11.05,
+  "canales": 1,
+  "rms_dbfs": -14.9,
+  "pico_dbfs": -1.7
+ },
+ {
+  "archivo": "Ambience/AMB_Ave_01.ogg",
+  "tipo": "puntual 3D restaurado",
+  "fuente": "https://opengameart.org/content/ambient-bird-sounds",
+  "segundos": 2.0,
+  "canales": 1,
+  "rms_dbfs": -20.0,
+  "pico_dbfs": -4.1
+ },
+ {
+  "archivo": "Ambience/AMB_Ave_02.ogg",
+  "tipo": "puntual 3D restaurado",
+  "fuente": "https://opengameart.org/content/ambient-bird-sounds",
+  "segundos": 2.0,
+  "canales": 1,
+  "rms_dbfs": -23.3,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Ambience/AMB_Ave_03.ogg",
+  "tipo": "puntual 3D restaurado",
+  "fuente": "https://opengameart.org/content/ambient-bird-sounds",
+  "segundos": 2.0,
+  "canales": 1,
+  "rms_dbfs": -20.4,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Ambience/AMB_Ave_04.ogg",
+  "tipo": "puntual 3D restaurado",
+  "fuente": "https://opengameart.org/content/ambient-bird-sounds",
+  "segundos": 2.0,
+  "canales": 1,
+  "rms_dbfs": -20.0,
+  "pico_dbfs": -1.4
+ },
+ {
+  "archivo": "Ambience/AMB_Ave_05.ogg",
+  "tipo": "puntual 3D restaurado",
+  "fuente": "https://opengameart.org/content/ambient-bird-sounds",
+  "segundos": 2.0,
+  "canales": 1,
+  "rms_dbfs": -21.5,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Ambience/AMB_Ave_06.ogg",
+  "tipo": "puntual 3D restaurado",
+  "fuente": "https://opengameart.org/content/bird-chirping-sounds",
+  "segundos": 1.76,
+  "canales": 1,
+  "rms_dbfs": -20.9,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Ambience/AMB_Crujido_01.ogg",
+  "tipo": "puntual 3D degradado",
+  "fuente": "https://opengameart.org/content/50-rpg-sound-effects",
+  "segundos": 0.52,
+  "canales": 1,
+  "rms_dbfs": -24.4,
+  "pico_dbfs": -7.9
+ },
+ {
+  "archivo": "Ambience/AMB_Crujido_02.ogg",
+  "tipo": "puntual 3D degradado",
+  "fuente": "https://opengameart.org/content/50-rpg-sound-effects",
+  "segundos": 0.72,
+  "canales": 1,
+  "rms_dbfs": -24.4,
+  "pico_dbfs": -7.3
+ },
+ {
+  "archivo": "Ambience/AMB_Crujido_03.ogg",
+  "tipo": "puntual 3D degradado",
+  "fuente": "https://opengameart.org/content/50-rpg-sound-effects",
+  "segundos": 0.26,
+  "canales": 1,
+  "rms_dbfs": -24.4,
+  "pico_dbfs": -11.7
+ },
+ {
+  "archivo": "Ambience/AMB_Rama_Seca_01.ogg",
+  "tipo": "puntual 3D degradado",
+  "fuente": "https://opengameart.org/content/35-wooden-crackshitsdestructions",
+  "segundos": 1.84,
+  "canales": 1,
+  "rms_dbfs": -26.0,
+  "pico_dbfs": -6.8
+ },
+ {
+  "archivo": "Ambience/AMB_Rama_Seca_02.ogg",
+  "tipo": "puntual 3D degradado",
+  "fuente": "https://opengameart.org/content/35-wooden-crackshitsdestructions",
+  "segundos": 1.23,
+  "canales": 1,
+  "rms_dbfs": -26.0,
+  "pico_dbfs": -6.3
+ },
+ {
+  "archivo": "Ambience/AMB_Rama_Seca_03.ogg",
+  "tipo": "puntual 3D degradado",
+  "fuente": "https://opengameart.org/content/35-wooden-crackshitsdestructions",
+  "segundos": 1.32,
+  "canales": 1,
+  "rms_dbfs": -26.0,
+  "pico_dbfs": -7.0
+ },
+ {
+  "archivo": "Sfx/SFX_Paso_Tierra_01.ogg",
+  "tipo": "paso",
+  "fuente": "https://opengameart.org/content/fantozzis-footsteps-grasssand-stone",
+  "segundos": 0.43,
+  "canales": 1,
+  "rms_dbfs": -24.8,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Paso_Tierra_02.ogg",
+  "tipo": "paso",
+  "fuente": "https://opengameart.org/content/fantozzis-footsteps-grasssand-stone",
+  "segundos": 0.32,
+  "canales": 1,
+  "rms_dbfs": -24.2,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Paso_Tierra_03.ogg",
+  "tipo": "paso",
+  "fuente": "https://opengameart.org/content/fantozzis-footsteps-grasssand-stone",
+  "segundos": 0.3,
+  "canales": 1,
+  "rms_dbfs": -26.3,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Paso_Tierra_04.ogg",
+  "tipo": "paso",
+  "fuente": "https://opengameart.org/content/fantozzis-footsteps-grasssand-stone",
+  "segundos": 0.41,
+  "canales": 1,
+  "rms_dbfs": -26.5,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Paso_Tierra_05.ogg",
+  "tipo": "paso",
+  "fuente": "https://opengameart.org/content/fantozzis-footsteps-grasssand-stone",
+  "segundos": 0.34,
+  "canales": 1,
+  "rms_dbfs": -26.4,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Paso_Tierra_06.ogg",
+  "tipo": "paso",
+  "fuente": "https://opengameart.org/content/fantozzis-footsteps-grasssand-stone",
+  "segundos": 0.33,
+  "canales": 1,
+  "rms_dbfs": -23.4,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Salto_01.ogg",
+  "tipo": "salto",
+  "fuente": "https://opengameart.org/content/50-rpg-sound-effects",
+  "segundos": 0.51,
+  "canales": 1,
+  "rms_dbfs": -22.6,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Salto_02.ogg",
+  "tipo": "salto",
+  "fuente": "https://opengameart.org/content/50-rpg-sound-effects",
+  "segundos": 0.42,
+  "canales": 1,
+  "rms_dbfs": -19.5,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Salto_03.ogg",
+  "tipo": "salto",
+  "fuente": "https://opengameart.org/content/50-rpg-sound-effects",
+  "segundos": 0.35,
+  "canales": 1,
+  "rms_dbfs": -21.1,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Aterrizaje_01.ogg",
+  "tipo": "aterrizaje",
+  "fuente": "https://opengameart.org/content/fantozzis-footsteps-grasssand-stone",
+  "segundos": 0.33,
+  "canales": 1,
+  "rms_dbfs": -20.4,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Aterrizaje_02.ogg",
+  "tipo": "aterrizaje",
+  "fuente": "https://opengameart.org/content/fantozzis-footsteps-grasssand-stone",
+  "segundos": 0.34,
+  "canales": 1,
+  "rms_dbfs": -26.4,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Interaccion_01.ogg",
+  "tipo": "interacción válida",
+  "fuente": "https://opengameart.org/content/50-rpg-sound-effects",
+  "segundos": 0.16,
+  "canales": 1,
+  "rms_dbfs": -21.3,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Interaccion_02.ogg",
+  "tipo": "interacción válida",
+  "fuente": "https://opengameart.org/content/50-rpg-sound-effects",
+  "segundos": 0.16,
+  "canales": 1,
+  "rms_dbfs": -21.3,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Retirar_Tronco_01.ogg",
+  "tipo": "retirar tronco",
+  "fuente": "https://opengameart.org/content/35-wooden-crackshitsdestructions",
+  "segundos": 2.64,
+  "canales": 1,
+  "rms_dbfs": -15.7,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Retirar_Tronco_02.ogg",
+  "tipo": "retirar tronco",
+  "fuente": "https://opengameart.org/content/35-wooden-crackshitsdestructions",
+  "segundos": 1.98,
+  "canales": 1,
+  "rms_dbfs": -16.8,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Retirar_Tronco_03.ogg",
+  "tipo": "retirar tronco",
+  "fuente": "https://opengameart.org/content/35-wooden-crackshitsdestructions",
+  "segundos": 2.02,
+  "canales": 1,
+  "rms_dbfs": -14.9,
+  "pico_dbfs": -1.2
+ },
+ {
+  "archivo": "Sfx/SFX_Retirar_Rocas_01.ogg",
+  "tipo": "retirar rocas",
+  "fuente": "https://opengameart.org/content/75-cc0-breaking-falling-hit-sfx",
+  "segundos": 0.46,
+  "canales": 1,
+  "rms_dbfs": -28.0,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Retirar_Rocas_02.ogg",
+  "tipo": "retirar rocas",
+  "fuente": "https://opengameart.org/content/75-cc0-breaking-falling-hit-sfx",
+  "segundos": 0.82,
+  "canales": 1,
+  "rms_dbfs": -28.9,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Retirar_Rocas_03.ogg",
+  "tipo": "retirar rocas",
+  "fuente": "https://opengameart.org/content/75-cc0-breaking-falling-hit-sfx",
+  "segundos": 0.45,
+  "canales": 1,
+  "rms_dbfs": -30.7,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Retirar_Rocas_04.ogg",
+  "tipo": "retirar rocas",
+  "fuente": "https://opengameart.org/content/75-cc0-breaking-falling-hit-sfx",
+  "segundos": 0.74,
+  "canales": 1,
+  "rms_dbfs": -28.5,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Retirar_Ramas_01.ogg",
+  "tipo": "retirar ramas",
+  "fuente": "https://opengameart.org/content/35-wooden-crackshitsdestructions + 50-rpg-sound-effects",
+  "segundos": 1.41,
+  "canales": 1,
+  "rms_dbfs": -22.2,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Retirar_Ramas_02.ogg",
+  "tipo": "retirar ramas",
+  "fuente": "https://opengameart.org/content/35-wooden-crackshitsdestructions + 50-rpg-sound-effects",
+  "segundos": 1.86,
+  "canales": 1,
+  "rms_dbfs": -21.8,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Retirar_Ramas_03.ogg",
+  "tipo": "retirar ramas",
+  "fuente": "https://opengameart.org/content/35-wooden-crackshitsdestructions + 50-rpg-sound-effects",
+  "segundos": 0.79,
+  "canales": 1,
+  "rms_dbfs": -18.4,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Salida_Desbloqueo_01.ogg",
+  "tipo": "desbloqueo de salida",
+  "fuente": "https://opengameart.org/content/50-rpg-sound-effects",
+  "segundos": 0.9,
+  "canales": 1,
+  "rms_dbfs": -22.2,
+  "pico_dbfs": -1.0
+ },
+ {
+  "archivo": "Sfx/SFX_Restauracion_01.ogg",
+  "tipo": "restauración ambiental",
+  "fuente": "síntesis propia + https://opengameart.org/content/40-cc0-water-splash-slime-sfx",
+  "segundos": 4.2,
+  "canales": 1,
+  "rms_dbfs": -20.0,
+  "pico_dbfs": -5.6
+ },
+ {
+  "archivo": "Sfx/SFX_Nivel_Completado_01.ogg",
+  "tipo": "final del nivel",
+  "fuente": "síntesis propia",
+  "segundos": 4.6,
+  "canales": 1,
+  "rms_dbfs": -20.0,
+  "pico_dbfs": -8.7
+ },
+ {
+  "archivo": "Music/MUS_Bosque_Hermoso.ogg",
+  "tipo": "música en bucle",
+  "fuente": "https://opengameart.org/content/beautiful-forest-orchestra",
+  "segundos": 67.0,
+  "canales": 2,
+  "rms_dbfs": -20.0,
+  "pico_dbfs": -2.6
+ }
+]

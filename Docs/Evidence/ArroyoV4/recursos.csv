@@ -1,0 +1,17 @@
+recurso,uso,derivado,observacion
+RiverStoneCluster_V4.obj,barranco y obstaculo 02,ArtV4/Combined_RiverStones.asset y VIS_Combined_RiverStones.prefab,4 grupos combinados sin perder indices; original conservado
+ReedFan_V4.obj,ribera degradada y restaurada,ArtV4/Combined_ReedFan.asset y VIS_Combined_ReedFan.prefab,13 grupos combinados; escala y color por estado
+MossyBranch_V4.obj,obstaculos 01 y 03,instancias VIS_V4_MossyBranch con ArtV4/Branch.mat,ajustadas al collider existente; sin UV ni textura estirada
+FoamRibbon_V4.obj,4 franjas sobre agua restaurada,ArtV4/Foam.mat,URP Unlit transparente doble cara; sin collider ni sombra
+bank_dry_detail_v4.png,suelo degradado,ArtV4/BankDry.mat,textura sobre superficie con UV
+bank_wet_detail_v4.png,suelo restaurado,ArtV4/BankWet.mat,textura sobre superficie con UV
+rock_matte_detail_v4.png,fondo del barranco degradado,ArtV4/CliffDry.mat,no se aplica a OBJ sin UV
+moss_matte_detail_v4.png,fondo del barranco restaurado,ArtV4/CliffMoss.mat,no se aplica a OBJ sin UV
+wood_matte_detail_v4.png,pilares y dintel de salida,ArtV4/ExitWood.mat,geometria Cube existente con UV
+foam_alpha_v4.png,espuma,ArtV4/Foam.mat,alfa 0.8; ZWrite 0; queue 3000; hueco sobre agua 0.035 m
+interact_focus_v4.png,HUD de interaccion,ArroyoPrototypeHud,solo presentacion
+progress_leaf_v4.png,HUD progreso,ArroyoPrototypeHud,contador existente
+exit_ready_v4.png,HUD y letrero restaurado,ArtV4/ExitSign.mat,quad sin collider
+restoration_soft_particle_v4.png,efecto de restauracion,ArtV4/SoftRestoration.mat,24 particulas como maximo; emision de T09 existente
+restoration_v3.png,icono de finalizacion,HUD existente,recurso V3 reutilizado
+agua y vegetacion V3,base visual conservada,ArtV3 y VisualIntegrationV3,agua con textura estatica; arboles y helechos conservados

@@ -1,0 +1,15 @@
+{
+  "identifier": "RC1",
+  "commit": "8838ff5c74038a5399d15b141e30a6b60e5fc949",
+  "unity": "6000.3.22f1",
+  "builtAtUtc": "2026-11-20T05:11:10.5342065Z",
+  "target": "StandaloneWindows64",
+  "scene": "Assets/_Bosque/Scenes/Integration/ArroyoPlayable.unity",
+  "options": "None",
+  "development": false,
+  "optionalQaVerifier": true,
+  "errors": 0,
+  "warnings": 0,
+  "totalBytes": 103846601,
+  "buildSeconds": 175.0540743
+}

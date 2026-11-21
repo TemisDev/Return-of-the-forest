@@ -1,0 +1,164 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a760ad518419174ab9f2e6ca531ff64, type: 3}
+  m_Name: SFX_Biblioteca
+  m_EditorClassIdentifier: Bosque.Runtime::Bosque.Audio.SfxLibrary
+  cues:
+  - id: footstep
+    clips:
+    - {fileID: 8300000, guid: 3f6d02b03393ce142a1c214d9eaf728c, type: 3}
+    - {fileID: 8300000, guid: 6ee40f7aff6e34b4782e4b09a725a8a1, type: 3}
+    - {fileID: 8300000, guid: adae17957a402014a9da1326814367b1, type: 3}
+    - {fileID: 8300000, guid: cb50ef94360de5f429f45990252daf62, type: 3}
+    - {fileID: 8300000, guid: 9e137328813475b4ea613a60cddf450c, type: 3}
+    - {fileID: 8300000, guid: 5cb8c457bbba5dd48bd8e60ae9ac3848, type: 3}
+    volume: 0.5
+    pitch: {x: 0.88, y: 1.1}
+    spatialBlend: 0.8
+    minDistance: 2
+    maxDistance: 18
+    cooldown: 0.14
+    bus: 3
+  - id: jump
+    clips:
+    - {fileID: 8300000, guid: a8012781b8a6a8b46ad4600105f65746, type: 3}
+    - {fileID: 8300000, guid: 0f4dc5c4eb8d5ce45b8e9343b3758cce, type: 3}
+    - {fileID: 8300000, guid: 15dc2c86a73d48b41a754ce394eee881, type: 3}
+    volume: 0.55
+    pitch: {x: 0.95, y: 1.08}
+    spatialBlend: 0.8
+    minDistance: 2
+    maxDistance: 18
+    cooldown: 0.3
+    bus: 3
+  - id: land
+    clips:
+    - {fileID: 8300000, guid: 469db53171d999942ae9ba4831509258, type: 3}
+    - {fileID: 8300000, guid: 1c5dda3281c0ebd4db4e643a39cf26d7, type: 3}
+    volume: 0.7
+    pitch: {x: 0.85, y: 1}
+    spatialBlend: 0.8
+    minDistance: 2
+    maxDistance: 18
+    cooldown: 0.25
+    bus: 3
+  - id: interact
+    clips:
+    - {fileID: 8300000, guid: 2ed2d5d8fbcf84644b4657009e6619e0, type: 3}
+    - {fileID: 8300000, guid: b0a1313ad5eca9142bb6e00215c7599b, type: 3}
+    volume: 0.6
+    pitch: {x: 0.95, y: 1.05}
+    spatialBlend: 0.6
+    minDistance: 2
+    maxDistance: 15
+    cooldown: 0.3
+    bus: 3
+  - id: remove.log
+    clips:
+    - {fileID: 8300000, guid: b97d2e47e20d12345bf0be3adeeb5b45, type: 3}
+    - {fileID: 8300000, guid: ddf1e745ec88ff542aee449394bcb37b, type: 3}
+    - {fileID: 8300000, guid: 8e4a7f778f0fc1844becc3f7fdd49783, type: 3}
+    volume: 0.9
+    pitch: {x: 0.95, y: 1.05}
+    spatialBlend: 1
+    minDistance: 3
+    maxDistance: 40
+    cooldown: 0.5
+    bus: 3
+  - id: remove.rocks
+    clips:
+    - {fileID: 8300000, guid: ca0a0e5386c1ed040a4ea2f33a4088aa, type: 3}
+    - {fileID: 8300000, guid: 855483385e9274b4eb68f031f522ac4c, type: 3}
+    - {fileID: 8300000, guid: 24dae1c93cede4d479dee561f09603c3, type: 3}
+    - {fileID: 8300000, guid: bff6f24362046a04ba030c68a62db19d, type: 3}
+    volume: 1
+    pitch: {x: 0.9, y: 1.05}
+    spatialBlend: 1
+    minDistance: 3
+    maxDistance: 40
+    cooldown: 0.5
+    bus: 3
+  - id: remove.branches
+    clips:
+    - {fileID: 8300000, guid: 52cdbce11bb11c343bc2142f55df230e, type: 3}
+    - {fileID: 8300000, guid: b62bf2033315eaa4291daedcdc862b18, type: 3}
+    - {fileID: 8300000, guid: ba301b8708397cb40a5d5dafe4e10fc6, type: 3}
+    volume: 0.9
+    pitch: {x: 0.95, y: 1.08}
+    spatialBlend: 1
+    minDistance: 3
+    maxDistance: 40
+    cooldown: 0.5
+    bus: 3
+  - id: restore
+    clips:
+    - {fileID: 8300000, guid: bd4377e8b49dabc43b9731ab5cd17559, type: 3}
+    volume: 0.85
+    pitch: {x: 1, y: 1}
+    spatialBlend: 0
+    minDistance: 1
+    maxDistance: 50
+    cooldown: 2
+    bus: 3
+  - id: exit.unlock
+    clips:
+    - {fileID: 8300000, guid: 32451e41af0e0804eabc9015f4d95fe6, type: 3}
+    volume: 0.8
+    pitch: {x: 0.9, y: 0.95}
+    spatialBlend: 1
+    minDistance: 4
+    maxDistance: 60
+    cooldown: 2
+    bus: 3
+  - id: complete
+    clips:
+    - {fileID: 8300000, guid: ca6a3fc0b3421b649b28dc5ef27976c0, type: 3}
+    volume: 0.8
+    pitch: {x: 1, y: 1}
+    spatialBlend: 0
+    minDistance: 1
+    maxDistance: 50
+    cooldown: 2
+    bus: 3
+  - id: grow
+    clips:
+    - {fileID: 8300000, guid: 9b8a382a089f5cf4ea82a322d5a6094d, type: 3}
+    - {fileID: 8300000, guid: 9f772e21e2592294aa41d5a15fe777f8, type: 3}
+    - {fileID: 8300000, guid: 4a0ac3deb7a95c84da760b1966d00c65, type: 3}
+    volume: 0.85
+    pitch: {x: 0.97, y: 1.04}
+    spatialBlend: 1
+    minDistance: 2
+    maxDistance: 30
+    cooldown: 0.4
+    bus: 3
+  - id: grow.fail
+    clips:
+    - {fileID: 8300000, guid: a076687a82a13f449b15faef0001dbed, type: 3}
+    - {fileID: 8300000, guid: 92a15740fc04ed54ca8282b5d310c9d0, type: 3}
+    volume: 0.7
+    pitch: {x: 0.92, y: 1}
+    spatialBlend: 1
+    minDistance: 2
+    maxDistance: 20
+    cooldown: 0.5
+    bus: 3
+  - id: bridge
+    clips:
+    - {fileID: 8300000, guid: c8ffe1db2b621954b8a63c6f96f2137f, type: 3}
+    volume: 0.9
+    pitch: {x: 1, y: 1}
+    spatialBlend: 0.6
+    minDistance: 4
+    maxDistance: 50
+    cooldown: 2
+    bus: 3

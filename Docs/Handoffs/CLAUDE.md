@@ -1,5 +1,54 @@
 # Relevo de Claude Code
 
+# Bloque 04: Zona 3, "El refugio perdido", fauna y final (21/11/2026)
+
+- **Rama:** `feature/character-animation-audio`, commit `5cc5a98`.
+- **Build:** `Builds/Windows/V9-Zona3-Refugio`, con las tres zonas encadenadas. Para entrar directamente en la zona 3: `-zona refugio`.
+- **Escena:** `Scenes/Zonas/RefugioPerdido.unity`, generada con `Bosque.LevelEditor.RefugioBuilder.BuildAllBatch`.
+  - También construye el zorro (`FaunaBuilder`), integra la transición en el claro y registra las tres escenas.
+- **Mecánicas:**
+  - E recoge y coloca elementos (`RefugeItem`, `RefugeSpot`, `ItemCarrier`) y Q hace crecer el matorral.
+  - El zorro de neblina recorre una ruta fija (`FaunaRoute`) con plano de cámara (`FaunaCinematic`).
+  - Con las tres zonas aparece el final en `RefugioHud`.
+- **Animal:** el modelo Fox de Khronos (CC0 + CC-BY 4.0, **requiere atribución en los créditos**), procesado con `Docs/Fauna/pipeline/preparar_zorro.py`.
+- **Pruebas:** PlayMode 26/26 y EditMode 38/38. El verificador sobre V9 da `passed=True`.
+- **Informe y pruebas manuales Z3-M01..M08:** `Docs/Zonas/Refugio/INFORME-ZONA-3.md`.
+
+# Bloque 03: Zona 2, "El claro vacío" (21/11/2026)
+
+- **Rama:** `feature/character-animation-audio`, commits `7855cdd` y `40b863c`.
+- **Build:** `Builds/Windows/V8-Zona2-Claro`. Para entrar directamente en la zona 2: `-zona claro`.
+- **Escena:** `Scenes/Zonas/ClaroVacio.unity`, generada con `Bosque.LevelEditor.ClaroBuilder.BuildAllBatch`, que además integra la transición en `ArroyoPlayable`.
+- **Habilidad Q:** `Runtime/Abilities/GrowthAbility.cs`, con lechos `GrowthPoint`. El progreso entre zonas vive en `GameProgress`, solo en memoria.
+- **Pruebas:** PlayMode 18/18, EditMode 38/38 y sonda 43 OK.
+- **Informe y pruebas manuales:** `Docs/Zonas/Claro/INFORME-ZONA-2.md`.
+
+# Bloque 02: personaje, animaciones y audio (20/11/2026)
+
+- **Rama:** `feature/character-animation-audio`, que sale de la integración V6 `4c973e5`.
+- **Build:** `Builds/Windows/V7-Character-Audio`.
+- **Informe y pruebas manuales:** `Docs/Character/INFORME-BLOQUE-02.md`.
+- **Regenerar:** `Bosque.CharacterEditor.GuardianaBuilder.BuildAllBatch`.
+- **Pruebas:** PlayMode en `Tests/PlayMode` (9/9) y EditMode 38/38.
+- **Cambios en el motor** (compatibles con lo anterior): eventos de solo lectura, Shift para caminar y margen de apoyo de 0,1 s.
+
+# Bloque 01.2: integración del arte V6 en ArroyoPlayable (20/11/2026)
+
+- **Rama:** `feature/arroyo-v6-integration` (sin fusionar). Contiene `develop` (arte V6 y QA V6), las correcciones P1 `afcbe4d` y RC1.
+- **Commits del bloque:**
+  - `122b504`: QA6-001 a QA6-004, efecto único y modo integrado de la sonda;
+  - `38acc1d`: escena vestida y build V6;
+  - `2cc512c`: rendimiento;
+  - además, un commit de documentación.
+- **Escena:** `ArroyoPlayable` vestida con `Bosque.ArtV6.Editor.ArroyoArtV6Dresser.DressPlayableBatch`. Colliders y componentes son idénticos a `EVIDENCIAS/contrato-arroyoplayable-pre-v6.json`.
+- **Build:** `Tools/Build-ArroyoRC1.ps1 -Configuration V6` → `Builds/Windows/V6`. Se verifica con `Tools/Verify-ArroyoV4.ps1 -Executable Builds/Windows/V6/BosqueDeRegreso.exe -AllowMissingReleaseCounters`.
+- **Sonda integrada:** `-executeMethod Bosque.Acceptance.ArroyoQAV6Probe.RunBatch -qa6-integrada`.
+- **Reparto de rendimiento:** `BosqueV6Preview.exe -v6-perf -v6-perf-breakdown`.
+- **Necesita a Codex:**
+  - QA6-016: la prueba `ActiveVisualBudgetStaysBoundedInBothStates` aplica el presupuesto de V3; no se cambió el criterio.
+  - QA6-006: para llegar a 60 FPS en restaurado haría falta tocar las cascadas de sombra o la escala de render del asset URP compartido.
+- **Detalle:** `Docs/QA/Entregable06/INFORME-ACEPTACION-V6.md`, sección "Integración en ArroyoPlayable".
+
 # C-02: revisión del recorrido con T06 integrado
 Fecha: 12 de noviembre de 2026. Estado: terminado salvo las pruebas manuales, que quedan pendientes para Diego.
 

@@ -1,0 +1,38 @@
+[
+  {
+    "run": "V6-RUN-01",
+    "errorMatches": 0,
+    "pattern": "Exception|NullReference|MissingReference|Shader error|ERROR",
+    "rawLogPublished": false
+  },
+  {
+    "run": "V6-RUN-02",
+    "errorMatches": 0,
+    "pattern": "Exception|NullReference|MissingReference|Shader error|ERROR",
+    "rawLogPublished": false
+  },
+  {
+    "run": "V6-RUN-03",
+    "errorMatches": 0,
+    "pattern": "Exception|NullReference|MissingReference|Shader error|ERROR",
+    "rawLogPublished": false
+  },
+  {
+    "run": "V7-RUN-01",
+    "errorMatches": 0,
+    "pattern": "Exception|NullReference|MissingReference|Shader error|ERROR",
+    "rawLogPublished": false
+  },
+  {
+    "run": "V7-RUN-02",
+    "errorMatches": 0,
+    "pattern": "Exception|NullReference|MissingReference|Shader error|ERROR",
+    "rawLogPublished": false
+  },
+  {
+    "run": "V7-RUN-03",
+    "errorMatches": 0,
+    "pattern": "Exception|NullReference|MissingReference|Shader error|ERROR",
+    "rawLogPublished": false
+  }
+]

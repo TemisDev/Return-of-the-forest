@@ -1,0 +1,11 @@
+﻿ID,Verificación,Resultado esperado,Commit probado,Estado,Resultado observado,Evidencia
+V-01,Importación de OBJ y PNG,Modelos y texturas presentes sin errores,,NO EJECUTADO,,
+V-02,Materiales URP,Sin elementos magenta,,NO EJECUTADO,,
+V-03,Escala de prefabs,Sin objetos demasiado grandes o pequeños,,NO EJECUTADO,,
+V-04,Pivotes y orientación,Modelos apoyados y orientados correctamente,,NO EJECUTADO,,
+V-05,Lectura degradado/restaurado,Cambio comprensible visualmente,,NO EJECUTADO,,
+V-06,Reconocimiento de obstáculos,Tres obstáculos distinguibles,,NO EJECUTADO,,
+V-07,Cámara junto a vegetación,Personaje y recorrido siguen visibles,,NO EJECUTADO,,
+V-08,Colisión de nuevos prefabs,Decoración no bloquea rutas,,NO EJECUTADO,,
+V-09,HUD e interacción,Contraste y texto legibles,,NO EJECUTADO,,
+V-10,Rendimiento visual,Sin caída inaceptable de FPS medida y documentada,,NO EJECUTADO,,

@@ -1,0 +1,204 @@
+{
+  "date": "2026-11-18",
+  "testsCommit": "ec960ba",
+  "runtimeBuildCommit": "e692340",
+  "unity": "6000.3.22f1",
+  "result": "Passed",
+  "total": 36,
+  "passed": 36,
+  "failed": 0,
+  "skipped": 0,
+  "durationSeconds": "7.3407543",
+  "inputEventMode": "Input System queued events confirmed by wasPressedThisFrame; Play Mode focus=False/cursorLocked=False; only unfocused guards verified",
+  "cameraSamples": 480,
+  "mutation": {
+    "firstAttemptEscaped": true,
+    "testStrengthened": "Assert processed key events; temporary test-only background/editor routing; restore settings after test",
+    "invertedCondition": "HUD focus guard",
+    "focusedTestFailed": true,
+    "failure": "Expected False but was True",
+    "sourceRestored": true
+  },
+  "cases": [
+    {
+      "name": "Bosque.Tests.ArroyoGameplayTests.AnyOrderRestoresExactlyOnceAndOnlyThenAllowsCompletion",
+      "result": "Passed",
+      "durationSeconds": "0.050420"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoGameplayTests.InRangeTargetCanBeInteractedWith",
+      "result": "Passed",
+      "durationSeconds": "0.024551"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoGameplayTests.InvalidAndDisabledTargetsAreIgnored",
+      "result": "Passed",
+      "durationSeconds": "0.003266"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoGameplayTests.InvalidConfigurationIsRejected",
+      "result": "Passed",
+      "durationSeconds": "0.010239"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoGameplayTests.LeavingRangeCancelsTargetAndRejectsStaleInteraction",
+      "result": "Passed",
+      "durationSeconds": "0.001721"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoGameplayTests.NearestAvailableSurfaceIsSelected",
+      "result": "Passed",
+      "durationSeconds": "0.001818"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoGameplayTests.ResetStartsAnotherCleanCycleAndPublishesChanges",
+      "result": "Passed",
+      "durationSeconds": "0.002324"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoGameplayTests.UnknownAndRepeatedIdsNeverAdvanceProgress",
+      "result": "Passed",
+      "durationSeconds": "0.003564"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoGameplayTests.WallPreventsInteraction",
+      "result": "Passed",
+      "durationSeconds": "0.002694"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoInputPlayTests.QueuedKeysFollowFocusAndCursorGuards",
+      "result": "Passed",
+      "durationSeconds": "31.597564"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoPlaySmokeTests.ActualExitVolumeCompletesOnlyAfterRestoringAndRestartIsClean",
+      "result": "Passed",
+      "durationSeconds": "8.721727"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoSceneTests.PhysicalBarrierBlocksWalkingAndJumpingUntilRestored",
+      "result": "Passed",
+      "durationSeconds": "0.418128"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoSceneTests.RealObstaclesRestoreAndCanBeResetWithoutDuplicatingComponents",
+      "result": "Passed",
+      "durationSeconds": "0.418365"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoSessionTests.EnvironmentAndBarrierFollowProgressAndRestart",
+      "result": "Passed",
+      "durationSeconds": "0.005537"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoSessionTests.RemovedObstacleCannotCountTwiceOrAcceptForeignActorAtExit",
+      "result": "Passed",
+      "durationSeconds": "0.001849"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoSessionTests.StandingOnObstacleCannotRemoveItsSupport",
+      "result": "Passed",
+      "durationSeconds": "0.001386"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoV4Tests.CameraOrbitRemainsFiniteAndUnobstructedAlongV4Bank",
+      "result": "Passed",
+      "durationSeconds": "0.462019"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoV4Tests.DecorationDoesNotHideTargetsFromNineBankApproaches",
+      "result": "Passed",
+      "durationSeconds": "0.393470"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoV4Tests.FallingAfterRestorationKeepsProgressAndAllowsExit",
+      "result": "Passed",
+      "durationSeconds": "0.409341"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoV4Tests.MovingInteractionDoesNotInterruptTheController(False)",
+      "result": "Passed",
+      "durationSeconds": "0.379220"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoV4Tests.MovingInteractionDoesNotInterruptTheController(True)",
+      "result": "Passed",
+      "durationSeconds": "0.401534"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoV4Tests.ResetBeforeExitRestoresWholePuzzle(1)",
+      "result": "Passed",
+      "durationSeconds": "0.449344"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoV4Tests.ResetBeforeExitRestoresWholePuzzle(3)",
+      "result": "Passed",
+      "durationSeconds": "0.402672"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoV4Tests.V4MountAndFoamAreVisualOnlyTransparentAndAboveWater",
+      "result": "Passed",
+      "durationSeconds": "0.428530"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoVisualTests.ActiveVisualBudgetStaysBoundedInBothStates",
+      "result": "Passed",
+      "durationSeconds": "0.402305"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoVisualTests.ArtMountsRemainVisualOnlyAndFollowExistingRestorationState",
+      "result": "Passed",
+      "durationSeconds": "0.419947"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoVisualTests.PolishedHudAndEffectHaveRequiredArtReferences",
+      "result": "Passed",
+      "durationSeconds": "0.442067"
+    },
+    {
+      "name": "Bosque.Tests.ArroyoVisualTests.VisualPrefabsHaveMeshesUrpMaterialsAndNoGameplayComponents",
+      "result": "Passed",
+      "durationSeconds": "0.414632"
+    },
+    {
+      "name": "Bosque.Tests.MovementTests.CameraStaysInFrontOfAnObstructingWall",
+      "result": "Passed",
+      "durationSeconds": "0.003424"
+    },
+    {
+      "name": "Bosque.Tests.MovementTests.FallResetsToTheConfiguredSafePoint",
+      "result": "Passed",
+      "durationSeconds": "0.000962"
+    },
+    {
+      "name": "Bosque.Tests.MovementTests.JumpCannotBeRepeatedInTheAirAndReturnsToGround",
+      "result": "Passed",
+      "durationSeconds": "0.000964"
+    },
+    {
+      "name": "Bosque.Tests.MovementTests.MovementUsesCameraYawAndClampsDiagonalSpeed",
+      "result": "Passed",
+      "durationSeconds": "0.001967"
+    },
+    {
+      "name": "Bosque.Tests.MovementTests.SolidWallStopsTheCharacter",
+      "result": "Passed",
+      "durationSeconds": "0.001277"
+    },
+    {
+      "name": "Bosque.Tests.MovementTests.ZeroDeltaDoesNotMoveTheCharacter",
+      "result": "Passed",
+      "durationSeconds": "0.000688"
+    },
+    {
+      "name": "Bosque.Tests.RestorationFeedbackTests.DisablingAndRebindingDoesNotAccumulateEventSubscriptions",
+      "result": "Passed",
+      "durationSeconds": "0.412914"
+    },
+    {
+      "name": "Bosque.Tests.RestorationFeedbackTests.EffectRunsOncePerCycleAndRestartClearsIt",
+      "result": "Passed",
+      "durationSeconds": "0.445465"
+    }
+  ]
+}

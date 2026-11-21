@@ -1,0 +1,13 @@
+﻿id,aspecto,prioridad,criterio,estado,sha_probado,entorno,resultado,evidencia,incidencia
+AV01,Materiales URP,P1,Sin magenta o superficies invisibles,NO EJECUTADO,,,,,
+AV02,Escala y pivotes,P2,Sin escalas incoherentes ni props flotantes,NO EJECUTADO,,,,,
+AV03,Transformación ambiental,P1,Cambio degradado/restaurado evidente a igual encuadre,NO EJECUTADO,,,,,
+AV04,Agua y espuma,P2,Sin z-fighting o alfa incorrecta visible,NO EJECUTADO,,,,,
+AV05,Camino y objetivos,P1,Recorrido visible y obstáculos reconocibles,NO EJECUTADO,,,,,
+AV06,Cámara con vegetación,P1,Decoración no impide ver personaje u objetivo,NO EJECUTADO,,,,,
+AV07,HUD y contraste,P1,"Indicador E, progreso y salida legibles a 1080p",NO EJECUTADO,,,,,
+AV08,Iluminación,P2,Luz y sombras coherentes; sin zonas ilegibles,NO EJECUTADO,,,,,
+AV09,VFX restauración,P2,Efecto breve sin ocultar el objetivo,NO EJECUTADO,,,,,
+AV10,Coherencia low poly,P3,Paleta mate y estilo consistente,NO EJECUTADO,,,,,
+AV11,Final de nivel,P1,Mensaje final y significado ambiental comprensibles,NO EJECUTADO,,,,,
+AV12,Recursos y licencias,P1,Recursos incorporados identificados y licencias registradas,NO EJECUTADO,,,,,
