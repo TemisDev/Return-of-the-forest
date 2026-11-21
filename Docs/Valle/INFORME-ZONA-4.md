@@ -2,7 +2,7 @@
 
 **Rama:** `feature/valle-olvidado`, que sale de `feature/presentation-menus` e incluye el Bloque 05.
 
-**Build:** `Builds/Windows/V11-Valle/BosqueDeRegreso.exe`.
+**Build:** `Builds/Windows/V12-Rios/BosqueDeRegreso.exe` (V12 añade los ríos, la brújula y el minimapa; la V11 anterior sigue en `Builds/Windows/V11-Valle`).
 - Partida completa: menú → arroyo → claro → refugio → **valle** → final.
 - Para entrar directamente en el valle: `-zona valle`.
 
@@ -15,18 +15,44 @@ Es un escenario grande y abierto. Hay que limpiar **todo** el valle, basura y tr
 - **Tamaño:** unos **210 × 210 m** jugables sobre un Terrain de Unity de 320 m, rodeado de montañas de 50–70 m que no se pueden escalar.
   - Cruzarlo corriendo lleva unos 45 s.
   - La niebla deja ver unos 150 m.
-- **Relieve:** suave en general, un cerro de 13 m al sureste y un río seco que baja de las montañas del norte y sale por el este.
+- **Relieve:** suave en general, un cerro de 13 m al sureste y una red de ríos y lagunas (ver abajo).
 - **Vegetación:** 392 árboles (secos al empezar) con colisión, ichu (pasto seco) en el terreno y rocas.
 - **Campamento:** en el centro, donde empieza la Guardiana, con un punto de reciclaje.
 
 | Sector | Dónde | Qué tiene | Dificultad |
 |---|---|---|---|
-| **La quebrada** (NE) | El cauce seco del río | Residuos en el cauce y las orillas; troncos gruesos atravesados en el río | Troncos de 3,6 s; hay que bajar al cauce |
-| **El bosque** (NO) | Bosque denso (190 árboles) | Residuos escondidos entre árboles; troncos en los claros | Visibilidad: conviene usar el rastreo |
-| **La pampa** (SO) | Llanura abierta | Un **basural** con llantas, bolsas y latas, y residuos sueltos muy separados | Las llantas ocupan 3 espacios; mucho recorrido |
+| **La quebrada** (NE) | Las tres lagunas y el curso alto del Mayu | Residuos flotando en las lagunas y en el Mayu; troncos gruesos que tapan los canales entre lagunas | Troncos de 3,6 s; hay que cruzar el Mayu y vadear |
+| **El bosque** (NO) | Bosque denso (190 árboles) y el curso alto del río Chico | Residuos escondidos entre árboles y en la orilla del Chico; un tronco grueso en el río | Visibilidad: conviene usar el rastreo |
+| **La pampa** (SO) | Llanura abierta, el bofedal y el río del Sur | Un **basural** con llantas, bolsas y latas, un residuo en el bofedal y otros sueltos; un tronco en el río del Sur | Las llantas ocupan 3 espacios; mucho recorrido |
 | **El mirador** (SE) | El cerro | Residuos en las laderas y **dos en lo alto de salientes de roca** | Hay que subir saltando escalones de 0,9 m |
 
 **Total:** 40 residuos y 16 troncos o ramas, 14 por sector.
+
+## Ríos y lagunas (V12)
+
+El diseño sigue el mapa de referencia que pasaste (los grandes ríos y lagos de Norteamérica), adaptado al valle:
+
+| En la referencia | En el valle | Cómo es |
+|---|---|---|
+| Misisipi (de norte a sur) | **Río Mayu** | Río principal: baja de las montañas del norte, cruza el valle por el este del campamento y sale por el sur. **Hondo**: solo se cruza por **2 puentes** o **4 vados**. |
+| Misuri (afluente del oeste) | **Río Chico** | Llega del oeste por el borde del bosque y desemboca en el Mayu al sur del campamento. Poco profundo: se vadea; tiene 1 puente. |
+| Grandes Lagos + San Lorenzo | **Laguna Alta, Laguna del Medio y Laguna Baja** + **río de la Salida** | Cadena de tres lagunas al noreste, alimentada por una vertiente del norte; cada una más baja que la anterior, unidas por canales, y desaguan al este. Centro hondo, orillas vadeables. |
+| Río Grande / Colorado (suroeste) | **Río del Sur** | Nace en un **bofedal** (humedal andino) de la pampa y baja al suroeste. Poco profundo. |
+
+- **El área:** todo el valle jugable (unos 210 × 210 m); los ríos siguen dentro de las montañas del borde, que no se pueden cruzar.
+- **Agua honda:** la Guardiana vadea hasta la cintura y va más lenta cuanto más hondo; donde pasa de unos 95 cm no avanza (como una pared) y aparece una pista: «Cruza por un puente o un vado». No cuenta como intento fallido.
+- **Puentes:** de troncos, con barandas (no se cae al agua). **Vados:** piedras que asoman en el agua baja.
+- **El agua cambia:** turbia y marrón mientras el sector está sucio, más clara al limpiarlo y cristalina cuando el valle revive.
+- **Sonido:** el río suena siempre (más fuerte al revivir) y el sonido viene del agua más cercana.
+- **Residuos en el agua:** 6 flotan en lagunas, ríos y bofedal (se alcanzan vadeando) y 5 troncos tapan canales y ríos.
+- Todo el agua se genera desde una sola descripción (`ValleWater`): el constructor talla el terreno y crea la malla, y el juego la usa para la profundidad, el sonido y el mapa.
+
+## Orientación: brújula, minimapa y mapa (V12)
+
+- **Brújula** (arriba, al centro): puntos cardinales que giran con la cámara, los **3 puntos de reciclaje** (el más cercano con su nombre y distancia) y los **3 residuos o troncos ubicados más cercanos** con su distancia. Si algo queda detrás, se marca en el borde.
+- **Minimapa** (abajo a la derecha): mapa redondo que gira con la cámara, la Guardiana en el centro, la **N** en el borde, los puntos de reciclaje, puentes, vados y lo ubicado. Debajo dice cuántos objetivos ubicados faltan.
+- **Ubicar:** lo que pasa a menos de **24 m** de la Guardiana, o lo que marca el rastreo (T), queda ubicado y aparece en la brújula, el minimapa y el mapa. Lo no visto **no** aparece, para que siga habiendo que explorar; el mapa dice cuántos faltan por ubicar en cada sector.
+- **Mapa (M):** ahora muestra los nombres de los ríos y lagunas, puentes y vados, lo ubicado y una rosa con el norte.
 
 ## Mecánicas y dificultad
 
@@ -39,9 +65,10 @@ Es un escenario grande y abierto. Hay que limpiar **todo** el valle, basura y tr
 
    E en un contenedor deposita solo los residuos de su tipo. Si no llevas de ese tipo, aparece una pista y cuenta como intento fallido.
 3. **Troncos (mantener E):** ramas 1,6 s, tronco 2,4 s y tronco grueso 3,6 s, con barra de progreso. Si sueltas o te alejas, el avance se va perdiendo.
-4. **Rastreo (T):** durante 6 s marca con columnas de luz lo pendiente en 40 m. Se recarga en 20 s.
-5. **Mapa (M):** mapa ilustrado con relieve, río, árboles, los puntos de reciclaje, tu posición y el avance de cada sector. Pausa el juego mientras está abierto.
-6. **Cronómetro y medallas:** oro en menos de 12 min y plata en menos de 18. El tiempo, la medalla y los intentos fallidos se muestran en el final.
+4. **Rastreo (T):** durante 6 s marca con columnas de luz lo pendiente en 40 m y lo deja ubicado en la brújula y los mapas. Se recarga en 20 s.
+5. **Mapa (M):** mapa ilustrado con relieve, ríos y lagunas con su nombre, árboles, puntos de reciclaje, puentes, vados, lo ubicado, tu posición y el avance de cada sector. Pausa el juego mientras está abierto.
+6. **Agua:** el Mayu y el centro de las lagunas son hondos; hay que planificar la ruta por puentes y vados.
+7. **Cronómetro y medallas:** oro en menos de 12 min y plata en menos de 18. El tiempo, la medalla y los intentos fallidos se muestran en el final.
 
 ## Recuperación
 
@@ -52,7 +79,7 @@ Es un escenario grande y abierto. Hay que limpiar **todo** el valle, basura y tr
   - El filtro gris del valle se aclara un 20 %.
 - **Con los cuatro sectores limpios y todo depositado:**
   - el valle entero revive: cielo, luz, aves y música;
-  - **vuelve el agua del río**;
+  - **el agua queda cristalina** y corre más;
   - el **zorro de neblina** baja del bosque al río, seguido por la cámara;
   - después aparece la última nota del cuaderno y el **final del juego**.
 - **El final:** ahora se muestra al terminar el valle, no el refugio, y resume las cuatro zonas.
@@ -84,6 +111,11 @@ Es un escenario grande y abierto. Hay que limpiar **todo** el valle, basura y tr
 | Audio y gestos | `Runtime/Session/ValleAudioBridge.cs` |
 | Refugio → valle | `Runtime/Session/RefugioZoneTransition.cs` |
 | Filtro por sectores | `Levels/Valle/ValleAmbienceLink.cs` (ajusta `BosqueV6Ambience.partial`) |
+| Ríos y lagunas (modelo compartido) | `Runtime/World/Valle/ValleWater.cs` |
+| Vadeo y agua honda | `Runtime/World/Valle/WaterWading.cs` (usa `ThirdPersonMotor.MoveBlocked`) |
+| Color del agua por sector | `Runtime/World/Valle/ValleWaterLook.cs` |
+| Sonido del río | `Runtime/World/Valle/WaterSoundAnchor.cs` |
+| Brújula y minimapa | `Runtime/UI/NavigationViews.cs` |
 | HUD lateral, barra de trabajo y mapa | `Runtime/UI/PresentationViews.cs` |
 | Medición en builds | `Runtime/Session/FpsProbe.cs` (`-medir-fps N -salir`) |
 | Construcción de la escena | `Editor/Levels/Valle/ValleBuilder.cs`: idempotente, `Bosque.LevelEditor.ValleBuilder.BuildAllBatch` |
@@ -128,6 +160,10 @@ Son para Diego. **No están ejecutadas.**
 | Z4-M07 | Limpiar un sector completo. | El cambio de color y de los árboles se nota y motiva. |
 | Z4-M08 | FPS en la PC de la presentación (`-zona valle -medir-fps 30 -salir`, mirar Player.log). | Al menos 30 FPS. |
 | Z4-M09 | Pulsar R a mitad de partida. | Todo vuelve al estado inicial, incluido el cronómetro. |
+| Z4-M10 | Intentar cruzar el Mayu por lo hondo; después buscar un puente o vado con el mapa. | No se puede por lo hondo, la pista se entiende y el cruce se encuentra. |
+| Z4-M11 | Jugar 5 minutos solo con la brújula y el minimapa (sin abrir el mapa). | Se sabe dónde está el norte, el reciclaje más cercano y lo ya visto. |
+| Z4-M12 | Recoger los residuos que flotan en las lagunas. | Se alcanzan vadeando sin quedar atascado. |
+| Z4-M13 | Mirar el agua de un sector antes y después de limpiarlo. | El agua pasa de turbia a clara y se nota. |
 
 ## Limitaciones conocidas
 

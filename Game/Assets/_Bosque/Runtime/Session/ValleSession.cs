@@ -33,6 +33,7 @@ namespace Bosque.Session
         private LitterBag bag;
         private ThirdPersonInput input;
         private TrackingPulse pulse;
+        private WaterWading wading;
         private Coroutine faunaStart;
         private bool initialized;
 
@@ -44,6 +45,8 @@ namespace Bosque.Session
         public ThirdPersonMotor Player => player;
         public LitterBag Bag => bag;
         public TrackingPulse Pulse => pulse;
+        public WaterWading Wading => wading;
+        public const string DeepWaterHint = "El agua es muy honda aquí. Cruza por un puente o un vado: los verás en el mapa (M).";
         public IEnumerable<LitterItem> AllLitter => sectors.SelectMany(s => s.Litter);
         public IEnumerable<FallenWood> AllWood => sectors.SelectMany(s => s.Wood);
         public int Total => sectors.Sum(s => s.Total);
@@ -68,6 +71,7 @@ namespace Bosque.Session
         public event Action<string> AttemptRejected;
         public event Action<ValleSector> SectorRestored;
         public event Action ValleRestored;
+        public event Action Restarted;
 
         public void Configure(ValleSector[] valleSectors, RecycleBin[] recycleBins, TerrainRestorer restorer, GameObject degraded, GameObject restored,
             FaunaRoute route, FaunaCinematic shot, ThirdPersonMotor motor, Transform spawn)
@@ -90,6 +94,8 @@ namespace Bosque.Session
             input = player.GetComponent<ThirdPersonInput>();
             pulse = player.GetComponent<TrackingPulse>();
             if (pulse != null) pulse.SetTargets(PendingPositions);
+            wading = player.GetComponent<WaterWading>();
+            if (wading != null) wading.DeepBlocked += () => Notify(DeepWaterHint);
             var actor = player.GetComponent<PlayerInteractor>();
             foreach (var l in AllLitter) l.Rejected += (item, hint) => Reject(hint);
             foreach (var w in AllWood) w.ClearedEvent += OnWoodCleared;
@@ -140,6 +146,13 @@ namespace Bosque.Session
         {
             Mistakes++; LastHint = hint; LastHintTime = Time.time;
             AttemptRejected?.Invoke(hint);
+            StateChanged?.Invoke();
+        }
+
+        /// <summary>Pista que no cuenta como intento fallido.</summary>
+        public void Notify(string hint)
+        {
+            LastHint = hint; LastHintTime = Time.time;
             StateChanged?.Invoke();
         }
 
@@ -199,6 +212,7 @@ namespace Bosque.Session
             IsRestored = false; IsCompleted = false; ElapsedSeconds = 0; Mistakes = 0; LastHint = null; LastHintTime = -100f;
             player.Teleport(playerSpawn.position, playerSpawn.rotation);
             ApplyVisuals();
+            Restarted?.Invoke();
             if (Application.isPlaying && input != null) input.CaptureCursor();
         }
 

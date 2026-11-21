@@ -14,9 +14,13 @@ namespace Bosque.UI
         string EndingExtra { get; }
     }
 
+    /// <summary>Qué representa un marcador: decide cómo y dónde se dibuja (mapa, minimapa, brújula).</summary>
+    public enum MarkerKind { Point, Station, Litter, Wood, Label, Bridge, Ford }
+
     public struct MapMarker
     {
         public Vector3 position; public string label; public Color color; public bool big;
+        public MarkerKind kind;
     }
 
     /// <summary>Mapa de la zona (tecla M): imagen cenital, área del mundo que cubre y marcadores.</summary>

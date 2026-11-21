@@ -247,11 +247,13 @@ namespace Bosque.Tests.PlayMode
             yield return EmptyBag();
             Assert.That(s.DepositedCount, Is.EqualTo(40));
             Assert.That(s.IsRestored, "Todo limpio y separado: el valle revive");
-            Assert.That(GameObject.Find("V6_Rio") != null, "Vuelve el agua del río");
+            var look = Object.FindFirstObjectByType<ValleWaterLook>();
+            Assert.That(look, Is.Not.Null); Assert.That(look.Count, Is.GreaterThan(20), "Malla de agua en trozos");
             Assert.That(played.Contains("restore"));
             s.Fauna.TimeScale = 8f;
             for (float t = 0; t < 20f && !s.IsCompleted; t += Time.deltaTime) yield return null;
             Assert.That(s.IsCompleted); Assert.That(GameProgress.IsZoneComplete(GameProgress.Valle));
+            Assert.That(look.Clarity, Is.GreaterThan(.5f), "El agua se aclara al revivir el valle");
             Assert.That(s.GameFinished);
             Assert.That(s.Medal, Is.EqualTo("oro").Or.EqualTo("plata").Or.EqualTo("bronce"));
             var pres = Presentation.Instance;
@@ -310,6 +312,142 @@ namespace Bosque.Tests.PlayMode
             Assert.That(SceneManager.GetActiveScene().name, Is.EqualTo(GameFlow.ValleScene), "Transición a la zona 4");
         }
 
+        private ValleWater Water => Object.FindFirstObjectByType<ValleWater>();
+
+        private float Ground(Vector3 p) => s.Terrain.GetComponent<Terrain>().SampleHeight(p);
+
+        /// <summary>Camina con el motor real hacia un punto; devuelve el resultado al llegar o al agotar el tiempo.</summary>
+        private IEnumerator Walk(Vector3 to, float seconds, System.Action<float> eachFrame = null)
+        {
+            for (float t = 0; t < seconds; t += Time.deltaTime)
+            {
+                var d = to - motor.transform.position; d.y = 0;
+                if (d.magnitude < 1f) yield break;
+                float yaw = Mathf.Atan2(d.x, d.z) * Mathf.Rad2Deg;
+                motor.Simulate(Vector2.up, false, yaw, Time.deltaTime);
+                eachFrame?.Invoke(t);
+                yield return null;
+            }
+        }
+
+        private static Vector2 Across(WaterStream st, Vector3 at)
+        {
+            ValleWater.Nearest(st, new Vector2(at.x, at.z), out _, out _, out _, out var flow, out _);
+            return new Vector2(-flow.y, flow.x);
+        }
+
+        [UnityTest]
+        public IEnumerator RiversLakesBridgesAndFordsFollowTheDesign()
+        {
+            yield return Load();
+            var w = Water;
+            Assert.That(w, Is.Not.Null);
+            var names = w.Streams.Select(x => x.name).Where(n => !string.IsNullOrEmpty(n)).ToList();
+            CollectionAssert.IsSupersetOf(names, new[] { "Río Mayu", "Río Chico", "Río de la Salida", "Río del Sur" });
+            Assert.That(w.Lakes.Length, Is.EqualTo(4), "Tres lagunas encadenadas y un bofedal");
+            Assert.That(w.Crossings.Count(c => c.bridge), Is.EqualTo(3)); Assert.That(w.Crossings.Count(c => !c.bridge), Is.EqualTo(4));
+            foreach (var st in w.Streams)
+                for (int i = 1; i < st.points.Length; i++)
+                    Assert.That(st.points[i].y, Is.LessThanOrEqualTo(st.points[i - 1].y + .001f), $"{st.name}: el agua baja río abajo");
+            var lakes = w.Lakes.Where(l => l.name.StartsWith("Laguna")).Select(l => l.center.y).ToArray();
+            Assert.That(lakes[0] > lakes[1] && lakes[1] > lakes[2], "La cadena de lagunas desagua escalón a escalón");
+            foreach (var c in w.Crossings.Where(c => c.bridge))
+            {
+                Assert.That(Physics.Raycast(c.position + Vector3.up * 6f, Vector3.down, out var hit, 10f), "Tablero del puente");
+                Assert.That(hit.point.y, Is.GreaterThan(c.position.y + .3f), "El puente queda sobre el agua");
+            }
+            var look = Object.FindFirstObjectByType<ValleWaterLook>();
+            Assert.That(look.Count, Is.GreaterThan(20));
+            foreach (var b in s.Bins) Assert.That(w.DepthAt(b.transform.position), Is.Zero, b.Station + " en seco");
+            Assert.That(w.DepthAt(motor.transform.position), Is.Zero, "Inicio en seco");
+            int floating = 0;
+            foreach (var l in s.AllLitter)
+            {
+                var p = l.transform.position; p.y = Ground(p);
+                float d = w.DepthAt(p);
+                Assert.That(d, Is.LessThan(.6f), l.name + " se alcanza vadeando");
+                if (d > .15f) floating++;
+            }
+            Assert.That(floating, Is.GreaterThanOrEqualTo(6), "Residuos flotando en lagunas, ríos y bofedal");
+            foreach (var wd in s.AllWood) { var p = wd.transform.position; p.y = Ground(p); Assert.That(w.DepthAt(p), Is.LessThan(.7f), wd.name); }
+            Assert.That(s.AllWood.Count(wd => { var p = wd.transform.position; p.y = Ground(p); return w.DepthAt(p) > .2f; }), Is.GreaterThanOrEqualTo(4), "Troncos que tapan canales y ríos");
+        }
+
+        [UnityTest]
+        public IEnumerator WadingSlowsDeepWaterBlocksAndFordsAndBridgesCross()
+        {
+            yield return Load();
+            var w = Water; var mayu = w.Streams.First(x => x.name == "Río Mayu");
+            var wading = motor.GetComponent<WaterWading>();
+            // Agua honda: no se cruza.
+            int idx = Enumerable.Range(0, mayu.points.Length).First(i => mayu.depth[i] > 1.45f && Mathf.Abs(mayu.points[i].z) < 80f && mayu.points[i].z > 20f &&
+                                                                             w.Crossings.All(c => Vector3.Distance(c.position, mayu.points[i]) > 16f));
+            var center = mayu.points[idx]; var side = Across(mayu, center);
+            var start = center + new Vector3(side.x, 0, side.y) * (mayu.bank + 2f); start.y = Ground(start) + .05f;
+            motor.Teleport(start, Quaternion.identity); yield return Settle();
+            Assert.That(wading.Depth, Is.Zero);
+            float maxDepth = 0, minFactor = 1;
+            var far = center - new Vector3(side.x, 0, side.y) * (mayu.bank + 2f);
+            yield return Walk(far, 5f, t => { maxDepth = Mathf.Max(maxDepth, wading.Depth); minFactor = Mathf.Min(minFactor, motor.SpeedFactor); });
+            Assert.That(maxDepth, Is.LessThan(wading.MaxDepth + .08f), "No entra en lo hondo");
+            Assert.That(minFactor, Is.LessThan(.9f), "Vadear frena");
+            var flat = motor.transform.position - center; flat.y = 0;
+            Assert.That(Vector2.Dot(new Vector2(flat.x, flat.z), side), Is.GreaterThan(0f), "Sigue en la orilla de partida");
+            Assert.That(s.LastHint, Is.EqualTo(ValleSession.DeepWaterHint));
+            Assert.That(s.Mistakes, Is.Zero, "El agua honda no cuenta como error");
+            // Vado y puente: se cruzan.
+            foreach (var c in w.Crossings)
+            {
+                var st = w.Streams.OrderBy(x => { ValleWater.Nearest(x, new Vector2(c.position.x, c.position.z), out float d, out _, out _, out _, out _); return d; }).First();
+                var a = Across(st, c.position); float reach = st.bank + (c.bridge ? 4.5f : 2.5f);
+                var from = c.position + new Vector3(a.x, 0, a.y) * reach; from.y = Ground(from) + .1f;
+                var to = c.position - new Vector3(a.x, 0, a.y) * reach;
+                motor.Teleport(from, Quaternion.identity); yield return Settle();
+                yield return Walk(to, 16f);
+                var rest = to - motor.transform.position; rest.y = 0;
+                Assert.That(rest.magnitude, Is.LessThan(1.6f), $"{(c.bridge ? "Puente" : "Vado")} en {c.position} se cruza");
+            }
+        }
+
+        [UnityTest]
+        public IEnumerator CompassMinimapAndMapShowWhatWasFound()
+        {
+            yield return Load();
+            var hud = s.GetComponent<ValleHud>(); var pres = Presentation.Instance;
+            var item = s.AllLitter.OrderByDescending(x => (x.transform.position - motor.transform.position).sqrMagnitude).First(x => x.transform.position.y - Ground(x.transform.position) < 1f);
+            yield return null;
+            Assert.That(hud.IsDiscovered(item), Is.False, "Lo lejano no está ubicado");
+            Assert.That(hud.MapMarkers.Any(m => m.kind == MarkerKind.Litter && m.position == item.transform.position), Is.False);
+            var p = item.transform.position + Vector3.back * 3f; p.y = Mathf.Max(Ground(p), Water.SurfaceAt(p, out float ws) ? ws - .5f : 0f) + .1f;
+            motor.Teleport(p, Quaternion.identity);
+            for (float t = 0; t < .6f; t += Time.deltaTime) { motor.Simulate(Vector2.zero, false, 0, Time.deltaTime); yield return null; }
+            Assert.That(hud.IsDiscovered(item), "Visto de cerca: queda ubicado");
+            Assert.That(hud.MapMarkers.Any(m => m.kind == MarkerKind.Litter && m.position == item.transform.position));
+            var cam = Camera.main; cam.GetComponent<ThirdPersonCamera>().enabled = false;
+            cam.transform.rotation = Quaternion.Euler(10, 90, 0);
+            for (float t = 0; t < .6f; t += Time.unscaledDeltaTime) yield return null;
+            var nav = pres.Navigation;
+            Assert.That(nav.Visible, "Brújula y minimapa visibles en el valle");
+            Assert.That(nav.HeadingName, Is.EqualTo("E"));
+            Assert.That(nav.CompassMarkersShown, Is.GreaterThanOrEqualTo(4), "Tres puntos de reciclaje y lo ubicado");
+            Assert.That(nav.MinimapMarkersShown, Is.GreaterThanOrEqualTo(1));
+            Assert.That(nav.CaptionText, Does.Contain("ubicado"));
+            pres.OpenMap(); yield return null; yield return null;
+            Assert.That(pres.Map.MarkersShown, Is.GreaterThanOrEqualTo(3 + 4 + 8 + 7 + 1), "Mapa: reciclaje, sectores, ríos y lagunas, cruces y lo ubicado");
+            pres.CloseMap();
+            // El rastreo también ubica.
+            var other = s.AllLitter.Where(x => !hud.IsDiscovered(x)).OrderBy(x => (x.transform.position - item.transform.position).sqrMagnitude).First();
+            var q = other.transform.position + Vector3.back * 30f; q.y = Ground(q) + .1f;
+            if (Water.DepthAt(q) == 0f)
+            {
+                motor.Teleport(q, Quaternion.identity); yield return Settle();
+                Assert.That(s.Pulse.Pulse());
+                Assert.That(hud.IsDiscovered(other), "El rastreo (T) ubica lo pendiente cercano");
+            }
+            s.Restart(); yield return null;
+            Assert.That(hud.IsDiscovered(item), Is.False, "Reiniciar olvida lo ubicado");
+        }
+
         [UnityTest]
         public IEnumerator CaptureTheValley()
         {
@@ -338,11 +476,16 @@ namespace Bosque.Tests.PlayMode
             yield return Shot("04_bosque", G(-30, 30, 3), G(-50, 50, 2));
             yield return Shot("05_basural_pampa", G(-46, -56, 3.5f), G(-55, -64, 0));
             yield return Shot("06_mirador_salientes", G(74, -42, 9), G(84, -31, 2));
-            var l = s.AllLitter.OrderBy(x => x.transform.position.sqrMagnitude).First();
-            motor.Teleport(l.transform.position + Vector3.back * 2f, Quaternion.identity); yield return Settle(.3f);
+            var l = s.Sectors[2].Litter.OrderBy(x => (x.transform.position - new Vector3(-72, 0, -52)).sqrMagnitude).First(); // el basural, a campo abierto
+            motor.Teleport(l.transform.position + new Vector3(2f, .2f, -1.5f), Quaternion.identity); yield return Settle(.3f);
             follow.enabled = true; follow.Configure(motor.transform); yield return Settle(.3f); actor.Scan(); follow.enabled = false;
             yield return Shot("07_hud_residuo", cam.transform.position, motor.transform.position + Vector3.up);
             Presentation.Instance.OpenMap(); yield return Shot("08_mapa", cam.transform.position, motor.transform.position + Vector3.up); Presentation.Instance.CloseMap();
+            yield return Shot("10_puente_mayu", G(18, 2, 4), G(32, 9, 0));
+            yield return Shot("11_lagunas", G(44, 92, 9), G(80, 58, 0));
+            yield return Shot("12_vado_mayu", G(22, -36, 3), G(21, -45, 0));
+            yield return Shot("13_afluente_chico", G(-40, -6, 4), G(-16, -23, 0));
+            yield return Shot("14_rio_del_sur_bofedal", G(-20, -30, 5), G(-44, -60, 0));
             // Sector de la pampa limpio para ver el contraste.
             foreach (var x in s.Sectors[2].Litter) { if (!bag.CanFit(x)) bag.Clear(); bag.Add(x); x.SetCollected(true); }
             foreach (var w in s.Sectors[2].Wood) { w.BeginWork(actor); }

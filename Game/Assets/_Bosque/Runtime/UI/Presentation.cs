@@ -29,6 +29,7 @@ namespace Bosque.UI
         public PauseView Pause { get; private set; }
         public TitleCardView TitleCard { get; private set; }
         public MapView Map { get; private set; }
+        public NavigationView Navigation { get; private set; }
         public bool Fading => fading != null;
         public bool InZone => Hud != null && Hud.Model != null;
 
@@ -51,6 +52,7 @@ namespace Bosque.UI
             var titleCanvas = Ui.Canvas("LienzoRotulo", 40, transform);
             fadeCanvas = Ui.Canvas("LienzoFundido", 200, transform);
             Hud = new ZoneHudView(hudCanvas.transform);
+            Navigation = new NavigationView(hudCanvas.transform);
             TitleCard = new TitleCardView(titleCanvas.transform);
             Notebook = new NotebookView(overlayCanvas.transform);
             Ending = new EndingView(overlayCanvas.transform);
@@ -85,6 +87,7 @@ namespace Bosque.UI
             bool overlay = Notebook.Visible || Ending.Visible || Pause.Visible || Map.Visible;
             Map.Tick(Hud.Model as IZoneMap);
             Hud.Tick(InZone && !overlay);
+            Navigation.Tick(InZone ? Hud.Model as IZoneMap : null, InZone && !overlay && !Hud.HelpShown);
             TitleCard.Tick();
 
             var model = Hud.Model;

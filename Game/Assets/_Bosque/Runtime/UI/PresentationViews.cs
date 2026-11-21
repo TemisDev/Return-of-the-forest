@@ -24,6 +24,7 @@ namespace Bosque.UI
         public string PromptShown => prompt.gameObject.activeSelf ? promptText.text : null;
         public string HintShown => hint.gameObject.activeSelf ? hintText.text : null;
         public string SideShown => side.gameObject.activeSelf ? sideText.text : null;
+        public bool HelpShown => help.gameObject.activeSelf;
 
         public ZoneHudView(Transform root)
         {
@@ -352,6 +353,7 @@ namespace Bosque.UI
         private readonly RectTransform markersRoot;
         private readonly System.Collections.Generic.List<(Image dot, TextMeshProUGUI label)> marks = new System.Collections.Generic.List<(Image, TextMeshProUGUI)>();
         public bool Visible => root.gameObject.activeSelf;
+        public int MarkersShown { get; private set; }
         private const float Size = 860f;
 
         public MapView(Transform parent)
@@ -367,8 +369,12 @@ namespace Bosque.UI
             markersRoot = Ui.Rect("Marcadores", frame).Stretch();
             playerMark = Ui.Image(frame, "Guardiana", UiTheme.Amber, t?.pill).rectTransform; playerMark.sizeDelta = new Vector2(26, 26);
             var arrow = Ui.Image(playerMark, "Flecha", UiTheme.Amber, null); arrow.rectTransform.Place(new Vector2(.5f, 1), new Vector2(.5f, 0), new Vector2(0, -2), new Vector2(8, 22));
-            var legend = Ui.Text(card, "Leyenda", "M o Esc: cerrar   ·   <color=#F7C76E>●</color> tú   ·   ■ punto de reciclaje", 22, t?.body, UiTheme.CreamDim, TextAlignmentOptions.Bottom);
+            var legend = Ui.Text(card, "Leyenda", "M o Esc: cerrar   ·   <color=#F7C76E>▲</color> tú   ·   <color=#B0D180>■</color> reciclaje   ·   <color=#F7C76E>■</color> residuo ubicado   ·   <color=#C78C52>■</color> tronco ubicado   ·   <color=#9E7347>■</color> puente   ·   <color=#9ED9FF>■</color> vado", 21, t?.body, UiTheme.CreamDim, TextAlignmentOptions.Bottom);
             legend.rectTransform.Stretch(20, 20, Size + 90, 18);
+            var rose = Ui.Image(frame, "Norte", UiTheme.PanelSolid, NavigationView.Circle()).rectTransform;
+            rose.Place(new Vector2(1, 1), new Vector2(1, 1), new Vector2(-16, -16), new Vector2(64, 64));
+            var roseTxt = Ui.Text(rose, "N", "▲\nN", 24, t?.bold, UiTheme.Amber, TextAlignmentOptions.Center); roseTxt.rectTransform.Stretch(0, 0, 2, 2);
+            roseTxt.lineSpacing = -28;
             root.gameObject.SetActive(false);
         }
 
@@ -401,10 +407,28 @@ namespace Bosque.UI
                 }
                 var (d, l) = marks[i++];
                 d.gameObject.SetActive(true);
-                d.color = m.color; d.rectTransform.sizeDelta = m.big ? new Vector2(20, 20) : new Vector2(10, 10);
                 d.rectTransform.anchoredPosition = ToMap(w, m.position);
                 l.text = m.label ?? "";
+                l.fontStyle = FontStyles.Normal; l.fontSize = 20; l.color = UiTheme.Cream;
+                switch (m.kind)
+                {
+                    case MarkerKind.Label:
+                        d.color = Color.clear; d.rectTransform.sizeDelta = new Vector2(2, 2);
+                        l.fontStyle = FontStyles.Italic; l.fontSize = 21; l.color = new Color(.72f, .88f, 1f);
+                        break;
+                    case MarkerKind.Litter: case MarkerKind.Wood: case MarkerKind.Ford:
+                        d.sprite = NavigationView.Circle(); d.color = NavigationView.MarkerColor(m);
+                        d.rectTransform.sizeDelta = new Vector2(13, 13); l.fontSize = 16;
+                        break;
+                    case MarkerKind.Bridge:
+                        d.sprite = null; d.color = NavigationView.MarkerColor(m); d.rectTransform.sizeDelta = new Vector2(14, 14); l.fontSize = 16;
+                        break;
+                    default:
+                        d.sprite = null; d.color = m.color; d.rectTransform.sizeDelta = m.big ? new Vector2(20, 20) : new Vector2(10, 10);
+                        break;
+                }
             }
+            MarkersShown = i;
             for (; i < marks.Count; i++) marks[i].dot.gameObject.SetActive(false);
             playerMark.SetAsLastSibling();
         }

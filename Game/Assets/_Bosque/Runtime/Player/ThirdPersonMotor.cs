@@ -29,6 +29,11 @@ namespace Bosque.Player
         public float RunSpeed => speed;
         /// <summary>Multiplicador de velocidad horizontal (p. ej., al cargar un elemento de refugio).</summary>
         public float SpeedFactor { get; set; } = 1f;
+        /// <summary>
+        /// Opcional: decide si un paso (posición antes, después) no está permitido; el desplazamiento horizontal se deshace,
+        /// como si hubiera una pared (p. ej., agua demasiado profunda).
+        /// </summary>
+        public Func<Vector3, Vector3, bool> MoveBlocked { get; set; }
         /// <summary>Momento (Time.time) del último Simulate; si el motor deja de simularse, la animación vuelve a reposo.</summary>
         public float LastStepTime { get; private set; } = -1f;
         public event Action Jumped;
@@ -66,6 +71,11 @@ namespace Bosque.Player
             var planar = direction * speed * SpeedFactor * (walk ? walkFactor : 1f);
             var before = transform.position;
             controller.Move((planar + Vector3.up * verticalSpeed) * dt);
+            if (MoveBlocked != null)
+            {
+                var after = transform.position;
+                if (MoveBlocked(before, after)) controller.Move(new Vector3(before.x - after.x, 0f, before.z - after.z));
+            }
             Velocity = (transform.position - before) / dt;
             LastStepTime = Time.time;
             if (direction.sqrMagnitude > .001f)

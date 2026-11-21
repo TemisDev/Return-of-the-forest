@@ -1,5 +1,22 @@
 # Relevo de Claude Code
 
+# Zona 4 V12: ríos, brújula y minimapa (21/11/2026)
+
+- **Rama:** `feature/valle-olvidado`. Sin fusionar.
+- **Build:** `Builds/Windows/V12-Rios`.
+- **Ríos y lagunas**, a partir del mapa de referencia del usuario:
+  - **Mayu:** río principal de norte a sur, hondo; se cruza por 2 puentes o 4 vados.
+  - **Chico:** afluente del oeste.
+  - **Lagunas Alta, del Medio y Baja**, con el **río de la Salida** hacia el este.
+  - **Bofedal** y **río del Sur** al suroeste.
+- **Agua:** se vadea con freno; lo hondo bloquea con una pista. Turbia mientras el sector está sucio y clara al limpiarlo.
+- **Modelo único:** `ValleWater`. El constructor talla el terreno y genera la malla; el juego lo usa para la profundidad, el sonido y el mapa.
+- **Orientación:** brújula y minimapa (`Runtime/UI/NavigationViews.cs`).
+  - Lo ubicado (a menos de 24 m o marcado con T) aparece en la brújula, el minimapa y el mapa.
+  - El mapa muestra los nombres de ríos y lagunas, puentes y vados.
+- **Motor:** `ThirdPersonMotor.MoveBlocked` es un delegado opcional que deshace el paso horizontal.
+- **Pruebas:** PlayMode 48/48 y EditMode 38/38. Las pruebas manuales nuevas, Z4-M10..M13, están en el informe y **no se han ejecutado**.
+
 # Zona 4: El valle olvidado (21/11/2026)
 
 - **Rama:** `feature/valle-olvidado`, que incluye el Bloque 05. Sin fusionar.
