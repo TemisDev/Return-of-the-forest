@@ -1,5 +1,18 @@
 # Relevo de Claude Code
 
+# Zona 4: El valle olvidado (21/11/2026)
+
+- **Rama:** `feature/valle-olvidado`, que incluye el Bloque 05. Sin fusionar.
+- **Build:** `Builds/Windows/V11-Valle`; `-zona valle` entra directamente.
+- **Juego:** valle de ~210 × 210 m con 4 sectores, 40 residuos de Poly Haven (CC0) y 16 troncos.
+  - Bolsa de 8 espacios y separación en 4 contenedores.
+  - Troncos que se apartan manteniendo E.
+  - Rastreo (T), mapa (M) y medallas.
+  - El final del juego pasa a esta zona.
+- **Regenerar:** `Bosque.LevelEditor.ValleBuilder.BuildAllBatch`.
+- **Pruebas:** PlayMode 45/45 y EditMode 38/38. FPS en la build: valle 53 y refugio 82 (GTX 1650, 1080p).
+- **Informe y pruebas manuales Z4-M01..M09:** `Docs/Valle/INFORME-ZONA-4.md`.
+
 # Bloque 05: presentación, menús e interfaz (21/11/2026)
 
 - **Rama:** `feature/presentation-menus`, que sale de `main` `1d143d8`; commit `389a98b`. Sin fusionar.

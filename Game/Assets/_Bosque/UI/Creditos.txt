@@ -24,6 +24,12 @@ Conversión glTF: @AsoboStudio y @scurest (CC-BY 4.0)
 Malla suavizada y pelaje repintado por el equipo
 
 
+<color=#B0D180><b>EL VALLE OLVIDADO</b></color>
+Residuos, troncos y contenedores: Poly Haven (CC0) — Rahul Chaudhary, James Ray Cock,
+Ulan Cabanilla, Rico Cilliers, Jurita Burger, Niklas, Sean Buckley, PierreB3D, Benny Weimer,
+MP, Rob Tuytel, Jenelle van Heerden, GurJas Studios
+
+
 <color=#B0D180><b>AUDIO</b></color>
 Música: "Beautiful Forest [Orchestra]" — nene (CC0)
 Ambientes: Some Weirdo, Thimras, rubberduck, isaiah658, syncopika (CC0, OpenGameArt)
