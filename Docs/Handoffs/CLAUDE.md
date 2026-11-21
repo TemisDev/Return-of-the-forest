@@ -1,5 +1,18 @@
 # Relevo de Claude Code
 
+# Bloque 05: presentación, menús e interfaz (21/11/2026)
+
+- **Rama:** `feature/presentation-menus`, que sale de `main` `1d143d8`; commit `389a98b`. Sin fusionar.
+- **Build:** `Builds/Windows/V10-Presentacion`. Arranca en el menú principal; `-zona claro` y `-zona refugio` siguen funcionando.
+- **Contenido:**
+  - menú principal con introducción, pausa (Esc) con opciones y controles, y créditos;
+  - fundidos, rótulos de zona y HUD uGUI;
+  - notas del cuaderno al completar cada zona y pantalla final.
+- **Regenerar:** `Bosque.PresentationEditor.PresentationBuilder.BuildAllBatch`.
+- **Pruebas:** PlayMode 34/34, EditMode 38/38 y verificador V10 `passed=True`.
+- **Informe y pruebas manuales B5-M01..M08:** `Docs/Presentacion/INFORME-BLOQUE-05.md`.
+- **Créditos:** editar en `Game/Assets/_Bosque/UI/Creditos.txt`; falta el nombre de quien programa.
+
 # Bloque 04: Zona 3, "El refugio perdido", fauna y final (21/11/2026)
 
 - **Rama:** `feature/character-animation-audio`, commit `5cc5a98`.

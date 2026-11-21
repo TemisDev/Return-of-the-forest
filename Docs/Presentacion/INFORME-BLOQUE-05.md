@@ -1,8 +1,8 @@
 # Bloque 05: presentación, menús e interfaz
 
-**Rama:** `feature/presentation-menus`, que sale de `main` (`1d143d8`).
+**Rama:** `feature/presentation-menus`, que sale de `main` (`1d143d8`). Commit `389a98b`.
 
-**Build:** `Builds/Windows/V10-Presentacion/BosqueDeRegreso.exe`. Arranca en el menú principal.
+**Build:** `Builds/Windows/V10-Presentacion/BosqueDeRegreso.exe`, commit `389a98b`, 0 errores. Arranca en el menú principal.
 
 ## Qué cambia al jugar
 
@@ -76,9 +76,29 @@
 
 Los textos de las licencias están en `Game/Assets/_Bosque/UI/Fonts/OFL-*.txt`.
 
-## Pruebas automatizadas
+## Resultados automatizados
 
-Ver la sección de resultados más abajo.
+Esto no sustituye a las pruebas manuales.
+
+| Prueba | Resultado |
+|---|---|
+| PlayMode de presentación (`PresentationPlayModeTests`) | **8/8** |
+| PlayMode completo (Guardiana, claro, refugio y presentación) | **34/34** |
+| EditMode | **38/38** |
+| Verificador de builds sobre V10 (arranca en el menú y carga el arroyo) | `passed=True`. Ver la nota debajo de la tabla. |
+| Arranque de la build en el menú y con `-zona refugio` (20 s cada uno) | Sin errores ni excepciones |
+
+**Verificador sobre V10:** degradado a 92 FPS (p95 15,5 ms); restaurado entre 60 y 66 FPS (p95 19,6 a 22,1 ms). Antes daba 69 FPS. La diferencia puede deberse al HUD uGUI o a que otro proceso de Unity (QA de Codex) estaba abierto durante la medición; hay que confirmarlo en B5-M07 / Z3-M08.
+
+Qué cubren las pruebas de presentación:
+- **Tema:** tema, tipografías con glifos del español, créditos con la atribución del zorro y una sola capa de presentación.
+- **Menú:** botones del menú; la introducción de tres páginas empieza una partida nueva en el arroyo con su rótulo.
+- **Pausa:** congela tiempo, audio y movimiento; tiene todos sus botones, abre los controles y vuelve. "Reiniciar zona" reinicia.
+- **Opciones:** cambian volúmenes y sensibilidad (la cámara gira el doble con 2×) y se restablecen.
+- **HUD:** muestra objetivo, aviso [Q] y pista en el claro.
+- **Final:** tras el zorro, la última nota, el final, los créditos y la vuelta al menú.
+- **Cuaderno entre zonas:** al completar el arroyo y el claro aparece la nota y solo se avanza al pulsar Continuar (pruebas del claro y del refugio, actualizadas).
+- **Capturas:** [CAPTURAS/](CAPTURAS/) (menú, opciones, créditos, introducción, rótulo, HUD, pausa, cuaderno y final).
 
 ## Pruebas manuales pendientes
 
@@ -94,3 +114,8 @@ Son para Diego. **No están ejecutadas.**
 | B5-M06 | Partida completa hasta el final; abrir Créditos y luego Jugar de nuevo. | El final se ve completo; Jugar de nuevo empieza en el arroyo sin progreso. |
 | B5-M07 | Resoluciones 1280×720, 1920×1080 y ultrapanorámica. | Nada se corta ni se solapa. |
 | B5-M08 | Cerrar y volver a abrir el juego. | Las opciones se conservan y el progreso no (como se avisa). |
+
+## Notas
+
+- **Copia de trabajo:** al compilar V10 había documentos de QA de Codex sin commit (`Docs/Handoffs/CODEX.md`, `Docs/Validacion-Codex/`, `output/`). No forman parte del juego y no se tocaron. Por eso la build se lanzó con el mismo comando de Unity que `Tools/Build-ArroyoRC1.ps1`, en lugar de con el script, que exige una copia limpia.
+- **Constructores antiguos:** `ClaroBuilder` deja Build Settings con 2 escenas. Si se vuelve a ejecutar, después hay que ejecutar `RefugioBuilder`, que conserva el menú, o `PresentationBuilder`.
