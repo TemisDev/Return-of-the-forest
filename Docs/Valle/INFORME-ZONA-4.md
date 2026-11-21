@@ -131,6 +131,8 @@ Esto no sustituye a las pruebas manuales.
 | EditMode | **38/38** |
 | FPS en la build V11, valle, 1080p, GTX 1650 (`-zona valle -medir-fps 25`) | **53,1 FPS** de media, p95 21,7 ms |
 | FPS en la build V11, refugio, mismas condiciones | 81,7 FPS de media, p95 16,8 ms |
+| FPS en la build **V12** (con ríos y lagunas), valle, 1080p, GTX 1650 | **60,7 FPS** de media, p95 19,0 ms |
+| PlayMode V12 (con ríos, vadeo, cruces, brújula y minimapa) | **48/48**; EditMode **38/38** |
 
 Qué cubren las pruebas del valle:
 - **Trazado:** 4 sectores de 14, 3 puntos con los 4 contenedores, residuos de cada tipo, llantas de 3 espacios, nada enterrado y dos residuos en salientes.
