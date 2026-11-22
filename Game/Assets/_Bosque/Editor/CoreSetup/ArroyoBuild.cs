@@ -24,6 +24,7 @@ namespace Bosque.CoreSetup
         public static void BuildV11WindowsBatch() => BuildCandidate(false, "V11-Valle");
         public static void BuildV12WindowsBatch() => BuildCandidate(false, "V12-Rios");
         public static void BuildV13WindowsBatch() => BuildCandidate(false, "V13-Acabado");
+        public static void BuildV14WindowsBatch() => BuildCandidate(false, "V14-Interfaz");
         [Serializable] private sealed class CandidateInfo
         {
             public string identifier, commit, unity, builtAtUtc, target, scene, options;

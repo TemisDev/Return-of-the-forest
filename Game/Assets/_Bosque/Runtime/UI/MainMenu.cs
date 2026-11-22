@@ -45,28 +45,38 @@ namespace Bosque.UI
             if (music != null) music.SetRestored(true, false);
             var t = Ui.Theme;
             var canvas = Ui.Canvas("LienzoMenu", 20, transform);
-            var shade = Ui.Image(canvas.transform, "Sombra", Color.white, t?.glow);
-            shade.color = new Color(0, 0, 0, .62f);
-            shade.rectTransform.Place(new Vector2(0, .5f), new Vector2(0, .5f), new Vector2(-300, 0), new Vector2(1700, 1700));
+            // V14: sin cajas. Un degradado lateral deja ver el bosque; título en versalitas y menú de solo texto.
+            var shade = Ui.Image(canvas.transform, "Sombra", new Color(0, 0, 0, .82f), UiKit.FadeRight).rectTransform;
+            shade.anchorMin = new Vector2(0, 0); shade.anchorMax = new Vector2(0, 1); shade.pivot = new Vector2(0, .5f); shade.sizeDelta = new Vector2(1250, 0); shade.anchoredPosition = Vector2.zero;
+            var floor = Ui.Image(canvas.transform, "SombraInferior", new Color(0, 0, 0, .5f), UiKit.FadeUp).rectTransform;
+            floor.anchorMin = Vector2.zero; floor.anchorMax = new Vector2(1, 0); floor.pivot = new Vector2(.5f, 0); floor.sizeDelta = new Vector2(0, 220); floor.anchoredPosition = Vector2.zero;
 
             main = Ui.Rect("Principal", canvas.transform).Stretch();
-            var title = Ui.Text(main, "Titulo", "Bosque de regreso", 120, t?.title, UiTheme.Cream, TextAlignmentOptions.TopLeft);
-            title.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(140, -150), new Vector2(1000, 150));
-            var sub = Ui.Text(main, "Subtitulo", "Reconecta un bosque andino: agua, plantas nativas y refugio", 34, t?.italic, UiTheme.CreamDim);
-            sub.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(146, -300), new Vector2(1000, 50));
-            var list = Ui.Rect("Botones", main); list.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(140, -400), new Vector2(460, 460));
-            Ui.Column(list, 16, TextAnchor.UpperLeft);
-            var start = Ui.Button(list, "Comenzar", ShowIntro, 440, 70, 34);
-            Ui.Button(list, "Opciones", () => Open(MenuPanels.Options(canvas.transform, Close)), 440);
-            Ui.Button(list, "Controles", () => Open(MenuPanels.Controls(canvas.transform, Close)), 440);
-            Ui.Button(list, "Créditos", () => Open(MenuPanels.Credits(canvas.transform, Close)), 440);
-            Ui.Button(list, "Salir", GameFlow.Quit, 440);
-            var notice = Ui.Text(main, "Aviso", "El progreso no se guarda al cerrar el juego. Una partida completa dura unos 15 minutos.", 24, t?.body, new Color(1, 1, 1, .72f), TextAlignmentOptions.BottomLeft);
-            notice.rectTransform.Place(new Vector2(0, 0), new Vector2(0, 0), new Vector2(146, 70), new Vector2(1100, 40));
-            var ods = Ui.Text(main, "ODS", "ODS 15 · Vida de ecosistemas terrestres", 24, t?.bold, UiTheme.Moss, TextAlignmentOptions.BottomLeft); ods.characterSpacing = 3;
-            ods.rectTransform.Place(new Vector2(0, 0), new Vector2(0, 0), new Vector2(146, 110), new Vector2(900, 40));
-            var ver = Ui.Text(main, "Version", GameFlow.Version, 22, t?.body, new Color(1, 1, 1, .45f), TextAlignmentOptions.BottomRight);
-            ver.rectTransform.Place(new Vector2(1, 0), new Vector2(1, 0), new Vector2(-40, 30), new Vector2(300, 40));
+            Ui.Image(main, "Rombo", UiTheme.Amber, UiKit.Diamond).rectTransform.Place(new Vector2(0, 1), new Vector2(.5f, .5f), new Vector2(148, -180), new Vector2(14, 14));
+            var kicker = UiKit.Shadowed(Ui.Text(main, "Antetitulo", "Un viaje por el bosque andino", 24, t?.mapCapsBold ?? t?.bold, UiTheme.Moss, TextAlignmentOptions.MidlineLeft));
+            kicker.characterSpacing = 9; kicker.rectTransform.Place(new Vector2(0, 1), new Vector2(0, .5f), new Vector2(168, -180), new Vector2(900, 36));
+            var title = UiKit.Shadowed(Ui.Text(main, "Titulo", "Bosque de regreso", 112, t?.mapCapsBold ?? t?.title, UiTheme.Cream, TextAlignmentOptions.TopLeft), .5f);
+            title.characterSpacing = 1; title.textWrappingMode = TextWrappingModes.NoWrap;
+            title.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(134, -204), new Vector2(1200, 140));
+            Ui.Image(main, "Linea", new Color(.96f, .92f, .8f, .35f)).rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(142, -350), new Vector2(460, 1.5f));
+            var sub = UiKit.Shadowed(Ui.Text(main, "Subtitulo", "Reconecta un bosque andino: agua, plantas nativas y refugio", 30, t?.italic, UiTheme.CreamDim));
+            sub.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(144, -366), new Vector2(1000, 50));
+            var list = Ui.Rect("Botones", main); list.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(110, -460), new Vector2(560, 380));
+            Ui.Column(list, 4, TextAnchor.UpperLeft);
+            var start = Ui.MenuItem(list, "Comenzar", ShowIntro, 560, 66, 38);
+            Ui.MenuItem(list, "Opciones", () => Open(MenuPanels.Options(canvas.transform, Close)));
+            Ui.MenuItem(list, "Controles", () => Open(MenuPanels.Controls(canvas.transform, Close)));
+            Ui.MenuItem(list, "Créditos", () => Open(MenuPanels.Credits(canvas.transform, Close)));
+            Ui.MenuItem(list, "Salir", GameFlow.Quit);
+            var ods = UiKit.Shadowed(Ui.Text(main, "ODS", "ODS 15 · Vida de ecosistemas terrestres", 21, t?.mapCapsBold ?? t?.bold, UiTheme.Moss, TextAlignmentOptions.BottomLeft)); ods.characterSpacing = 5;
+            ods.rectTransform.Place(new Vector2(0, 0), new Vector2(0, 0), new Vector2(146, 104), new Vector2(900, 34));
+            var notice = UiKit.Shadowed(Ui.Text(main, "Aviso", "El progreso no se guarda al cerrar el juego. Una partida completa dura unos 15 minutos.", 21, t?.body, new Color(1, 1, 1, .7f), TextAlignmentOptions.BottomLeft));
+            notice.rectTransform.Place(new Vector2(0, 0), new Vector2(0, 0), new Vector2(146, 70), new Vector2(1100, 34));
+            var keys = new KeyHintRow(main, "Teclas", TextAnchor.MiddleRight);
+            keys.Rect.Place(new Vector2(1, 0), new Vector2(1, 0), new Vector2(-44, 64), new Vector2(700, 40));
+            keys.Set("Enter: aceptar · Esc: volver");
+            var ver = Ui.Text(main, "Version", GameFlow.Version, 19, t?.body, new Color(1, 1, 1, .4f), TextAlignmentOptions.BottomRight);
+            ver.rectTransform.Place(new Vector2(1, 0), new Vector2(1, 0), new Vector2(-44, 26), new Vector2(300, 30));
 
             // Introducción: tres páginas sobre papel, con Siguiente y Saltar.
             intro = Ui.Rect("Introduccion", canvas.transform).Stretch();

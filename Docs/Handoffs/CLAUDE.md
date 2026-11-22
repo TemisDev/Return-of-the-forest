@@ -1,5 +1,20 @@
 # Relevo de Claude Code
 
+# V14: interfaz renovada y nueva Guardiana (22/11/2026)
+
+- **Rama:** `feature/valle-olvidado`. Sin fusionar. Build: `Builds/Windows/V14-Interfaz` (`-Configuration V14-Interfaz`).
+- **Guardiana:** modelo Microsoft Rocketbox "Female_Adult_07" (licencia MIT; aviso en `Characters/Guardiana/Source/Rocketbox/LICENSE-Rocketbox.txt`), elegido por el usuario entre tres candidatas.
+  - Preparado por `Docs/Character/pipeline/rocketbox_guardiana.py`: FBX Biped → Humanoid de Unity; texturas de 2048 px; el especular se convierte en suavidad por píxel.
+  - `GuardianaBuilder` apunta ahora a `Source/Rocketbox`. Estrecha el rango In-Out de los muslos y el cierre de los dedos del avatar, para que el reposo de la biblioteca Quaternius no abra las piernas ni cierre los puños.
+  - 8.308 triángulos y 3 materiales; mide 1,75 m. El modelo MPFB anterior sigue en `Source/MPFB`.
+- **Interfaz:** estilo «cuaderno de campo».
+  - `Runtime/UI/UiKit.cs` reúne vidrio con filete, teclas dibujadas, degradados, rombos y la fila `KeyHintRow`.
+  - Menú principal y pausa: columna izquierda sin cajas, elementos de menú en versalitas con rombo y velo animado (`Ui.MenuItem`, `MenuItemFx`). La pausa muestra la zona y el objetivo (`PauseView.SetContext`).
+  - HUD: sin cajas. Texto sobre sombras suaves de esquina, progreso con rombos o con una barra fina, aviso con tecla dibujada, atajos con teclas y estado lateral alineado a la derecha.
+  - Rótulos de zona, ayuda, paneles de opciones y controles, y brújula, con el mismo estilo.
+- **Corrección:** `PresentationBuilder` ya no borra el valle de la lista de escenas al regenerar el menú.
+- **Pruebas:** PlayMode 48/48 y EditMode 38/38. Pruebas manuales de la interfaz y del personaje **no ejecutadas**.
+
 # Zona 4 V13: acabado realista y mapa topográfico (21/11/2026)
 
 - **Rama:** `feature/valle-olvidado`. Sin fusionar.

@@ -6,17 +6,24 @@ using UnityEngine.UI;
 
 namespace Bosque.UI
 {
-    /// <summary>HUD de zona (uGUI) alimentado por IZoneHud: objetivo, progreso, aviso de acción, pista y ayuda.</summary>
+    /// <summary>
+    /// HUD de zona (uGUI) alimentado por IZoneHud: objetivo, progreso, aviso de acción, pista y ayuda.
+    /// V14: sin cajas macizas; el texto se lee sobre sombras suaves de esquina (como en los juegos de mundo abierto
+    /// actuales), las teclas se dibujan como teclas y los paneles que sí hacen falta son de vidrio con filete.
+    /// </summary>
     public sealed class ZoneHudView
     {
         private readonly CanvasGroup group;
-        private readonly TextMeshProUGUI zoneLabel, objective, progress, promptKey, promptText, hintTitle, hintText, tip, helpTitle, helpText;
-        private readonly RectTransform pips, prompt, hint, help, side, workBar;
+        private readonly TextMeshProUGUI zoneLabel, objective, progress, promptText, hintTitle, hintText, helpTitle, helpText;
+        private TextMeshProUGUI promptKey;
+        private readonly RectTransform pips, prompt, hint, help, side, workBar, progressBar, progressFill, sideScrim, keyCap;
         private readonly TextMeshProUGUI sideTitle, sideText;
         private readonly Image workFill;
+        private readonly KeyHintRow tipRow, keysRow;
         private readonly List<Image> pipImages = new List<Image>();
         private IZoneHud model;
         private int lastDone = -1, lastTotal = -1;
+        private string lastKey, lastPrompt;
 
         public IZoneHud Model => model;
         public bool Visible => group.alpha > .5f;
@@ -25,6 +32,7 @@ namespace Bosque.UI
         public string HintShown => hint.gameObject.activeSelf ? hintText.text : null;
         public string SideShown => side.gameObject.activeSelf ? sideText.text : null;
         public bool HelpShown => help.gameObject.activeSelf;
+        public string TipShown => tipRow.Text;
 
         public ZoneHudView(Transform root)
         {
@@ -32,94 +40,128 @@ namespace Bosque.UI
             var rt = Ui.Rect("HUD", root).Stretch();
             group = rt.gameObject.AddComponent<CanvasGroup>(); group.blocksRaycasts = false; group.interactable = false;
 
-            var card = Ui.Panel(rt, "Objetivo").rectTransform;
-            card.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(36, -36), new Vector2(620, 236));
-            var accent = Ui.Image(card, "Acento", UiTheme.Moss); accent.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(28, -30), new Vector2(5, 30));
-            zoneLabel = Ui.Text(card, "Zona", "", 24, t?.bold, UiTheme.Moss); zoneLabel.characterSpacing = 6;
-            zoneLabel.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(46, -28), new Vector2(560, 36));
-            objective = Ui.Text(card, "Texto", "", 30, t?.body, UiTheme.Cream);
-            objective.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(30, -74), new Vector2(560, 96));
-            pips = Ui.Rect("Progreso", card); pips.Place(new Vector2(0, 0), new Vector2(0, 0), new Vector2(30, 24), new Vector2(200, 40));
-            var h = pips.gameObject.AddComponent<HorizontalLayoutGroup>(); h.spacing = 8; h.childControlWidth = h.childControlHeight = false; h.childForceExpandWidth = false;
-            progress = Ui.Text(card, "Cuenta", "", 26, t?.body, UiTheme.CreamDim, TextAlignmentOptions.MidlineLeft);
-            progress.rectTransform.Place(new Vector2(0, 0), new Vector2(0, 0), new Vector2(240, 24), new Vector2(360, 40));
+            // Sombras suaves para leer sobre el juego (arriba a la izquierda, arriba a la derecha y abajo).
+            Ui.Image(rt, "SombraObjetivo", UiKit.Shade, UiKit.Corner).rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), Vector2.zero, new Vector2(980, 420));
+            sideScrim = Ui.Image(rt, "SombraLateral", UiKit.Shade, UiKit.Corner).rectTransform;
+            sideScrim.Place(new Vector2(1, 1), new Vector2(0, 1), Vector2.zero, new Vector2(820, 520)); sideScrim.localScale = new Vector3(-1, 1, 1);
+            var bottom = Ui.Image(rt, "SombraInferior", new Color(0, 0, 0, .42f), UiKit.FadeUp).rectTransform;
+            bottom.anchorMin = new Vector2(0, 0); bottom.anchorMax = new Vector2(1, 0); bottom.pivot = new Vector2(.5f, 0); bottom.sizeDelta = new Vector2(0, 150); bottom.anchoredPosition = Vector2.zero;
 
-            prompt = Ui.Image(rt, "Aviso", UiTheme.Panel, t?.pill).rectTransform;
-            prompt.Place(new Vector2(.5f, 0), new Vector2(.5f, 0), new Vector2(0, 150), new Vector2(760, 84));
-            var keyBg = Ui.Image(prompt, "Tecla", UiTheme.Moss, t?.pill); keyBg.rectTransform.Place(new Vector2(0, .5f), new Vector2(0, .5f), new Vector2(18, 0), new Vector2(62, 56));
-            promptKey = Ui.Text(keyBg.transform, "Letra", "E", 34, t?.title, UiTheme.PanelSolid, TextAlignmentOptions.Center); promptKey.rectTransform.Stretch();
-            promptText = Ui.Text(prompt, "Texto", "", 32, t?.bold, UiTheme.Cream, TextAlignmentOptions.MidlineLeft);
-            promptText.rectTransform.Stretch(100, 24, 0, 0);
+            // Objetivo: rombo, zona en versalitas, texto y progreso.
+            var obj = Ui.Rect("Objetivo", rt); obj.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(56, -46), new Vector2(660, 260));
+            Ui.Image(obj, "Rombo", UiTheme.Amber, UiKit.Diamond).rectTransform.Place(new Vector2(0, 1), new Vector2(.5f, .5f), new Vector2(7, -16), new Vector2(14, 14));
+            zoneLabel = UiKit.Shadowed(Ui.Text(obj, "Zona", "", 22, t?.mapCapsBold ?? t?.bold, UiTheme.Moss)); zoneLabel.characterSpacing = 6;
+            zoneLabel.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(26, 0), new Vector2(620, 32));
+            Ui.Image(obj, "Linea", new Color(1, 1, 1, .22f)).rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, -40), new Vector2(300, 1.5f));
+            objective = UiKit.Shadowed(Ui.Text(obj, "Texto", "", 29, t?.body, UiTheme.Cream)); objective.lineSpacing = 2;
+            objective.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, -52), new Vector2(620, 120));
+            pips = Ui.Rect("Progreso", obj); pips.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(0, -184), new Vector2(320, 22));
+            var h = pips.gameObject.AddComponent<HorizontalLayoutGroup>(); h.spacing = 6; h.childAlignment = TextAnchor.MiddleLeft;
+            h.childControlWidth = h.childControlHeight = false; h.childForceExpandWidth = false;
+            progressBar = Ui.Image(obj, "Barra", new Color(1, 1, 1, .16f), UiKit.Fill).rectTransform;
+            progressBar.Place(new Vector2(0, 1), new Vector2(0, .5f), new Vector2(0, -195), new Vector2(260, 5));
+            var pf = Ui.Image(progressBar, "Relleno", UiTheme.Moss, UiKit.Fill); progressFill = pf.rectTransform;
+            progressFill.anchorMin = Vector2.zero; progressFill.anchorMax = new Vector2(0, 1); progressFill.offsetMin = progressFill.offsetMax = Vector2.zero;
+            progress = UiKit.Shadowed(Ui.Text(obj, "Cuenta", "", 23, t?.body, UiTheme.CreamDim, TextAlignmentOptions.MidlineLeft));
+            progress.rectTransform.Place(new Vector2(0, 1), new Vector2(0, .5f), new Vector2(276, -195), new Vector2(400, 34));
 
-            hint = Ui.Panel(rt, "Pista").rectTransform;
-            hint.Place(new Vector2(.5f, 0), new Vector2(.5f, 0), new Vector2(0, 254), new Vector2(760, 150));
-            var hAccent = Ui.Image(hint, "Acento", UiTheme.Amber); hAccent.rectTransform.Place(new Vector2(0, .5f), new Vector2(0, .5f), new Vector2(0, 0), new Vector2(6, 150));
-            hintTitle = Ui.Text(hint, "Titulo", "", 24, t?.bold, UiTheme.Amber); hintTitle.rectTransform.Stretch(30, 24, 16, 100);
-            hintText = Ui.Text(hint, "Texto", "", 27, t?.body, UiTheme.Cream); hintText.rectTransform.Stretch(30, 24, 52, 12);
+            // Aviso de acción: tecla dibujada + texto, sobre una banda que se desvanece.
+            prompt = Ui.Rect("Aviso", rt); prompt.Place(new Vector2(.5f, 0), new Vector2(.5f, 0), new Vector2(0, 150), new Vector2(900, 76));
+            Ui.Image(prompt, "Banda", new Color(0, 0, 0, .5f), UiKit.Band).rectTransform.Stretch(-120, -120, 0, 0);
+            var row = Ui.Rect("Fila", prompt).Stretch();
+            var hr = row.gameObject.AddComponent<HorizontalLayoutGroup>(); hr.spacing = 16; hr.childAlignment = TextAnchor.MiddleCenter;
+            hr.childControlWidth = hr.childControlHeight = false; hr.childForceExpandWidth = false;
+            keyCap = UiKit.KeyCap(row, "E", 52); promptKey = keyCap.GetComponentInChildren<TextMeshProUGUI>();
+            promptText = UiKit.Shadowed(Ui.Text(row, "Texto", "", 30, t?.bold, UiTheme.Cream, TextAlignmentOptions.MidlineLeft));
+            promptText.textWrappingMode = TextWrappingModes.NoWrap; promptText.rectTransform.sizeDelta = new Vector2(600, 60);
+            promptText.gameObject.AddComponent<LayoutElement>();
 
-            tip = Ui.Text(rt, "Consejo", "", 23, t?.italic, new Color(1, 1, 1, .78f), TextAlignmentOptions.BottomLeft);
-            tip.rectTransform.Place(new Vector2(0, 0), new Vector2(0, 0), new Vector2(40, 30), new Vector2(1100, 40));
-            var keys = Ui.Text(rt, "Teclas", "Esc: pausa   ·   F1: ayuda   ·   R: reiniciar zona", 22, t?.body, new Color(1, 1, 1, .6f), TextAlignmentOptions.BottomRight);
-            keys.rectTransform.Place(new Vector2(1, 0), new Vector2(1, 0), new Vector2(-40, 30), new Vector2(700, 40));
+            hint = UiKit.GlassPanel(rt, "Pista").rectTransform;
+            hint.Place(new Vector2(.5f, 0), new Vector2(.5f, 0), new Vector2(0, 250), new Vector2(780, 142));
+            Ui.Image(hint, "Rombo", UiTheme.Amber, UiKit.Diamond).rectTransform.Place(new Vector2(0, 1), new Vector2(.5f, .5f), new Vector2(34, -32), new Vector2(14, 14));
+            hintTitle = Ui.Text(hint, "Titulo", "", 21, t?.mapCapsBold ?? t?.bold, UiTheme.Amber); hintTitle.characterSpacing = 5; hintTitle.rectTransform.Stretch(54, 24, 18, 94);
+            hintText = Ui.Text(hint, "Texto", "", 26, t?.body, UiTheme.Cream); hintText.rectTransform.Stretch(34, 28, 54, 14);
 
-            side = Ui.Panel(rt, "Lateral").rectTransform;
-            side.Place(new Vector2(1, 1), new Vector2(1, 1), new Vector2(-36, -36), new Vector2(470, 330));
-            var sAccent = Ui.Image(side, "Acento", UiTheme.Moss); sAccent.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(28, -30), new Vector2(5, 30));
-            sideTitle = Ui.Text(side, "Titulo", "", 24, t?.bold, UiTheme.Moss); sideTitle.characterSpacing = 4;
-            sideTitle.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(46, -28), new Vector2(400, 36));
-            sideText = Ui.Text(side, "Texto", "", 25, t?.body, UiTheme.Cream); sideText.richText = true; sideText.lineSpacing = 4;
-            sideText.rectTransform.Stretch(30, 24, 74, 18);
-            side.gameObject.SetActive(false);
+            // Atajos: teclas dibujadas (abajo a la izquierda, los de la zona; a la derecha, los generales).
+            tipRow = new KeyHintRow(rt, "Consejo", TextAnchor.MiddleLeft);
+            tipRow.Rect.Place(new Vector2(0, 0), new Vector2(0, 0), new Vector2(44, 26), new Vector2(1180, 40));
+            keysRow = new KeyHintRow(rt, "Teclas", TextAnchor.MiddleRight);
+            keysRow.Rect.Place(new Vector2(1, 0), new Vector2(1, 0), new Vector2(-44, 26), new Vector2(700, 40));
+            keysRow.Set("Esc: pausa · F1: ayuda · R: reiniciar zona");
 
-            workBar = Ui.Image(prompt, "Barra", new Color(1, 1, 1, .15f), t?.pill).rectTransform;
-            workBar.Place(new Vector2(.5f, 0), new Vector2(.5f, 1), new Vector2(0, -8), new Vector2(700, 12));
-            workFill = Ui.Image(workBar, "Relleno", UiTheme.Amber, t?.pill);
+            // Estado lateral (zonas grandes): alineado a la derecha, sin caja.
+            side = Ui.Rect("Lateral", rt); side.Place(new Vector2(1, 1), new Vector2(1, 1), new Vector2(-56, -46), new Vector2(480, 380));
+            Ui.Image(side, "Rombo", UiTheme.Moss, UiKit.Diamond).rectTransform.Place(new Vector2(1, 1), new Vector2(.5f, .5f), new Vector2(-7, -16), new Vector2(14, 14));
+            sideTitle = UiKit.Shadowed(Ui.Text(side, "Titulo", "", 22, t?.mapCapsBold ?? t?.bold, UiTheme.Moss, TextAlignmentOptions.TopRight)); sideTitle.characterSpacing = 5;
+            sideTitle.rectTransform.Place(new Vector2(1, 1), new Vector2(1, 1), new Vector2(-26, 0), new Vector2(440, 32));
+            Ui.Image(side, "Linea", new Color(1, 1, 1, .22f)).rectTransform.Place(new Vector2(1, 1), new Vector2(1, 1), new Vector2(0, -40), new Vector2(240, 1.5f));
+            sideText = UiKit.Shadowed(Ui.Text(side, "Texto", "", 24, t?.body, UiTheme.Cream, TextAlignmentOptions.TopRight)); sideText.richText = true; sideText.lineSpacing = 6;
+            sideText.rectTransform.Stretch(0, 0, 54, 0);
+            side.gameObject.SetActive(false); sideScrim.gameObject.SetActive(false);
+
+            workBar = Ui.Image(prompt, "Barra", new Color(1, 1, 1, .16f), UiKit.Fill).rectTransform;
+            workBar.Place(new Vector2(.5f, 0), new Vector2(.5f, 1), new Vector2(0, -6), new Vector2(420, 6));
+            workFill = Ui.Image(workBar, "Relleno", UiTheme.Amber, UiKit.Fill);
             workFill.rectTransform.anchorMin = Vector2.zero; workFill.rectTransform.anchorMax = new Vector2(0, 1); workFill.rectTransform.pivot = new Vector2(0, .5f);
             workFill.rectTransform.offsetMin = workFill.rectTransform.offsetMax = Vector2.zero;
             workBar.gameObject.SetActive(false);
 
-            help = Ui.Panel(rt, "Ayuda", UiTheme.PanelSolid).rectTransform;
-            help.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), new Vector2(0, 40), new Vector2(900, 470));
-            helpTitle = Ui.Text(help, "Titulo", "", 40, t?.title, UiTheme.Cream, TextAlignmentOptions.Top); helpTitle.rectTransform.Stretch(40, 40, 30, 380);
-            helpText = Ui.Text(help, "Texto", "", 28, t?.body, UiTheme.Cream); helpText.rectTransform.Stretch(60, 50, 110, 30);
+            help = UiKit.GlassPanel(rt, "Ayuda", UiKit.GlassSolid).rectTransform;
+            help.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), new Vector2(0, 40), new Vector2(920, 480));
+            helpTitle = Ui.Text(help, "Titulo", "", 40, t?.mapCapsBold ?? t?.title, UiTheme.Cream, TextAlignmentOptions.Top); helpTitle.characterSpacing = 4; helpTitle.rectTransform.Stretch(40, 40, 34, 380);
+            Ui.Image(help, "Linea", UiTheme.Moss).rectTransform.Place(new Vector2(.5f, 1), new Vector2(.5f, 1), new Vector2(0, -96), new Vector2(120, 2));
+            helpText = Ui.Text(help, "Texto", "", 27, t?.body, UiTheme.Cream); helpText.rectTransform.Stretch(64, 56, 120, 30);
             group.alpha = 0;
         }
 
-        public void Bind(IZoneHud zone) { model = zone; lastDone = lastTotal = -1; }
+        public void Bind(IZoneHud zone) { model = zone; lastDone = lastTotal = -1; lastKey = lastPrompt = null; }
 
         public void Tick(bool show)
         {
             if (model == null || (model as UnityEngine.Object) == null) { model = null; group.alpha = 0; return; }
             group.alpha = Mathf.MoveTowards(group.alpha, show ? 1 : 0, Time.unscaledDeltaTime * 4f);
-            zoneLabel.text = "ZONA " + model.ZoneNumber + " · " + model.ZoneTitle.ToUpperInvariant();
+            zoneLabel.text = "Zona " + model.ZoneNumber + " · " + model.ZoneTitle;
             objective.text = model.Objective;
             if (model.ProgressDone != lastDone || model.ProgressTotal != lastTotal)
             {
                 lastDone = model.ProgressDone; lastTotal = model.ProgressTotal;
-                // Con totales grandes (zona 4) solo se muestra la cuenta: los puntos no caben.
-                int shownPips = lastTotal <= 12 ? lastTotal : 0;
+                // Pocos pasos: rombos; muchos (zona 4): barra fina con la cuenta.
+                bool usePips = lastTotal <= 12;
+                int shownPips = usePips ? lastTotal : 0;
                 while (pipImages.Count < shownPips)
                 {
-                    var p = Ui.Image(pips, "Pip", Color.white, Ui.Theme?.pill); p.rectTransform.sizeDelta = new Vector2(26, 26);
+                    var p = Ui.Image(pips, "Pip", Color.white, UiKit.Diamond); p.rectTransform.sizeDelta = new Vector2(20, 20);
                     pipImages.Add(p);
                 }
                 for (int i = 0; i < pipImages.Count; i++)
                 {
                     pipImages[i].gameObject.SetActive(i < shownPips);
-                    pipImages[i].color = i < lastDone ? UiTheme.Moss : new Color(1f, 1f, 1f, .18f);
+                    pipImages[i].color = i < lastDone ? UiTheme.Moss : new Color(1f, 1f, 1f, .22f);
                 }
+                progressBar.gameObject.SetActive(!usePips);
+                if (!usePips) progressFill.anchorMax = new Vector2(lastTotal > 0 ? (float)lastDone / lastTotal : 0, 1);
                 progress.text = lastDone + " / " + lastTotal + "  " + model.ProgressLabel;
-                progress.rectTransform.anchoredPosition = new Vector2(30 + shownPips * 34 + (shownPips > 0 ? 14 : 0), 24);
+                progress.rectTransform.anchoredPosition = new Vector2(usePips ? shownPips * 26 + 10 : 276, -195);
             }
             bool hasPrompt = !string.IsNullOrEmpty(model.PromptKey);
             prompt.gameObject.SetActive(hasPrompt);
-            if (hasPrompt) { promptKey.text = model.PromptKey; promptText.text = model.PromptText; }
+            if (hasPrompt && (model.PromptKey != lastKey || model.PromptText != lastPrompt))
+            {
+                lastKey = model.PromptKey; lastPrompt = model.PromptText;
+                promptKey.text = lastKey;
+                float kw = Mathf.Max(52, 18 + lastKey.Length * 19);
+                keyCap.sizeDelta = new Vector2(kw, 52); keyCap.GetComponent<LayoutElement>().preferredWidth = kw;
+                promptText.text = lastPrompt;
+                float w = Mathf.Min(760, promptText.GetPreferredValues(lastPrompt).x + 4);
+                promptText.rectTransform.sizeDelta = new Vector2(w, 60);
+                var le = promptText.GetComponent<LayoutElement>(); le.preferredWidth = w; le.preferredHeight = 60;
+            }
             bool hasHint = !string.IsNullOrEmpty(model.HintText);
             hint.gameObject.SetActive(hasHint);
-            if (hasHint) { hintTitle.text = model.HintTitle; hintText.text = model.HintText; hint.anchoredPosition = new Vector2(0, hasPrompt ? 254 : 150); }
-            tip.text = model.Tip;
+            if (hasHint) { hintTitle.text = model.HintTitle; hintText.text = model.HintText; hint.anchoredPosition = new Vector2(0, hasPrompt ? 250 : 150); }
+            tipRow.Set(model.Tip);
             var extra = model as IZoneHudExtra;
-            side.gameObject.SetActive(extra != null);
+            side.gameObject.SetActive(extra != null); sideScrim.gameObject.SetActive(extra != null);
             if (extra != null)
             {
                 sideTitle.text = extra.SideTitle; sideText.text = extra.SideText;
@@ -165,6 +207,9 @@ namespace Bosque.UI
             reward = Ui.Text(page, "Recompensa", "", 26, t?.body, new Color(.38f, .26f, .12f), TextAlignmentOptions.Top);
             reward.rectTransform.Stretch(90, 90, 575, 110);
             button = Ui.Button(page, "Continuar  [E]", () => Continue(), 360, 62, 28);
+            var nb = button.colors;   // sobre papel: tinta, y musgo al seleccionarse
+            nb.normalColor = new Color(.22f, .17f, .11f, .92f); nb.selectedColor = nb.highlightedColor = new Color(.26f, .38f, .18f, 1f);
+            button.colors = nb;
             ((RectTransform)button.transform).Place(new Vector2(.5f, 0), new Vector2(.5f, 0), new Vector2(0, 40), new Vector2(360, 62));
             root.gameObject.SetActive(false);
         }
@@ -211,7 +256,7 @@ namespace Bosque.UI
             Ui.Image(root, "Velo", new Color(.02f, .05f, .04f, .7f), null, true).rectTransform.Stretch();
             card = Ui.Panel(root, "Tarjeta", UiTheme.PanelSolid).rectTransform;
             card.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), Vector2.zero, new Vector2(1320, 900));
-            var title = Ui.Text(card, "Titulo", "El bosque regresa", 84, t?.title, UiTheme.Cream, TextAlignmentOptions.Top); title.rectTransform.Stretch(40, 40, 40, 760);
+            var title = Ui.Text(card, "Titulo", "El bosque regresa", 84, t?.mapCapsBold ?? t?.title, UiTheme.Cream, TextAlignmentOptions.Top); title.characterSpacing = 2; title.rectTransform.Stretch(40, 40, 40, 760);
             var sub = Ui.Text(card, "Subtitulo", "LAS CUATRO ZONAS ESTÁN RECUPERADAS  ·  ODS 15 · VIDA DE ECOSISTEMAS TERRESTRES", 23, t?.bold, UiTheme.Moss, TextAlignmentOptions.Top);
             sub.characterSpacing = 4; sub.rectTransform.Stretch(40, 40, 150, 700);
             (string z, string what)[] rows =
@@ -268,26 +313,47 @@ namespace Bosque.UI
     public sealed class PauseView
     {
         private readonly RectTransform root, main;
+        private readonly TextMeshProUGUI zoneTitle, objective;
         private GameObject sub;
         public bool Visible => root.gameObject.activeSelf;
         public bool SubPanelOpen => sub != null;
+
+        /// <summary>Zona y objetivo actuales, para que la pausa recuerde dónde estás.</summary>
+        public void SetContext(IZoneHud zone)
+        {
+            bool ok = zone != null && (zone as UnityEngine.Object) != null;
+            zoneTitle.text = ok ? zone.ZoneTitle : "Bosque de regreso";
+            objective.text = ok ? zone.Objective + (zone.ProgressTotal > 0 ? $"\n<size=85%><color=#B0D180>{zone.ProgressDone} / {zone.ProgressTotal} {zone.ProgressLabel}</color></size>" : "") : "";
+        }
 
         public PauseView(Transform parent, Action resume, Action restart)
         {
             var t = Ui.Theme;
             root = Ui.Rect("Pausa", parent).Stretch();
-            Ui.Image(root, "Velo", new Color(0, 0, 0, .6f), null, true).rectTransform.Stretch();
-            main = Ui.Panel(root, "Tarjeta", UiTheme.PanelSolid).rectTransform;
-            main.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), Vector2.zero, new Vector2(600, 720));
-            var title = Ui.Text(main, "Titulo", "Pausa", 64, t?.title, UiTheme.Cream, TextAlignmentOptions.Top); title.rectTransform.Stretch(20, 20, 40, 600);
-            var list = Ui.Rect("Botones", main).Stretch(60, 60, 150, 50);
-            Ui.Column(list, 16, TextAnchor.UpperCenter);
-            Ui.Button(list, "Continuar", resume, 440);
-            Ui.Button(list, "Reiniciar zona", restart, 440);
-            Ui.Button(list, "Opciones", () => Open(MenuPanels.Options(root, Close)), 440);
-            Ui.Button(list, "Controles", () => Open(MenuPanels.Controls(root, Close)), 440);
-            Ui.Button(list, "Menú principal", GameFlow.BackToMenu, 440);
-            Ui.Button(list, "Salir del juego", GameFlow.Quit, 440);
+            // V14: el juego queda visible y atenuado; columna izquierda con la zona, el objetivo y el menú.
+            Ui.Image(root, "Velo", new Color(0, 0, 0, .45f), null, true).rectTransform.Stretch();
+            var side = Ui.Image(root, "Sombra", new Color(0, 0, 0, .85f), UiKit.FadeRight).rectTransform;
+            side.anchorMin = new Vector2(0, 0); side.anchorMax = new Vector2(0, 1); side.pivot = new Vector2(0, .5f); side.sizeDelta = new Vector2(1150, 0); side.anchoredPosition = Vector2.zero;
+            main = Ui.Rect("Tarjeta", root).Stretch();
+            Ui.Image(main, "Rombo", UiTheme.Amber, UiKit.Diamond).rectTransform.Place(new Vector2(0, 1), new Vector2(.5f, .5f), new Vector2(148, -170), new Vector2(14, 14));
+            var kicker = UiKit.Shadowed(Ui.Text(main, "Antetitulo", "Juego en pausa", 24, t?.mapCapsBold ?? t?.bold, UiTheme.Moss, TextAlignmentOptions.MidlineLeft));
+            kicker.characterSpacing = 7; kicker.rectTransform.Place(new Vector2(0, 1), new Vector2(0, .5f), new Vector2(168, -170), new Vector2(700, 36));
+            zoneTitle = UiKit.Shadowed(Ui.Text(main, "Titulo", "", 76, t?.mapCapsBold ?? t?.title, UiTheme.Cream, TextAlignmentOptions.TopLeft), .5f);
+            zoneTitle.textWrappingMode = TextWrappingModes.NoWrap; zoneTitle.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(138, -196), new Vector2(1000, 100));
+            Ui.Image(main, "Linea", new Color(.96f, .92f, .8f, .35f)).rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(142, -300), new Vector2(420, 1.5f));
+            objective = UiKit.Shadowed(Ui.Text(main, "Objetivo", "", 25, t?.italic, UiTheme.CreamDim));
+            objective.rectTransform.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(144, -316), new Vector2(720, 110));
+            var list = Ui.Rect("Botones", main); list.Place(new Vector2(0, 1), new Vector2(0, 1), new Vector2(110, -440), new Vector2(560, 440));
+            Ui.Column(list, 4, TextAnchor.UpperLeft);
+            Ui.MenuItem(list, "Continuar", resume, 560, 64, 36);
+            Ui.MenuItem(list, "Reiniciar zona", restart);
+            Ui.MenuItem(list, "Opciones", () => Open(MenuPanels.Options(root, Close)));
+            Ui.MenuItem(list, "Controles", () => Open(MenuPanels.Controls(root, Close)));
+            Ui.MenuItem(list, "Menú principal", GameFlow.BackToMenu);
+            Ui.MenuItem(list, "Salir del juego", GameFlow.Quit);
+            var keys = new KeyHintRow(main, "Teclas", TextAnchor.MiddleLeft);
+            keys.Rect.Place(new Vector2(0, 0), new Vector2(0, 0), new Vector2(150, 50), new Vector2(700, 40));
+            keys.Set("Esc: volver al juego · Enter: aceptar");
             root.gameObject.SetActive(false);
         }
 
@@ -319,17 +385,19 @@ namespace Bosque.UI
             var rt = Ui.Rect("Rotulo", parent).Stretch();
             group = rt.gameObject.AddComponent<CanvasGroup>(); group.blocksRaycasts = false; group.alpha = 0;
             var band = Ui.Image(rt, "Banda", new Color(0, 0, 0, .45f), t?.glow); band.rectTransform.Place(new Vector2(.5f, .62f), new Vector2(.5f, .5f), Vector2.zero, new Vector2(1500, 300));
-            number = Ui.Text(rt, "Numero", "", 30, t?.bold, UiTheme.Moss, TextAlignmentOptions.Center); number.characterSpacing = 12;
-            number.rectTransform.Place(new Vector2(.5f, .62f), new Vector2(.5f, .5f), new Vector2(0, 86), new Vector2(1200, 50));
-            title = Ui.Text(rt, "Titulo", "", 96, t?.title, UiTheme.Cream, TextAlignmentOptions.Center);
+            number = UiKit.Shadowed(Ui.Text(rt, "Numero", "", 28, t?.mapCapsBold ?? t?.bold, UiTheme.Moss, TextAlignmentOptions.Center)); number.characterSpacing = 14;
+            number.rectTransform.Place(new Vector2(.5f, .62f), new Vector2(.5f, .5f), new Vector2(0, 92), new Vector2(1200, 50));
+            foreach (var sx in new[] { -1f, 1f })
+                Ui.Image(rt, "Linea", new Color(.96f, .92f, .8f, .4f)).rectTransform.Place(new Vector2(.5f, .62f), new Vector2(.5f, .5f), new Vector2(sx * 210, 92), new Vector2(180, 1.5f));
+            title = UiKit.Shadowed(Ui.Text(rt, "Titulo", "", 100, t?.mapCapsBold ?? t?.title, UiTheme.Cream, TextAlignmentOptions.Center), .55f);
             title.rectTransform.Place(new Vector2(.5f, .62f), new Vector2(.5f, .5f), new Vector2(0, 6), new Vector2(1400, 120));
-            subtitle = Ui.Text(rt, "Subtitulo", "", 34, t?.italic, UiTheme.CreamDim, TextAlignmentOptions.Center);
+            subtitle = UiKit.Shadowed(Ui.Text(rt, "Subtitulo", "", 32, t?.italic, UiTheme.CreamDim, TextAlignmentOptions.Center));
             subtitle.rectTransform.Place(new Vector2(.5f, .62f), new Vector2(.5f, .5f), new Vector2(0, -78), new Vector2(1300, 50));
         }
 
         public void Show(GameFlow.ZoneInfo zone)
         {
-            number.text = "ZONA " + zone.number; title.text = zone.title; subtitle.text = zone.subtitle;
+            number.text = "Zona " + zone.number; title.text = zone.title; subtitle.text = zone.subtitle;
             start = Time.unscaledTime;
         }
 

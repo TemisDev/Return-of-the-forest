@@ -12,9 +12,8 @@ ChatGPT y Codex (OpenAI) · Claude Code (Anthropic)
 
 
 <color=#B0D180><b>PERSONAJES</b></color>
-<b>La Guardiana</b> — generada con MPFB 2 / MakeHuman (Joel Palmius y MakeHuman Community)
-Malla base, ojos, cejas, pestañas y pelo: MakeHuman system assets (CC0)
-Piel: callharvey3d (Skins01, CC0) · Suéter y botas: toigo (CC0) · Pantalón: cortu (CC0)
+<b>La Guardiana</b> — "Female_Adult_07", Microsoft Rocketbox Avatar Library
+Copyright (c) 2020 Microsoft · Licencia MIT (texto completo en Characters/Guardiana/Source/Rocketbox)
 Animaciones: Universal Animation Library — Quaternius (CC0)
 
 <b>Zorro de neblina</b> — basado en "Fox" (Khronos glTF Sample Assets)

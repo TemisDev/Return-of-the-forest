@@ -62,8 +62,9 @@ namespace Bosque.UI
             return img;
         }
 
+        /// <summary>Panel de vidrio con filete (V14). PanelSolid da la variante casi opaca.</summary>
         public static Image Panel(Transform parent, string name, Color? color = null) =>
-            Image(parent, name, color ?? UiTheme.Panel, Theme != null ? Theme.panel : null, true);
+            UiKit.GlassPanel(parent, name, color == null || color.Value == UiTheme.Panel ? UiKit.Glass : color.Value == UiTheme.PanelSolid ? UiKit.GlassSolid : color.Value);
 
         public static TextMeshProUGUI Text(Transform parent, string name, string text, float size, TMP_FontAsset font = null,
             Color? color = null, TextAlignmentOptions align = TextAlignmentOptions.TopLeft)
@@ -87,17 +88,39 @@ namespace Bosque.UI
         /// <summary>Botón con fondo redondeado, estados de color y texto centrado.</summary>
         public static Button Button(Transform parent, string label, Action onClick, float width = 420, float height = 64, float fontSize = 30)
         {
-            var img = Image(parent, "Boton_" + label, Color.white, Theme != null ? Theme.pill : null, true);
+            // V14: vidrio con filete; al seleccionarse se llena de musgo.
+            var img = Image(parent, "Boton_" + label, Color.white, UiKit.Fill, true); img.type = UnityEngine.UI.Image.Type.Sliced;
             var rt = img.rectTransform; rt.sizeDelta = new Vector2(width, height);
             var le = img.gameObject.AddComponent<LayoutElement>(); le.preferredWidth = width; le.preferredHeight = height;
+            var frame = Image(rt, "Filete", new Color(.96f, .92f, .8f, .3f), UiKit.Frame); frame.type = UnityEngine.UI.Image.Type.Sliced; frame.rectTransform.Stretch();
             var b = img.gameObject.AddComponent<Button>();
             var cb = b.colors;
-            cb.normalColor = new Color(.1f, .17f, .13f, .9f); cb.highlightedColor = new Color(.27f, .38f, .2f, .97f);
-            cb.selectedColor = new Color(.27f, .38f, .2f, .97f); cb.pressedColor = new Color(.42f, .55f, .3f, 1f);
-            cb.disabledColor = new Color(.1f, .12f, .11f, .5f); cb.fadeDuration = .08f;
+            cb.normalColor = new Color(.04f, .07f, .05f, .72f); cb.highlightedColor = new Color(.3f, .42f, .22f, .95f);
+            cb.selectedColor = new Color(.3f, .42f, .22f, .95f); cb.pressedColor = new Color(.45f, .58f, .32f, 1f);
+            cb.disabledColor = new Color(.1f, .12f, .11f, .45f); cb.fadeDuration = .1f;
             b.colors = cb;
             var t = Text(rt, "Texto", label, fontSize, Theme != null ? Theme.bold : null, UiTheme.Cream, TextAlignmentOptions.Center);
-            t.rectTransform.Stretch(16, 16, 0, 0);
+            t.rectTransform.Stretch(16, 16, 0, 0); t.characterSpacing = 2f;
+            if (onClick != null) b.onClick.AddListener(() => onClick());
+            return b;
+        }
+
+        /// <summary>
+        /// Elemento de menú (menú principal y pausa): solo texto en versalitas, con un rombo de acento y un velo
+        /// degradado que entra al seleccionarlo (como los menús de juegos de autor). El texto es el primer TMP hijo.
+        /// </summary>
+        public static Button MenuItem(Transform parent, string label, Action onClick, float width = 560, float height = 64, float fontSize = 34)
+        {
+            var hit = Image(parent, "Boton_" + label, new Color(0, 0, 0, 0), null, true);
+            var rt = hit.rectTransform; rt.sizeDelta = new Vector2(width, height);
+            var le = hit.gameObject.AddComponent<LayoutElement>(); le.preferredWidth = width; le.preferredHeight = height;
+            var glow = Image(rt, "Velo", new Color(0, 0, 0, 0), UiKit.FadeRight); glow.rectTransform.Stretch();
+            var marker = Image(rt, "Rombo", Color.white, UiKit.Diamond); marker.rectTransform.Place(new Vector2(0, .5f), new Vector2(.5f, .5f), new Vector2(22, 0), new Vector2(16, 16));
+            var t = Text(rt, "Texto", label, fontSize, Theme != null && Theme.mapCapsBold != null ? Theme.mapCapsBold : Theme?.bold, UiTheme.Cream, TextAlignmentOptions.MidlineLeft);
+            t.rectTransform.Stretch(48, 16, 0, 0); t.characterSpacing = 4f; t.textWrappingMode = TextWrappingModes.NoWrap;
+            UiKit.Shadowed(t, .6f);
+            var b = hit.gameObject.AddComponent<Button>(); b.transition = Selectable.Transition.None; b.targetGraphic = hit;
+            var fx = hit.gameObject.AddComponent<MenuItemFx>(); fx.glow = glow; fx.marker = marker; fx.label = t;
             if (onClick != null) b.onClick.AddListener(() => onClick());
             return b;
         }
@@ -113,15 +136,16 @@ namespace Bosque.UI
 
             var area = Rect("Control", row); area.anchorMin = new Vector2(.44f, .5f); area.anchorMax = new Vector2(.84f, .5f);
             area.sizeDelta = new Vector2(0, 26); area.anchoredPosition = Vector2.zero;
-            var bg = Image(area, "Fondo", new Color(1, 1, 1, .14f), Theme != null ? Theme.pill : null, true);
-            bg.rectTransform.Stretch(0, 0, 8, 8);
-            var fillArea = Rect("AreaRelleno", area).Stretch(0, 0, 8, 8);
-            var fill = Image(fillArea, "Relleno", UiTheme.Moss, Theme != null ? Theme.pill : null);
+            // V14: pista fina de 6 px y asa redonda.
+            var bg = Image(area, "Fondo", new Color(1, 1, 1, .13f), UiKit.Fill, true); bg.type = UnityEngine.UI.Image.Type.Sliced;
+            bg.rectTransform.Stretch(0, 0, 10, 10);
+            var fillArea = Rect("AreaRelleno", area).Stretch(0, 0, 10, 10);
+            var fill = Image(fillArea, "Relleno", UiTheme.Moss, UiKit.Fill); fill.type = UnityEngine.UI.Image.Type.Sliced;
             fill.rectTransform.Stretch();
-            var handleArea = Rect("AreaAsa", area).Stretch(10, 10, 0, 0);
-            var handle = Image(handleArea, "Asa", UiTheme.Cream, Theme != null ? Theme.pill : null, true);
+            var handleArea = Rect("AreaAsa", area).Stretch(12, 12, 0, 0);
+            var handle = Image(handleArea, "Asa", UiTheme.Cream, UiKit.Dot, true);
             handle.rectTransform.anchorMin = Vector2.zero; handle.rectTransform.anchorMax = new Vector2(0, 1);
-            handle.rectTransform.sizeDelta = new Vector2(26, 6);
+            handle.rectTransform.sizeDelta = new Vector2(24, 0);
             var s = area.gameObject.AddComponent<Slider>();
             s.fillRect = fill.rectTransform; s.handleRect = handle.rectTransform; s.targetGraphic = handle;
             s.minValue = min; s.maxValue = max; s.SetValueWithoutNotify(value);
@@ -135,10 +159,10 @@ namespace Bosque.UI
             var le = row.gameObject.AddComponent<LayoutElement>(); le.preferredHeight = 58; le.preferredWidth = 720;
             var name = Text(row, "Etiqueta", label, 27, null, UiTheme.Cream, TextAlignmentOptions.MidlineLeft);
             name.rectTransform.anchorMin = Vector2.zero; name.rectTransform.anchorMax = new Vector2(.8f, 1); name.rectTransform.offsetMin = name.rectTransform.offsetMax = Vector2.zero;
-            var box = Image(row, "Casilla", new Color(1, 1, 1, .14f), Theme != null ? Theme.pill : null, true);
+            var box = Image(row, "Casilla", new Color(1, 1, 1, .14f), UiKit.Fill, true); box.type = UnityEngine.UI.Image.Type.Sliced;
             box.rectTransform.anchorMin = box.rectTransform.anchorMax = new Vector2(.44f, .5f); box.rectTransform.pivot = new Vector2(0, .5f);
             box.rectTransform.sizeDelta = new Vector2(64, 32); box.rectTransform.anchoredPosition = Vector2.zero;
-            var mark = Image(box.transform, "Marca", UiTheme.Moss, Theme != null ? Theme.pill : null);
+            var mark = Image(box.transform, "Marca", UiTheme.Moss, UiKit.Fill); mark.type = UnityEngine.UI.Image.Type.Sliced;
             mark.rectTransform.Stretch(4, 4, 4, 4);
             var t = row.gameObject.AddComponent<Toggle>(); t.targetGraphic = box; t.graphic = mark; t.SetIsOnWithoutNotify(value);
             t.onValueChanged.AddListener(v => onChange(v));

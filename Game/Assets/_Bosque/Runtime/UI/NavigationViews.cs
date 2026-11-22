@@ -40,8 +40,9 @@ namespace Bosque.UI
             group = rt.gameObject.AddComponent<CanvasGroup>(); group.blocksRaycasts = false; group.interactable = false; group.alpha = 0;
 
             // Brújula.
-            var bar = Ui.Image(rt, "Brujula", UiTheme.Panel, t?.pill).rectTransform;
-            bar.Place(new Vector2(.5f, 1), new Vector2(.5f, 1), new Vector2(0, -30), new Vector2(CompassWidth + 40, 78));
+            var bar = Ui.Image(rt, "Brujula", new Color(0, 0, 0, .55f), UiKit.Band).rectTransform;
+            bar.Place(new Vector2(.5f, 1), new Vector2(.5f, 1), new Vector2(0, -30), new Vector2(CompassWidth + 220, 78));
+            Ui.Image(bar, "Linea", new Color(.96f, .92f, .8f, .28f), UiKit.Band).rectTransform.Place(new Vector2(.5f, 0), new Vector2(.5f, .5f), new Vector2(0, 2), new Vector2(CompassWidth, 1.5f));
             strip = Ui.Rect("Franja", bar); strip.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), Vector2.zero, new Vector2(CompassWidth, 78));
             strip.gameObject.AddComponent<RectMask2D>();
             for (int h = 0; h < 360; h += 15)

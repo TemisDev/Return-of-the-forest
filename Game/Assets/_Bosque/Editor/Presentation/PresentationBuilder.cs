@@ -41,11 +41,10 @@ namespace Bosque.PresentationEditor
             EnsureTmpResources();
             Theme();
             BuildMenuScene();
-            EditorBuildSettings.scenes = new[]
-            {
-                new EditorBuildSettingsScene(MenuScenePath, true), new EditorBuildSettingsScene(ClaroBuilder.ArroyoScene, true),
-                new EditorBuildSettingsScene(ClaroBuilder.ScenePath, true), new EditorBuildSettingsScene(RefugioBuilder.ScenePath, true),
-            };
+            // Menú y zonas 1–3 primero; se conservan las escenas que otros constructores añadieron después (p. ej. el valle).
+            var core = new[] { MenuScenePath, ClaroBuilder.ArroyoScene, ClaroBuilder.ScenePath, RefugioBuilder.ScenePath };
+            EditorBuildSettings.scenes = core.Select(p => new EditorBuildSettingsScene(p, true))
+                .Concat(EditorBuildSettings.scenes.Where(s => !core.Contains(s.path) && System.IO.File.Exists(s.path))).ToArray();
             AssetDatabase.SaveAssets();
             Debug.Log($"[Presentacion] Tema {ThemePath} y menú listos.");
         }

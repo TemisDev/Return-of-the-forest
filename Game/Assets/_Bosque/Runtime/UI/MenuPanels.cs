@@ -14,7 +14,7 @@ namespace Bosque.UI
         {
             var card = Ui.Panel(parent, name, UiTheme.PanelSolid).rectTransform;
             card.Place(new Vector2(.5f, .5f), new Vector2(.5f, .5f), Vector2.zero, size);
-            var h = Ui.Text(card, "Titulo", heading, 46, Ui.Theme?.title, UiTheme.Cream, TextAlignmentOptions.Center);
+            var h = Ui.Text(card, "Titulo", heading, 46, Ui.Theme?.mapCapsBold ?? Ui.Theme?.title, UiTheme.Cream, TextAlignmentOptions.Center); h.characterSpacing = 4;
             h.rectTransform.Place(new Vector2(.5f, 1), new Vector2(.5f, 1), new Vector2(0, -34), new Vector2(size.x - 80, 64));
             var line = Ui.Image(card, "Linea", UiTheme.Moss); line.rectTransform.Place(new Vector2(.5f, 1), new Vector2(.5f, 1), new Vector2(0, -104), new Vector2(120, 3));
             return card;
@@ -31,8 +31,8 @@ namespace Bosque.UI
 
         public static GameObject Options(Transform parent, Action onBack)
         {
-            var card = Card(parent, "PanelOpciones", "Opciones", new Vector2(880, 760));
-            var list = Ui.Rect("Lista", card).Stretch(80, 80, 140, 130);
+            var card = Card(parent, "PanelOpciones", "Opciones", new Vector2(880, 840));
+            var list = Ui.Rect("Lista", card).Stretch(80, 80, 140, 120);
             Ui.Column(list, 10, TextAnchor.UpperCenter);
             var master = Ui.Slider(list, "Volumen general", 0, 1, BosqueAudio.GetVolume(AudioBus.Master), v => BosqueAudio.SetVolume(AudioBus.Master, v), Pct);
             var music = Ui.Slider(list, "Música", 0, 1, BosqueAudio.GetVolume(AudioBus.Music), v => BosqueAudio.SetVolume(AudioBus.Music, v), Pct);
@@ -67,9 +67,11 @@ namespace Bosque.UI
             foreach (var (key, what) in rows)
             {
                 var row = Ui.Rect("Fila_" + key, list); row.sizeDelta = new Vector2(700, 50);
-                var badge = Ui.Image(row, "Tecla", new Color(1, 1, 1, .12f), Ui.Theme?.pill);
-                badge.rectTransform.Place(new Vector2(0, .5f), new Vector2(0, .5f), Vector2.zero, new Vector2(190, 44));
-                var k = Ui.Text(badge.transform, "Texto", key, 24, Ui.Theme?.bold, UiTheme.Moss, TextAlignmentOptions.Center); k.rectTransform.Stretch();
+                // V14: cada tecla dibujada como tecla (W A S D son cuatro).
+                var keys = Ui.Rect("Teclas", row); keys.Place(new Vector2(0, .5f), new Vector2(0, .5f), Vector2.zero, new Vector2(200, 44));
+                var hk = keys.gameObject.AddComponent<HorizontalLayoutGroup>(); hk.spacing = 6; hk.childAlignment = TextAnchor.MiddleLeft;
+                hk.childControlWidth = hk.childControlHeight = false; hk.childForceExpandWidth = false;
+                foreach (var part in key.Split(' ')) UiKit.KeyCap(keys, part, 40);
                 var w = Ui.Text(row, "Accion", what, 26, null, UiTheme.Cream, TextAlignmentOptions.MidlineLeft);
                 w.rectTransform.Place(new Vector2(0, .5f), new Vector2(0, .5f), new Vector2(220, 0), new Vector2(480, 50));
             }

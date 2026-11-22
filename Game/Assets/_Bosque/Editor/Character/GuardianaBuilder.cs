@@ -23,9 +23,11 @@ namespace Bosque.CharacterEditor
     public static class GuardianaBuilder
     {
         public const string Root = "Assets/_Bosque/Characters/Guardiana";
-        public const string ModelFbx = Root + "/Source/MPFB/SK_Guardiana.fbx";
-        public const string UrpManifest = Root + "/Source/MPFB/guardiana-urp.json";
-        public const string TexturesDir = Root + "/Textures/MPFB";
+        // V14: modelo Microsoft Rocketbox "Female_Adult_07" (MIT), preparado por Docs/Character/pipeline/rocketbox_guardiana.py.
+        // El modelo MPFB anterior sigue en Source/MPFB y Textures/MPFB.
+        public const string ModelFbx = Root + "/Source/Rocketbox/SK_Guardiana_RB.fbx";
+        public const string UrpManifest = Root + "/Source/Rocketbox/guardiana-urp.json";
+        public const string TexturesDir = Root + "/Textures/Rocketbox";
         public const string AnimFbx = Root + "/Source/Animations/UAL1_Standard.fbx";
         public const string ControllerPath = Root + "/Animation/AC_Guardiana.controller";
         public const string MaskPath = Root + "/Animation/AM_Guardiana_TorsoBrazos.mask";
@@ -69,7 +71,7 @@ namespace Bosque.CharacterEditor
         }
 
         // ------------------------------------------------------------------ texturas y materiales
-        [Serializable] private sealed class UrpEntry { public string material, parte, @base, normal; public float smoothness, alphaClip; public bool doubleSided; }
+        [Serializable] private sealed class UrpEntry { public string material, parte, @base, normal, smoothMap; public float smoothness, alphaClip; public bool doubleSided; }
         [Serializable] private sealed class UrpManifestData { public List<UrpEntry> materiales = new List<UrpEntry>(); }
 
         private static UrpManifestData Manifest() =>
@@ -81,9 +83,9 @@ namespace Bosque.CharacterEditor
             {
                 var path = AssetDatabase.GUIDToAssetPath(guid);
                 var ti = (TextureImporter)AssetImporter.GetAtPath(path);
-                bool normal = path.Contains("_Normal");
+                bool normal = path.Contains("_Normal"), linear = path.Contains("_MetalSmooth");
                 ti.textureType = normal ? TextureImporterType.NormalMap : TextureImporterType.Default;
-                ti.sRGBTexture = !normal; ti.maxTextureSize = 2048;
+                ti.sRGBTexture = !normal && !linear; ti.maxTextureSize = 2048;
                 ti.alphaIsTransparency = !normal && ti.DoesSourceTextureHaveAlpha();
                 ti.textureCompression = TextureImporterCompression.CompressedHQ; ti.mipmapEnabled = true;
                 ti.SaveAndReimport();
@@ -108,6 +110,10 @@ namespace Bosque.CharacterEditor
             if (n != null) { m.SetTexture("_BumpMap", n); m.SetFloat("_BumpScale", 1f); m.EnableKeyword("_NORMALMAP"); }
             else { m.SetTexture("_BumpMap", null); m.DisableKeyword("_NORMALMAP"); }
             m.SetFloat("_Metallic", 0f); m.SetFloat("_Smoothness", e.smoothness);
+            // Suavidad por píxel (piel, tela y cuero distintos): alfa del mapa MetalSmooth, escalada por "smoothness".
+            var sm = Tex(e.smoothMap);
+            m.SetTexture("_MetallicGlossMap", sm); m.SetFloat("_SmoothnessTextureChannel", 0f);
+            if (sm != null) m.EnableKeyword("_METALLICSPECGLOSSMAP"); else m.DisableKeyword("_METALLICSPECGLOSSMAP");
             bool clip = e.alphaClip > 0f;
             m.SetFloat("_AlphaClip", clip ? 1f : 0f); m.SetFloat("_Cutoff", clip ? e.alphaClip : .5f);
             if (clip) m.EnableKeyword("_ALPHATEST_ON"); else m.DisableKeyword("_ALPHATEST_ON");
@@ -131,6 +137,26 @@ namespace Bosque.CharacterEditor
                 mi.importAnimation = false; mi.importBlendShapes = false; mi.importCameras = false; mi.importLights = false;
                 mi.materialImportMode = ModelImporterMaterialImportMode.ImportViaMaterialDescription;
                 foreach (var kv in mats) mi.AddRemap(new AssetImporter.SourceAssetIdentifier(typeof(Material), kv.Key), kv.Value);
+                mi.SaveAndReimport();
+                // El reposo de la biblioteca abre mucho las piernas (postura de pelea). Se estrecha el rango
+                // "In-Out" de los muslos del avatar: la misma animación, con los pies más juntos y natural.
+                var hd = mi.humanDescription; var human = hd.human;
+                for (int i = 0; i < human.Length; i++)
+                {
+                    var n = human[i].humanName;
+                    if ((n.Contains("Proximal") || n.Contains("Intermediate") || n.Contains("Distal")) && !n.Contains("Thumb"))
+                    {
+                        // Los puños del reposo quedan cerrados: con menos recorrido de cierre, la mano queda relajada.
+                        var f = human[i].limit;
+                        f.useDefaultValues = false; f.min = new Vector3(0f, -12f, -22f); f.max = new Vector3(0f, 12f, 22f);
+                        human[i].limit = f; continue;
+                    }
+                    if (n != "LeftUpperLeg" && n != "RightUpperLeg") continue;
+                    var l = human[i].limit;
+                    l.useDefaultValues = false; l.min = new Vector3(-60f, -90f, -24f); l.max = new Vector3(60f, 50f, 24f);
+                    human[i].limit = l;
+                }
+                hd.human = human; mi.humanDescription = hd;
                 mi.SaveAndReimport();
             }
             var ai = (ModelImporter)AssetImporter.GetAtPath(AnimFbx);
@@ -266,7 +292,7 @@ namespace Bosque.CharacterEditor
                 var smrs = go.GetComponentsInChildren<SkinnedMeshRenderer>();
                 int tris = smrs.Sum(r => r.sharedMesh.triangles.Length / 3);
                 var b0 = smrs.Select(r => r.bounds).Aggregate((a, c) => { a.Encapsulate(c); return a; });
-                Debug.Log($"[Guardiana] Prefab MPFB: {smrs.Length} mallas, {tris} triángulos, altura {b0.size.y:F2} m, " +
+                Debug.Log($"[Guardiana] Prefab Rocketbox: {smrs.Length} mallas, {tris} triángulos, altura {b0.size.y:F2} m, " +
                           $"materiales {smrs.SelectMany(r => r.sharedMaterials).Distinct().Count()}, huesos {smrs.SelectMany(r => r.bones).Distinct().Count()}.");
                 return prefab;
             }

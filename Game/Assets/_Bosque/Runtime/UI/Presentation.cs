@@ -124,7 +124,7 @@ namespace Bosque.UI
         {
             if (!InZone || Pause.Visible) return;
             GamePause.Set(true);
-            Pause.Show();
+            Pause.SetContext(Hud.Model); Pause.Show();
             Cursor.lockState = CursorLockMode.None; Cursor.visible = true;
         }
 
