@@ -1,0 +1,16 @@
+{
+  "name": "Bosque.PlayMode.Tests",
+  "references": [
+    "Bosque.Runtime",
+    "Unity.InputSystem",
+    "UnityEngine.UI",
+    "Unity.TextMeshPro"
+  ],
+  "includePlatforms": [],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ],
+  "defineConstraints": [
+    "UNITY_INCLUDE_TESTS"
+  ]
+}

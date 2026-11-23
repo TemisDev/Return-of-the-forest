@@ -1,0 +1,817 @@
+# SHA256  estado(A=nuevo,M=modificado)  bytes  ruta
+9a089bde2f2a4a7e129d4f02f9373cd1de4b7026ed47978b7eb14061996ea737  A  5762  Docs/Character/LICENCIAS-BLOQUE-02.csv
+11d5099711f482e68c5292c7dfb2cf17ec7732685abde6eb53712196599c314d  A  1454  Docs/Fauna/LICENCIAS-ZONA-3.csv
+42ebf9a20baa44d8c9bc90a6762e35aff041dfc481ff964a36b103a3eb7c6c3b  A  6255  Docs/Valle/LICENCIAS-ZONA-4.csv
+46973edd17c4615f06f735e924e26c3a48e7a6b8b1579246395275fe796ece1b  A  3392  Docs/Valle/pipeline/fuentes-polyhaven.json
+a22c512c95d282a56143439551dff5e0112d21c31dc72e8799b9e9cdb91672a0  M  4672  Game/Assets/Settings/PC_RPAsset.asset
+8529d84d190a68aeb1a16e0a90308081bd30a738dbcc63c63b2a93c53b9a11b3  A  172  Game/Assets/TextMesh Pro.meta
+11e80153fa39b86efadb8917ecde12a0402fe0729f2c88f6f8d1999f3fb04748  A  172  Game/Assets/TextMesh Pro/Fonts.meta
+37f8552e9a874ec10710dc0ede6a9adf168e6609fbd02a507f35629373b85a48  A  4469  Game/Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt
+5dbec32c014c17d94674af5f1494d49b42ba00edd50397f895f088c868ccbf86  A  177  Game/Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt.meta
+e5b0af421ea2bfbc1ac8d251d647268087ae82786234c57f757d1f0b90fa8b49  A  350200  Game/Assets/TextMesh Pro/Fonts/LiberationSans.ttf
+e2e35a015703584fb119355fa02631764d111c3e112d32519801d46bd697b596  A  414  Game/Assets/TextMesh Pro/Fonts/LiberationSans.ttf.meta
+167448559db07c9857b206a0f5a0aedcd6a6dad900d618b35b0702d636573805  A  172  Game/Assets/TextMesh Pro/Resources.meta
+8917470a9265beb1ef55a28c6a3718eb12ec8004554499998cc345056247995f  A  191  Game/Assets/TextMesh Pro/Resources/Fonts & Materials.meta
+b6b65c34e4907dd3006c2217fc8a4cef81b6da24df0a3de8e2288199eb6c5a9d  A  2975  Game/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Drop Shadow.mat
+ef2eee63b288d47823da38109e3e8c879f4717a82dc662ac2d5e2460dacde698  A  179  Game/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Drop Shadow.mat.meta
+e2d77876f2b90d98ba2424f6fc32b1403ea701de8fd24a8fe8e571ecc3cdc10a  A  9365  Game/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset
+d6d86504040cf6e736767fda9bdef494afb06d5304384243e2dd703eba3a4a3d  A  179  Game/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Fallback.asset.meta
+25874340976d40e9f9e8abf731b7f32e5a478541dead9288140bd60c7a3287d9  A  2889  Game/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Outline.mat
+a8cf0ee9888a163e892368b4660b9c62a7375e7f8afdb8ee02e5c91ca1cdb355  A  179  Game/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Outline.mat.meta
+c3ff50e3133d989180b187748ffc67903f1fede099a5b85b4fcbd8cb6e8be958  A  2256862  Game/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset
+37233890984555987cb585551bc885069f2849a9b0d1c2191af073b9376aa10f  A  179  Game/Assets/TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset.meta
+3a73e5ffe2510756dd3c2e982fdc1218b4be82c6e21abde88070d6860e1bc8e6  A  269  Game/Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt
+d5a86d8b7db6aa3ca6f4a63750eb94e0c42a64909b47d8c6c6f2565845534490  A  179  Game/Assets/TextMesh Pro/Resources/LineBreaking Following Characters.txt.meta
+62d3f4d5f64aaf885692d2d13a8313f6918e6e4c5aeb3990a43f614652bfd89c  A  95  Game/Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt
+6a925814d5e251a0ced6de210db2bacf2de29b4f0dc2991e85c908632e9565e4  A  179  Game/Assets/TextMesh Pro/Resources/LineBreaking Leading Characters.txt.meta
+5605affac803b81f876f35577f075c9b7e5ea73cf812fdfcc74277bf0f40140e  A  191  Game/Assets/TextMesh Pro/Resources/Sprite Assets.meta
+155fff99f467baa93dd2d0886df466bd242cd5e3c8c60c9d43e9cdad269f7f54  A  13441  Game/Assets/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset
+097525b164260b0fb34b4e0c73b3187c693f4dfe2991f475b5b416dbf07dfbbc  A  179  Game/Assets/TextMesh Pro/Resources/Sprite Assets/EmojiOne.asset.meta
+1fdf0423552f46284fb97894f36adcd34d32e595aaf5c7cf1ce38a2349faaf89  A  191  Game/Assets/TextMesh Pro/Resources/Style Sheets.meta
+93e073cdb91b7e3d2fa31e2dd13626d7b9d2f327904ba8c3c2b97a3eecfbabac  A  5539  Game/Assets/TextMesh Pro/Resources/Style Sheets/Default Style Sheet.asset
+b832663ca09ec7af8c8e816fd91a718b2af6c21ab4f126fa818871ad53bce763  A  181  Game/Assets/TextMesh Pro/Resources/Style Sheets/Default Style Sheet.asset.meta
+7be438062cdc296835a1258b68bcbeb8e9fdc4b01ea27c05a24a1074260f7424  A  1852  Game/Assets/TextMesh Pro/Resources/TMP Settings.asset
+a65193b095ec3606789a3191751a837704cf52d4f461993ae7903024c6d43f45  A  179  Game/Assets/TextMesh Pro/Resources/TMP Settings.asset.meta
+c109eb7e331affedb377f7051df3d4881f8529b65f9593234585713e6e94ed30  A  172  Game/Assets/TextMesh Pro/Shaders.meta
+88cf0f62e4000b71750c059d0886b19504cd1cf10f39bb61ddc11b77a882d417  A  6021  Game/Assets/TextMesh Pro/Shaders/SDFFunctions.hlsl
+e1d0c5347b3c55930759f5bc0985e11611a4b2ff22eef24523eb108687bd1642  A  230  Game/Assets/TextMesh Pro/Shaders/SDFFunctions.hlsl.meta
+42892a52f22bdde6d482cf2da5f35e4b813063fc6fe42189eee5562080079494  A  3836  Game/Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader
+91be1d5618a7da33c878e20cf2be3e13b897d4976c70bde0cda7a67dbd502cd2  A  204  Game/Assets/TextMesh Pro/Shaders/TMP_Bitmap-Custom-Atlas.shader.meta
+b50afc7edc8a710f8b4159149b2391e7238b5e4076cc0ea2119090ed29e13b4a  A  4071  Game/Assets/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader
+7430f3e97ae1b46f34e1ca75508705bb7b944307c41dc568ea728011f327086d  A  204  Game/Assets/TextMesh Pro/Shaders/TMP_Bitmap-Mobile.shader.meta
+1d32f34c71276c1321aa0540a2410e15808743a38b2026923045a4dec4a79b58  A  3839  Game/Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader
+3d462e6f8ba57f45dc5e6000020db066c36ed5a1a24f74f749727812373c2325  A  204  Game/Assets/TextMesh Pro/Shaders/TMP_Bitmap.shader.meta
+a0d318756cba0f95a7052c387e629d0add3e9a4125c8333f1d1ed591af5f17cb  A  11054  Game/Assets/TextMesh Pro/Shaders/TMP_SDF Overlay.shader
+fb8fc84b612e19c169cdf3596195b416e68d227a8987a0eaa90d8c137fb69797  A  204  Game/Assets/TextMesh Pro/Shaders/TMP_SDF Overlay.shader.meta
+2a991951b00b0c052363a1025f655450054325437b3d13c2623a987c8ec77c30  A  12438  Game/Assets/TextMesh Pro/Shaders/TMP_SDF SSD.shader
+bea74d576f181a8bb04b8cf02eedd0136540325ecb2824928a3aa52c75adcb13  A  204  Game/Assets/TextMesh Pro/Shaders/TMP_SDF SSD.shader.meta
+bf68062f68b38b588abd1c354f64e905f824d9a2c47f92ebdd70a32989eb2097  A  287427  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-HDRP LIT.shadergraph
+d1b70558e8b974d918e13c010db6d375fef815ba530bc2421ab031aa3a784ee8  A  285  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-HDRP LIT.shadergraph.meta
+8a969c2d775079cce4e1c45d5eb6d3964b27d44dc884178363050c74fd5e9742  A  279909  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-HDRP UNLIT.shadergraph
+8cd498ce8f6ed2e7c0560d605eb912455cd6fdaf09a4d545d9743f63b3426bd0  A  285  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-HDRP UNLIT.shadergraph.meta
+41cff58473557bf760d03513a8c098f43a24e4eeb4c8ccd7d828c045a338a9ed  A  8273  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader
+3744d078f9a8b6d3c5d9bca51e43f9223544fcafaf9396e121f49ea84a0609d3  A  204  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Masking.shader.meta
+fb286386d0592ce6d63eb736f180b4b0f638ec538b0855aa54767a438ebd1173  A  8081  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader
+1eeca1536c7506f79d4d877b866a5fb88db8f402634e091b6d78aa9d21c9d18b  A  204  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile Overlay.shader.meta
+8b30c140f6af9134392fe6ecf4c0676db73f873489ac52adfb47bbd288cb51b8  A  3064  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader
+e3412891b9306b017e60cba4ae4f6d258ee8b161d986dcde9cefb3d60345514d  A  204  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile SSD.shader.meta
+4bc2db64befbd0e37e23539f21096ad2fcd9d61b36d2174d208a7d831a0883f7  A  11795  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile-2-Pass.shader
+65ecbce6f1621f2d7ddc5e6004dda5e55e1f58ec6e01178f3691e1e81e01de55  A  204  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile-2-Pass.shader.meta
+44c39aabc7e88e7e1feffc1880df754f4adf86b62e9512aa89e9d2d65171aff4  A  8074  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader
+f2112f50c72762d4e6731391495ea11f76975d677b698e9bcfdd38275ea18f9d  A  204  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-Mobile.shader.meta
+f9fae5906dd37d89298338953294459975de58a5421e68dd9e82a79794b95509  A  3523  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-Surface-Mobile.shader
+95aa060f371ee503a22c0a0b018e029c0328bd82b9317feaa784432b0a787343  A  204  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-Surface-Mobile.shader.meta
+5dadb68b56429547918b392626e9af8fd5173936d20bb43cfca58dfa00947257  A  4353  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-Surface.shader
+42439f5ac7491998f562e8ede73d64c3512953eb99fb1b49e833f5d9999a7660  A  204  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-Surface.shader.meta
+e0148ce8e5904232a4e711376a45b7af2a007fb9690c5a69c1cb4952a696cdbf  A  283866  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-URP Lit.shadergraph
+4c36abf5f2611c9d2cb04e7da8c30e42077503a17cb218020e171b6d3ff664f7  A  285  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-URP Lit.shadergraph.meta
+dc15b6819ad87a4b34ed888ae2c274624efc0ada902d1a9e7752d87922414dcc  A  277012  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-URP Unlit.shadergraph
+f1ef815e2672fd770f47ee424c64f7ecdbdc642b7475828c29db032586aa10b6  A  285  Game/Assets/TextMesh Pro/Shaders/TMP_SDF-URP Unlit.shadergraph.meta
+10efe6d4728474a09970b857faf37913793e168dc13dbd4d7316b54b37615d97  A  11027  Game/Assets/TextMesh Pro/Shaders/TMP_SDF.shader
+0897fb06d170043fffa2d28783b347bbaee87a3f09f08374ca44b2c3848697d6  A  204  Game/Assets/TextMesh Pro/Shaders/TMP_SDF.shader.meta
+af669bb9ae136c8099f8e0a94a6933fd2f1e1fb0a6842129939a319fab4b8dbb  A  3446  Game/Assets/TextMesh Pro/Shaders/TMP_Sprite.shader
+9609584c5249687f3765f0018a93dfd6445c7e35d5aee4e87556f111c8852819  A  204  Game/Assets/TextMesh Pro/Shaders/TMP_Sprite.shader.meta
+14edb7d7b88caf2b82cae68200abe895e5b5b3474c3fffbf0e9b4b09a4e2467e  A  2277  Game/Assets/TextMesh Pro/Shaders/TMPro.cginc
+a9cf9d5431b809e36b8ffff4377b5ebda7d386a36d48838cd134bc09f3caec6c  A  215  Game/Assets/TextMesh Pro/Shaders/TMPro.cginc.meta
+d9d43ddd9810476162f21b42477d9ce2cdc4e6cc7571d354c3253aafc6673ead  A  5453  Game/Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc
+2e16fa15ef884a60a402d8b696f8b09e5315cbb468ba223d256030c7fe2b0667  A  204  Game/Assets/TextMesh Pro/Shaders/TMPro_Mobile.cginc.meta
+66db1f03e8d7a413eba79bcb6602fdb2de710b586f34a6f2584ed6f68f028e90  A  2707  Game/Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc
+edace33591894d86d9a4144466fb3606e538d3341030fe22f908551755120ea5  A  204  Game/Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc.meta
+244b442520282a66363d121c8d2aeeb30bb1e72cbbadbf41ce68d9100322ade5  A  3515  Game/Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc
+247746f3a4e39dd24d1ad99e4fae03ae8976586307948b2846529a876dcb0a63  A  204  Game/Assets/TextMesh Pro/Shaders/TMPro_Surface.cginc.meta
+41e002b97ba2235689fba502d1ee4419f50ea0095cd3632cdc50bc90ca8a94de  A  172  Game/Assets/TextMesh Pro/Sprites.meta
+4b65f8960e4f4c5c8b35fd139e369265e9bb45667fc16461b2ba01188d464d93  A  185  Game/Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt
+9fffc8ac513116b8ac394d86d81ca9ac4ec52ee92c63c114d355808384ea16fc  A  158  Game/Assets/TextMesh Pro/Sprites/EmojiOne Attribution.txt.meta
+b85c4b3001b6ba82d175f4cd5dab83da467bbc2527d3d447b66919d2d20c4faf  A  3966  Game/Assets/TextMesh Pro/Sprites/EmojiOne.json
+ac2c551b5bc7f7d636d54ded634dfc3493e249567283b2efc06d1299f9360061  A  177  Game/Assets/TextMesh Pro/Sprites/EmojiOne.json.meta
+a87b965a701de3dc31d7401e542b1fc946587f912c51d7a26e46ade9f098bd1a  A  112319  Game/Assets/TextMesh Pro/Sprites/EmojiOne.png
+eb63c0321658b980b138ce5f675d44689b8c7144df43976931e132e7706d1e1a  A  9784  Game/Assets/TextMesh Pro/Sprites/EmojiOne.png.meta
+92b884a60d80b858e82daffcb3a8c65470586b803ef39ccc5abdd7ef38fc60e3  M  7832  Game/Assets/_Bosque/Art/V6/Editor/ArroyoArtV6Capture.cs
+cc776c99a1779029fa4e8160acf87f85422a6323b42c458266d4b175a62b703a  M  51780  Game/Assets/_Bosque/Art/V6/Editor/ArroyoArtV6Dresser.cs
+51741408f061d0dba753b9e2b2e8913ec68437aeb768c02adc3d267d3d89998b  M  4651  Game/Assets/_Bosque/Art/V6/Runtime/BosqueV6Ambience.cs
+f25a22301f8e15d12419ff6dae48b74e4ffba5a29798362c69e58b9a7c7e7283  M  13385  Game/Assets/_Bosque/Art/V6/Runtime/BosqueV6PerfProbe.cs
+8638528cd8a1ce08bed818fab4a3aaa02f3301557233677fbe19ee0f713794b8  M  11166  Game/Assets/_Bosque/Art/V6/Shaders/BosqueV6Water.shader
+f41a77dbb5535fd2ae74009a30dde7d7dff2a3efc1ca91ef7da231487685a7d8  M  6101070  Game/Assets/_Bosque/Art/V6/Showcase/ArroyoV6_Showcase.unity
+e8e6a316348153e2e99c7b94a2d3c1a83507a2f8bb01dcca938e6ca2d7db9142  A  172  Game/Assets/_Bosque/Art/Valle.meta
+ae9b933c6fcd3c7f1c2a93f31275821030ceacc7adf2eea6b9b24c99825d7495  A  172  Game/Assets/_Bosque/Art/Valle/Materials.meta
+50c64935aab7f11f86240f53fd218f37d165d9cd5148aa5982fb7b6f49274620  A  4064  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Aerosol.mat
+1b022182146b7b2df39d73f38aa1f72e782fe0b219349d22ab1153ad4892d8bf  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Aerosol.mat.meta
+e3bb3180329b7ca44a2b66a051ce762dca3ea11550f171c0b9ad406ea6a09935  A  1786  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Agua.mat
+c277d59e2b32502ec3c4437d9867986b20f9dba3547b0ec51b444e8caa513af1  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Agua.mat.meta
+7bf4b037bac05c5dbe53f659467b2d4babbaa179b8982593973ba7d4fa2c146b  A  1965  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Baliza.mat
+acc018c0e4257dc0a161d55dd26f832dc8903a5d96914edb88b50e594773a688  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Baliza.mat.meta
+c01377f6756111bae843a4308abe367179d1de18da208f9be2050b5b892ae630  A  4068  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_BidonMetal.mat
+0b59420387d5cafbf1f700a3f49564a45fb476f48733a6ac08e39defd9471d94  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_BidonMetal.mat.meta
+9a9aab353772f43c730c4b484817e8252efd8a810da3fed2ef45985284c9bf04  A  4070  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_BidonPlastico.mat
+1edaf1833fb93fb4d294dbff2b0075d4267539b4397f74c62949fb8a173f83c5  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_BidonPlastico.mat.meta
+5fbc04b06c0cf5d08abe5af245274206e08dfb70048519815387440b4b20eb3b  A  4068  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_BolsaBasura.mat
+6ff889a42bb017ef1a01e883c916b883198021ffbb57f62dadd3277fa6b4808b  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_BolsaBasura.mat.meta
+c6abeb9935f70743d3972979f7be23038a124f8b1b36f22b6d6e40b7317d3ed8  A  4067  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_BolsaPapel.mat
+eda0521f0893631b743144631373ad80dddfe46afeb0adc8e7f2ccf77a7cae83  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_BolsaPapel.mat.meta
+19b171e5e109479e61edd9b6bf3b05b15f09592de0e7e6bf2b01a96b5a8faae1  A  4070  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_BotellaLejia.mat
+86437f2c6059650b1f6da05ea538e911bc231e071e6d726ae256a6da1ec2c04e  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_BotellaLejia.mat.meta
+d14b62f77db34f255dd96424c2530daaff4f92e4f6d592739f7e1714e4e3eb2e  A  4073  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_BotellaLimpiador.mat
+36066ca1922f41c23010376132244e0be7231afc9454801263abe6f906779d33  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_BotellaLimpiador.mat.meta
+3d5f75909712ecb319e0ed96b285fa77d989725199c640cc6c6dec11cd2bd0f8  A  4092  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_BotellaVidrio.mat
+cb24d57210f5f0490c87e3ca772888bc13b60ad3069cef1ec0501c17eec3997a  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_BotellaVidrio.mat.meta
+26b34e76a5282ddd459c990be5fe3df1dd6a8492e4ef712535b0fced71877bd6  A  4068  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_CajaCarton.mat
+71fd89e06fe2b90bf40da00fb8e521e1ad6d64927d29848d13fd834a71cef46c  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_CajaCarton.mat.meta
+fedae31efdf9649472dd0debc43e5ea87891c0bdf03d1417963cf47f59001174  A  4067  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Contenedor.mat
+50a344fad2665f9d089ee0870a943c24ed428756b94c55d0300eeb26aec844b4  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Contenedor.mat.meta
+ee777058af5352b8acac845811444a40c338cdfd932fbb157ee613f3994f8629  A  4127  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Contenedor_NoAprovechable.mat
+210d65f09cad5df71c746026dd12f9aa96257690462103b91dfc5d1b2a594cd6  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Contenedor_NoAprovechable.mat.meta
+ca8feed73dc602289f19509ca225e0e1edd689d8bf4539069ef19f5d2d94e286  A  4139  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Contenedor_PapelCarton.mat
+a2809afb8bd1772014c0e3d85b65adb6b4f20f384d4bc13367b7dda858c4f15a  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Contenedor_PapelCarton.mat.meta
+78edda468fe7149a77d08e7fc88327bf5ade098ae8be76de4a79af2095289489  A  4106  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Contenedor_Plastico.mat
+7268c2d8991a45af20b204955b3cdd600d265e80b11c0495c71ead4d98d88c86  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Contenedor_Plastico.mat.meta
+d3bd213e4bcbe23cee8eb764306eb1ea0738fbdcfee63d03cd6ca0d3d282b0b3  A  4128  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Contenedor_VidrioMetal.mat
+29fc30b81e96a9120910459e83b34abb043de82d1df66fc83f48c6930c2c1cf9  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Contenedor_VidrioMetal.mat.meta
+eb02ca137e4db301a006d9b33a27a0d0228c7e21c4b9431d8d5bf7ebe535e679  A  4074  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_GaloneraPlastico.mat
+3633a99188b56f9379be8e50f40d8b98c1360ba12635465f2bf65d74f6a0e4eb  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_GaloneraPlastico.mat.meta
+1e5ec57201c5c808ba237a002076bc5031cde5d2d71caf423993f35769e2705d  A  1629  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Ichu.mat
+5151c59ab2d2dbbf6bf897fdd04087ea804e98960456d2fa1502b3fda218f6e4  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Ichu.mat.meta
+c9c18fb10e03f9f029c261865a4f6f4b098fe30d58b22b44cf8be84b7b43c3fd  A  4068  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_LataAceite.mat
+a4dbcba06111f8b41aa878c918901c28a0a705da8d3225e5e9ad26c52f844507  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_LataAceite.mat.meta
+d3e93eb0a46bccbd68384096d5399abecdba9689747908f6f8c9bbe183c29d96  A  4069  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_LataOxidada.mat
+44d11a87c41b0c8b85420f858eb76c9a76326da057de431e5ecd81899d00db1e  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_LataOxidada.mat.meta
+06e7c01adcd273324a8fc3e690b9f6c5996ab021b27dceda68cdc694b42da8c4  A  4063  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Llanta.mat
+27d6cfc124ddc3c5ca13b253d6c632d4f97daa1d438343bf4f5f1c9e94dae4f0  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Llanta.mat.meta
+8e6aebc9e3ccdee710751478a484126f2d43e3b170025d2bd411fa0a1ca77b8e  A  4086  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_MaderaPostes.mat
+9dcb0a37143619c44b928cd75d4a611d7380774b3732bc0882a30efc2fe59101  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_MaderaPostes.mat.meta
+995aee4bc6f7c29c7b22c9f0d23beaa98367d896b01acb28b5fb15e6cdc8e891  A  4086  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_MaderaTablas.mat
+32b078f6940ecbd6f56d554fd9a8fa0f716c3c1bdeada185578deca0766033df  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_MaderaTablas.mat.meta
+9bf71dbe05205382ef617647f3cced658c99d6400782ab7c278c3a5eb353b55f  A  3869  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Placa_NoAprovechable.mat
+f7803efa4413fc7995c38df6e3a3957e5e0a789cd44ee2d22cd9ce46bba8e5d6  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Placa_NoAprovechable.mat.meta
+6921bb004d34414a8c90c9092980b7b045cb068fa5f2b37b2b1c0bb61173e94e  A  3868  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Placa_PapelCarton.mat
+98cd2c552033030fe356c93ef1fc783885f6ddcb0e46f8b430534f203168f8ac  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Placa_PapelCarton.mat.meta
+7fe3664a7f9be88eeca0999adabcb1a3938b169af15ffdcc70793cabda196db4  A  3851  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Placa_Plastico.mat
+04ba1790e9e6f3c6f34c4250f44dbcd5e0e9536aff5c9b24c5bfe1b7a6dd4ba8  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Placa_Plastico.mat.meta
+f5dfa8cbbaebae1b022c98d170342f02ba3523d801eb6ccd289ee432235a3d41  A  3862  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Placa_VidrioMetal.mat
+e19ac701a49c38a75d0c777205a6c299a46ad5c88981817b851a606f5549c6c5  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Placa_VidrioMetal.mat.meta
+d3d7fba5c2b697c46c8cf86c3f56c3e08a0be54f2dd50caa2eb25f75c8307957  A  4062  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Ramas.mat
+8aaa4148af54c1d7246d4e51b01bd2d33880fc23804ac4e0d09d5f6fd76b4d54  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_Ramas.mat.meta
+fca6c060414e2788d176b91462a7770e43bc88e0a2469c4ba0d702a7b3342134  A  4071  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_TroncoDelgado.mat
+e8a8911d9755c7bddf07bfd0487ee5d4df64745d83a4156d0ab49709cc11e856  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_TroncoDelgado.mat.meta
+3d23daf3406c1a8e7d0f0e0b39a439109580cc838f54b9627f2391e94e2658fb  A  4069  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_TroncoGrueso.mat
+5f59ff6fcd93aceac7a7704185d56b21f0d5945bfb31460014bc669a060cdc7a  A  188  Game/Assets/_Bosque/Art/Valle/Materials/M_Valle_TroncoGrueso.mat.meta
+10315aba4ed00305ccfa3c2324a17f4ac5313de5f8ad48ab42ad2b7285559fce  A  172  Game/Assets/_Bosque/Art/Valle/Models.meta
+abf87d290066364a443c2949ba309cb8a8b003ae6172226f009e685a46867de1  A  84076  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_Aerosol.fbx
+dc7581b30982ca0f17019b6b60d57e4891a1de239d13352e8d42003b9650f798  A  3078  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_Aerosol.fbx.meta
+822bf155911b91241615627eda6560ecb4cf5699526bdf3944f311c2037fa4a2  A  171804  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_BidonMetal.fbx
+baa25087d3f99e61e879686e951333154eb7a6a04ca1514e31a5c729bf64f73d  A  3081  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_BidonMetal.fbx.meta
+6d92a888be0aafe0d877f8030e4279a4940a3989e1f062db691927fdb266faf8  A  121404  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_BidonPlastico.fbx
+fbd6bd2270c4ce376ee98d9d33153468e1156c26829e454e5fc9a704f2d1cdf4  A  3084  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_BidonPlastico.fbx.meta
+1f8ba4768dec70513c2a26618325988aef5e8e81a4dcb9329663306e236bcceb  A  118428  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_BolsaBasura.fbx
+cbde1925a2eb07bed456b2c65abcfeeb7c5bbe2919de37871ff4cc3fd5e663ed  A  3082  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_BolsaBasura.fbx.meta
+135ce24ee0fc7f16b5b0f38ea2c152ceb7a77730ab565b92a772180fdfbbc192  A  46220  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_BolsaPapel.fbx
+bd38c1142fbd34360525213fd5441006e056cba46d28cb381d68cc282f259010  A  3081  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_BolsaPapel.fbx.meta
+78f2c27102bfe41304ff90843f10d436b666b21a01798685c589d87e5ac7f8e1  A  104700  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_BotellaLejia.fbx
+9a7449099824518ea9f11d69e8edbed5964a39ae73dc2470574b076f8e2c81d8  A  3083  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_BotellaLejia.fbx.meta
+06a7736f962d0d7f0d7914e88b5a8d4af2097e3b780132cb682ebab1d65ad4e6  A  115820  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_BotellaLimpiador.fbx
+728eeca70f53a1bae5725fbe28f85edff1889bcc8604a1cc51a30aef57bc08a3  A  3087  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_BotellaLimpiador.fbx.meta
+0fc7bf9d3ec2ec5e816cdb2c11940ae04b1b483aa0baccace1406f089e0cac79  A  137244  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_BotellaVidrio.fbx
+c77e862875650721d999f04b0fa719d4520870eaa53b3ee537f175052a03c119  A  3084  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_BotellaVidrio.fbx.meta
+d4e7671d52793b3204d66982eb80ba4f0b16bdf6f327ab6a821e35181a360816  A  119484  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_CajaCarton.fbx
+20366479050d98c5de77fce51a7b811822329cb56cabae4582a2853484061672  A  3081  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_CajaCarton.fbx.meta
+971f47a2c360cb47764366c6c3105c9354b5d9e293f9ee43251d1dcf4bda6b42  A  207372  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_Contenedor.fbx
+c22e78d16854036ad0ec70a67ed00272871d4c0d94a9a294ea640abdbdaf9181  A  3081  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_Contenedor.fbx.meta
+04d7aa522ad7d3f850a939418425132f6898b91a50bcf7631e0180798e815a9b  A  153852  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_GaloneraPlastico.fbx
+01b498349279c17c18fdffec79da88287feba2181237cf4ca8a96999342ac2d3  A  3087  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_GaloneraPlastico.fbx.meta
+fecc1593984496e0c630633d0042d4748f7a1c96bfa489ddd4a455e9b4fd1bd1  A  111676  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_LataAceite.fbx
+c3d1fd12a9a9a610f80f456c7ba6360819de9e5ef71ad93cc8d01cf6e0c2054f  A  3081  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_LataAceite.fbx.meta
+bd92c1790b68834826eb4bf1956ac336a842e7c31d623f45cfdec9b8929159e1  A  114700  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_LataOxidada.fbx
+e24c3c09ad119c97847b0f16000cad2bafc0cd97b635bed4cb1f67fc7ba9f1f7  A  3082  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_LataOxidada.fbx.meta
+4a783f502b32352e5a33c85d3039eb80af8dc90bee511e5da8e52895f49fabc8  A  105180  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_Llanta.fbx
+f3a575d97d0ecb71ada1ade2d372a8f35c20b87d7a1fe3a238d48b69a438c45e  A  3077  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_Llanta.fbx.meta
+7365c549aaee91d5ae80922d4f7451ed7e659147cc7346f219cd6bef7b98a744  A  34940  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_Poste.fbx
+5742c3ee1b13521f0ad808d0817c667f9fac83ecea62c610cac087bce7a81cdc  A  3278  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_Poste.fbx.meta
+c64384e5e87a7750d78e374dc5bd0a44b7d2d41dd43b984eb5b277214ec3887c  A  207820  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_PuenteTramoA.fbx
+4bb612a6ea47893d93ae0b6011b724e440fd50a718d10a6a4365b9ba99315604  A  3278  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_PuenteTramoA.fbx.meta
+ebc2d7d981403b479e7ca7f110b7c4e79f497227aa484a760787f744d8281fa4  A  217692  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_PuenteTramoB.fbx
+f8d491793ddbb2cf67038daa92b990d8d01c5f684960e9948541abef1612e1f8  A  3278  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_PuenteTramoB.fbx.meta
+fa9dcc93e1fe971015182cd8552b13ac530275e2c623861a5b0ad57d84ca3a0c  A  282028  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_PuenteTramoC.fbx
+5e7168ca78160e481eab385a2d39a60231e1bb91666cfea1af310c8b45ddd849  A  3278  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_PuenteTramoC.fbx.meta
+dfd3180447ab51eb7745e4ef936ef09e43306363e475fb00e2304bf74dfed682  A  293020  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_Ramas.fbx
+f11163683e5b54f7299da4b5bf395c58e1f5e1c1a295b8da307e4e8e0bc46e36  A  3076  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_Ramas.fbx.meta
+d6f1275cc94f7a1d95d28371a30e909e2cd014529750fb7a8676431fe17eefcc  A  127260  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_Tablas.fbx
+b82b93378d96ae4be553fb5343641791bf8c33b54e7b3802bbe5935918b133f1  A  3278  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_Tablas.fbx.meta
+596538fec8051dcc5d5dd55b36addc2bd8c9599eeede1e63cbdc3b8403503e51  A  328060  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_TroncoDelgado.fbx
+a5643802bc090ad8efbd2cd25987a9e7b3383a00988e9bdb807db31a3ed15b7c  A  3084  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_TroncoDelgado.fbx.meta
+1d0a4e913246d91cffe59c5547190d4c35c7f37f859d2d7b84afaa00696e058d  A  400236  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_TroncoGrueso.fbx
+669148bb159b5dd05d240f39f4c6621ba218fddbccc847889cc772562baf1ae8  A  3083  Game/Assets/_Bosque/Art/Valle/Models/SM_Valle_TroncoGrueso.fbx.meta
+58d62ee0bbb8fafdcaf884913b783e83538b74fd1a0f5bc3c86251ef77e8eee0  A  172  Game/Assets/_Bosque/Art/Valle/Prefabs.meta
+e889b8080b378623f42f5f7116388c2e3069c333d981e899ce1b66414bc8f022  A  172  Game/Assets/_Bosque/Art/Valle/Prefabs/Arboles.meta
+8a42530ed3f08e60fa0f27ca4a1aeb57a0a556d67983ba02a2303bc855b52f36  A  10473  Game/Assets/_Bosque/Art/Valle/Prefabs/Arboles/PF_Valle_TreeA_Dead.prefab
+776171699edc4bb3cd5ed7ff801cead843b0953c4247ad8d0b681bb45014dfeb  A  154  Game/Assets/_Bosque/Art/Valle/Prefabs/Arboles/PF_Valle_TreeA_Dead.prefab.meta
+23aa38aa43ce1e23fef8fdf2d8c8d46db95c0004b46037568cdd7ef0514b034f  A  10475  Game/Assets/_Bosque/Art/Valle/Prefabs/Arboles/PF_Valle_TreeA_Green.prefab
+56ce477405e6c2ce726b7faf430cf0b4f71f7d1e9af9981e656ebafb34e3dc86  A  154  Game/Assets/_Bosque/Art/Valle/Prefabs/Arboles/PF_Valle_TreeA_Green.prefab.meta
+4dfc49fa1c71f4af07074e0206b67cf0ecff41c6cb623a2a10965f063b502662  A  10470  Game/Assets/_Bosque/Art/Valle/Prefabs/Arboles/PF_Valle_TreeB_Dead.prefab
+c8b1f8c244b39597d8e63061a5b250937972c19a702eb9b7c02c3976bcffc142  A  154  Game/Assets/_Bosque/Art/Valle/Prefabs/Arboles/PF_Valle_TreeB_Dead.prefab.meta
+82b994e3c19c547361c887cfbf00b0272cb0f9bcd7d8deb85054912f4148a450  A  10477  Game/Assets/_Bosque/Art/Valle/Prefabs/Arboles/PF_Valle_TreeB_Green.prefab
+c1b794805a994f36146dfaade7f8c08849d36a81fa8477e66ef2e5b89f3496fd  A  154  Game/Assets/_Bosque/Art/Valle/Prefabs/Arboles/PF_Valle_TreeB_Green.prefab.meta
+65d8db7c2799ae0ca77a72267b113d5c4f0ab72fdb3a4c8d0a286590a98f73ae  A  10448  Game/Assets/_Bosque/Art/Valle/Prefabs/Arboles/PF_Valle_TreeB_Tall_Dead.prefab
+267f2cd5b4e42dd4b73b2e6e8faf218ad6cc363060f4ea8c4cc795adc6ce4cbf  A  154  Game/Assets/_Bosque/Art/Valle/Prefabs/Arboles/PF_Valle_TreeB_Tall_Dead.prefab.meta
+4aff1d600b688a21986092738215c098ea3f5aaa07d2edb0b8f54624b786b689  A  10439  Game/Assets/_Bosque/Art/Valle/Prefabs/Arboles/PF_Valle_TreeB_Tall_Green.prefab
+8e718d138b7859868d1e911036a9379f2da4781c65f58fa5f1c8f83e3810fdd7  A  154  Game/Assets/_Bosque/Art/Valle/Prefabs/Arboles/PF_Valle_TreeB_Tall_Green.prefab.meta
+2fb2dd37dc4780010ef0915786bc5fe48ce4cd0017e90f9b2057011f7f67e68a  A  172  Game/Assets/_Bosque/Art/Valle/Prefabs/Detalles.meta
+a6a6469290925a09a6e7222fd4111b4d58bf7c5fd3e6562acdb01a725d835347  A  2660  Game/Assets/_Bosque/Art/Valle/Prefabs/Detalles/DET_Valle_PastoSeco.prefab
+56da1aec892075f3db802f041e9b61286dd41176968f0fe0cef885b20ba93150  A  154  Game/Assets/_Bosque/Art/Valle/Prefabs/Detalles/DET_Valle_PastoSeco.prefab.meta
+fd831429aab4f53aa1d2f91e74f8b88d90269823fd43cb9eb5d9525ca64b267e  A  2661  Game/Assets/_Bosque/Art/Valle/Prefabs/Detalles/DET_Valle_PastoVerde.prefab
+6a608e576fcd4416ba9b040d3313e08de04e325dc0bf522eb2eaff3738bd57e7  A  154  Game/Assets/_Bosque/Art/Valle/Prefabs/Detalles/DET_Valle_PastoVerde.prefab.meta
+1db1be5ea8ad864233b5de02e028447d472eed582fd1f71630e8c0b528ee5ad7  A  6216  Game/Assets/_Bosque/Art/Valle/Prefabs/PF_Valle_Baliza.prefab
+3f6b4c2471ab3fe1c2045ddb75dfe728befbd355d123621ca9862ad3ef6b3ec7  A  154  Game/Assets/_Bosque/Art/Valle/Prefabs/PF_Valle_Baliza.prefab.meta
+086556ce0e8692db125eccbdf4dc3629e6ebe26d3d7940b908fee6ecd76f90b0  A  5162493  Game/Assets/_Bosque/Art/Valle/T_Valle_Mapa.png
+24cf12e103b2e99ee27617f6e24b6db65a83a1e52f40a302563db418f1d418fe  A  3364  Game/Assets/_Bosque/Art/Valle/T_Valle_Mapa.png.meta
+d45051bdee1851b7f7b17db7738a3f9f062074201a19596e2be8f2edd02e1a48  A  172  Game/Assets/_Bosque/Art/Valle/Terreno.meta
+a7f9f6ee949f0e82fed35ddb12f4f4d12c8c507ac63ea3d47c1251804370a5e2  A  3168  Game/Assets/_Bosque/Art/Valle/Terreno/M_Valle_Terreno.mat
+03135c1cbc39b82805773f2a57c20299d60e0d0e3721b3aefa082b6ea68ab6ab  A  188  Game/Assets/_Bosque/Art/Valle/Terreno/M_Valle_Terreno.mat.meta
+b7cec8d0eeee1b56a3b25fd4b1dcb3befec8ae113cb71dc6cba4f13d7eff3234  A  1115112  Game/Assets/_Bosque/Art/Valle/Terreno/SM_Valle_Agua.asset
+636bcf00ef91d0147d1996c1b16a0c37eba2ea2e94ba41b57d6289ebf67a4670  A  188  Game/Assets/_Bosque/Art/Valle/Terreno/SM_Valle_Agua.asset.meta
+1f0d9ebdd13710a17836a756bfdf51eed70251eccb64fb5c8c7572b9ff0e3eb2  A  2114119  Game/Assets/_Bosque/Art/Valle/Terreno/TD_ValleOlvidado.asset
+839ddbba92ce4564dd7eda7d390d2fc5a3eccce73f50808a0fd25be28bca66ea  A  189  Game/Assets/_Bosque/Art/Valle/Terreno/TD_ValleOlvidado.asset.meta
+39f048bce89c01736b19891819e1d6cf32e9dba208709976fd901f0f1a10f287  A  888  Game/Assets/_Bosque/Art/Valle/Terreno/TL_Valle_Cauce.terrainlayer
+abaf3b5089e7a6ba9de92760b3a2f15d0d26b5c9fbbf0f644d99174017043111  A  200  Game/Assets/_Bosque/Art/Valle/Terreno/TL_Valle_Cauce.terrainlayer.meta
+f7eef69316893d366f59601ac953eba839529affc1f2989dfdeb0183aa8103e4  A  871  Game/Assets/_Bosque/Art/Valle/Terreno/TL_Valle_Pasto.terrainlayer
+b41b530efdfcf467357f4d2687254b384be861df7b53220b96f5d16569d267ef  A  200  Game/Assets/_Bosque/Art/Valle/Terreno/TL_Valle_Pasto.terrainlayer.meta
+064ea33a6013bd66459c02961c9878fa2f566a56f730bc4774ef6ff625ae88b4  A  870  Game/Assets/_Bosque/Art/Valle/Terreno/TL_Valle_Roca.terrainlayer
+215c0128c13965a80881935914537168f0fa959ff3cf3614fe1094695c76254a  A  200  Game/Assets/_Bosque/Art/Valle/Terreno/TL_Valle_Roca.terrainlayer.meta
+87a932317ea690ff29a46c21c14216bd33bf4daa327a7cc2f9be38341feca683  A  877  Game/Assets/_Bosque/Art/Valle/Terreno/TL_Valle_SueloSeco.terrainlayer
+3806fe72fb921823efc44f2a54ddd2721a60e8f7f97fe274a52854fb93783c2c  A  200  Game/Assets/_Bosque/Art/Valle/Terreno/TL_Valle_SueloSeco.terrainlayer.meta
+6568d4d64091b45b0d81e1ec66e6c79a1b6a36569d5a18d3c44d3cefedba3568  A  172  Game/Assets/_Bosque/Art/Valle/Textures.meta
+1ec79098537b4cc6afeeda7eabcb49a736e67741d3217ea44a25b26d8d5073ec  A  317066  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Aerosol_BaseColor.jpg
+b4f6017434b525dea26ba011329fcdb129e0bb9467e4303f956102df8a5c9239  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Aerosol_BaseColor.jpg.meta
+bea941ce8713030cc384c8f07deb991770a985fc5d278fd1d82f17e1d9d5f25a  A  1442990  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Aerosol_MetalSmooth.png
+5dbb0ee7b5b915b2afbbae9dfb6a0c382329ba07f6ca8b175705c91a159f5953  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Aerosol_MetalSmooth.png.meta
+3ac6522135a4f16cfbe45a86c913dc1cd9f7a6138249068c77e72cf012b75cbd  A  150340  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Aerosol_Normal.jpg
+7735952644da6ff70cc2bbc1f7d18fb640fefddb7a47544994191766e36358d7  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Aerosol_Normal.jpg.meta
+602df9a57244c3a49b7c293edfeef597addc3c28583083aa1ab4193e8693c9fe  A  776382  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_AguaNormalA.png
+ee83b96f5e05c837db525239e02c99220a26b0e40e550e765b723257ebf3e49b  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_AguaNormalA.png.meta
+93ba95e3e32e1963a19f5c0431507d31d62b0645996d48baa6704bb20b3a56ab  A  1365464  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_AguaNormalB.png
+55eb359971b193b66ce4e74378888877a62dca69e46188153bf3d5e27aac6dcd  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_AguaNormalB.png.meta
+64781939c4b3f739c52c335d26473def75d736173f3cc11a50ac2876d511d123  A  673499  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BidonMetal_BaseColor.jpg
+5b352e9fdcb573a846ec92fb93c31570036adc2b1ae73d00f401ea343cc2d938  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BidonMetal_BaseColor.jpg.meta
+81ff95461ba3ceccdf627e0103f5c939f37996ed8188bc2929d1c57d1c0e075a  A  2335704  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BidonMetal_MetalSmooth.png
+47addbafcf75169d787eff658ac8622895ac7ec4919272964ef24b5f808aa965  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BidonMetal_MetalSmooth.png.meta
+88dd8f6566cc5faa8fee658777115b518642508f23ffa1917128dba9539ae14d  A  885424  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BidonMetal_Normal.jpg
+83fe31a3a4b4e2ff9ceeb423b747c23885637d33d18c0110188256272d2b8529  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BidonMetal_Normal.jpg.meta
+b763c4dd071baf9aa319eb3a94e8045614fa7f52404fda9e61c660164f8444f2  A  317396  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BidonPlastico_BaseColor.jpg
+4a4379f8263ff782709b39bfb355bbd3d831fd4b5fc14a1988a55b0e36abd284  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BidonPlastico_BaseColor.jpg.meta
+56114ebddff1612a5a7d0a7dbb6f56e4e5468435de52c5b9c63b0913bf1b91f9  A  1161555  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BidonPlastico_MetalSmooth.png
+166d4018b5633b8aee1bf18e8cee714c986e43082c00b64431f2f0de1a7753f2  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BidonPlastico_MetalSmooth.png.meta
+8cefc29b47a68200fa9c8b4330a6c76a9c21153d0e5e95ef45a4c45793d110a6  A  407414  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BidonPlastico_Normal.jpg
+31c44fb7a0e74750c7e3eeffa259734d48f863e3cecb64795d0831b9c5e49062  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BidonPlastico_Normal.jpg.meta
+676e01cbeef39b51c9ecd67315c952a605c8db9c11544fbe11e14dcbd00be27f  A  332301  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BolsaBasura_BaseColor.jpg
+3a7a9b1f70e0233595c68534b6c8d050c035da40b720cc997eeed9c2e70777d5  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BolsaBasura_BaseColor.jpg.meta
+b6ecc6365a5205c8bae369df93d3034032efca9be1428f265ee068b1999f9cd6  A  1744082  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BolsaBasura_MetalSmooth.png
+29ebcbe812aaf10d4744806d9de7882e6a5ee854115d5df6503b3e2cf1fa0e19  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BolsaBasura_MetalSmooth.png.meta
+33ddb9711bb3ab2ff1ed19fa361a4251909643fada7e5579a28f6346a58b4daf  A  573449  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BolsaBasura_Normal.jpg
+cf057b8f63ca724210b8e582a28089ba3aef158fb1d8a736ac1b4675755d1d71  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BolsaBasura_Normal.jpg.meta
+0f1a45ba37e569b744325976b0a4514bc9e0b073bc12f1adb4d3232f6e90ed3e  A  616339  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BolsaPapel_BaseColor.jpg
+f808d39c608a0cc3c87a59d69419a6605cb6e70f2f5d4c18cb8fa29ff2185944  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BolsaPapel_BaseColor.jpg.meta
+8b6f9b4a6c7d83ac86716ecad77c881690c2f6fe99f1025ffaaf01dadde43ee9  A  1378720  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BolsaPapel_MetalSmooth.png
+88c57707009f8542a8a5c8ae97ea19a782dc41ba43f1b4bb57afbfd357c7bf2c  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BolsaPapel_MetalSmooth.png.meta
+4f9b5ff34b029b47744dca27b864d35c167472792073a2141a5f69fc4cb39ddd  A  397422  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BolsaPapel_Normal.jpg
+4a8895131add6572b07a9be73bffc0ed48f941686ac3ea7589dd82eb37c011e2  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BolsaPapel_Normal.jpg.meta
+340329a562c3b5a1d5441577cb9ecbb4e1bbbd3e5221439681a392db566b08a1  A  380740  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BotellaLejia_BaseColor.jpg
+c3ea261775952bba59a6dbaf8c87f3f4ab76e9d433dc10743c30d7d2055856ab  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BotellaLejia_BaseColor.jpg.meta
+2c7fb6980cbef36615cbef1fe7d7be5191b841f557aa32f61b2d80349d072c5b  A  1535325  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BotellaLejia_MetalSmooth.png
+2fcfe16a265550f49a068c0703476b278e198e96aaff81a6295697c7ce139941  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BotellaLejia_MetalSmooth.png.meta
+cc16f4c13f17c7f511e36a614a91b2e932cdf85263788bba9ea58d2a94e049bf  A  286558  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BotellaLejia_Normal.jpg
+b1250cd3a8fc5028080e20050ee4ca59ddcc0784bd97de67f306f9de883e751c  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BotellaLejia_Normal.jpg.meta
+fcdc4f5f56c3ccc20b76bd9128a7e19a92f421bfb2b1c9c650ce949e930eff4f  A  376440  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BotellaLimpiador_BaseColor.jpg
+56a6ffd2c7dffe4bead743b07615a9af5e2df8cb4d3a50cee2650f7e9ce7bf95  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BotellaLimpiador_BaseColor.jpg.meta
+089f28859b2affe93400a17bff938bc1a61b8b98a062c034fef4d7e13a4401ef  A  1531748  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BotellaLimpiador_MetalSmooth.png
+42c821e706f5cbdbc540fcb5fd86b9d2383b789cb8c21adadf82da56a161a69e  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BotellaLimpiador_MetalSmooth.png.meta
+19d183f10e95b74bc0ef906ba219e47ef32f2f33ef64b0d429e2bca643e48254  A  311193  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BotellaLimpiador_Normal.jpg
+4dd60c24b923269cd84c7f60c1a5641f6ef2e3d2dd8f84160a602e0ff343b90e  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BotellaLimpiador_Normal.jpg.meta
+f440b6364c87eb440c9ca201759cfdaf2735e3147488eadc24be334f1e457a09  A  110230  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BotellaVidrio_BaseColor.jpg
+99fa7b06b374ad685d44f434a20e93fdb74c9767569ea036a464dd514402dce8  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BotellaVidrio_BaseColor.jpg.meta
+c343545bf9d4866a49074ce9ae24d58a397663d4c079741b62cbdea4bddcdbc8  A  1391998  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BotellaVidrio_MetalSmooth.png
+d8891d2aaa1817191a295085be04b71e7ad85ed567352ae9f71ff130170ce5d5  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BotellaVidrio_MetalSmooth.png.meta
+ed92387b827b7aebf4602e655c8e9cbaf53bbed24b7228106b04b3456e2d779c  A  194721  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BotellaVidrio_Normal.jpg
+1110b24b9f007ab83ed7bca6dfbb75b0001c00f7f3491eff2ef0bdcb4889b5ba  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_BotellaVidrio_Normal.jpg.meta
+122c7ba8c5935e289804a730b480677a4bffdf74a45c91970cba682df92e171c  A  567741  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_CajaCarton_BaseColor.jpg
+60e409155b560ac03c9f69f39970f2ceec718e7cbb45b1c39f9c0f618eaa50e0  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_CajaCarton_BaseColor.jpg.meta
+0474602888c40ffe384620dd489578ff09be01224dcc1d25c8fa31f10a0f363a  A  1330559  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_CajaCarton_MetalSmooth.png
+1112984792b1fca9f92c8220b601f099f95a72a688abcaf27d68bc4a1e40c3ee  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_CajaCarton_MetalSmooth.png.meta
+d2d1f529a851966b65411b5094510dd9eba03cd5c0a89921f79325c377a8e8eb  A  817424  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_CajaCarton_Normal.jpg
+fbcc3d3d052c5dfa28b7939fccfb21fc285e9754775505c09b8ccf5c93f4221d  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_CajaCarton_Normal.jpg.meta
+920c895a31b1cd2c000123c0592c70c33d46562752987da98070e7e0eebb662f  A  551939  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Contenedor_BaseColor.jpg
+1b1d640d4116aa75fda8074428f172c227978e06667c1c4b46a5adbc52ee6fb4  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Contenedor_BaseColor.jpg.meta
+adbf347a0bf753e55232af860eb12207876e88c76128f66fc2cbad05e091e452  A  2010326  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Contenedor_MetalSmooth.png
+c41fb67c21b01dabd799e8b7ff41edb14b0a5be353139b781fad0e78dde4b81a  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Contenedor_MetalSmooth.png.meta
+b977f17aa9d4718ffc91a62868b7171b4479578b8cffd1d32001d92552af81a4  A  842945  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Contenedor_Normal.jpg
+09e7c7ee75dd64fb23b0588e6162b135ae2043bc7f35e61f7595facd40fe8817  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Contenedor_Normal.jpg.meta
+7b37ad8d4d24844fd9a53f1684cb99772aa8a93b3be1e09af8e83a9528c785f0  A  670067  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_GaloneraPlastico_BaseColor.jpg
+86e643ff0835ff67ddf7c7e6b7844f99d6bb0e721d0a3da13725187d6e419319  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_GaloneraPlastico_BaseColor.jpg.meta
+6fa3ef34e1ea22ce9ce1b3849156406531e7acbc48bf97fd2220f92772c95c6f  A  2144054  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_GaloneraPlastico_MetalSmooth.png
+6b4c6a095a3d24aea1a31637b4a88c71950531f4f81c93ea0b3f4db0492d3492  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_GaloneraPlastico_MetalSmooth.png.meta
+e23c53dfd3182cfa83a819f47260374ce3bf2deeb3a88d42f268927187e3bf56  A  647099  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_GaloneraPlastico_Normal.jpg
+4e328583f3f031792520bd05cb9fe2f581625d36fb34b74b41eb312dd10a9a7f  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_GaloneraPlastico_Normal.jpg.meta
+6ceb66c99081fb1b5528176b2ee57423b951b0a7c9f4624c85f144715e9b6fb5  A  615722  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_LataAceite_BaseColor.jpg
+575b0700949b45255c16374a580cc664802666b11b9278c4f8bd25c56b9b4eb3  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_LataAceite_BaseColor.jpg.meta
+b4e3248e62d4cbce1fdbc9cd663636920f6059789686abb1db800e9f435f6a62  A  1782320  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_LataAceite_MetalSmooth.png
+7ae40093074867f2d13a2806e32a286ec4f5df58d7e98b2305bb144138eca426  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_LataAceite_MetalSmooth.png.meta
+6002933496c5f9cab97f24daa6a1b743f8b052f98ae45135fc052bbdd35b0d19  A  744753  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_LataAceite_Normal.jpg
+81eb50610146f203ea22c7b2d78ffbb7aa1c5d5f010d40ce5f7adf8057bdd535  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_LataAceite_Normal.jpg.meta
+ed838bd8c1f0bd73d5a2914cebb68b394d97b18e191785f214b919a233b4b246  A  739913  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_LataOxidada_BaseColor.jpg
+91b024db88f77ee0b34d3980cddbc52ce96090b51a8cdc4514e43d633f051488  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_LataOxidada_BaseColor.jpg.meta
+c972ce056333d5e4bbde6bf392b37b8efba48aeb2d63ac4ebfed60ec8ffb10a8  A  1760359  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_LataOxidada_MetalSmooth.png
+38dda9a3ac48ea68a771d7cd003ee14aeb94940273460ab1b0d35d6c95cf93e1  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_LataOxidada_MetalSmooth.png.meta
+f4f049846ec80e39d65b29dee588ea643643e0e3ca12b56d6f6374acffefd366  A  663638  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_LataOxidada_Normal.jpg
+4b435db4470cad8e5e23c86ec9e1146f2b1eb366eb396414b57616d9d6823b42  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_LataOxidada_Normal.jpg.meta
+0e34ce658c0844c0c94022233226d495930d514c917a5fa15ffee4760567439e  A  650708  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Llanta_BaseColor.jpg
+ddcd81f520ceb62cdfa20668a9a8c348ff1e506bdd0520d3841977fd735b9a18  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Llanta_BaseColor.jpg.meta
+b95aa7c88ef5a7284b391e032770801ae72d9ce1d89c5e9278a98a94d4442c3a  A  1963843  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Llanta_MetalSmooth.png
+f549d5ae3ee95d6b6c5478957e59205fb4a120b5e4521fe20722ae3093cc80a0  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Llanta_MetalSmooth.png.meta
+34b716e140408985ddbab7d4bf1d8d430edf834cd2fd4639d82b14cb393fa73e  A  722778  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Llanta_Normal.jpg
+bd888295a826f5a91170a8f29526fbebfaf84582a758d74eac1c256fb0bd75ab  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Llanta_Normal.jpg.meta
+da9e017b41e052d5e47558bb98e61b577f66e9d44eb2d26dc9b085e317bede9e  A  836152  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_MaderaPostes_BaseColor.jpg
+6f42bf8c6655c7dde897a20f458dbbf0e4ed04c01361c9e84a4c459a159980d7  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_MaderaPostes_BaseColor.jpg.meta
+f30a3df67bf9bea54ea4912ba63f998fd965db38ea70604b38721e9f051cad04  A  2034976  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_MaderaPostes_MetalSmooth.png
+d73c04f467709fdf6b66bddcc53de85e106293f107737ced02b1e92ca5c4e358  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_MaderaPostes_MetalSmooth.png.meta
+9b2d7ca04642e249428969fa32189f36fcea8577a282dbccca1ac15d59dce18e  A  978238  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_MaderaPostes_Normal.jpg
+50547b6ae1fa1b5100eb59e9dfc8d9b0eac2f9cb96782ba6f1b9ab868d469eb7  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_MaderaPostes_Normal.jpg.meta
+2670a7eae2a3104e8537e61d90a8d8b169c7eb0f69b51622bec10e9472dc4573  A  764066  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_MaderaTablas_BaseColor.jpg
+8e73e098b104947c4ea276f60df21b48b2b1f018c10e82948e7c7cd5e55931bc  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_MaderaTablas_BaseColor.jpg.meta
+6fedd28a8433dc4d2f3adc543c3844c96c7349bc3900cbb7eb38b165009759ec  A  1909617  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_MaderaTablas_MetalSmooth.png
+cb39effd539e8b05ba4d73dcbec233918ca0b76d051a8896a4132c9ffdc5405e  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_MaderaTablas_MetalSmooth.png.meta
+b23d7b0c23c9a41d50b7e1691e183902765aa4c21ac6ca6da678e874c4ddfb04  A  1055218  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_MaderaTablas_Normal.jpg
+f7f13fcd48be05c19e9f214045d567ae8bc139919897903f73b22688e4a7c25f  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_MaderaTablas_Normal.jpg.meta
+1fbaf810a9ca29d2faf0a179834e8dce10cf4854bafe13f63af111030b3ec660  A  778799  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Ramas_BaseColor.jpg
+7af2f50a0c13c47bb641fc7860f458163583095a906241fa926a7dad445c25a5  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Ramas_BaseColor.jpg.meta
+f847f6e5e40bccf78fdde009e6ef3663e995b78a1354343c23720606a4501e33  A  2116319  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Ramas_MetalSmooth.png
+423dbc4daf0806aebebb6d91bd9825b62533c085a43ed024a271a6f1def85243  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Ramas_MetalSmooth.png.meta
+62f5205bfec599000bb7a430e003bbada939bc8d7976a7d3ab7709fd5893413c  A  1170647  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Ramas_Normal.jpg
+ca628826d592e9405275687ad90fe68cafe1750f56be19c8f9ae8a121509983e  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_Ramas_Normal.jpg.meta
+bc31d7d23db90d90cfb568c583914eeec11b29716b79096818b706a9e3e0216c  A  713480  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_TroncoDelgado_BaseColor.jpg
+47ed21b8f6e59f0b104eb835f0f90a41cf18bcfa75d78d0b81bb9e6335d48d5f  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_TroncoDelgado_BaseColor.jpg.meta
+8907803736a6167d0433398f7ea9bfc0cca9dfd7d9a6a5db25143c23a62bed2e  A  1978874  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_TroncoDelgado_MetalSmooth.png
+8d8c356e0e8ec562e8732a4d56ed7035af1b135bc1ebfb0f72ab6d724a8ae3a1  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_TroncoDelgado_MetalSmooth.png.meta
+b7c393204c93f0c67535ff3b5d723b26598f9dbb2b5110b74249ab88189f026f  A  1053075  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_TroncoDelgado_Normal.jpg
+9bc8cf8cadff886af53f15bcdc6f97d326bd24072a68e8fb277b3bbd272caaa9  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_TroncoDelgado_Normal.jpg.meta
+fac23e81ab5639dcde93db605e5dd94c65e0aa2b1fb4a303f37de9afbb9af5b4  A  932059  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_TroncoGrueso_BaseColor.jpg
+706a77142fda466f3997cc39052b57ff17a771ba132ae7cdddffd70fa59de467  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_TroncoGrueso_BaseColor.jpg.meta
+bbc9ac07f241f6d73fc312dfa63ebedd28c7722ebd31bdd4a69ed70604db422a  A  2094971  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_TroncoGrueso_MetalSmooth.png
+6179f63ab7176f3570172c8e4b23ec82b88fa0a9d68456e620695e96f3e2919b  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_TroncoGrueso_MetalSmooth.png.meta
+9b26c29b89afced0ddb91dbe6f917e59038bed5ba6076dfceb8d1b4b00ca04f7  A  1192056  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_TroncoGrueso_Normal.jpg
+1e98b6668d86c066b03fc02e02be9bbbc605e55682052f3a1e5f5a778081ee15  A  3364  Game/Assets/_Bosque/Art/Valle/Textures/T_Valle_TroncoGrueso_Normal.jpg.meta
+8b4be19bbb4c55384c371b0bc89ad12901e181e3cb5c4a2730df0f21ba3d2cd0  A  172  Game/Assets/_Bosque/Art/Zonas.meta
+ec0d680be345270797fb66437872cff2c829619957ac94d70530d4512ef1c3c6  A  172  Game/Assets/_Bosque/Art/Zonas/Claro.meta
+ba44f2686cf72da5bfec72bc84fe6a80c28b39bc524257fa06f86db111b8d159  A  172  Game/Assets/_Bosque/Art/Zonas/Claro/Materials.meta
+3712a7bca2a04065212bb5ecc9e3cec9c0ed506a1dbdd817c8248b6062a69971  A  1770  Game/Assets/_Bosque/Art/Zonas/Claro/Materials/M_Claro_Manantial.mat
+331462a1426192a7721316ffd34f2da7fc54fde412cecc5953a9ddf119ed3738  A  188  Game/Assets/_Bosque/Art/Zonas/Claro/Materials/M_Claro_Manantial.mat.meta
+78b8fc40bb3e50ca98eb47e2e410cb3438942128649a5682afe63f2c429a449f  A  2306  Game/Assets/_Bosque/Art/Zonas/Claro/Materials/M_Claro_TierraHumeda.mat
+23e883bf2cda56b03374696f2060364819931b856c8422b18f530c2ed200e437  A  188  Game/Assets/_Bosque/Art/Zonas/Claro/Materials/M_Claro_TierraHumeda.mat.meta
+7d12d3abba13eaaf9f06bed6bd66c4cb3f97069f3efc8ebb93d3cd017765cdec  A  4148  Game/Assets/_Bosque/Art/Zonas/Claro/Materials/M_Claro_TroncoVivo.mat
+8b4dd520b6e0bde3536c3c47660fc9026a9460d835cccf2bca771565b5dc6093  A  188  Game/Assets/_Bosque/Art/Zonas/Claro/Materials/M_Claro_TroncoVivo.mat.meta
+c36be8b91634e32d4c6520a7df1589554916a0ebec819a05c8a7a7b95ad1cb51  A  172  Game/Assets/_Bosque/Art/Zonas/Refugio.meta
+d2ab79ab7994249302a337a58c90a8b0409af1e29d2f65f1f8d4d7995a5216ce  A  172  Game/Assets/_Bosque/Art/Zonas/Refugio/Materials.meta
+34a27a88f9eeed4be60f33511f1c820f44caf3139f7354da1b81a1f96b4bc9f6  A  2302  Game/Assets/_Bosque/Art/Zonas/Refugio/Materials/M_Refugio_Boca.mat
+076cf0d1b8e2ecd6711bb207756b505d602fda2d66d72627f099cb55603ae45b  A  188  Game/Assets/_Bosque/Art/Zonas/Refugio/Materials/M_Refugio_Boca.mat.meta
+0a1a46cd33d6de47fb43ed830f1081811cffb53794cbe357753002c756c97883  A  4174  Game/Assets/_Bosque/Art/Zonas/Refugio/Materials/M_Refugio_Hueco.mat
+4afc4dfbf79b3785d74a3d54664b677e7d2a05688f33627b832007942961973d  A  188  Game/Assets/_Bosque/Art/Zonas/Refugio/Materials/M_Refugio_Hueco.mat.meta
+ba9f0d4974604b00fd79afc487861dff5d60e470d199a7715060b5d4877dbdc0  A  2305  Game/Assets/_Bosque/Art/Zonas/Refugio/Materials/M_Refugio_Huella.mat
+0efdb70360497a5134ed7b11b8a50973652a891e5979324af70080a27b6cda15  A  188  Game/Assets/_Bosque/Art/Zonas/Refugio/Materials/M_Refugio_Huella.mat.meta
+7fa88c5c7731fcfa5933954be559d84cf6f7e3edbde3ac9171080a05fd0c5b7e  A  172  Game/Assets/_Bosque/Audio.meta
+44db7198372984bbd2c2740a65e06e67db21462c96611bcadaddbba98422685e  A  172  Game/Assets/_Bosque/Audio/Ambience.meta
+2eb81ec55315d1d47815c959aaf5b675070cccc72818d8deeba1f26df2818ca3  A  21001  Game/Assets/_Bosque/Audio/Ambience/AMB_Ave_01.ogg
+1e465c57690398a543dc814f42bf5d4083deb19739e3e038ef06904076996cdc  A  487  Game/Assets/_Bosque/Audio/Ambience/AMB_Ave_01.ogg.meta
+8d8d045d806d8023931fbba405b2b4bd6f955b44f281a8ead4dfbdec33b9c3fc  A  20488  Game/Assets/_Bosque/Audio/Ambience/AMB_Ave_02.ogg
+e0237d8090019ac00cc4f2b7f7d24075a9e5a678b3b23dd7de5497200c99c1ac  A  487  Game/Assets/_Bosque/Audio/Ambience/AMB_Ave_02.ogg.meta
+ee9530e2868dd9b07b0ad82939355cd5201b0cab1614f7128d2791e8cb5ea901  A  21074  Game/Assets/_Bosque/Audio/Ambience/AMB_Ave_03.ogg
+424535999684b2c11f49f43160f3e635883c34d5b1f26ed9df0faac642810393  A  487  Game/Assets/_Bosque/Audio/Ambience/AMB_Ave_03.ogg.meta
+965d5a8c5829e097928fb6cbb645cfa7f51a9fb4b17a4824e4d5591f7cd5c7bb  A  20957  Game/Assets/_Bosque/Audio/Ambience/AMB_Ave_04.ogg
+46b4c3b42800f5edfe97e4a110814cf0bce6df5c2c464189ee0ff352af4df2ad  A  487  Game/Assets/_Bosque/Audio/Ambience/AMB_Ave_04.ogg.meta
+5b75b6dcf592a9e48e9fb3763be20dfcd09e61237a4db8420d6309fc687fee18  A  20704  Game/Assets/_Bosque/Audio/Ambience/AMB_Ave_05.ogg
+10ba3f408fd42871dd50d4e433c04e17e5bf0b171aa1c19df7eb83816094cb59  A  487  Game/Assets/_Bosque/Audio/Ambience/AMB_Ave_05.ogg.meta
+275c98ab87ebbce6607e4785c0dc0aaa9b7680e49b55a0de89fe9ed0a0956782  A  20128  Game/Assets/_Bosque/Audio/Ambience/AMB_Ave_06.ogg
+6e289091dd8eb590f379ef030f30e8b35da23739189852dd591a72636505e2e2  A  487  Game/Assets/_Bosque/Audio/Ambience/AMB_Ave_06.ogg.meta
+70710eda5d3f8e6933d5b93019c63bc594798499f99b83d2cb317c387b55d813  A  919327  Game/Assets/_Bosque/Audio/Ambience/AMB_Aves.ogg
+99643d6156bc6fced2b4ba921648cb9c432b42cdb990975e32a7b0b46fb2d083  A  487  Game/Assets/_Bosque/Audio/Ambience/AMB_Aves.ogg.meta
+743f230ccb8bc3d5a3daa1a382b99d3698db08034a62069aaae70adece7e7f43  A  929931  Game/Assets/_Bosque/Audio/Ambience/AMB_Brisa_Hojas.ogg
+466fb312c5fbfc15da4bad33e838e7ef689adcb4cdb90f8e357454b4432f5dca  A  487  Game/Assets/_Bosque/Audio/Ambience/AMB_Brisa_Hojas.ogg.meta
+13e70ea06a357e1b098e85a184bd3a6c707d8833681f8b03e4ccb48fd27ee52a  A  100804  Game/Assets/_Bosque/Audio/Ambience/AMB_Corriente_3D.ogg
+b3b20b30da9de7df1ad51f487e220ac6dbabbcff97e8ec9a7e7cef026603608d  A  487  Game/Assets/_Bosque/Audio/Ambience/AMB_Corriente_3D.ogg.meta
+ff2dfb463fe8d57a05c1696b3a2a6914a4110b5ff32fc5ced9c51021361d33d1  A  8484  Game/Assets/_Bosque/Audio/Ambience/AMB_Crujido_01.ogg
+840441bf2962213303cbc09786e947528e36f1ce994105c98504c16e941edcea  A  487  Game/Assets/_Bosque/Audio/Ambience/AMB_Crujido_01.ogg.meta
+dfda605e341fc429bd8c1c9b0e0ecb38960ecc784fb0f8a8b78630f0d649c583  A  9854  Game/Assets/_Bosque/Audio/Ambience/AMB_Crujido_02.ogg
+5eccb84c514e4f442fce9a6d7999e8394cd44c566351816f3eccc699fa12a0d9  A  487  Game/Assets/_Bosque/Audio/Ambience/AMB_Crujido_02.ogg.meta
+020d817d58f52676f6361dec7e5b912313372232a7128e14f5699ce5124d28b5  A  5983  Game/Assets/_Bosque/Audio/Ambience/AMB_Crujido_03.ogg
+d715307d41ad5c57d5b17c8e9377651f67cd268e40b0fba603deef2fd1c7b2af  A  487  Game/Assets/_Bosque/Audio/Ambience/AMB_Crujido_03.ogg.meta
+6bcaa68a2051a0a3c87589bf9f1103f816c2a3bb5b26bf78c87d94f303093437  A  23588  Game/Assets/_Bosque/Audio/Ambience/AMB_Rama_Seca_01.ogg
+4f7fc9ea6110cd2df209b2a5a7059efee8092b83e188eb30512bb8e67969b7b4  A  487  Game/Assets/_Bosque/Audio/Ambience/AMB_Rama_Seca_01.ogg.meta
+ac23be55a10c8ce7ad4c6d1879e560e99940616443fcfc47f17e006e773ca3af  A  16972  Game/Assets/_Bosque/Audio/Ambience/AMB_Rama_Seca_02.ogg
+1f22348a1b53deff06e30a42037a69d0466cbc321fc9099793e33b2778f572ed  A  487  Game/Assets/_Bosque/Audio/Ambience/AMB_Rama_Seca_02.ogg.meta
+4758df46a25a2f43fc8b0a030a98c68d4e04be8f91849ac65894bc28cfee960c  A  16590  Game/Assets/_Bosque/Audio/Ambience/AMB_Rama_Seca_03.ogg
+3067b4327fe1c9dcf2134c138a3da885706c3f4f84faeb4e128ae455d8162dec  A  487  Game/Assets/_Bosque/Audio/Ambience/AMB_Rama_Seca_03.ogg.meta
+1812df39b241fc31fe5c23ba5de6433183b10f96e87cfaea58fea27c6384de08  A  870112  Game/Assets/_Bosque/Audio/Ambience/AMB_Rio.ogg
+01aeac1e829fa2f0e19d9c04b41f26a6cc5fed98774cdf8c91ad231946497914  A  487  Game/Assets/_Bosque/Audio/Ambience/AMB_Rio.ogg.meta
+bbaae712970b64748252a6197080729410f3c3a057a0d73e4ed3ae177311d68c  A  860873  Game/Assets/_Bosque/Audio/Ambience/AMB_Viento_Seco.ogg
+f30cb5c7e2e8c5bb9aaf4c8eed88ec0cffb3fc26dbd4daf191c94fbdea8beeb8  A  487  Game/Assets/_Bosque/Audio/Ambience/AMB_Viento_Seco.ogg.meta
+c04bd45885df3e0474e086fe750fda4cff10ef80e312ba937d2c91a80f190136  A  172  Game/Assets/_Bosque/Audio/Music.meta
+456d5fec1141167a7fd73c95f31244c33142fa48b23d031b6edd7b2154015b36  A  1379744  Game/Assets/_Bosque/Audio/Music/MUS_Bosque_Hermoso.ogg
+69c945c1d3ed629c1655f4ebd5d8df82f8c586f9153d1fbc910aebcd6197c550  A  487  Game/Assets/_Bosque/Audio/Music/MUS_Bosque_Hermoso.ogg.meta
+018ff60c60993ae25350073a320f653c278b30e292c63f1a6edc5623dbf33127  A  4872  Game/Assets/_Bosque/Audio/SFX_Biblioteca.asset
+96c1ef1137e425da0fad9af17d2de083fd93b00f8eafca1df8a7bc0210754b8e  A  189  Game/Assets/_Bosque/Audio/SFX_Biblioteca.asset.meta
+4918e8720c13185012e60fb309e9d8a407f9b2797643b14b5bd73f98efebc3e5  A  172  Game/Assets/_Bosque/Audio/Sfx.meta
+918b40d6f3096ecfc405d327b56c413aed063da32799ae35fa3b598ff0dead3d  A  6706  Game/Assets/_Bosque/Audio/Sfx/SFX_Aterrizaje_01.ogg
+c030e84d1c5f7241902a85dedcecb2d08ee92cbabd3fd3ea36cccb7e17cbd070  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Aterrizaje_01.ogg.meta
+5928fd79daaa67e52bd14eb7ef30ffcae45e686eeb0b17a38fa3e7166f712b63  A  6813  Game/Assets/_Bosque/Audio/Sfx/SFX_Aterrizaje_02.ogg
+48447f33850ce40ce28e46b600b4b5a8f9c15681b08cf32180752548e9547fe5  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Aterrizaje_02.ogg.meta
+1f40f62b1876a46e79a8e3b0224c20bbc045376eef8554464769c47fcdcce4c2  A  16040  Game/Assets/_Bosque/Audio/Sfx/SFX_Brote_01.ogg
+2bc488812c7c2567dcd13ccebbd01a257f2e206a049e720cc7a89c30e500d6fd  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Brote_01.ogg.meta
+6b27e074e8f279c86043b239bb32eb1297a1b7a2e4246eebcab3ad8ddaa2c810  A  14973  Game/Assets/_Bosque/Audio/Sfx/SFX_Brote_02.ogg
+68482a8bc63e980d223531de260f6d1d6099db92d0f81148d4f9909b3b9632c9  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Brote_02.ogg.meta
+2faa75982498c6532586435d02ee2e0852b84ee7c2b253300a161c467205c130  A  15141  Game/Assets/_Bosque/Audio/Sfx/SFX_Brote_03.ogg
+283bd7d37c87e194539ba105db929deb42782a69c69ec23ab9ed859f119f26fb  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Brote_03.ogg.meta
+d6677c9725d1eefa89942bf55da2b4eaafc63b23f69a70af0f370befc9baaba6  A  9833  Game/Assets/_Bosque/Audio/Sfx/SFX_Brote_Fallido_01.ogg
+363b1ca93d54d501edb53ac84ee7c31a99ee8b912f3de9ce00576a1c8bb8acca  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Brote_Fallido_01.ogg.meta
+b55a50ee867230bd09cb4c47e76906a93dd6c29321ced44ace13f854fe4d4fa5  A  10250  Game/Assets/_Bosque/Audio/Sfx/SFX_Brote_Fallido_02.ogg
+6aeeb056532aec62aab031f72b9257547bf4a19fef99e1f9f1213b0becc48410  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Brote_Fallido_02.ogg.meta
+b149461ea444dbc2865605aa6db06d55f8c85f678466c6f4e6fdc76e802ec7ca  A  5428  Game/Assets/_Bosque/Audio/Sfx/SFX_Interaccion_01.ogg
+769d35e760e5207f92a0de9d8430d9e3be71f6a02884c7489bc336865f189922  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Interaccion_01.ogg.meta
+3382f281117d45ff2ea161e39084929318bd771cbba806275200553ae60700e9  A  5355  Game/Assets/_Bosque/Audio/Sfx/SFX_Interaccion_02.ogg
+3cffee577729d9f6680898c2e21a0b89da330f02944c21ad6fc96367d42036df  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Interaccion_02.ogg.meta
+5ddcdf19f066c378e6aa82024ff6263957c3a34e9d5d967e126751ea1438955e  A  43281  Game/Assets/_Bosque/Audio/Sfx/SFX_Nivel_Completado_01.ogg
+7b9ed05ee640e3eb6f4e05f2c819cab96ce4cb9195247e07f141bb5dbe5d9853  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Nivel_Completado_01.ogg.meta
+c41e3b348c4cd8f83e9f5082d6f7adae78223efd1653f29d56bb609faecddda2  A  8121  Game/Assets/_Bosque/Audio/Sfx/SFX_Paso_Tierra_01.ogg
+e70bea3e5522d9c5dd5bd34261156741da196a9bffa86b16f67edd38cb3f1a4c  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Paso_Tierra_01.ogg.meta
+e2a4a38364ac7c00a290635836f70a5b5cb764890f59c125de79585c7b5c2eb1  A  6882  Game/Assets/_Bosque/Audio/Sfx/SFX_Paso_Tierra_02.ogg
+d09b27189040dda13ccb2aa430993da5c2ca57f177c03c3183527f3b684f6a0b  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Paso_Tierra_02.ogg.meta
+382fd2cfbdc9bb87f78fbbd4662905cbe696721f2d7cbb369c3937dff5c9ef7d  A  6500  Game/Assets/_Bosque/Audio/Sfx/SFX_Paso_Tierra_03.ogg
+e53e0d6549795e4aea64a7b5444edff3ae1b3461a04e95bc2489a9b0a4b37f26  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Paso_Tierra_03.ogg.meta
+885209f01b53b8968818abc3dcf052e3134a2a4052bf7b2a36835ad1759c14be  A  7549  Game/Assets/_Bosque/Audio/Sfx/SFX_Paso_Tierra_04.ogg
+b3986b7a1f70ae99585c361aab151ce6599539d540ee4df132281595ee9c3fc1  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Paso_Tierra_04.ogg.meta
+656b5222f6edede7201733be4f0f0d378a38bda7eb0b94556c015e43fee22c09  A  6813  Game/Assets/_Bosque/Audio/Sfx/SFX_Paso_Tierra_05.ogg
+c48ce3e85f17f27b6418c4e4d1558794afd446acfa66723fb359d362720b2c0e  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Paso_Tierra_05.ogg.meta
+e62755132faa798de8d8982d12cc509e8a1702e05fd9e866b38a587fa10ea5f8  A  6875  Game/Assets/_Bosque/Audio/Sfx/SFX_Paso_Tierra_06.ogg
+4a5b73fe0ceefab39c72d7c975b31a4d6566ccc73c2b24c156d411cab7f4e90d  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Paso_Tierra_06.ogg.meta
+28022010aae989f61dced10e387509e907cb8adcc545a83a54df20c433abfab8  A  38299  Game/Assets/_Bosque/Audio/Sfx/SFX_Puente_Raices_01.ogg
+ccc2d2e88a1a85663336d1b57f67488a51a0f5c43fe6e85e568a1fa872767d7e  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Puente_Raices_01.ogg.meta
+e5b17122db960731054075d0d31917bd961e813b2cbd1dc268dc1ba0243e65ba  A  38806  Game/Assets/_Bosque/Audio/Sfx/SFX_Restauracion_01.ogg
+c9f96df688db573f58a782fe0653754c229b479ee51eddc996ae0f9fae3e6d41  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Restauracion_01.ogg.meta
+7e84036ab59aa1a70566b70bb46f4bf80000f494df065b935edec09a5c6e2c3d  A  18343  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Ramas_01.ogg
+3665f3c54283aab9a391f1d78436db2341546a55834a263937f6fe1d8ead96eb  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Ramas_01.ogg.meta
+03dee9700976c6449551a345e5836c0de7af74d1487d1727b7a1a36c828791de  A  23483  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Ramas_02.ogg
+19f66f31e5bbd73d8fbb74004d967679af823f86ca595b9d6e941003ea756613  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Ramas_02.ogg.meta
+eecb9baa79a1892940d92a9f4a45b123b2c32eb6c6484f3f05099b6094290670  A  12292  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Ramas_03.ogg
+dddf27fe156f1b002f724e75dbcb322785895646e00c8294546ccfd666059f3a  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Ramas_03.ogg.meta
+90c934c954fcc6eb11749bfd62c1bd4cd2ee6dc42222387b826d033dc66d44a6  A  8459  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Rocas_01.ogg
+7a1e2ef754c75bfb1fd7e78207eb923d99d53b1ab045da7f67ca2019a3c98606  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Rocas_01.ogg.meta
+e78a129db49653118786bb527a84baed2049f49d67cad7ac5ece0160268ad077  A  13227  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Rocas_02.ogg
+88e4a437b40910419c55d7174080e3382d7004fbb2e6f7a3d5f88708f7d1ea9a  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Rocas_02.ogg.meta
+d4af29bcfb639e0cf7fa159d215a4fd0010ee343e9ee93feb15d0cd14fc01a29  A  8803  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Rocas_03.ogg
+07e716d2d82c28a93d04a26a79ae84ce28f6ef5bf3c3d75f01503d6d6d0ee2de  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Rocas_03.ogg.meta
+f21dc11a8765ef3bac74d3ae8a6f60cbf088f1008a30263aa2e610e769712079  A  10360  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Rocas_04.ogg
+2cb61bac4c53edec2055188c890bf2ee18bd96723de84ff9ad944846a54dcfff  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Rocas_04.ogg.meta
+a362699ff2c0046cbdca1c37cb34872bc4c27dc56ff0a080b58df8cd093f051c  A  28708  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Tronco_01.ogg
+290a8576063299a498571a362f5f58d5ba4b6cf515195f3dc349ce2a097eb9ca  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Tronco_01.ogg.meta
+ac5e1cabb203bf9331bf214d6550757d5672cb26b6e9584d8d16c4f323620933  A  23853  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Tronco_02.ogg
+9a64212b31ef1081799af36497c8d8304de3f8afd279f7d591f6294e9b26f0b1  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Tronco_02.ogg.meta
+59e67aa4f44f45b32f5047d7651943ffe2f80dacfd5a98723723160ded7d53f1  A  23440  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Tronco_03.ogg
+36a5dadfebf54d714061cccf5bb574c96e61eb93bb40f685f42fd3f72e02c529  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Retirar_Tronco_03.ogg.meta
+90e4ce5a68d693ace53e07f5cb8bbd76eb3503e3760ee939c8965e95844ed0a4  A  12232  Game/Assets/_Bosque/Audio/Sfx/SFX_Salida_Desbloqueo_01.ogg
+39da6d0c0d0bcd77d72ea1061a45792ec58a41c304e7cecd95e62552026d0669  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Salida_Desbloqueo_01.ogg.meta
+1ca153eec5670d35561d70d0206be3604b08e70f8668837fdacb87cbb98cf8b4  A  8684  Game/Assets/_Bosque/Audio/Sfx/SFX_Salto_01.ogg
+a8c61b4b0604d641edd337aadbf0a0ecd707d50d749c5a1fe502c82c4a962581  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Salto_01.ogg.meta
+fdc7baea329df401c47156f068ee1e2ce4dcf2aae999a411aa0b1a7b01f0df13  A  7393  Game/Assets/_Bosque/Audio/Sfx/SFX_Salto_02.ogg
+b17f2b44cd9d568933bb01b3346fd63f6298c6bf39d1ef4248cc282434eeeca6  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Salto_02.ogg.meta
+5de17e29a55c341df35676ef7c4f23f65df5dd382258146a4018574c483dda67  A  7175  Game/Assets/_Bosque/Audio/Sfx/SFX_Salto_03.ogg
+172047f035b713eeaf4c1b4ebf28f33e188a715bff7202192d6b7c79302a364e  A  487  Game/Assets/_Bosque/Audio/Sfx/SFX_Salto_03.ogg.meta
+8cc47e03f9dd4e975975cd872d4143be1408a25cc97c2962dbee24d5e61d2f2d  A  172  Game/Assets/_Bosque/Characters.meta
+76dbfa7e0f94f7dfd0f5ea0e3b99e06aae55dc3631a113482ec9981bf7e9f61b  A  172  Game/Assets/_Bosque/Characters/Fauna.meta
+38708f4de954e8d54c42394ed2f28fd6623e73be99117802f04a1ba5fec61202  A  172  Game/Assets/_Bosque/Characters/Fauna/ZorroNeblina.meta
+5298d3be18461e69c0e1b12b074352eaa3bb552ee7b02d95e55d1c296ace0926  A  172  Game/Assets/_Bosque/Characters/Fauna/ZorroNeblina/Animation.meta
+7f836bc49dfcfc6a159b9bc6918af018403a85536f9e91502121e2ca07198468  A  3272  Game/Assets/_Bosque/Characters/Fauna/ZorroNeblina/Animation/AC_ZorroNeblina.controller
+bba3f101a2b2a8f415015f3fe3144a064a3659ea7011ca4dd41710d5b664bb21  A  188  Game/Assets/_Bosque/Characters/Fauna/ZorroNeblina/Animation/AC_ZorroNeblina.controller.meta
+5698277a59159a999d165d66b645fc7700a98efbaab9a2c83b033cb5372b11a6  A  172  Game/Assets/_Bosque/Characters/Fauna/ZorroNeblina/Materials.meta
+538a0892aff61070badb739d569bb1f056a99c65f187fbda2ed6f09c8a04e607  A  3948  Game/Assets/_Bosque/Characters/Fauna/ZorroNeblina/Materials/M_ZorroNeblina.mat
+6b2147b5a269c38a428c208f61f304f44c8dbefe536a8266081948e0989387af  A  188  Game/Assets/_Bosque/Characters/Fauna/ZorroNeblina/Materials/M_ZorroNeblina.mat.meta
+b3ccc19be3adeaa6945cb8f2626bad7b3d2018f27cb069955e4d5e5b885b86f0  A  172  Game/Assets/_Bosque/Characters/Fauna/ZorroNeblina/Prefabs.meta
+f3295648a3c3e7dc532f3d6a381f7c02da434699b6a808c5a03c1b330b6661ff  A  31241  Game/Assets/_Bosque/Characters/Fauna/ZorroNeblina/Prefabs/PF_ZorroNeblina.prefab
+08790ab61d4858a2d446e4c492be76b3a89124cb6b64ac1f29d60d949f183c92  A  154  Game/Assets/_Bosque/Characters/Fauna/ZorroNeblina/Prefabs/PF_ZorroNeblina.prefab.meta
+4b795e726cd2e60b6a36ef0811ebdadfe82fa26fa0cf407f8d5ef5a9f3608a5c  A  172  Game/Assets/_Bosque/Characters/Fauna/ZorroNeblina/Source.meta
+f7959750c9271a70316e5842e906f5687c36596b0f51ee63cb196558fea08b3f  A  883420  Game/Assets/_Bosque/Characters/Fauna/ZorroNeblina/Source/SK_ZorroNeblina.fbx
+532f9711cbc2c216d7c36758450a29d0520e9e713848c6222ed679cfebeb2301  A  5518  Game/Assets/_Bosque/Characters/Fauna/ZorroNeblina/Source/SK_ZorroNeblina.fbx.meta
+a55c23984c963b780535c3ac08a2f7228128503d8fc8f8af926a36b15de6e16a  A  172  Game/Assets/_Bosque/Characters/Fauna/ZorroNeblina/Textures.meta
+2e775b566827e39a9a001f6cd18e2b09e14e77d24f84b3c3408b08ae0bf100b0  A  2246760  Game/Assets/_Bosque/Characters/Fauna/ZorroNeblina/Textures/T_ZorroNeblina_BaseColor.png
+cb0ec7f25e86456d30e36a2499bde1594d49c71c672e98589d849bd1364ef77c  A  3364  Game/Assets/_Bosque/Characters/Fauna/ZorroNeblina/Textures/T_ZorroNeblina_BaseColor.png.meta
+f866b50bb62ca8426f478a9859d1cb8ffd9e470b0c09f67c5906023f7fbbc6b8  A  172  Game/Assets/_Bosque/Characters/Guardiana.meta
+66f90e735fae83f53ac621d7a94b7eca0a1ce15f9eb68a6748b9947f1885c443  A  172  Game/Assets/_Bosque/Characters/Guardiana/Animation.meta
+fcf2d95f6ab25a1a943321583c42629fcff29299d6ded4d7ba06348e74edf13f  A  18375  Game/Assets/_Bosque/Characters/Guardiana/Animation/AC_Guardiana.controller
+95f501f9dc8442f24b68b6177a2d31f64b1a102d325e1adfbe32bed389d5955a  A  188  Game/Assets/_Bosque/Characters/Guardiana/Animation/AC_Guardiana.controller.meta
+a5acbee20008a0e1848f3eb1ec237215ac37f8fc13b1f5e612ef0278250a639a  A  368  Game/Assets/_Bosque/Characters/Guardiana/Animation/AM_Guardiana_TorsoBrazos.mask
+ef76a0dac5c0ab4f980ecc4b14c38bd09954ea98bfa2b9ea9df74fed7f6b02a7  A  189  Game/Assets/_Bosque/Characters/Guardiana/Animation/AM_Guardiana_TorsoBrazos.mask.meta
+593f6c976e30fc9c567080feb7e30bd2aacbde0e1750a71d0ce1d9c734e36b9f  A  172  Game/Assets/_Bosque/Characters/Guardiana/Materials.meta
+e59c59d3710a76564d31f5cfe9878de317ee17d42f54fcc0f18b30baf76f945f  A  3989  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_Botas.mat
+748a40a3b5b2088d620868995bcfa99d277287936a8686ffed7460c4a9488471  A  188  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_Botas.mat.meta
+d7d27255a143d008055c11eade2e4eee752b6ad3da29ae4742583197fbe23864  A  3949  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_Cejas.mat
+d1127d473a11d5707ff0228b48674201a3d83ba785bc95fac6d0099a794f3096  A  188  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_Cejas.mat.meta
+7cfdec7b1d2af3b37adc6841a298ddb451d3eacf66bbb8d771dc25cef1a74b6b  A  3949  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_Ojos.mat
+1dbf9c230a212971dd4fc794728d6efd2047047245a37586a053143c516fb487  A  188  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_Ojos.mat.meta
+27e4263e71d8a7f41ae994be671f0da34c23d1c47bade4049adf6eea38911230  A  3991  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_Pantalon.mat
+d3bd6f3fc861f96618296466d8057b916f47a1174812da78101efa422c33b468  A  188  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_Pantalon.mat.meta
+46d191ea85c130213b18e864cda69ad485acef9bb943c821673492499493dabf  A  3953  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_Pestanas.mat
+85e8bef53647830eb2f95260563aa1677d44ebe38fec4d23ca16246b49166162  A  188  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_Pestanas.mat.meta
+b4fd854bade55dc765df6dd4653960eaf39b0f1b258cd5738c15f73814501bfa  A  3920  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_Piel.mat
+227850969d5d9a2c1c57d2819b2b61aca4a2b9572ce8e78d8eed0b82b5dd236a  A  188  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_Piel.mat.meta
+9e736090e72ce54c3cdf216042a8c741ec989fc0b605ac4f939ca464d662a839  A  4072  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_RB_Cabeza.mat
+8795941ddfea57f9c68e43c63ffa14d015d02a64e66afe74732da1293f500034  A  188  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_RB_Cabeza.mat.meta
+5b7eec489ba812443116322925d443005eb27df7aca31c1b5b8f4cd83ad3afad  A  4074  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_RB_Cuerpo.mat
+ff2bba9466a7e57e8124d9d357e2f417f597c792965f011c205adbfa739aa22e  A  188  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_RB_Cuerpo.mat.meta
+dd82357f3b03922568a4701645213e8c5de32a9f456495430ec5ccb2aa8f8b19  A  3953  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_RB_Pelo.mat
+3c4859b49de98ff6047bb08186dc1bd2588444dcd303ff0d864b7495ec1eefaa  A  188  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_RB_Pelo.mat.meta
+a1a20ef6255c9fef96b642dd1101669865123bb51f2ba19421f388289fb6ff04  A  3990  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_Sueter.mat
+7c2f438e5a235c3187eefc67ef4f1ee93379089f8e5efb0ba975fb1c04a88936  A  188  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_Sueter.mat.meta
+65915cdbc4c0962e26debbd10b0ac0826154d0f53d9cb52d7f7853326c044409  A  3950  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_Trenza.mat
+df229f66e0e8f3e57a9e0c9dc88c74bee2c1f52e71a429e664c729c2549cc1da  A  188  Game/Assets/_Bosque/Characters/Guardiana/Materials/M_Guardiana_Trenza.mat.meta
+9d4ac07dcb4e9b7d7bf7fb8f20ac99af38aeb42eb89b96724240114b4f463f80  A  172  Game/Assets/_Bosque/Characters/Guardiana/Prefabs.meta
+9d8aee70cbf8de32e30ad23fdbd28f0007ed3e11a65a030c95094226fa1bcc28  A  90221  Game/Assets/_Bosque/Characters/Guardiana/Prefabs/PF_Guardiana.prefab
+d133818a18e06ece90daef20b747899719c4f885844f172ee63e7e59239beb34  A  154  Game/Assets/_Bosque/Characters/Guardiana/Prefabs/PF_Guardiana.prefab.meta
+22762bd7ac679c55a24c38ab42c52ef03e6f6b44205437c41e92887f5f8294c9  A  172  Game/Assets/_Bosque/Characters/Guardiana/Source.meta
+7bb1ff9abae8b995a87fbfe61ccde6baeb96ebe258c45be047a4ecb9a1181c76  A  172  Game/Assets/_Bosque/Characters/Guardiana/Source/Animations.meta
+21b32d912da3cb93426d974fb945e86f5b2e86970acd2ce89905e0fbf9f1dcc2  A  23754684  Game/Assets/_Bosque/Characters/Guardiana/Source/Animations/UAL1_Standard.fbx
+7dc96261a69bef12b030632d3dec4ccb8eb55791dd1c9f923e0839cce05d8895  A  66466  Game/Assets/_Bosque/Characters/Guardiana/Source/Animations/UAL1_Standard.fbx.meta
+1480915b64be5cb2db82c0d0dde1cf56a5e3eccd120418ec88aa30de5e4f2259  A  172  Game/Assets/_Bosque/Characters/Guardiana/Source/MPFB.meta
+0adc3cf3c0c3cf3effd0a9da72f54b01bd1e1b978250c6f5d53be6651a6939d2  A  2697804  Game/Assets/_Bosque/Characters/Guardiana/Source/MPFB/SK_Guardiana.fbx
+03e942542861ccd0732bbeab25f7b340f8280d0db41f042b392549387c031274  A  29846  Game/Assets/_Bosque/Characters/Guardiana/Source/MPFB/SK_Guardiana.fbx.meta
+2efdf4aa844fc79b29fc1867cdb3d9d4d368f121a62c50e4ae88e6e870b3e3c8  A  2028  Game/Assets/_Bosque/Characters/Guardiana/Source/MPFB/guardiana-urp.json
+248dc24defb4ed8c44fd11df218caa3e2b8493e3e750f88656b5f7156c359da2  A  158  Game/Assets/_Bosque/Characters/Guardiana/Source/MPFB/guardiana-urp.json.meta
+87f6e6ca0d034ca6da7260663273e3ec43dbf7186f6b0225f8932f2bad5340db  A  172  Game/Assets/_Bosque/Characters/Guardiana/Source/Rocketbox.meta
+17474e386e0b9e1a700cc3d06b2b0882a2c376d9c6b49c7f8274409b8f8d2352  A  1066  Game/Assets/_Bosque/Characters/Guardiana/Source/Rocketbox/LICENSE-Rocketbox.txt
+75edb8d958cf015a3f327e098b907fdc0379d73b02b384fd132141d6b2f17272  A  158  Game/Assets/_Bosque/Characters/Guardiana/Source/Rocketbox/LICENSE-Rocketbox.txt.meta
+faaa677ad270784b87538d16839c179b0930a121fa0bb3fed8f3ed189b33a98a  A  591744  Game/Assets/_Bosque/Characters/Guardiana/Source/Rocketbox/SK_Guardiana_RB.fbx
+aac2de6d0ae56103cd3cee94dd4454b27ef5109965badfe9fcfba91e1963b0cd  A  33121  Game/Assets/_Bosque/Characters/Guardiana/Source/Rocketbox/SK_Guardiana_RB.fbx.meta
+b87bde14236d79ce8ca861fcd2708d1851f69dcab59f5a485f458f78af8a2aec  A  798  Game/Assets/_Bosque/Characters/Guardiana/Source/Rocketbox/guardiana-urp.json
+066bd67af497a663037543f0e727a25439868760622c24cd4ecaa83f34d286c6  A  158  Game/Assets/_Bosque/Characters/Guardiana/Source/Rocketbox/guardiana-urp.json.meta
+2b57d53e4a6a7d0d5071650374defda1b96ade421a2fff2fb6af1023178580a1  A  172  Game/Assets/_Bosque/Characters/Guardiana/Textures.meta
+70ade1784214c2b758ae663c8a1d255bb3f13d021fb4c85520c63c69de453d60  A  172  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB.meta
+4626e0e162ccb079b1abf323ad981cece8d8d2893f9e99eb91deadbe57df4c22  A  1154984  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Botas_BaseColor.png
+1555e2857cbc24a9d9942f5f7aed4e62eafd647640635496712f4628f717716d  A  3364  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Botas_BaseColor.png.meta
+2821adb39eef184d74d3e9c8daa7f07233779b9e711779c975a165020f122ea8  A  1951029  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Botas_Normal.png
+c2705c447810715e0fc649a3d79b55e35647af1f2b41ed402e400e07acfd924e  A  3364  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Botas_Normal.png.meta
+087f0a51f23d16f8d3b083d05990729e6ef0bcc906a16a9d9e5ee9d2c8d54179  A  92346  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Cejas_BaseColor.png
+b103dff1c8a90548eefe06e2b6513a778815861c0ad10fdb98de3c1f822e0ab6  A  3364  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Cejas_BaseColor.png.meta
+003eec5ab3f09068aa88e7cd7eaee251b75e1098fa41f1d67c62c5633abe3423  A  662402  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Ojos_BaseColor.png
+9c6b981174409e06b0b9a3d4030729a171c949034502de862a19f3e0c9625630  A  3364  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Ojos_BaseColor.png.meta
+5078b4b66e31cfe8a1eadc862f855da9bab4be6fd6f87c01ae499cfa1c4f4cb5  A  2057689  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Pantalon_BaseColor.png
+2b1283b8dfa80beee35eab67fe3b883682a04e0b178e8fc18c25a69492f00a95  A  3364  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Pantalon_BaseColor.png.meta
+116fefaf9a9b4e2cb79ec8c5e57f5c174ac29d948c1fd7dca318210ea3b53ac6  A  3427224  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Pantalon_Normal.png
+0d52b17c3703a9820e549e8938358019f7ec68776746a8873d8129ce4eb67fcc  A  3364  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Pantalon_Normal.png.meta
+ac76e68e84aafd36eafade9f200373085c4b93035d1839cb8c2723ee67d62b22  A  92505  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Pestanas_BaseColor.png
+4609730f65b6c5577e89bffe2a516af2bd742c57dddf72bc311cedf0fa1bb9f2  A  3364  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Pestanas_BaseColor.png.meta
+c22808776fa28af52ca1eb74a54bfab998776143739c50df1f8861fb4707cbb9  A  4449275  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Piel_BaseColor.png
+49213aeecc3dcb86465cb66393fe821bc2f86e059886061a93240cf10fe19cad  A  3364  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Piel_BaseColor.png.meta
+f0c52a10f061a6a24a1ec5b1322d567c3a95267e87970d30055494664ad035e3  A  1931662  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Sueter_BaseColor.png
+9131cc68c89dd953d70f59f93f51342565b9872f8349f4db23cb316f9d62ac14  A  3364  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Sueter_BaseColor.png.meta
+352763427c23ca5a2f7fac3dd91d847335001dc555931f82ee9c72c0871d3f60  A  501544  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Sueter_Normal.png
+09dfba5a45c35ea0f88eaadf784c9af9fa3ca93ea6d665722a8cb828ca0800dd  A  3364  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Sueter_Normal.png.meta
+ffe863449ca1cdc6ff178911fb6d8a9f37527ca99ccc438f03faddd15f89bbc6  A  2764410  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Trenza_BaseColor.png
+1d5a728dd9174689fce8de51b20c420672b3414184ff5e18a9f86d2fc01e03ed  A  3364  Game/Assets/_Bosque/Characters/Guardiana/Textures/MPFB/T_Guardiana_Trenza_BaseColor.png.meta
+eec83d4c02efffc5e7fc863ddd268a6ceec9bd53849e9159c638167d419d4546  A  172  Game/Assets/_Bosque/Characters/Guardiana/Textures/Rocketbox.meta
+7c604343b1a214033254bc6a1df29e19eed8d08849c984c13df37edddaf87953  A  874100  Game/Assets/_Bosque/Characters/Guardiana/Textures/Rocketbox/T_GuardianaRB_Cabeza_BaseColor.jpg
+ffb022cd58060dd2a1a77656174b50297d3623cfc561876c0dbf88a9c072b91a  A  3364  Game/Assets/_Bosque/Characters/Guardiana/Textures/Rocketbox/T_GuardianaRB_Cabeza_BaseColor.jpg.meta
+364baccc8f9129c9bf21cb2563a22411216e8e6988d09122314d355acaba406d  A  1648426  Game/Assets/_Bosque/Characters/Guardiana/Textures/Rocketbox/T_GuardianaRB_Cabeza_MetalSmooth.png
+28de6da1d9af54d256243fa4bd6268475007c8d09a7982a5a0beef48cbd8de18  A  3364  Game/Assets/_Bosque/Characters/Guardiana/Textures/Rocketbox/T_GuardianaRB_Cabeza_MetalSmooth.png.meta
+75ed266b8def036b4f372e1e3c4ff3911cc96d250443e886e476a72ba53ed050  A  888145  Game/Assets/_Bosque/Characters/Guardiana/Textures/Rocketbox/T_GuardianaRB_Cabeza_Normal.jpg
+8a742d4cc832a155c8a6350f4274dc23c64af14a889ae3aa4f4d797a84861aae  A  3364  Game/Assets/_Bosque/Characters/Guardiana/Textures/Rocketbox/T_GuardianaRB_Cabeza_Normal.jpg.meta
+5e9744851c10431fae7c215860cc5385ffdc23e45e34676fb75a6a17fdec95f1  A  917131  Game/Assets/_Bosque/Characters/Guardiana/Textures/Rocketbox/T_GuardianaRB_Cuerpo_BaseColor.jpg
+4e6342c3c24ad58d41d45789bc0ae97956e1547c49777c8eba9646826ef580a0  A  3364  Game/Assets/_Bosque/Characters/Guardiana/Textures/Rocketbox/T_GuardianaRB_Cuerpo_BaseColor.jpg.meta
+afbb980ee31fbb80229d3a6eec21c2841ba4cde375b8f71a8a2520dde4e3f65a  A  699450  Game/Assets/_Bosque/Characters/Guardiana/Textures/Rocketbox/T_GuardianaRB_Cuerpo_MetalSmooth.png
+2a3dfc497872d188ba1e78aa9594d9f51b92f0ad8960990a101b490929385ec4  A  3364  Game/Assets/_Bosque/Characters/Guardiana/Textures/Rocketbox/T_GuardianaRB_Cuerpo_MetalSmooth.png.meta
+b65d83d1adfb308e0c61839a4ce0da7c9cd3e9a41b31089d9b882048e4c503ea  A  1713270  Game/Assets/_Bosque/Characters/Guardiana/Textures/Rocketbox/T_GuardianaRB_Cuerpo_Normal.jpg
+318d1555b0adf4a00ad141e78291c00000b0a4b09f2b975d156cd2551ee81a5a  A  3364  Game/Assets/_Bosque/Characters/Guardiana/Textures/Rocketbox/T_GuardianaRB_Cuerpo_Normal.jpg.meta
+4cdb63ffa848845576e00b6178e3d3f8ce17c82508b77ef2aea533c99e820969  A  4397495  Game/Assets/_Bosque/Characters/Guardiana/Textures/Rocketbox/T_GuardianaRB_Pelo_BaseColor.png
+7494812f86716ff8112704027b5ee4c64c5fe8ad71c0594104ebe83da1f9ae69  A  3364  Game/Assets/_Bosque/Characters/Guardiana/Textures/Rocketbox/T_GuardianaRB_Pelo_BaseColor.png.meta
+fa1496277653b623cadef853da0f099d5195ebf243323cbcc7a4408a3c0f162c  A  172  Game/Assets/_Bosque/Editor/Character.meta
+4526cbd11acc4dea562b7380e9d5889e73886ce09b490788b5c86fad8f41f171  A  7924  Game/Assets/_Bosque/Editor/Character/FaunaBuilder.cs
+59396b323a5e53110a3ac2120cbf62213be02f860c0815133194a3427eecd125  A  59  Game/Assets/_Bosque/Editor/Character/FaunaBuilder.cs.meta
+e0a2e173ad88f2646abec326a9159ac32e841bd12ba8d8417deb94ef72b9e7eb  A  28051  Game/Assets/_Bosque/Editor/Character/GuardianaBuilder.cs
+2ac15f2a699a22ccc79fd35197b28c749c321b07d8e6aa70f97f819e43b377dd  A  59  Game/Assets/_Bosque/Editor/Character/GuardianaBuilder.cs.meta
+ebe0fa575e4a0afff8ecf77f941810f6f08d628fc83e8a79306ae100bf7992f7  A  5373  Game/Assets/_Bosque/Editor/Character/GuardianaCapture.cs
+991a74d89b00d7fd00c335cb53b484b355a8af2b157113d356b3d1836d5fe7e0  A  59  Game/Assets/_Bosque/Editor/Character/GuardianaCapture.cs.meta
+6f1944bf9e293c222c9f08870a833c9e7a83fea01ab540333fe3950ddc3eead0  M  5782  Game/Assets/_Bosque/Editor/CoreSetup/ArroyoBuild.cs
+b4caa0ca43e225583d52b6729c2635ca9d7cb79fb4856c25cef93844966722da  A  1389  Game/Assets/_Bosque/Editor/CoreSetup/Tests/ArroyoTimingTests.cs
+b9b6c4ab15eebea817529d605a2938b61efc63e3b2b7f2c743531a1dd201ec57  A  59  Game/Assets/_Bosque/Editor/CoreSetup/Tests/ArroyoTimingTests.cs.meta
+de581747ae19a516638b4201f5bacf0d705687f604382d2a7cf7333b697d2331  M  6026  Game/Assets/_Bosque/Editor/CoreSetup/Tests/ArroyoVisualTests.cs
+d703634a1cd97370457360a04c6b97412761e795a3442a34b6cd8fba00cc2619  A  172  Game/Assets/_Bosque/Editor/Levels.meta
+361c62bdb0d6b564e5738a924153549472603813f27057cdf9be9c52e3780088  A  172  Game/Assets/_Bosque/Editor/Levels/Claro.meta
+1c52d168ac433ddaf320d2a52d0f457944451a7c07ece55777757387e60d85dc  A  31974  Game/Assets/_Bosque/Editor/Levels/Claro/ClaroBuilder.cs
+a81b7287d7b2255e51953236befd5cc160d2947b6138828dcaacd0d549f799ff  A  59  Game/Assets/_Bosque/Editor/Levels/Claro/ClaroBuilder.cs.meta
+a852b2e93b4306ebc07dd89ffe948bae12751e65feab1e557eb07ae356fe222a  A  172  Game/Assets/_Bosque/Editor/Levels/Refugio.meta
+fcd0309b2bdd7807347f5d8d4dda7bf42ebf359d77c3ef609c6225bac14836f2  A  39586  Game/Assets/_Bosque/Editor/Levels/Refugio/RefugioBuilder.cs
+d7b3aaa875a85efe6efdea222ce12f5e9ac383e54e427a60353996742985d86d  A  59  Game/Assets/_Bosque/Editor/Levels/Refugio/RefugioBuilder.cs.meta
+17cd8438b3d8120c7363a96742983d6afd57a418b1477c7bfcb743e4d810e0da  A  172  Game/Assets/_Bosque/Editor/Levels/Valle.meta
+f9d657ccee7486cae85279ab72f730419eb13a00b7200411b8c2f427c7d9e6b4  A  102676  Game/Assets/_Bosque/Editor/Levels/Valle/ValleBuilder.cs
+dd4d8785621d47f6761838089d8fe9fb25df87d7971d46a717456dad1b6a7514  A  59  Game/Assets/_Bosque/Editor/Levels/Valle/ValleBuilder.cs.meta
+95e3ed8eb84cf0aaffdd33b5665cce64c48fa08906cbe0238cc3c24442491cf9  A  172  Game/Assets/_Bosque/Editor/Presentation.meta
+a45ca2b4f1e1be3e16ed29250ea1c4da2ca327024c5ffced33aedd4d4ee469df  A  17733  Game/Assets/_Bosque/Editor/Presentation/PresentationBuilder.cs
+ef0553a2038f0d6e3e199e825fd237f9056e1c7f4adce0ed9bf1e408b233153b  A  59  Game/Assets/_Bosque/Editor/Presentation/PresentationBuilder.cs.meta
+480f7ef2e106ffa8731045c4928c5b2034bcf1ff57e1a648993dc6b21811f84e  A  172  Game/Assets/_Bosque/Levels/Valle.meta
+5e4f18f785b2b47c29f019f070fc7e29b34649eb4345146a136ff0aeeb392c0a  A  911  Game/Assets/_Bosque/Levels/Valle/ValleAmbienceLink.cs
+e59d59000391268492ca2c2f166162de8f3efea7683707a87f365ccf11a5232a  A  59  Game/Assets/_Bosque/Levels/Valle/ValleAmbienceLink.cs.meta
+151e5f267cfc400e7ba19e243e5f00f024e155ba41549c936ab94fc9dbf922f3  A  172  Game/Assets/_Bosque/Runtime/Abilities.meta
+0adcf1ca6818071d10a2b1fe23af1484af52e55dfa79b2951e94950b0a173bbc  A  3010  Game/Assets/_Bosque/Runtime/Abilities/GrowthAbility.cs
+d1e0f594a827c66aece4da0220f5e66156bba83e10be0dc96ccf6dbd46ec97ac  A  59  Game/Assets/_Bosque/Runtime/Abilities/GrowthAbility.cs.meta
+4ccf451d7952a68d12f76fcb60f51a9a5394d62e632c0b430fd6409b3ec3ffc4  A  172  Game/Assets/_Bosque/Runtime/Audio.meta
+81ee64a904c961fc2dc8dfb797970eaebcd5730a939e1a293f8e801c6ec2908f  A  6441  Game/Assets/_Bosque/Runtime/Audio/AmbienceController.cs
+814bf357a5d02a2dd64277ce71c7fe4b87a0c9623dd84f51f2c0b117eea875ee  A  59  Game/Assets/_Bosque/Runtime/Audio/AmbienceController.cs.meta
+8b134182a16fff03021a9f312fde1505e1c8b5c7f42882332d549c93dcf40807  A  2148  Game/Assets/_Bosque/Runtime/Audio/BosqueAudio.cs
+a448062cc18c78375841b9b796bf2ec131bb2fc8e735e8f2791119b4e8722061  A  59  Game/Assets/_Bosque/Runtime/Audio/BosqueAudio.cs.meta
+50c18c6978c89df7294227bdb2cc1ba143c5ecb0fbcbacbfadcc3b668dda9ac3  A  1422  Game/Assets/_Bosque/Runtime/Audio/MusicPlayer.cs
+6bcbca32d3a7dad19ebd9b5cfcfd518e546b9d89aaf47a0c121f48a720084407  A  59  Game/Assets/_Bosque/Runtime/Audio/MusicPlayer.cs.meta
+abe16ea388efcce5ee7ad81f5fb35ccc9921131ea87457fb135fd0213309f154  A  1525  Game/Assets/_Bosque/Runtime/Audio/SfxLibrary.cs
+c3a8359130d898d3d2616fd040f847cd23f82a0e06e09597ff0effe2942bd8c5  A  59  Game/Assets/_Bosque/Runtime/Audio/SfxLibrary.cs.meta
+f90c0e2af3a3854ce40914a337e4b5c13d3b09a22ec39c7b8629d705c1cac833  A  4330  Game/Assets/_Bosque/Runtime/Audio/SfxPlayer.cs
+6f5def22213043b694124b54a6230f0fc2bcf60b276349ad61c48588ac3f0ff1  A  59  Game/Assets/_Bosque/Runtime/Audio/SfxPlayer.cs.meta
+e6490779e2ca2405e1be9e804a177829edb1b54f88e068bf4a885676042565a0  M  154  Game/Assets/_Bosque/Runtime/Bosque.Runtime.asmdef
+cbcaf6b248583a00829e2b0d8036f9a5b04e1f3ef9dbcaaba250ac99ed68a8ae  A  172  Game/Assets/_Bosque/Runtime/Character.meta
+540d07caa39f50d644ffbfba1aabadc10fe7a364eb666d2ce9033d871880ecaf  A  6248  Game/Assets/_Bosque/Runtime/Character/CharacterAnimationDriver.cs
+ee037da591efa1b684697e6f2f3d224d87064e791e5346e5c6089a87a00083fc  A  59  Game/Assets/_Bosque/Runtime/Character/CharacterAnimationDriver.cs.meta
+09b949cbd5c5c8bd4279087d477a658a2a5f34c50e9d4baaac3e5d8bab1caf28  A  4361  Game/Assets/_Bosque/Runtime/Interaction/ItemCarrier.cs
+6fe2ace168b1f89329b273245bc64f9e7869835d315c06b20a704db381448e0e  A  59  Game/Assets/_Bosque/Runtime/Interaction/ItemCarrier.cs.meta
+abc5f8f757c5e513f176e2dd7b8684a1e1f5e9daeec845cd25597deb2f5b0749  M  3788  Game/Assets/_Bosque/Runtime/Interaction/PlayerInteractor.cs
+3761eb0b12466b94ad4e61452b818b98467a0fb4caf5f3ce1fa2d488ff99b6f8  A  1353  Game/Assets/_Bosque/Runtime/Player/CameraSettings.cs
+e12099779b593ba2449d5c07348a44cbe616a776917e77cc881355dfc7486ed7  A  59  Game/Assets/_Bosque/Runtime/Player/CameraSettings.cs.meta
+094a7ad19e113ae0cfcb04e0726036cc9c30b04888862b3100b1bee257e27e4b  M  3089  Game/Assets/_Bosque/Runtime/Player/ThirdPersonCamera.cs
+73c344b13fdb6f3b535b290c814edaff3139f6e2f0fe7acb0fe16c3c234e7dae  M  2118  Game/Assets/_Bosque/Runtime/Player/ThirdPersonInput.cs
+f1513ef1930c78f3853cd18722069dab5a99bc7dc0c2decb7ade5c398217c423  M  5431  Game/Assets/_Bosque/Runtime/Player/ThirdPersonMotor.cs
+9cf325b29382c866ff4d89aad65fec97e2997226e731b317f1ae857e8ae06e20  A  6778  Game/Assets/_Bosque/Runtime/Session/ArroyoAudioBridge.cs
+169446820af0f745a3404553da513b0911b4de641c264291e7e72fd778c352d1  A  59  Game/Assets/_Bosque/Runtime/Session/ArroyoAudioBridge.cs.meta
+1237d7761b5a9ac34ebd173cb027694b3befac999660be88ead6b9b998a8bf54  M  17222  Game/Assets/_Bosque/Runtime/Session/ArroyoBuildProbe.cs
+6297b1b390c96a2de86a1542c7bcbf458941f8eab849a3cdefc624e32e38c5f7  M  9313  Game/Assets/_Bosque/Runtime/Session/ArroyoPrototypeHud.cs
+0156e055d18fb33536a5570babe63b15407b5be27fca0ee15dc106c75628ab7e  A  3538  Game/Assets/_Bosque/Runtime/Session/ArroyoZoneTransition.cs
+0affbfb39d4fbb03398b94a7093512391a4249d7ed5f5a3f4f9d0f90b6200e9f  A  59  Game/Assets/_Bosque/Runtime/Session/ArroyoZoneTransition.cs.meta
+f069ea094bbeb55cd39a178884f788b21bde980e05f2683cf525fac4e3231eee  A  3542  Game/Assets/_Bosque/Runtime/Session/ClaroAudioBridge.cs
+5ddddbfe4b6b0223d3424df14ee5e3d8ddea117d4c8eeaa48e37b0505e769d9d  A  59  Game/Assets/_Bosque/Runtime/Session/ClaroAudioBridge.cs.meta
+1d5b4ca9daab45c2bbe4307831913638f4a5a78399269375b28ed1be4187af41  A  939  Game/Assets/_Bosque/Runtime/Session/ClaroExit.cs
+9c1043f133ad421aba5467bb8389647062ad08a027c26c4051b5180058c52f65  A  59  Game/Assets/_Bosque/Runtime/Session/ClaroExit.cs.meta
+fd60f70dad16204c34dad6432855a09c31f2e5ddf9b27ec9736e997b5270f8a1  A  8890  Game/Assets/_Bosque/Runtime/Session/ClaroHud.cs
+5cb1a013aba28f03cbba6e7b14c074e748446e16ff8fbbcfd401809d07d18610  A  59  Game/Assets/_Bosque/Runtime/Session/ClaroHud.cs.meta
+510403da48437be325848dcf059dcecd38fa399f2526828f37592f920898c530  A  5341  Game/Assets/_Bosque/Runtime/Session/ClaroSession.cs
+291bd5738b47e008f8b349804c274d7dbb6a5691b54953cb47e599eea1a84d06  A  59  Game/Assets/_Bosque/Runtime/Session/ClaroSession.cs.meta
+5569d0a68f592d849a0ef5c749d63e491e282756e23bbf15e25daea7afaa2a51  A  3366  Game/Assets/_Bosque/Runtime/Session/ClaroZoneTransition.cs
+bb31b2f4b25062c144ad7398d772b90d3b132b8a4950905eec3234f957019c9b  A  59  Game/Assets/_Bosque/Runtime/Session/ClaroZoneTransition.cs.meta
+cde9d12c67ba53b0e852814aab7ee5ab89eb8e4c4030af9a07a2a46fc40a15e8  A  2127  Game/Assets/_Bosque/Runtime/Session/FaunaCinematic.cs
+4e4a83ed21069cc40a6947a80198428f10f5fb77d66847005e87d2f417dca33c  A  59  Game/Assets/_Bosque/Runtime/Session/FaunaCinematic.cs.meta
+7043e86d767a26c1ac05d9c228af251280a14183d0ec8e54f9669253f707e985  A  2056  Game/Assets/_Bosque/Runtime/Session/FpsProbe.cs
+a6ac398080d8941cbf3ebb47a09ce52f8ceb193b2925551b105fcc94e341624f  A  59  Game/Assets/_Bosque/Runtime/Session/FpsProbe.cs.meta
+95b7f253a0c1f2e51d9a2b78b3c05e10266999ae62c565c3006ed928a5f9c2a3  A  3945  Game/Assets/_Bosque/Runtime/Session/RefugioAudioBridge.cs
+35784a9893af73fcd89d22c47b9106aa16ee3cac4bc821d83569492624cdb2cf  A  59  Game/Assets/_Bosque/Runtime/Session/RefugioAudioBridge.cs.meta
+e9dae9be39d4767e8acfc729be5bac9f9db69c3f62efb329c63a9f54bf5f951e  A  11722  Game/Assets/_Bosque/Runtime/Session/RefugioHud.cs
+c383546fd355638079fc546aa8a50c0efa6e91440533655fef6bc8a15657672d  A  59  Game/Assets/_Bosque/Runtime/Session/RefugioHud.cs.meta
+f36a7e92aa1557e2ce115ebc042719b7b91df2ffd4da8ca02c2c3a1338954e07  A  7706  Game/Assets/_Bosque/Runtime/Session/RefugioSession.cs
+68905e625dd007e58ef0b7f056144f89ae7719a672a7a9d28c0826b2b8a9cef4  A  59  Game/Assets/_Bosque/Runtime/Session/RefugioSession.cs.meta
+364f53557602d0dadbbaffac5d3c3a99d8727f2bd2cafa02bfe987b82aacbfec  A  3374  Game/Assets/_Bosque/Runtime/Session/RefugioZoneTransition.cs
+2dd6abb6705d2a00ba8e3ffc5c17c879bebe31c47acb341a72577fbcb727c9dd  A  59  Game/Assets/_Bosque/Runtime/Session/RefugioZoneTransition.cs.meta
+a2104007ad431f5954076ced2c0a01a42387d65db35fd3b9fef98419b8196dba  A  3861  Game/Assets/_Bosque/Runtime/Session/ValleAudioBridge.cs
+6b3580deac7c18b85d89ac9d76e5b5eed33be508edf70174e645309c956ac7c3  A  59  Game/Assets/_Bosque/Runtime/Session/ValleAudioBridge.cs.meta
+72ab7e3fed6d4c052908cc2aabe9af0c123bfb44286ec78fdf6e5cb1e49f7d53  A  12260  Game/Assets/_Bosque/Runtime/Session/ValleHud.cs
+2dd29068ad244977daaf9e5c983b3e6348a3b11dc92cc5acdd11e3de3026afc3  A  59  Game/Assets/_Bosque/Runtime/Session/ValleHud.cs.meta
+196ac30ac727743851af1d0bbb21433978315ad819f237e461503806b37fb4b7  A  10017  Game/Assets/_Bosque/Runtime/Session/ValleSession.cs
+c08607fdf3a75775c8f1b1e1dc8449b43f9b9dcf3f17de72a963584709995968  A  59  Game/Assets/_Bosque/Runtime/Session/ValleSession.cs.meta
+15b7ab3b6492f94aea6d1c7d2a797b0bf5d9341ed18fdd433a2d7da6b5c7658b  A  1731  Game/Assets/_Bosque/Runtime/Session/ZoneLauncher.cs
+918083eddba515a3d47472c6b4e70888085c0c63d5225bd06b8cdf7bd9d8d068  A  59  Game/Assets/_Bosque/Runtime/Session/ZoneLauncher.cs.meta
+131d32e382c002632ba77b13bea5eeb9052091c9377046c78210b6c4325786a9  A  4809  Game/Assets/_Bosque/Runtime/UI/GameFlow.cs
+dc08f4275c7b96d386ae01567503accc95a5b5ac22d3eaba8a3b74c742b030c8  A  59  Game/Assets/_Bosque/Runtime/UI/GameFlow.cs.meta
+86a42c79069ef0fde0cc189e2fd5c84a6d8daaed46372c5ea9959540672e5b16  A  595  Game/Assets/_Bosque/Runtime/UI/GamePause.cs
+8cfacac713a2a858b461ec29006fc55005ad74d20f9c857567ada34dadbe5af3  A  59  Game/Assets/_Bosque/Runtime/UI/GamePause.cs.meta
+f8c197725e542f7649c5e9ad381e6f324de049455b9535b02bff8410e6f9a245  A  1061  Game/Assets/_Bosque/Runtime/UI/IZoneHud.cs
+71e0a5be5a41ca2e2e72f753e1af2e23345aa82e3a51abd346d84b5eeb3920f3  A  59  Game/Assets/_Bosque/Runtime/UI/IZoneHud.cs.meta
+f3cdf827d2d30f26b6e477e747105bcfc875b148ec90300fe167bba8ae2357ba  A  2016  Game/Assets/_Bosque/Runtime/UI/IZoneHudExtra.cs
+0fb604343cd98b9dbcffe113308a1f1df01cb3ff41649d614218395c868b19e6  A  59  Game/Assets/_Bosque/Runtime/UI/IZoneHudExtra.cs.meta
+414ba3bb4114011d079e7775d4a9406fc844825fb54ba9415d83b4b4bc740c57  A  9720  Game/Assets/_Bosque/Runtime/UI/MainMenu.cs
+046c30009e64ba12f5c178a3415ea620325263b9e41c1e04657a47eb96627175  A  59  Game/Assets/_Bosque/Runtime/UI/MainMenu.cs.meta
+813cd240b2238c60ecc6bcc258d83f5d8ddcdb7a3facc470f53ed7c6feb694ec  A  10858  Game/Assets/_Bosque/Runtime/UI/MapIcons.cs
+25133ccd0f7e756b2a5512fd7a1286323a6e77f0570a24ec6cd9e603079f758e  A  59  Game/Assets/_Bosque/Runtime/UI/MapIcons.cs.meta
+057b61644ee163d624557cec2a15ff61a4b1e810d55750a11bdea570be65341e  A  6710  Game/Assets/_Bosque/Runtime/UI/MenuPanels.cs
+c5683a0da35e09e48c7bacede80d7bec0d0d52a2d0dfb2be804255e2da3646a8  A  59  Game/Assets/_Bosque/Runtime/UI/MenuPanels.cs.meta
+212eb14ca0145557a0b2849ebceceee431dacf7b7b04c27c8f5c6edda7e246f0  A  14366  Game/Assets/_Bosque/Runtime/UI/NavigationViews.cs
+4d3e6558b86c965a6c9cd5f3eb5a5fa673ad520685b32000732dadf8b8ec4962  A  59  Game/Assets/_Bosque/Runtime/UI/NavigationViews.cs.meta
+b017ff73b9b4a8c4cc7274eb4a2e10db19254af982d0ad41d7d2ce2675a8e964  A  8247  Game/Assets/_Bosque/Runtime/UI/Presentation.cs
+c25a7f24dad7d5b4b9c4c656423be921993efd0d8c7f8b5c5aa20a361bca98fb  A  59  Game/Assets/_Bosque/Runtime/UI/Presentation.cs.meta
+d1feed2f57ac2c0742dd633385678110c56103ceb1d8e71351130df70b4b7830  A  47755  Game/Assets/_Bosque/Runtime/UI/PresentationViews.cs
+542eef8aeb05dd8c06e4426e26d88e5902afde43f94dc8d0e93d7b86c7c5c668  A  59  Game/Assets/_Bosque/Runtime/UI/PresentationViews.cs.meta
+9c9757f58c94d20471d07859265e251c2066fa7f0984b327ba9e30f8954d61c7  A  12079  Game/Assets/_Bosque/Runtime/UI/Ui.cs
+9b90f36b6b8f97d02762b991fc0553b04ce0a56db3e71297b8b262ae72fe881f  A  59  Game/Assets/_Bosque/Runtime/UI/Ui.cs.meta
+f969201d8bc5776147991d29581f9256e1f9df7b37a42c96a66e929440961061  A  11656  Game/Assets/_Bosque/Runtime/UI/UiKit.cs
+001422b27c338fc4c1c7688f55838477ff7dac24eda6463f3f9f9af96df47a44  A  59  Game/Assets/_Bosque/Runtime/UI/UiKit.cs.meta
+8733ac0e35c559f572c794250cbddb954aef4a7c36fa7fc4af4b738425983b1d  A  2014  Game/Assets/_Bosque/Runtime/UI/UiTheme.cs
+009e98134d685d877e7b541046509a6188ce8a04210a74a59ef634242f1b1a6b  A  59  Game/Assets/_Bosque/Runtime/UI/UiTheme.cs.meta
+20464d60bfedfb1a5ca5441c1578e875ef5e25002e857d9600b1694b8d7cdf4a  A  5201  Game/Assets/_Bosque/Runtime/World/FaunaRoute.cs
+a7f558df9fca6aedfd10da345c73887f244d974c4346d32aba2287f4c14f7de5  A  59  Game/Assets/_Bosque/Runtime/World/FaunaRoute.cs.meta
+aa3af51e51f1b4c363247d2507d8fcbc4621113fce3d8b5acf579e0142a334d5  A  1449  Game/Assets/_Bosque/Runtime/World/GameProgress.cs
+dedff20c3fddbc81d103e2f14e05a7738feba103ee75406c1cf194c1f7320b39  A  59  Game/Assets/_Bosque/Runtime/World/GameProgress.cs.meta
+12ed9b53462a259f6256672d876836618066a5193db2825ebd65d4d7e9a312f6  A  3328  Game/Assets/_Bosque/Runtime/World/GrowthPoint.cs
+a177768f22603dffb17beffc1653d67cd0032266732f51a3e28ae27a20e3b3d3  A  59  Game/Assets/_Bosque/Runtime/World/GrowthPoint.cs.meta
+d0c08e6904a2ea12d52248742e0451589bd85566963d8b016d140dab10251520  A  3548  Game/Assets/_Bosque/Runtime/World/RefugeItem.cs
+708b1897a51bcc17406f1f03e11fe090b9bc91eb07a1742a25c1d0ef70656165  A  59  Game/Assets/_Bosque/Runtime/World/RefugeItem.cs.meta
+e2541f2066fa1b23d0b718a9407d9a64d156259071f4dbcca7a43af36fcc98cb  A  2499  Game/Assets/_Bosque/Runtime/World/RefugeSpot.cs
+eed9d29c13e496a3afab6540c2d5852672a40ff2a51eff5b5312d4a208d27d05  A  59  Game/Assets/_Bosque/Runtime/World/RefugeSpot.cs.meta
+3cd04493d4fe5f6652cefc615100726368a7ee14be75536c4c77d8f9b8fe7c6a  A  172  Game/Assets/_Bosque/Runtime/World/Valle.meta
+ed788f2f50486dd63b56009dcbbad2cbbc2c2215d40e307b9ab8dbafd75b069d  A  5060  Game/Assets/_Bosque/Runtime/World/Valle/FallenWood.cs
+68b611c36839574e7e3691a80f8551e0e9a1f8cf22652c41bd27672e96e13545  A  59  Game/Assets/_Bosque/Runtime/World/Valle/FallenWood.cs.meta
+d5d366ec0ad924ced0b4110b34fd7436ef3c222d990591e8dc0edf7a1319ecb7  A  1994  Game/Assets/_Bosque/Runtime/World/Valle/LitterBag.cs
+b502322de29354460a37644bcc08933cde54fa26ebc7bfd1169e855b102dd234  A  59  Game/Assets/_Bosque/Runtime/World/Valle/LitterBag.cs.meta
+870dd327a9532b7e489a4ddf25da54ad74c90101f5871dc8d60c7e4930d8226f  A  3591  Game/Assets/_Bosque/Runtime/World/Valle/LitterItem.cs
+eb634699272a15c1c0c7c1784ff8e57eb20d586f0b05ce0f6d4705cc29045f9e  A  59  Game/Assets/_Bosque/Runtime/World/Valle/LitterItem.cs.meta
+95534f0389bb0271dd6053346603cb050939bbf47868d32cb9bfe89cd39bc9b0  A  2042  Game/Assets/_Bosque/Runtime/World/Valle/RecycleBin.cs
+263f7b16f2182c0e030a01a6d5a34c9fa52df60e65f2e925b388db2d4ea1006a  A  59  Game/Assets/_Bosque/Runtime/World/Valle/RecycleBin.cs.meta
+eda76bae690bb05760e0211674a5748135ca4c090dad07bff725b09542d2d9b5  A  9515  Game/Assets/_Bosque/Runtime/World/Valle/TerrainRestorer.cs
+3d18159c4e722e908147403504ff6984bde55464c945f2d83e3f72c50c01d5eb  A  59  Game/Assets/_Bosque/Runtime/World/Valle/TerrainRestorer.cs.meta
+85cb874b39eefa76acb056abc8c9832d45f8c5a745782ebbbda58d67a7886484  A  2589  Game/Assets/_Bosque/Runtime/World/Valle/TrackingPulse.cs
+cfd555695ba254034dc572f7a93936c8a6f1e9ada9899fafdf6ffe224a8b2cf3  A  59  Game/Assets/_Bosque/Runtime/World/Valle/TrackingPulse.cs.meta
+5d8c0507fac9c5827899c62c58f7b50aef3020f87058d9c7548b063c77128a54  A  1298  Game/Assets/_Bosque/Runtime/World/Valle/ValleSector.cs
+08ec40bc0bd7bbe76ca36a8a0fbfcb59248c0ca248d09e45978b2da85627f7c9  A  59  Game/Assets/_Bosque/Runtime/World/Valle/ValleSector.cs.meta
+739a4e3a9aa02ea6dee4d13032e8799bb33ab403e5f713a6adbef7cfd08decfb  A  6937  Game/Assets/_Bosque/Runtime/World/Valle/ValleWater.cs
+32f175bd59b40254a0c18c9451cb949ddf4a737b39d5af4f5757acf3d664a5f4  A  59  Game/Assets/_Bosque/Runtime/World/Valle/ValleWater.cs.meta
+77a2a2eaf903eefbc1765fa84d71264457f43310e6da3ccc7df40b70fdd97581  A  4829  Game/Assets/_Bosque/Runtime/World/Valle/ValleWaterLook.cs
+3cfb95f9bf0fe65d0f00eace441f1fa37037a6dec499589822498439968bde2c  A  59  Game/Assets/_Bosque/Runtime/World/Valle/ValleWaterLook.cs.meta
+3e79ed3d57419e57b7e8595b48f8a5eceda0710c674c583425ce7a0b9e920e0c  A  657  Game/Assets/_Bosque/Runtime/World/Valle/WaterSoundAnchor.cs
+73d6e26a2a9495f9909bcde8ea30cb62f1998a38c6609913402b7017d3ab6487  A  59  Game/Assets/_Bosque/Runtime/World/Valle/WaterSoundAnchor.cs.meta
+bc2babf23fa182a86111cdef13b167a90cd2de5f8a69ae38054a41474ffc02fe  A  2419  Game/Assets/_Bosque/Runtime/World/Valle/WaterWading.cs
+87a2e7c4f783579201fcbb0d3330e7798d55750bcc87ea06dbd0ec2c572b0b5e  A  59  Game/Assets/_Bosque/Runtime/World/Valle/WaterWading.cs.meta
+df1f224ce760b99c18b8bd2386a83bf2c5a2fa979663fb7cf68481ef4e9d3c20  M  6115916  Game/Assets/_Bosque/Scenes/Integration/ArroyoPlayable.unity
+75f0dfd0d54df0064ec004e655b0dedb18a690e59f0e6ba6f688b77da255c654  A  1331379  Game/Assets/_Bosque/Scenes/MenuPrincipal.unity
+a8daaaf0f45e970f2b37f082524a39082be550c41afe763ea0efa7ade52db0c9  A  155  Game/Assets/_Bosque/Scenes/MenuPrincipal.unity.meta
+ac6f2983e7ca81f13a10c64491a5d8a1f0ee73b91de495acb9183d031d617bd0  A  172  Game/Assets/_Bosque/Scenes/Zonas.meta
+804d929a1a24c551ab5fcfc6c3a226999b34f8c56231be34240689e0020959a5  A  2789601  Game/Assets/_Bosque/Scenes/Zonas/ClaroVacio.unity
+66149822148e46a65d385ca75b90f45c33e52fff6847ad632b5dbb94e928f01b  A  155  Game/Assets/_Bosque/Scenes/Zonas/ClaroVacio.unity.meta
+cab7eabffd897e51b7eb4d514d2e69d0cc3cbeb6f4e335ef43aa48ce26b8a050  A  2808129  Game/Assets/_Bosque/Scenes/Zonas/RefugioPerdido.unity
+c246c0163b3d7a05512d75fe215e73a8f31db59e70ab74f8d34a4995c3890f44  A  155  Game/Assets/_Bosque/Scenes/Zonas/RefugioPerdido.unity.meta
+df08aca2cbd93422deeb7870341a54fae3ce09cf769c5d6da06c7a7bc42974f0  A  2562149  Game/Assets/_Bosque/Scenes/Zonas/ValleOlvidado.unity
+d7ad71be4afb464c94677a916658bea1b10667a8ce2ec0260bda5ff7132f7a2a  A  155  Game/Assets/_Bosque/Scenes/Zonas/ValleOlvidado.unity.meta
+b0a715b83e3b7b904fa100ed2d4ef9c91aa894be212497d212e0f31661b80e24  A  40552  Game/Assets/_Bosque/Tests/Acceptance/Editor/ArroyoQAV6Probe.cs
+1593b4a0f2f6abdcaa4e6bb81ce7ccae0d3601ddb44ae02207f9652f22ca231f  A  59  Game/Assets/_Bosque/Tests/Acceptance/Editor/ArroyoQAV6Probe.cs.meta
+c119595a86ffd39b484abc8e15eb8ae562e23ddde4178aa4faaee829c69e45d5  A  172  Game/Assets/_Bosque/Tests/PlayMode.meta
+d24a596e78b83bea1eafab36783d422402c533f2dcf97c354d91fae344b0c96c  A  293  Game/Assets/_Bosque/Tests/PlayMode/Bosque.PlayMode.Tests.asmdef
+bbaa14915bb67f6bc876db5f08873fe8cf15a238fc09a0aca961c0da13fd3d77  A  166  Game/Assets/_Bosque/Tests/PlayMode/Bosque.PlayMode.Tests.asmdef.meta
+f3dfc7bda68affce719be4cf9b2868d11bba6bf97af6550c5ac7830d4ee0c4a4  A  12241  Game/Assets/_Bosque/Tests/PlayMode/ClaroPlayModeTests.cs
+59ec179bcba1a859d70360241d0958812a17d935763f90308b9ca6b9535c4cab  A  59  Game/Assets/_Bosque/Tests/PlayMode/ClaroPlayModeTests.cs.meta
+ab2dc172f7e6d4ab16367cbac04901b5732b0ca1a9f092a15f4cfa3411374aae  A  18938  Game/Assets/_Bosque/Tests/PlayMode/GuardianaPlayModeTests.cs
+00ab7c7d22300db4ab48ea4a7be3bd4dd6c1bdeac7b8e27c402dd6039feba943  A  59  Game/Assets/_Bosque/Tests/PlayMode/GuardianaPlayModeTests.cs.meta
+8d161eb37667c8b8497b4c082130b7e60cf0f79801ad99598fd99ddfdf18a6d7  A  13011  Game/Assets/_Bosque/Tests/PlayMode/PresentationPlayModeTests.cs
+01394357efa9f3425e8000cecff09f5d7da720b177c0e25c1a80f1a7a98c3417  A  59  Game/Assets/_Bosque/Tests/PlayMode/PresentationPlayModeTests.cs.meta
+2c90481bdb882c85b9dd84dd7de441965f4a6c56dac9f3e6555a2c2fa9356d19  A  18368  Game/Assets/_Bosque/Tests/PlayMode/RefugioPlayModeTests.cs
+4c0a15c49b4cec6f511c7d7b165e48787ae369e65fe7cea2b5a41fb351207414  A  59  Game/Assets/_Bosque/Tests/PlayMode/RefugioPlayModeTests.cs.meta
+e797cc132165eb36b15ef0672f14f34150aac1d8490a32e06222b1f9a0727b1b  A  30784  Game/Assets/_Bosque/Tests/PlayMode/VallePlayModeTests.cs
+3e08ced616660670d1213590824efb79962a2dfd4741db9fd58b6a3a664d2302  A  59  Game/Assets/_Bosque/Tests/PlayMode/VallePlayModeTests.cs.meta
+e6aa87ed333b5c615044dfdcb6d29e90e4c5a90bf9baf14fbdd11a597cc8147d  A  172  Game/Assets/_Bosque/UI.meta
+ec830c0d6b86570a9eaaf8470f1fa6144e0fb869c837d351676247de01221c97  A  2329  Game/Assets/_Bosque/UI/Creditos.txt
+e7906d8ab46d056089c5e41501237281ed654603282df0ea85e041d81e743f97  A  158  Game/Assets/_Bosque/UI/Creditos.txt.meta
+7872ac07c4c1b0fe06c875630026b14ba860fdd8fa1a06fe652d6307016bffd7  A  172  Game/Assets/_Bosque/UI/Fonts.meta
+9bfbeb9510740b9108fce66234c3496de814cea068650c953b84e8580e2b127f  A  270556  Game/Assets/_Bosque/UI/Fonts/Alegreya-Italic.ttf
+e154ddc883d5e354c05d93ea7f53a07e841379ec4ed7fcc41cfdf92181477e2d  A  473  Game/Assets/_Bosque/UI/Fonts/Alegreya-Italic.ttf.meta
+d0ae58346ece7b67cbeb8a3132893d07f137269be3b3ffb51e29d668f02ec137  A  267976  Game/Assets/_Bosque/UI/Fonts/Alegreya-Regular.ttf
+e474bf302762cf8b79c246ab30f4417b97dfee11f23bcf9f2005bb8de6c09828  A  473  Game/Assets/_Bosque/UI/Fonts/Alegreya-Regular.ttf.meta
+3ef96cbf3be7b84d9dff9b1aa1e2ac40eec0cf323ccd0638395cdef9c5a91528  A  378796  Game/Assets/_Bosque/UI/Fonts/AlegreyaSC-Bold.ttf
+0c2fdb4f74680df9160f5643186fd07db087460d7e5d20fb9ade62d3f5f3b7d6  A  476  Game/Assets/_Bosque/UI/Fonts/AlegreyaSC-Bold.ttf.meta
+5c8fba800b848b851e308dfdfdc573b64135e498db41cbd0b6d78ba9d267d9a1  A  367628  Game/Assets/_Bosque/UI/Fonts/AlegreyaSC-Regular.ttf
+a711cbd69ccefb6ff35fc9a5a21727b3635be6ba09be37a63027a711fadef1a7  A  476  Game/Assets/_Bosque/UI/Fonts/AlegreyaSC-Regular.ttf.meta
+a3055a1893759bdbd7504bb22abc583769e7974c49353176eac0b03792c9fb8e  A  266856  Game/Assets/_Bosque/UI/Fonts/AlegreyaSans-Bold.ttf
+2741bd83fb5d8385507fde06adb33e8828cb8535fba20600e406535ed97a808c  A  478  Game/Assets/_Bosque/UI/Fonts/AlegreyaSans-Bold.ttf.meta
+3861f08a77d5c1b3b311055913443b07337a4b7abaff21a8cdb51fc0ae980b9e  A  267996  Game/Assets/_Bosque/UI/Fonts/AlegreyaSans-ExtraBold.ttf
+ccf831e283af398dac45def3e04f3fbaa7d5bddcdc18316ddb3d4dd7bf35c39c  A  478  Game/Assets/_Bosque/UI/Fonts/AlegreyaSans-ExtraBold.ttf.meta
+f49f6f2bdd84df850b25b0f8185d8a051e1d1eb2dd08e2f91b8c7b86d9a9e1a6  A  271096  Game/Assets/_Bosque/UI/Fonts/AlegreyaSans-Italic.ttf
+a62bc94328924a3f8e4873e759b75d20e021024914def0209b1b3d74f7d68693  A  478  Game/Assets/_Bosque/UI/Fonts/AlegreyaSans-Italic.ttf.meta
+8fab634196007afca839f1e5a6fb300976daff55d8528b590ef032f01b14ea10  A  263804  Game/Assets/_Bosque/UI/Fonts/AlegreyaSans-Regular.ttf
+b5c33b88cecad677d77c3067ae1f6a81849603eba6e1710eac83311268c6e167  A  478  Game/Assets/_Bosque/UI/Fonts/AlegreyaSans-Regular.ttf.meta
+57cecb63d4608019371954274ae1d8c397764debd5b19d4a33c1efa4dc923c0b  A  427360  Game/Assets/_Bosque/UI/Fonts/Kalam-Regular.ttf
+ea676d53d9bb2b3f84071fd1f80a38d57cd2e268dbdbaab79b011cb5bc1a228a  A  470  Game/Assets/_Bosque/UI/Fonts/Kalam-Regular.ttf.meta
+f6f60d5d4cf4f4b1fc4e41353c897a2f5a16e6396c0cd8fa8bdfd2f4586a9a68  A  4395  Game/Assets/_Bosque/UI/Fonts/OFL-Alegreya.txt
+44bc43aac523d624c4adeb0bb7eb517c2c4ca9df11394c683bcbcc2450c029f2  A  158  Game/Assets/_Bosque/UI/Fonts/OFL-Alegreya.txt.meta
+0677891e6a143f297350d260ad766ad33bfc18ed5fa4f213acf648d6b597ec1a  A  4405  Game/Assets/_Bosque/UI/Fonts/OFL-AlegreyaSans.txt
+0ff88683e219d60391f1cff8ebf869e04e32e7d20f09eb9b3a66baa6af4752ab  A  158  Game/Assets/_Bosque/UI/Fonts/OFL-AlegreyaSans.txt.meta
+f62ef357d3a1c3d27edd35a6e1ba350e8a8d13499797964eeadefbf0b3b15d1f  A  4373  Game/Assets/_Bosque/UI/Fonts/OFL-Kalam.txt
+81d7e66a4f7c65d1bdf9f87e8ef5a6c04fe5cb051f1a871253312095694e148a  A  158  Game/Assets/_Bosque/UI/Fonts/OFL-Kalam.txt.meta
+da312846bb29ac9b2dc11eb0366e69f26b78cdef78020f881392d25d4e2eb519  A  795348  Game/Assets/_Bosque/UI/Fonts/TMP_Alegreya.asset
+d505d6afc37d7a3288acf874b8d7fbc12d774aa3e302600db48a204dc1cf3711  A  189  Game/Assets/_Bosque/UI/Fonts/TMP_Alegreya.asset.meta
+4ae9b93928193033a09926e3e68ad652ab573bfe08ef21b8fa00fda4bef4097e  A  2364881  Game/Assets/_Bosque/UI/Fonts/TMP_AlegreyaSC.asset
+fa34e4e8046f2d7603b0e1ab4d51c0157af9ffa4882670144720f8a3da82306b  A  189  Game/Assets/_Bosque/UI/Fonts/TMP_AlegreyaSC.asset.meta
+af85dfd7d15a257306e49404982674deadeedec3f9d05d7a9166a2e2badc2d8b  A  3384030  Game/Assets/_Bosque/UI/Fonts/TMP_AlegreyaSC_Bold.asset
+7aa97d3c54da7782823fa395cda62fb1eb6fc3d7e18f9de7c20ff0cd2ba7173d  A  189  Game/Assets/_Bosque/UI/Fonts/TMP_AlegreyaSC_Bold.asset.meta
+2475846512b8f39c694e1046341fe7cbc59f4d4972549563cec791801386fcdd  A  16713240  Game/Assets/_Bosque/UI/Fonts/TMP_AlegreyaSans.asset
+a7fe3a36762f7aa1ca32327e3f573418a147e0eec3216620e5cffbacfc8c4f66  A  189  Game/Assets/_Bosque/UI/Fonts/TMP_AlegreyaSans.asset.meta
+d80cfa0731911d7642040507c0420fa9866b4b29408b01c86626f1eb03aa07d6  A  16489664  Game/Assets/_Bosque/UI/Fonts/TMP_AlegreyaSans_Bold.asset
+706af6ce354454f85382dcb63a3ed977b73bd1cd0a4e875174ae36b1d51606e3  A  189  Game/Assets/_Bosque/UI/Fonts/TMP_AlegreyaSans_Bold.asset.meta
+c66e0993cbb8042ec21ab8d7e27d65f1d2a76c4d8f843a084b6278b4c535d47f  A  8119901  Game/Assets/_Bosque/UI/Fonts/TMP_AlegreyaSans_ExtraBold.asset
+315fd1092714571cb20fdfb5481b12ec9f2d98e167905a727f0d535f964710cb  A  189  Game/Assets/_Bosque/UI/Fonts/TMP_AlegreyaSans_ExtraBold.asset.meta
+827779d53a7d0e1f35d07d52c1bd8cb059e5424711a1f13db7c6c6ddd13fee0a  A  8774560  Game/Assets/_Bosque/UI/Fonts/TMP_AlegreyaSans_Italic.asset
+36d7d7c71236244a041196c9fd051a3c88a72bbb8f245dba176de038fc456ca4  A  189  Game/Assets/_Bosque/UI/Fonts/TMP_AlegreyaSans_Italic.asset.meta
+ae6330c3131b4b0cd69697a8f7d8d5145b1f55f2e354a18d603ba4f54d81c369  A  6890385  Game/Assets/_Bosque/UI/Fonts/TMP_Alegreya_Italic.asset
+3ada5e65187cffdedea8d49efb563c8ed8edba7c728596ff05feb859b4062af0  A  189  Game/Assets/_Bosque/UI/Fonts/TMP_Alegreya_Italic.asset.meta
+0b298de4dcf082c4f9848213331d6e16231f0dc38a2ad0ac89bac01a88a783bd  A  6588  Game/Assets/_Bosque/UI/Fonts/TMP_Kalam.asset
+a2a7a4256fcf232f7b28b8a7eb2818d471c662e0940f7b3c16cc6fbd8876e5ea  A  189  Game/Assets/_Bosque/UI/Fonts/TMP_Kalam.asset.meta
+248ea8f974cbd1faba204d350769f1d40c0545d443d9d2757601dc7e482b80dd  A  172  Game/Assets/_Bosque/UI/Resources.meta
+52848319a7cac16ec73b558f5f2dc26fa3cd690fa50a76b035e923f9ad5211b8  A  1871  Game/Assets/_Bosque/UI/Resources/BosqueUiTheme.asset
+2752cc1eca9e3ed42ed2a692b568bb9726e4dd800c394c94662f581cfd47f91b  A  189  Game/Assets/_Bosque/UI/Resources/BosqueUiTheme.asset.meta
+7f2446c9e98538ab1a2cd1e4d3cc1abde773dcde423156bbedb7c5ad69b1a4d6  A  172  Game/Assets/_Bosque/UI/Sprites.meta
+174ec010018ddcca846d6043a21094f1c4e1273dd8a295e95b241d19dd7f3d77  A  19917  Game/Assets/_Bosque/UI/Sprites/UI_Halo.png
+6f62c9fcc8ec3112dbaf0bccf6a6c75069732446af9c880c020e1dc5f84b73a0  A  3396  Game/Assets/_Bosque/UI/Sprites/UI_Halo.png.meta
+90ad6163c576bbfd2b32c0382a9602c1f582ab86baae915458c53236641aeb68  A  1027  Game/Assets/_Bosque/UI/Sprites/UI_Panel.png
+6aa34ccfae60328171dfbadf0ac120cde6977fa5be22125761aa925d90cad295  A  3400  Game/Assets/_Bosque/UI/Sprites/UI_Panel.png.meta
+77767451f71ce13a63476c59bfdf0729f5b775d172fe017439d5aadb5b858321  A  400667  Game/Assets/_Bosque/UI/Sprites/UI_Papel.png
+e4aea30adeeb1d60ce0919a1d8e562d1b97e2b107b2b0b215ad37c827463331f  A  3400  Game/Assets/_Bosque/UI/Sprites/UI_Papel.png.meta
+0d5a86d3f5ef627858cf3a9b0442a25bb9980fd0e7bf871d8e23ec162899d63f  A  1007  Game/Assets/_Bosque/UI/Sprites/UI_Pastilla.png
+aa60eb10cdeb5ab6542c9fa0eb683cd39589d8dbd49996572c9dba0f0768044f  A  3400  Game/Assets/_Bosque/UI/Sprites/UI_Pastilla.png.meta

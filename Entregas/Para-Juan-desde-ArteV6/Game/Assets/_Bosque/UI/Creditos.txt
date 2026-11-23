@@ -1,0 +1,55 @@
+<size=44><b>Bosque de regreso</b></size>
+<i>Videojuego educativo · ODS 15, Vida de ecosistemas terrestres</i>
+
+
+<color=#B0D180><b>EQUIPO</b></color>
+Programación e integración — Equipo de Bosque de regreso
+Arte 3D, animación y audio — Juan
+QA, diseño de niveles y documentación — Diego
+
+Desarrollo asistido con herramientas de IA:
+ChatGPT y Codex (OpenAI) · Claude Code (Anthropic)
+
+
+<color=#B0D180><b>PERSONAJES</b></color>
+<b>La Guardiana</b> — "Female_Adult_07", Microsoft Rocketbox Avatar Library
+Copyright (c) 2020 Microsoft · Licencia MIT (texto completo en Characters/Guardiana/Source/Rocketbox)
+Animaciones: Universal Animation Library — Quaternius (CC0)
+
+<b>Zorro de neblina</b> — basado en "Fox" (Khronos glTF Sample Assets)
+Modelo: PixelMannen (CC0)
+Rig y animación: tomkranis (CC-BY 4.0)
+Conversión glTF: @AsoboStudio y @scurest (CC-BY 4.0)
+Malla suavizada y pelaje repintado por el equipo
+
+
+<color=#B0D180><b>EL VALLE OLVIDADO</b></color>
+Residuos, troncos y contenedores: Poly Haven (CC0) — Rahul Chaudhary, James Ray Cock,
+Ulan Cabanilla, Rico Cilliers, Jurita Burger, Niklas, Sean Buckley, PierreB3D, Benny Weimer,
+MP, Rob Tuytel, Jenelle van Heerden, GurJas Studios
+Puentes y paneles de madera: «Modular Wooden Pier», Poly Haven (CC0) — Rico Cilliers
+
+
+<color=#B0D180><b>AUDIO</b></color>
+Música: "Beautiful Forest [Orchestra]" — nene (CC0)
+Ambientes: Some Weirdo, Thimras, rubberduck, isaiah658, syncopika (CC0, OpenGameArt)
+Efectos: Kenney, qubodup / Independent.nu Ljudbank, Fantozzi, rubberduck (CC0, OpenGameArt)
+Síntesis de quena, brotes y restauración: propia del proyecto
+
+
+<color=#B0D180><b>TIPOGRAFÍAS</b></color>
+Alegreya Sans — The Alegreya Sans Project Authors (SIL Open Font License 1.1)
+Kalam — Indian Type Foundry (SIL Open Font License 1.1)
+Alegreya y Alegreya SC (mapa) — The Alegreya Project Authors (SIL Open Font License 1.1)
+
+
+<color=#B0D180><b>TECNOLOGÍA</b></color>
+Unity 6 · Universal Render Pipeline · Blender
+
+
+<color=#B0D180><b>NOTA</b></color>
+El bosque es ficticio e inspirado en paisajes andinos; no es una reproducción científica
+de un ecosistema real. La recuperación instantánea es una simplificación: en la realidad,
+restaurar un hábitat toma años, seguimiento y el conocimiento de las comunidades locales.
+
+Gracias por jugar.
