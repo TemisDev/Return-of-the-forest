@@ -1,5 +1,5 @@
 param(
-    [ValidateSet('Candidate','Diagnostics','V6','V6-Diagnostics','V7-Character-Audio','V8-Zona2-Claro','V9-Zona3-Refugio','V10-Presentacion','V11-Valle','V12-Rios','V13-Acabado','V14-Interfaz','V15-Animaciones')][string]$Configuration = 'Candidate',
+    [ValidateSet('Candidate','Diagnostics','V6','V6-Diagnostics','V7-Character-Audio','V8-Zona2-Claro','V9-Zona3-Refugio','V10-Presentacion','V11-Valle','V12-Rios','V13-Acabado','V14-Interfaz','V15-Animaciones','V15.1-Locomocion')][string]$Configuration = 'Candidate',
     [string]$Unity = 'C:\Program Files\Unity\Hub\Editor\6000.3.22f1\Editor\Unity.exe',
     [string]$Git = 'git'
 )
@@ -32,6 +32,7 @@ $brMethod = switch ($Configuration) {
     'V13-Acabado' { 'Bosque.CoreSetup.ArroyoBuild.BuildV13WindowsBatch' }
     'V14-Interfaz' { 'Bosque.CoreSetup.ArroyoBuild.BuildV14WindowsBatch' }
     'V15-Animaciones' { 'Bosque.CoreSetup.ArroyoBuild.BuildV15WindowsBatch' }
+    'V15.1-Locomocion' { 'Bosque.CoreSetup.ArroyoBuild.BuildV151WindowsBatch' }
 }
 $brPreviousCommit = $env:BOSQUE_BUILD_COMMIT
 try {

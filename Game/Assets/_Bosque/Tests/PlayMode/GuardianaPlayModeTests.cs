@@ -267,6 +267,39 @@ namespace Bosque.Tests.PlayMode
             Debug.Log("[Guardiana][Postura] " + report);
         }
 
+        /// <summary>
+        /// Estabilidad de la locomoción: corriendo y caminando en línea recta, el cuerpo (cadera y hombros) no debe
+        /// girar a los lados ni dar saltos de un fotograma a otro, y la cadera no se aparta de la línea de avance.
+        /// </summary>
+        [UnityTest]
+        public IEnumerator LocomotionStaysStraightAndSmooth()
+        {
+            var report = new System.Text.StringBuilder();
+            foreach (var (name, walk) in new[] { ("correr", false), ("caminar", true) })
+            {
+                motor.Teleport(new Vector3(3, 0, -2), Quaternion.identity);
+                float minY = 999, maxY = -999, maxJump = 0, minHip = 999, maxHip = -999, prev = float.NaN, sum = 0; int n = 0;
+                for (float t = 0; t < 3f; t += Time.deltaTime)
+                {
+                    input.enabled = false; motor.Simulate(Vector2.up, false, 0, Time.deltaTime, walk); yield return null;
+                    if (t < 1f) continue;
+                    var s = Posture(); float yaw = (s.chestYaw + s.hipYaw) * .5f;
+                    var hips = animator.GetBoneTransform(HumanBodyBones.Hips).position - motor.transform.position;
+                    float lateral = Vector3.Dot(hips, motor.transform.right);
+                    minY = Mathf.Min(minY, yaw); maxY = Mathf.Max(maxY, yaw); sum += yaw; n++;
+                    minHip = Mathf.Min(minHip, lateral); maxHip = Mathf.Max(maxHip, lateral);
+                    if (!float.IsNaN(prev)) maxJump = Mathf.Max(maxJump, Mathf.Abs(Mathf.DeltaAngle(prev, yaw)));
+                    prev = yaw;
+                }
+                report.Append($"{name}: giro del cuerpo {minY:F1}..{maxY:F1}° (media {sum / n:F1}°), salto máx entre fotogramas {maxJump:F1}°, cadera lateral {minHip:F2}..{maxHip:F2} m | ");
+                Assert.That(Mathf.Max(-minHip, maxHip), Is.LessThan(.1f), $"{name}: la cadera se aparta de la línea de avance ({report})");
+                Assert.That(Mathf.Abs(sum / n), Is.LessThan(5f), $"{name}: el cuerpo avanza torcido ({report})");
+                Assert.That(maxY - minY, Is.LessThan(35f), $"{name}: el cuerpo gira demasiado a los lados ({report})");
+                Assert.That(maxJump, Is.LessThan(6f), $"{name}: saltos bruscos de orientación ({report})");
+            }
+            Debug.Log("[Guardiana][Estabilidad] " + report);
+        }
+
         [UnityTest]
         public IEnumerator VolumeApiAffectsBuses()
         {

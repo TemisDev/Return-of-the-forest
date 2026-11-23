@@ -47,13 +47,13 @@ namespace Bosque.CharacterEditor
         public const string RbAnimDir = Root + "/Source/Animations/Rocketbox";
         private static readonly Dictionary<string, (string file, float speed)> RbLocomotion = new Dictionary<string, (string, float)>
         {
-            ["Idle_Loop"] = ("RB_f_idle_neutral_01", 0f),
+            ["Idle_Loop"] = ("RB_f_idle_breathe_01", 0f),   // corto (2,7 s): no ralentiza la caminata al arrancar
             ["Walk_Loop"] = ("RB_f_walk_neutral", 1.30f),
-            ["Jog_Fwd_Loop"] = ("RB_f_run_neutral_01", 2.75f),
+            ["Jog_Fwd_Loop"] = ("RB_f_run_neutral", 3.16f),
             ["Sprint_Loop"] = ("RB_f_run_fast_01", 5.39f),
         };
         /// <summary>Desfase de giro (grados) por clip Rocketbox, medido con la prueba PostureFacesMovementWithoutSideLean.</summary>
-        private static readonly Dictionary<string, float> RbYaw = new Dictionary<string, float> { ["RB_f_walk_neutral"] = -6.2f };
+        private static readonly Dictionary<string, float> RbYaw = new Dictionary<string, float> { ["RB_f_walk_neutral"] = -6.2f, ["RB_f_run_neutral"] = 4f, ["RB_f_run_fast_01"] = 4f };
         private static float ClipSpeed(string name, float fallback) => RbLocomotion.TryGetValue(name, out var e) ? e.speed : fallback;
 
         /// <summary>Desfase de giro por clip (grados) medido en modo juego: pecho y cadera respecto a la dirección de avance.</summary>
@@ -213,7 +213,10 @@ namespace Bosque.CharacterEditor
                     c.lockRootRotation = true; c.keepOriginalOrientation = false;
                     c.rotationOffset = RbYaw.TryGetValue(file, out float yaw) ? yaw : 0f;
                     c.lockRootHeightY = true; c.keepOriginalPositionY = false; c.heightFromFeet = true;
-                    c.lockRootPositionXZ = true; c.keepOriginalPositionXZ = true;
+                    // Estos clips traen el avance real del actor (3 m por ciclo al correr). Si se hornea en la pose, el
+                    // cuerpo se separa de la cápsula y vuelve de golpe en cada ciclo. Sin hornear, ese avance pasa a ser
+                    // movimiento de raíz, que el Animator descarta (applyRootMotion = false): el cuerpo queda en su sitio.
+                    c.lockRootPositionXZ = false;
                     return c;
                 }).ToArray();
                 ri.SaveAndReimport();

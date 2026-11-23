@@ -1,5 +1,19 @@
 # Relevo de Claude Code
 
+# V15.1: locomoción corregida (22/11/2026)
+
+- **Problema reportado por el usuario en la V15:** al correr y moverse, el personaje «parece moverse a distintos lados».
+- **Causa medida** con la nueva prueba `LocomotionStaysStraightAndSmooth`: los clips Rocketbox traen el avance real del actor y estaban horneados en la pose (`lockRootPositionXZ`). La cadera se separaba hasta 0,79 m de la cápsula y volvía de golpe en cada ciclo.
+- **Arreglo:**
+  - `lockRootPositionXZ = false`: el avance pasa a movimiento de raíz y el Animator lo descarta.
+  - El reposo de 15 s se cambia por `f_idle_breathe_01`, de 2,7 s; el largo ralentizaba la caminata al arrancar y frenar.
+  - Trote con `f_run_neutral`, a 3,16 m/s.
+  - Desfase de giro por clip (`RbYaw`).
+- **Resultado:**
+  - Al correr: cadera a ±0,02 m, giro medio de 0,2°, balanceo de ±14° y saltos de 2,3° como máximo entre fotogramas.
+  - Al caminar: giro medio de 0,8°.
+- **Build:** `Builds/Windows/V15.1-Locomocion`.
+
 # V15: animaciones de captura de movimiento (22/11/2026)
 
 - **Rama:** `feature/valle-olvidado`. Build: `Builds/Windows/V15-Animaciones` (`-Configuration V15-Animaciones`).

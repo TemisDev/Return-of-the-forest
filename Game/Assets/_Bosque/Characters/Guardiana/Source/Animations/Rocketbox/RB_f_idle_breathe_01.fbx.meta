@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2d1c3004401a70c4a817d1b9a91ca38d
+guid: 00a05ac4afd312843aa088750296da8d
 ModelImporter:
   serializedVersion: 24300
   internalIDToNameTable: []
@@ -32,11 +32,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: RB_f_idle_neutral_01
+      name: RB_f_idle_breathe_01
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0
-      lastFrame: 466
+      lastFrame: 80
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -47,10 +47,10 @@ ModelImporter:
       loopBlend: 1
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 0
-      keepOriginalPositionXZ: 1
+      keepOriginalPositionXZ: 0
       heightFromFeet: 1
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000

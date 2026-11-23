@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0b4ec8ab1087560488f86303c722cc54
+guid: e08f0b496cda03d4ca819a11ed771f20
 ModelImporter:
   serializedVersion: 24300
   internalIDToNameTable: []
@@ -32,13 +32,13 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: RB_f_run_neutral_01
+      name: RB_f_run_neutral
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0
-      lastFrame: 23
+      lastFrame: 25
       wrapMode: 0
-      orientationOffsetY: 0
+      orientationOffsetY: 4
       level: 0
       cycleOffset: 0
       loop: 0
@@ -47,10 +47,10 @@ ModelImporter:
       loopBlend: 1
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 0
-      keepOriginalPositionXZ: 1
+      keepOriginalPositionXZ: 0
       heightFromFeet: 1
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
