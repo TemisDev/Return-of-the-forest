@@ -14,7 +14,8 @@ ChatGPT y Codex (OpenAI) · Claude Code (Anthropic)
 <color=#B0D180><b>PERSONAJES</b></color>
 <b>La Guardiana</b> — "Female_Adult_07", Microsoft Rocketbox Avatar Library
 Copyright (c) 2020 Microsoft · Licencia MIT (texto completo en Characters/Guardiana/Source/Rocketbox)
-Animaciones: Universal Animation Library — Quaternius (CC0)
+Locomoción (reposo, caminar, correr): captura de movimiento de Microsoft Rocketbox (MIT)
+Saltos y gestos: Universal Animation Library — Quaternius (CC0)
 
 <b>Zorro de neblina</b> — basado en "Fox" (Khronos glTF Sample Assets)
 Modelo: PixelMannen (CC0)

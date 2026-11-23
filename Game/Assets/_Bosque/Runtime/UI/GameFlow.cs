@@ -9,7 +9,7 @@ namespace Bosque.UI
     public static class GameFlow
     {
         public const string MenuScene = "MenuPrincipal", ArroyoScene = "ArroyoPlayable", ClaroScene = "ClaroVacio", RefugioScene = "RefugioPerdido", ValleScene = "ValleOlvidado";
-        public const string Version = "V14";
+        public const string Version = "V15";
 
         public sealed class ZoneInfo
         {

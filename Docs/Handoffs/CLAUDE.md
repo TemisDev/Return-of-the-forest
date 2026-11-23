@@ -1,5 +1,20 @@
 # Relevo de Claude Code
 
+# V15: animaciones de captura de movimiento (22/11/2026)
+
+- **Rama:** `feature/valle-olvidado`. Build: `Builds/Windows/V15-Animaciones` (`-Configuration V15-Animaciones`).
+- **Animaciones nuevas:** reposo, caminar, trotar y correr usan ahora captura de movimiento real de Microsoft Rocketbox (MIT), con el mismo esqueleto Biped que la Guardiana.
+  - Archivos: `Characters/Guardiana/Source/Animations/Rocketbox/`.
+  - Usan el avatar del modelo (`CopyFromOther`).
+- **Umbrales del árbol de mezcla:** son la velocidad natural de cada clip, medida en Blender: caminar 1,30 m/s, trotar 2,75 m/s, correr 5,39 m/s.
+  - Caminar coincide con el motor (1,35 m/s), así que los pies no patinan.
+  - Correr a 4,5 m/s mezcla trote y carrera.
+- **Sin cambios:** saltos y gestos (interactuar, restaurar) siguen con Quaternius, porque Rocketbox no tiene saltos.
+- **Ajustes:**
+  - Desfase de giro de -6,2° en la caminata (`RbYaw`).
+  - La prueba de orientación de los pies ahora promedia el ciclo completo, en lugar de mirar un solo fotograma.
+- **Postura medida:** caminar con el pecho a -2,1° y la cadera a 1,4°; trotar con el pecho a -0,9° y la cadera a 4,7°.
+
 # V14: interfaz renovada y nueva Guardiana (22/11/2026)
 
 - **Rama:** `feature/valle-olvidado`. Sin fusionar. Build: `Builds/Windows/V14-Interfaz` (`-Configuration V14-Interfaz`).

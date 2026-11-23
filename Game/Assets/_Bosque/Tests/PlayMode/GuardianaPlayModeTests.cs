@@ -93,10 +93,17 @@ namespace Bosque.Tests.PlayMode
             yield return Settle(.5f);
             Assert.That(Base("Locomocion"), "Estado inicial");
             Assert.That(ArmDrop(animator), Is.LessThan(45f), "En reposo los brazos caen (no está en pose T)");
-            // Orientación: al avanzar, la punta del pie apunta en la dirección del motor.
-            yield return Run(Vector2.up, .6f);
+            // Orientación: al avanzar, las puntas de los pies apuntan, en promedio durante la zancada, hacia donde va el
+            // motor. (En un solo fotograma de carrera el pie de atrás puede apuntar hacia atrás: se promedia el ciclo.)
+            yield return Run(Vector2.up, .4f);
             var foot = animator.GetBoneTransform(HumanBodyBones.LeftFoot); var toes = animator.GetBoneTransform(HumanBodyBones.LeftToes);
-            var fwd = toes.position - foot.position; fwd.y = 0;
+            var rFoot = animator.GetBoneTransform(HumanBodyBones.RightFoot); var rToes = animator.GetBoneTransform(HumanBodyBones.RightToes);
+            var fwd = Vector3.zero;
+            for (float t = 0; t < 1.2f; t += Time.deltaTime)
+            {
+                input.enabled = false; motor.Simulate(Vector2.up, false, 0, Time.deltaTime); yield return null;
+                var f = (toes.position - foot.position).normalized + (rToes.position - rFoot.position).normalized; f.y = 0; fwd += f;
+            }
             Assert.That(Vector3.Dot(fwd.normalized, motor.transform.forward), Is.GreaterThan(.5f), "El personaje mira hacia donde avanza");
         }
 

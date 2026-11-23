@@ -1446,151 +1446,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4958380278040304355, guid: e5edb081d5c10954084f38275cd8462e, type: 3}
   m_PrefabInstance: {fileID: 20250133}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &21469294
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 21469297}
-  - component: {fileID: 21469296}
-  - component: {fileID: 21469295}
-  m_Layer: 0
-  m_Name: Musica
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &21469295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 21469294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8cc260bbe4532e479086e772f87aaf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Bosque.Runtime::Bosque.Audio.MusicPlayer
-  degradedVolume: 0.22
-  restoredVolume: 0.5
-  fadeSeconds: 6
---- !u!82 &21469296
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 21469294}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: dd82366b40cf7bb4a84ee102da8c47a6, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!4 &21469297
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 21469294}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1650732999}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &22450043
 GameObject:
   m_ObjectHideFlags: 0
@@ -19676,6 +19531,155 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4868124471824408495, guid: 6cc4834775be1824e977995be4436fe5, type: 3}
   m_PrefabInstance: {fileID: 279511143}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &280299819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 280299821}
+  - component: {fileID: 280299820}
+  m_Layer: 0
+  m_Name: Ambiente
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &280299820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280299819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a67679e316cbc4aa63052fac029149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Bosque.Runtime::Bosque.Audio.AmbienceController
+  loops:
+  - name: Viento seco
+    clip: {fileID: 8300000, guid: 8e12da38981c4ca449665a72c15c6d37, type: 3}
+    volume: 0.55
+    weightDegradedRestored: {x: 1, y: 0.15}
+    anchor: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    spatial: 0
+    minDistance: 4
+    maxDistance: 40
+  - name: Brisa en hojas
+    clip: {fileID: 8300000, guid: b2241fee06963b64fab8f19bc33c84db, type: 3}
+    volume: 0.5
+    weightDegradedRestored: {x: 0.1, y: 1}
+    anchor: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    spatial: 0
+    minDistance: 4
+    maxDistance: 40
+  - name: "R\xEDo"
+    clip: {fileID: 8300000, guid: da67546abdc8b144aa2945cba4e6ad3e, type: 3}
+    volume: 0.35
+    weightDegradedRestored: {x: 0, y: 1}
+    anchor: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    spatial: 0
+    minDistance: 4
+    maxDistance: 40
+  - name: Aves
+    clip: {fileID: 8300000, guid: a43b86273fb45764aa089a297125c86d, type: 3}
+    volume: 0.45
+    weightDegradedRestored: {x: 0.05, y: 1}
+    anchor: {fileID: 0}
+    position: {x: 0, y: 0, z: 0}
+    spatial: 0
+    minDistance: 4
+    maxDistance: 40
+  - name: Cauce sur
+    clip: {fileID: 8300000, guid: 9bf673a693e22974689e7b4acfc18261, type: 3}
+    volume: 0.7
+    weightDegradedRestored: {x: 0, y: 1}
+    anchor: {fileID: 2113035267}
+    position: {x: 0, y: 0, z: 0}
+    spatial: 0
+    minDistance: 2
+    maxDistance: 16
+  - name: Cauce norte
+    clip: {fileID: 8300000, guid: 9bf673a693e22974689e7b4acfc18261, type: 3}
+    volume: 0.7
+    weightDegradedRestored: {x: 0, y: 1}
+    anchor: {fileID: 516845606}
+    position: {x: 0, y: 0, z: 0}
+    spatial: 0
+    minDistance: 2
+    maxDistance: 16
+  oneShots:
+  - name: Crujidos
+    clips:
+    - {fileID: 8300000, guid: 8fade0bf73b8ce14f85aefda91202c40, type: 3}
+    - {fileID: 8300000, guid: 0e2e059d0c6e86247b002af66370bddf, type: 3}
+    - {fileID: 8300000, guid: 684f863d55065134faf6419925beb07f, type: 3}
+    volume: 0.5
+    weightDegradedRestored: {x: 1, y: 0}
+    intervalSeconds: {x: 5, y: 12}
+    radius: {x: 6, y: 18}
+    height: {x: 1, y: 6}
+    pitch: {x: 0.92, y: 1.08}
+  - name: Ramas secas
+    clips:
+    - {fileID: 8300000, guid: f407cdf9b78c40749b4838be99643de5, type: 3}
+    - {fileID: 8300000, guid: e3ef4ffde2e2eac4c96e744c99c3f864, type: 3}
+    - {fileID: 8300000, guid: 0556d328d083fd24fbebffb7a200228f, type: 3}
+    volume: 0.45
+    weightDegradedRestored: {x: 1, y: 0}
+    intervalSeconds: {x: 7, y: 16}
+    radius: {x: 6, y: 18}
+    height: {x: 1, y: 6}
+    pitch: {x: 0.92, y: 1.08}
+  - name: Ave lejana
+    clips:
+    - {fileID: 8300000, guid: 7b1c2520508ba1b4e928c6e2a44eaeef, type: 3}
+    volume: 0.25
+    weightDegradedRestored: {x: 0.4, y: 0}
+    intervalSeconds: {x: 18, y: 35}
+    radius: {x: 20, y: 30}
+    height: {x: 1, y: 6}
+    pitch: {x: 0.92, y: 1.08}
+  - name: Aves cercanas
+    clips:
+    - {fileID: 8300000, guid: bf6cbd5da3ea6914a95b843aac642a61, type: 3}
+    - {fileID: 8300000, guid: cdcb127da5a33c040b4ec13b75da2548, type: 3}
+    - {fileID: 8300000, guid: 752ecd2a1ddd70d4fa187603f1e5dea6, type: 3}
+    - {fileID: 8300000, guid: 5d28075c7727ca84c9d15403bb36db8e, type: 3}
+    - {fileID: 8300000, guid: c56222f2294655f48aa555dc4af81818, type: 3}
+    volume: 0.55
+    weightDegradedRestored: {x: 0, y: 1}
+    intervalSeconds: {x: 2.5, y: 7}
+    radius: {x: 6, y: 18}
+    height: {x: 1, y: 6}
+    pitch: {x: 0.92, y: 1.08}
+  restoreFadeSeconds: 5
+  resetFadeSeconds: 1.2
+  oneShotVoices: 6
+--- !u!4 &280299821
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280299819}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2113035267}
+  - {fileID: 516845606}
+  m_Father: {fileID: 602523754}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &281300514
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33804,6 +33808,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7152547805652347956, guid: 33f2b234c245cd341b0f1cc3ad5d5221, type: 3}
   m_PrefabInstance: {fileID: 515404815}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &516845605
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 516845606}
+  m_Layer: 0
+  m_Name: Cauce norte
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &516845606
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516845605}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.5, y: -0.2, z: 27}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 280299821}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &517007171
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36317,37 +36352,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 557065441}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &559495595
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 559495596}
-  m_Layer: 0
-  m_Name: Cauce norte
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &559495596
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 559495595}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5, y: -0.2, z: 27}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1696297620}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &560895694
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39146,6 +39150,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6866865701567998067, guid: 02636df57fbc1504bad4ef6dea127844, type: 3}
   m_PrefabInstance: {fileID: 598490289}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &602523751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 602523754}
+  - component: {fileID: 602523753}
+  - component: {fileID: 602523752}
+  m_Layer: 0
+  m_Name: Audio_Arroyo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &602523752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602523751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5386790bbe2a22e4e942a78f2db33684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Bosque.Runtime::Bosque.Session.ArroyoAudioBridge
+  session: {fileID: 364697226}
+  sfx: {fileID: 602523753}
+  ambience: {fileID: 280299820}
+  music: {fileID: 1292403392}
+  character: {fileID: 995819663}
+  exitPoint: {fileID: 1889508705}
+  exitUnlockDelay: 1.6
+  obstacleCues:
+  - obstacleId: arroyo.log
+    cue: remove.log
+  - obstacleId: arroyo.rocks
+    cue: remove.rocks
+  - obstacleId: arroyo.branches
+    cue: remove.branches
+--- !u!114 &602523753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602523751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3074571a2e1532d4e81ff913f6c561de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Bosque.Runtime::Bosque.Audio.SfxPlayer
+  library: {fileID: 11400000, guid: 6561a09e6b1e29e4aa419be7ebaf6b76, type: 2}
+  voices: 14
+--- !u!4 &602523754
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602523751}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 280299821}
+  - {fileID: 1292403394}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &603478857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42308,37 +42387,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3148830594987577378, guid: 80a8d71e471f98e46ba0acda5c5ab195, type: 3}
   m_PrefabInstance: {fileID: 641669221}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &641885073
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 641885074}
-  m_Layer: 0
-  m_Name: Cauce sur
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &641885074
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 641885073}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5, y: -0.2, z: 6}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1696297620}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &643135078
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67797,6 +67845,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7930620454452237141, guid: 2f63e635134386d4082a6f17cdf0ed00, type: 3}
   m_PrefabInstance: {fileID: 995772367}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &995819662
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1599638538}
+    m_Modifications:
+    - target: {fileID: 1418405406198699479, guid: 003944b10315cca46ad008440e2290fc, type: 3}
+      propertyPath: m_Name
+      value: Guardiana
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 003944b10315cca46ad008440e2290fc, type: 3}
+--- !u!114 &995819663 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2454467915547904821, guid: 003944b10315cca46ad008440e2290fc, type: 3}
+  m_PrefabInstance: {fileID: 995819662}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9456c85d55646cf488dc8d4049eb9b5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Bosque.Runtime::Bosque.Character.CharacterAnimationDriver
+--- !u!4 &995819664 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
+  m_PrefabInstance: {fileID: 995819662}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &996445272
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -87655,6 +87776,151 @@ Transform:
   - {fileID: 611521566}
   - {fileID: 1158511793}
   m_Father: {fileID: 77788664}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1292403391
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1292403394}
+  - component: {fileID: 1292403393}
+  - component: {fileID: 1292403392}
+  m_Layer: 0
+  m_Name: Musica
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1292403392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292403391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8cc260bbe4532e479086e772f87aaf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Bosque.Runtime::Bosque.Audio.MusicPlayer
+  degradedVolume: 0.22
+  restoredVolume: 0.5
+  fadeSeconds: 6
+--- !u!82 &1292403393
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292403391}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: dd82366b40cf7bb4a84ee102da8c47a6, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1292403394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292403391}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 602523754}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1293239772
 GameObject:
@@ -107731,7 +107997,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 144910457}
-  - {fileID: 1909381717}
+  - {fileID: 995819664}
   m_Father: {fileID: 217838989}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1599638539
@@ -110959,81 +111225,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4719734471233725363, guid: 6050318f93a1aad4f98d5365efc7df7b, type: 3}
   m_PrefabInstance: {fileID: 1649437384}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1650732996
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1650732999}
-  - component: {fileID: 1650732998}
-  - component: {fileID: 1650732997}
-  m_Layer: 0
-  m_Name: Audio_Arroyo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1650732997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1650732996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5386790bbe2a22e4e942a78f2db33684, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Bosque.Runtime::Bosque.Session.ArroyoAudioBridge
-  session: {fileID: 364697226}
-  sfx: {fileID: 1650732998}
-  ambience: {fileID: 1696297619}
-  music: {fileID: 21469295}
-  character: {fileID: 1909381716}
-  exitPoint: {fileID: 1889508705}
-  exitUnlockDelay: 1.6
-  obstacleCues:
-  - obstacleId: arroyo.log
-    cue: remove.log
-  - obstacleId: arroyo.rocks
-    cue: remove.rocks
-  - obstacleId: arroyo.branches
-    cue: remove.branches
---- !u!114 &1650732998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1650732996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3074571a2e1532d4e81ff913f6c561de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Bosque.Runtime::Bosque.Audio.SfxPlayer
-  library: {fileID: 11400000, guid: 6561a09e6b1e29e4aa419be7ebaf6b76, type: 2}
-  voices: 14
---- !u!4 &1650732999
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1650732996}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1696297620}
-  - {fileID: 21469297}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1652974802
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113715,155 +113906,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2150319406129102241, guid: d72f816ee8b7f5b4e97cf4992c71017c, type: 3}
   m_PrefabInstance: {fileID: 1693948729}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1696297618
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1696297620}
-  - component: {fileID: 1696297619}
-  m_Layer: 0
-  m_Name: Ambiente
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1696297619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1696297618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86a67679e316cbc4aa63052fac029149, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Bosque.Runtime::Bosque.Audio.AmbienceController
-  loops:
-  - name: Viento seco
-    clip: {fileID: 8300000, guid: 8e12da38981c4ca449665a72c15c6d37, type: 3}
-    volume: 0.55
-    weightDegradedRestored: {x: 1, y: 0.15}
-    anchor: {fileID: 0}
-    position: {x: 0, y: 0, z: 0}
-    spatial: 0
-    minDistance: 4
-    maxDistance: 40
-  - name: Brisa en hojas
-    clip: {fileID: 8300000, guid: b2241fee06963b64fab8f19bc33c84db, type: 3}
-    volume: 0.5
-    weightDegradedRestored: {x: 0.1, y: 1}
-    anchor: {fileID: 0}
-    position: {x: 0, y: 0, z: 0}
-    spatial: 0
-    minDistance: 4
-    maxDistance: 40
-  - name: "R\xEDo"
-    clip: {fileID: 8300000, guid: da67546abdc8b144aa2945cba4e6ad3e, type: 3}
-    volume: 0.35
-    weightDegradedRestored: {x: 0, y: 1}
-    anchor: {fileID: 0}
-    position: {x: 0, y: 0, z: 0}
-    spatial: 0
-    minDistance: 4
-    maxDistance: 40
-  - name: Aves
-    clip: {fileID: 8300000, guid: a43b86273fb45764aa089a297125c86d, type: 3}
-    volume: 0.45
-    weightDegradedRestored: {x: 0.05, y: 1}
-    anchor: {fileID: 0}
-    position: {x: 0, y: 0, z: 0}
-    spatial: 0
-    minDistance: 4
-    maxDistance: 40
-  - name: Cauce sur
-    clip: {fileID: 8300000, guid: 9bf673a693e22974689e7b4acfc18261, type: 3}
-    volume: 0.7
-    weightDegradedRestored: {x: 0, y: 1}
-    anchor: {fileID: 641885074}
-    position: {x: 0, y: 0, z: 0}
-    spatial: 0
-    minDistance: 2
-    maxDistance: 16
-  - name: Cauce norte
-    clip: {fileID: 8300000, guid: 9bf673a693e22974689e7b4acfc18261, type: 3}
-    volume: 0.7
-    weightDegradedRestored: {x: 0, y: 1}
-    anchor: {fileID: 559495596}
-    position: {x: 0, y: 0, z: 0}
-    spatial: 0
-    minDistance: 2
-    maxDistance: 16
-  oneShots:
-  - name: Crujidos
-    clips:
-    - {fileID: 8300000, guid: 8fade0bf73b8ce14f85aefda91202c40, type: 3}
-    - {fileID: 8300000, guid: 0e2e059d0c6e86247b002af66370bddf, type: 3}
-    - {fileID: 8300000, guid: 684f863d55065134faf6419925beb07f, type: 3}
-    volume: 0.5
-    weightDegradedRestored: {x: 1, y: 0}
-    intervalSeconds: {x: 5, y: 12}
-    radius: {x: 6, y: 18}
-    height: {x: 1, y: 6}
-    pitch: {x: 0.92, y: 1.08}
-  - name: Ramas secas
-    clips:
-    - {fileID: 8300000, guid: f407cdf9b78c40749b4838be99643de5, type: 3}
-    - {fileID: 8300000, guid: e3ef4ffde2e2eac4c96e744c99c3f864, type: 3}
-    - {fileID: 8300000, guid: 0556d328d083fd24fbebffb7a200228f, type: 3}
-    volume: 0.45
-    weightDegradedRestored: {x: 1, y: 0}
-    intervalSeconds: {x: 7, y: 16}
-    radius: {x: 6, y: 18}
-    height: {x: 1, y: 6}
-    pitch: {x: 0.92, y: 1.08}
-  - name: Ave lejana
-    clips:
-    - {fileID: 8300000, guid: 7b1c2520508ba1b4e928c6e2a44eaeef, type: 3}
-    volume: 0.25
-    weightDegradedRestored: {x: 0.4, y: 0}
-    intervalSeconds: {x: 18, y: 35}
-    radius: {x: 20, y: 30}
-    height: {x: 1, y: 6}
-    pitch: {x: 0.92, y: 1.08}
-  - name: Aves cercanas
-    clips:
-    - {fileID: 8300000, guid: bf6cbd5da3ea6914a95b843aac642a61, type: 3}
-    - {fileID: 8300000, guid: cdcb127da5a33c040b4ec13b75da2548, type: 3}
-    - {fileID: 8300000, guid: 752ecd2a1ddd70d4fa187603f1e5dea6, type: 3}
-    - {fileID: 8300000, guid: 5d28075c7727ca84c9d15403bb36db8e, type: 3}
-    - {fileID: 8300000, guid: c56222f2294655f48aa555dc4af81818, type: 3}
-    volume: 0.55
-    weightDegradedRestored: {x: 0, y: 1}
-    intervalSeconds: {x: 2.5, y: 7}
-    radius: {x: 6, y: 18}
-    height: {x: 1, y: 6}
-    pitch: {x: 0.92, y: 1.08}
-  restoreFadeSeconds: 5
-  resetFadeSeconds: 1.2
-  oneShotVoices: 6
---- !u!4 &1696297620
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1696297618}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 641885074}
-  - {fileID: 559495596}
-  m_Father: {fileID: 1650732999}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1696323992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132058,79 +132100,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1909210270}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &1909381715
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1599638538}
-    m_Modifications:
-    - target: {fileID: 1418405406198699479, guid: 003944b10315cca46ad008440e2290fc, type: 3}
-      propertyPath: m_Name
-      value: Guardiana
-      objectReference: {fileID: 0}
-    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 003944b10315cca46ad008440e2290fc, type: 3}
---- !u!114 &1909381716 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2454467915547904821, guid: 003944b10315cca46ad008440e2290fc, type: 3}
-  m_PrefabInstance: {fileID: 1909381715}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9456c85d55646cf488dc8d4049eb9b5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Bosque.Runtime::Bosque.Character.CharacterAnimationDriver
---- !u!4 &1909381717 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7500222724572664198, guid: 003944b10315cca46ad008440e2290fc, type: 3}
-  m_PrefabInstance: {fileID: 1909381715}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1909969752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -146807,6 +146776,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7478673805047864852, guid: 91da69ce76e556b408ac62d41d4067e7, type: 3}
   m_PrefabInstance: {fileID: 2112488475}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2113035266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2113035267}
+  m_Layer: 0
+  m_Name: Cauce sur
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2113035267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113035266}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.5, y: -0.2, z: 6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 280299821}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2116585843
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -149618,4 +149618,4 @@ SceneRoots:
   - {fileID: 77788664}
   - {fileID: 217838989}
   - {fileID: 1143755492}
-  - {fileID: 1650732999}
+  - {fileID: 602523754}

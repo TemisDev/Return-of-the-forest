@@ -39,6 +39,23 @@ namespace Bosque.CharacterEditor
         // Velocidad propia de cada clip (m/s), medida en la versión con root motion de la librería.
         public const float WalkClipSpeed = .97f, JogClipSpeed = 5.36f, SprintClipSpeed = 8.25f;
 
+        /// <summary>
+        /// V15: locomoción de captura de movimiento real (Microsoft Rocketbox, MIT), mismo esqueleto Biped que la
+        /// Guardiana. Clip del controlador → (archivo, velocidad natural en m/s medida en Blender: avance de la pelvis
+        /// por ciclo / duración). Saltos y gestos siguen siendo de la biblioteca Quaternius (Rocketbox no tiene saltos).
+        /// </summary>
+        public const string RbAnimDir = Root + "/Source/Animations/Rocketbox";
+        private static readonly Dictionary<string, (string file, float speed)> RbLocomotion = new Dictionary<string, (string, float)>
+        {
+            ["Idle_Loop"] = ("RB_f_idle_neutral_01", 0f),
+            ["Walk_Loop"] = ("RB_f_walk_neutral", 1.30f),
+            ["Jog_Fwd_Loop"] = ("RB_f_run_neutral_01", 2.75f),
+            ["Sprint_Loop"] = ("RB_f_run_fast_01", 5.39f),
+        };
+        /// <summary>Desfase de giro (grados) por clip Rocketbox, medido con la prueba PostureFacesMovementWithoutSideLean.</summary>
+        private static readonly Dictionary<string, float> RbYaw = new Dictionary<string, float> { ["RB_f_walk_neutral"] = -6.2f };
+        private static float ClipSpeed(string name, float fallback) => RbLocomotion.TryGetValue(name, out var e) ? e.speed : fallback;
+
         /// <summary>Desfase de giro por clip (grados) medido en modo juego: pecho y cadera respecto a la dirección de avance.</summary>
         private static readonly Dictionary<string, float> ClipYawCorrection = new Dictionary<string, float>
         {
@@ -180,16 +197,43 @@ namespace Bosque.CharacterEditor
             }).ToArray();
             ai.clipAnimations = clips;
             ai.SaveAndReimport();
-            foreach (var path in new[] { ModelFbx, AnimFbx })
+            // Locomoción Rocketbox: un clip por archivo, en el sitio (la raíz se hornea en la pose), en bucle.
+            foreach (var (file, _) in RbLocomotion.Values)
             {
+                string path = $"{RbAnimDir}/{file}.fbx";
+                var ri = (ModelImporter)AssetImporter.GetAtPath(path) ?? throw new Exception("Falta " + path);
+                // Mismo esqueleto Biped que la Guardiana: se usa su avatar (misma pose de referencia, sin desajustes de pies).
+                ri.animationType = ModelImporterAnimationType.Human; ri.avatarSetup = ModelImporterAvatarSetup.CopyFromOther;
+                ri.sourceAvatar = AssetDatabase.LoadAllAssetsAtPath(ModelFbx).OfType<Avatar>().First();
+                ri.importAnimation = true; ri.materialImportMode = ModelImporterMaterialImportMode.None; ri.importBlendShapes = false;
+                ri.SaveAndReimport();
+                ri.clipAnimations = ri.defaultClipAnimations.Take(1).Select(c =>
+                {
+                    c.name = file; c.loopTime = true; c.loopPose = true;
+                    c.lockRootRotation = true; c.keepOriginalOrientation = false;
+                    c.rotationOffset = RbYaw.TryGetValue(file, out float yaw) ? yaw : 0f;
+                    c.lockRootHeightY = true; c.keepOriginalPositionY = false; c.heightFromFeet = true;
+                    c.lockRootPositionXZ = true; c.keepOriginalPositionXZ = true;
+                    return c;
+                }).ToArray();
+                ri.SaveAndReimport();
+            }
+            foreach (var path in new[] { ModelFbx, AnimFbx }.Concat(RbLocomotion.Values.Select(v => $"{RbAnimDir}/{v.file}.fbx")))
+            {
+                if (path.StartsWith(RbAnimDir)) continue;   // usan el avatar de la Guardiana
                 var avatar = AssetDatabase.LoadAllAssetsAtPath(path).OfType<Avatar>().FirstOrDefault();
                 if (avatar == null || !avatar.isValid || !avatar.isHuman) throw new Exception("Avatar humanoide no válido en " + path);
             }
         }
 
-        private static AnimationClip Clip(string name) =>
-            AssetDatabase.LoadAllAssetsAtPath(AnimFbx).OfType<AnimationClip>().FirstOrDefault(c => c.name == name)
-            ?? throw new Exception("Falta el clip " + name);
+        private static AnimationClip Clip(string name)
+        {
+            if (RbLocomotion.TryGetValue(name, out var rb))
+                return AssetDatabase.LoadAllAssetsAtPath($"{RbAnimDir}/{rb.file}.fbx").OfType<AnimationClip>().FirstOrDefault(c => c.name == rb.file)
+                       ?? throw new Exception("Falta el clip " + rb.file);
+            return AssetDatabase.LoadAllAssetsAtPath(AnimFbx).OfType<AnimationClip>().FirstOrDefault(c => c.name == name)
+                   ?? throw new Exception("Falta el clip " + name);
+        }
 
         // ------------------------------------------------------------------ máscara y controlador
         private static AvatarMask UpperBodyMask()
@@ -223,9 +267,10 @@ namespace Bosque.CharacterEditor
             var tree = new BlendTree { name = "Locomocion", blendType = BlendTreeType.Simple1D, blendParameter = "Speed", useAutomaticThresholds = false };
             AssetDatabase.AddObjectToAsset(tree, ac);
             tree.AddChild(Clip("Idle_Loop"), 0f);
-            tree.AddChild(Clip("Walk_Loop"), WalkClipSpeed);
-            tree.AddChild(Clip("Jog_Fwd_Loop"), JogClipSpeed);
-            tree.AddChild(Clip("Sprint_Loop"), SprintClipSpeed);
+            // Umbral = velocidad natural del clip: a la velocidad del motor los pies no patinan.
+            tree.AddChild(Clip("Walk_Loop"), ClipSpeed("Walk_Loop", WalkClipSpeed));
+            tree.AddChild(Clip("Jog_Fwd_Loop"), ClipSpeed("Jog_Fwd_Loop", JogClipSpeed));
+            tree.AddChild(Clip("Sprint_Loop"), ClipSpeed("Sprint_Loop", SprintClipSpeed));
             var loco = sm.AddState("Locomocion", new Vector3(300, 0)); loco.motion = tree;
             var jump = sm.AddState("SaltoInicio", new Vector3(300, 120)); jump.motion = Clip("Jump_Start"); jump.speed = 1.6f;
             var air = sm.AddState("Aire", new Vector3(550, 120)); air.motion = Clip("Jump_Loop");
