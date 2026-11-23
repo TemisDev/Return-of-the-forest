@@ -1,0 +1,18 @@
+{
+  "unity": "6000.3.22f1",
+  "fecha_utc": "2026-11-21T08:44:55Z",
+  "resumen": {"OK": 43, "AVISO": 0, "FALLA": 0},
+  "metricas": {
+    "escena_probada": "Assets/_Bosque/Scenes/Integration/ArroyoPlayable.unity",
+    "sha_ArroyoPlayable": "F99ABB79582015843BD1D1FBCC1DF06F4BB9C0EC9D1B877E1677545B352F66DF",
+    "sha_ArroyoGreybox": "617AD893A90A3784D633DDDCFDD1163545F9B2EF6B4FD0964A0A0D14A0F3BBD2",
+    "sha_linea_base": "A4134AF6C8B0BF3B0BA442292A94AAD51D89DFC77D68137673B2DE4DFD707B84",
+    "camara_degradado": {"muestras": 2736, "dentro_de_solido": 8, "a_menos_de_12cm_de_solido": 35, "linea_de_vista_cortada_por_solido": 13, "linea_de_vista_cortada_por_vegetacion": 25},
+    "paso_degradado": {"celdas": 1155, "atraviesa_solido_visual": 3},
+    "camara_restaurado": {"muestras": 2736, "dentro_de_solido": 9, "a_menos_de_12cm_de_solido": 36, "linea_de_vista_cortada_por_solido": 14, "linea_de_vista_cortada_por_vegetacion": 30},
+    "paso_restaurado": {"celdas": 1170, "atraviesa_solido_visual": 3},
+    "obstaculo_Obstacle_01": {"collider": "(2.90, 0.80, 0.80)", "visual": "(3.27, 1.56, 1.69)", "collider_sobre_visual_m": -0.71, "visual_fuera_en_x_m": 0.37, "cobertura_x": 1},
+    "obstaculo_Obstacle_02": {"collider": "(2.80, 1.00, 1.40)", "visual": "(3.34, 1.10, 1.67)", "collider_sobre_visual_m": -0.08, "visual_fuera_en_x_m": 0.54, "cobertura_x": 1},
+    "obstaculo_Obstacle_03": {"collider": "(2.80, 0.90, 1.20)", "visual": "(3.21, 1.47, 1.71)", "collider_sobre_visual_m": -0.55, "visual_fuera_en_x_m": 0.41, "cobertura_x": 1}
+  }
+}

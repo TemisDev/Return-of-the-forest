@@ -1,0 +1,96 @@
+﻿ruta,tipo,bytes,detalle,alertas
+Game/Assets/_Bosque/Art/Editor,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Editor/ArroyoArtKitBuilder.cs,.cs,5066,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Editor/ArroyoArtV4Builder.cs,.cs,4304,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Environment,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Environment/Models,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Environment/Models/Driftwood_V3.obj,.obj,641,vertices=16; caras=12,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Environment/Models/FernCluster_V3.obj,.obj,3321,vertices=88; caras=94,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Environment/Models/RiverReeds_01.obj,.obj,809,vertices=20; caras=20,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Environment/Models/RockCluster_V3.obj,.obj,786,vertices=18; caras=24,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Environment/Models/ShrubCluster_01.obj,.obj,653,vertices=15; caras=18,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Environment/Textures,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Environment/Textures/reeds_degraded.png,.png,283,64x64,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Environment/Textures/reeds_restored.png,.png,283,64x64,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Environment/Textures/riverbank_dry_v3.png,.png,74424,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Environment/Textures/riverbank_restored_v3.png,.png,79987,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Environment/Textures/stream_moss_v3.png,.png,81728,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Environment/Textures/water_ripple_mask_v3.png,.png,82792,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Materials,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Materials/MAT_Leaf_Degraded.mat,.mat,3864,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Materials/MAT_Leaf_Restored.mat,.mat,3864,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Materials/MAT_Rock.mat,.mat,3850,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Materials/MAT_Soil_Degraded.mat,.mat,3864,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Materials/MAT_Soil_Restored.mat,.mat,3862,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Materials/MAT_Water_Degraded.mat,.mat,3863,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Materials/MAT_Water_Restored.mat,.mat,3862,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Materials/MAT_Wood.mat,.mat,3854,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Prefabs,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Prefabs/VIS_GrassClump_01.prefab,.prefab,2707,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Prefabs/VIS_PineCanopy_01.prefab,.prefab,2707,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Prefabs/VIS_RiverReeds_01.prefab,.prefab,2707,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Prefabs/VIS_Rock_01.prefab,.prefab,2699,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Prefabs/VIS_ShrubCluster_01.prefab,.prefab,2709,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Prefabs/VIS_Stump_01.prefab,.prefab,2702,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/Prefabs/VIS_TreeTrunk_01.prefab,.prefab,2706,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/Models,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/Models/GrassClump_01.obj,.obj,1241,vertices=30; caras=21,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/Models/PineCanopy_01.obj,.obj,1307,vertices=32; caras=20,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/Models/Rock_01.obj,.obj,635,vertices=14; caras=9,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/Models/Stump_01.obj,.obj,782,vertices=18; caras=11,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/Models/TreeTrunk_01.obj,.obj,712,vertices=16; caras=10,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/Textures,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/Textures/leaf_degraded.png,.png,760,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/Textures/leaf_restored.png,.png,760,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/Textures/rock.png,.png,759,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/Textures/soil_degraded.png,.png,760,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/Textures/soil_restored.png,.png,760,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/Textures/ui_cream.png,.png,761,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/Textures/ui_dark.png,.png,760,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/Textures/water_degraded.png,.png,761,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/Textures/water_restored.png,.png,760,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/Textures/wood.png,.png,761,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/UI,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/UI/interact.png,.png,1028,128x128,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/UI/progress.png,.png,827,128x128,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/PrototypeKit/UI/restored.png,.png,1065,128x128,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/UI,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/UI/Icons,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/UI/Icons/exit_unlocked_v3.png,.png,1789,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/UI/Icons/interact_e_v3.png,.png,1818,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/UI/Icons/progress_leaf_v3.png,.png,2335,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/UI/Icons/restoration_v3.png,.png,2583,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Generated,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Generated/Materials,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Generated/Materials/MAT_V4_Branch.mat,.mat,3969,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Generated/Materials/MAT_V4_Foam.mat,.mat,3968,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Generated/Materials/MAT_V4_Reeds.mat,.mat,3969,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Generated/Materials/MAT_V4_Rock.mat,.mat,3963,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Generated/Prefabs,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Generated/Prefabs/VIS_V4_FoamRibbon.prefab,.prefab,2705,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Generated/Prefabs/VIS_V4_MossyBranch.prefab,.prefab,2708,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Generated/Prefabs/VIS_V4_ReedFan.prefab,.prefab,5646,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Generated/Prefabs/VIS_V4_RiverStones.prefab,.prefab,3444,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Models,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Models/FoamRibbon_V4.obj,.obj,2467,vertices=34; caras=32,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Models/MossyBranch_V4.obj,.obj,2179,vertices=42; caras=72,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Models/ReedFan_V4.obj,.obj,2096,vertices=52; caras=26,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Models/RiverStoneCluster_V4.obj,.obj,4333,vertices=88; caras=140,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Textures,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Textures/bank_dry_detail_v4.png,.png,45697,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Textures/bank_wet_detail_v4.png,.png,47964,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Textures/foam_alpha_v4.png,.png,8221,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Textures/moss_matte_detail_v4.png,.png,47466,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Textures/rock_matte_detail_v4.png,.png,42130,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/Textures/wood_matte_detail_v4.png,.png,38244,256x256,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/UI,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/UI/exit_ready_v4.png,.png,1323,192x192,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/UI/interact_focus_v4.png,.png,1949,192x192,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/UI/progress_leaf_v4.png,.png,1940,192x192,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/VFX,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/V4/VFX/restoration_soft_particle_v4.png,.png,3993,128x128,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/VFX,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/VFX/Textures,directorio,,,SIN ALERTA ESTRUCTURAL
+Game/Assets/_Bosque/Art/VFX/Textures/restoration_particles_v3.png,.png,1654,256x256,SIN ALERTA ESTRUCTURAL

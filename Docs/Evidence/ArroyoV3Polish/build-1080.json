@@ -1,0 +1,34 @@
+{
+    "passed": true,
+    "error": "",
+    "unity": "6000.3.22f1",
+    "gpu": "NVIDIA GeForce GTX 1650",
+    "cpu": "Intel(R) Core(TM) i5-10300H CPU @ 2.50GHz",
+    "operatingSystem": "Windows 11  (10.0.26300)",
+    "ramMb": 16221,
+    "width": 1920,
+    "height": 1080,
+    "resets": 3,
+    "moved": true,
+    "jumped": true,
+    "rejectedEarlyExit": true,
+    "restored": true,
+    "completed": true,
+    "feedbackOnce": true,
+    "degraded": {
+        "frames": 494,
+        "seconds": 3.0021095275878908,
+        "meanFps": 164.55096435546876,
+        "worstFrameMs": 37.372398376464847,
+        "meanDrawCalls": 281.6389465332031,
+        "drawCallsAvailable": true
+    },
+    "recovered": {
+        "frames": 542,
+        "seconds": 3.0030627250671388,
+        "meanFps": 180.48240661621095,
+        "worstFrameMs": 12.349794387817383,
+        "meanDrawCalls": 283.0683898925781,
+        "drawCallsAvailable": true
+    }
+}

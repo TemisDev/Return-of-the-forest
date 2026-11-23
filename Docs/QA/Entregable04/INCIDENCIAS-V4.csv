@@ -1,0 +1,6 @@
+﻿ID,titulo,prioridad_orientativa,estado,pasos,esperado,resultado_obtenido,evidencia
+I-01,Posible caída al retirar obstáculo con jugador encima,P2,POR REVALIDAR,Recorrer obstáculos 1 y 3 subido; intentar interacción,No caer inesperadamente ni quedar atrapado,,
+I-02,Salida del cauce exige salto entre obstáculos,P3,POR REVALIDAR,Recorrer ambos sentidos sin saltar,Rampas y recorrido según diseño,,
+I-03,Tronco opcional se supera andando,P3,POR REVALIDAR,Atravesar tronco sin pulsar salto,Tronco cumple función definida,,
+I-04,Respawn siempre al inicio,P3,POR REVALIDAR,Caer desde el tramo final,Retorno según diseño aprobado,,
+I-05,Cámara demasiado próxima junto a paredes,P3,POR REVALIDAR,Orbitar cámara contra paredes y vegetación,Personaje se mantiene visible,,

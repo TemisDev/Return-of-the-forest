@@ -6,8 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_Bosque/Scenes/MenuPrincipal.unity
+    guid: 1e08bbd995cd8fa4eb581fa61fe2e367
+  - enabled: 1
     path: Assets/_Bosque/Scenes/Integration/ArroyoPlayable.unity
     guid: 32d54fa45363c8441a2e2f6183da5321
+  - enabled: 1
+    path: Assets/_Bosque/Scenes/Zonas/ClaroVacio.unity
+    guid: 78eca31483102b649bfd09fa43484f61
+  - enabled: 1
+    path: Assets/_Bosque/Scenes/Zonas/RefugioPerdido.unity
+    guid: 83059e6ee29500543af40bd987ee8dd4
+  - enabled: 1
+    path: Assets/_Bosque/Scenes/Zonas/ValleOlvidado.unity
+    guid: 8ceaace3f4f15034db1ab815600fe036
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

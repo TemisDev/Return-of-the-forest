@@ -1,5 +1,192 @@
 # Relevo de Claude Code
 
+# V16: sonido, solidez, charcos e inventario (23/11/2026)
+
+- **Pedido del usuario:**
+  - mejor música y ambiente («apagado pero que suene mejor; ahora suena a motor o ventilador»);
+  - objetos que se atraviesan en varios niveles (había capturas de cada uno);
+  - un inventario.
+- **Audio** (`Docs/Character/pipeline/audio_v16.py`):
+  - **Causa medida:** `AMB_Viento_Seco` era una banda fija de ruido, con el 76 % de la energía entre 500 Hz y 2 kHz y nada por encima. `AMB_Brisa_Hojas` tenía el 74 % de la energía por debajo de 150 Hz.
+  - **Viento seco y brisa:** sustituidos por viento sintetizado con ráfagas (rango de unos 11 dB), banda variable, silbido y crujido de pasto u hojas.
+  - **Aves:** «Birds and Wind» (Spring Spring, CC0) con paso alto.
+  - **Música:** «Cathedral in the forest» (congusbongus, CC0) suena en lo degradado y pasa por fundido cruzado a «Forest Whisper» (Cleyton Kauffman, CC0) al restaurar (`MusicPlayer.SetDegradedClip`).
+  - **Sonoridad:** ambientes a -24/-26 LUFS y música a -23/-25 LUFS.
+- **Solidez** (`Editor/LevelTools/SolidPropColliders.cs`):
+  - Arroyo, claro y refugio no tenían colisión en árboles, rocas, peñascos ni tocones.
+  - En el valle, la cápsula de los árboles quedaba a 0,8 m del tronco, porque el pivote del modelo está desplazado.
+  - La herramienta añade un MeshCollider a lo sólido y una cápsula medida sobre el tronco de cada árbol. Respeta el contrato de los montajes solo visuales del arroyo (`ArtV3`, `ArtV4Integration`, `VisualIntegrationV3`).
+  - Es idempotente. La llaman los constructores de claro, refugio y valle; para el arroyo, o para repasar todo: `Bosque.LevelTools.SolidPropColliders.ApplyAllBatch`.
+  - Las mallas con colisión se marcan como legibles, porque *Prebake Collision Meshes* está desactivado.
+- **Otros arreglos:**
+  - Puente de raíces: la caja sube hasta la cresta del tronco, así que las botas ya no se hunden.
+  - Objetos que se cargan en el refugio: el eje largo va hacia delante, a la altura de la cadera y al costado; ya no atraviesan la cabeza.
+  - Charcos del arroyo: planos con borde de tierra mojada difuminado, en lugar de discos con aro oscuro (sombreador `_PuddleShape`).
+- **Inventario** (`Runtime/UI/InventoryView.cs`): se abre con Tab o I en todas las zonas y pausa el juego. Muestra:
+  - la bolsa por casillas o el objeto cargado;
+  - las habilidades con su tecla;
+  - el recorrido por las cuatro zonas;
+  - las notas del cuaderno.
+- **Pruebas:** `V16PlayModeTests` comprueba la solidez en las 4 zonas, que los troncos del valle bloquean, el inventario y el fundido de la música.
+
+# V15.1: locomoción corregida (22/11/2026)
+
+- **Problema reportado por el usuario en la V15:** al correr y moverse, el personaje «parece moverse a distintos lados».
+- **Causa medida** con la nueva prueba `LocomotionStaysStraightAndSmooth`: los clips Rocketbox traen el avance real del actor y estaban horneados en la pose (`lockRootPositionXZ`). La cadera se separaba hasta 0,79 m de la cápsula y volvía de golpe en cada ciclo.
+- **Arreglo:**
+  - `lockRootPositionXZ = false`: el avance pasa a movimiento de raíz y el Animator lo descarta.
+  - El reposo de 15 s se cambia por `f_idle_breathe_01`, de 2,7 s; el largo ralentizaba la caminata al arrancar y frenar.
+  - Trote con `f_run_neutral`, a 3,16 m/s.
+  - Desfase de giro por clip (`RbYaw`).
+- **Resultado:**
+  - Al correr: cadera a ±0,02 m, giro medio de 0,2°, balanceo de ±14° y saltos de 2,3° como máximo entre fotogramas.
+  - Al caminar: giro medio de 0,8°.
+- **Build:** `Builds/Windows/V15.1-Locomocion`.
+
+# V15: animaciones de captura de movimiento (22/11/2026)
+
+- **Rama:** `feature/valle-olvidado`. Build: `Builds/Windows/V15-Animaciones` (`-Configuration V15-Animaciones`).
+- **Animaciones nuevas:** reposo, caminar, trotar y correr usan ahora captura de movimiento real de Microsoft Rocketbox (MIT), con el mismo esqueleto Biped que la Guardiana.
+  - Archivos: `Characters/Guardiana/Source/Animations/Rocketbox/`.
+  - Usan el avatar del modelo (`CopyFromOther`).
+- **Umbrales del árbol de mezcla:** son la velocidad natural de cada clip, medida en Blender: caminar 1,30 m/s, trotar 2,75 m/s, correr 5,39 m/s.
+  - Caminar coincide con el motor (1,35 m/s), así que los pies no patinan.
+  - Correr a 4,5 m/s mezcla trote y carrera.
+- **Sin cambios:** saltos y gestos (interactuar, restaurar) siguen con Quaternius, porque Rocketbox no tiene saltos.
+- **Ajustes:**
+  - Desfase de giro de -6,2° en la caminata (`RbYaw`).
+  - La prueba de orientación de los pies ahora promedia el ciclo completo, en lugar de mirar un solo fotograma.
+- **Postura medida:** caminar con el pecho a -2,1° y la cadera a 1,4°; trotar con el pecho a -0,9° y la cadera a 4,7°.
+
+# V14: interfaz renovada y nueva Guardiana (22/11/2026)
+
+- **Rama:** `feature/valle-olvidado`. Sin fusionar. Build: `Builds/Windows/V14-Interfaz` (`-Configuration V14-Interfaz`).
+- **Guardiana:** modelo Microsoft Rocketbox "Female_Adult_07" (licencia MIT; aviso en `Characters/Guardiana/Source/Rocketbox/LICENSE-Rocketbox.txt`), elegido por el usuario entre tres candidatas.
+  - Preparado por `Docs/Character/pipeline/rocketbox_guardiana.py`: FBX Biped → Humanoid de Unity; texturas de 2048 px; el especular se convierte en suavidad por píxel.
+  - `GuardianaBuilder` apunta ahora a `Source/Rocketbox`. Estrecha el rango In-Out de los muslos y el cierre de los dedos del avatar, para que el reposo de la biblioteca Quaternius no abra las piernas ni cierre los puños.
+  - 8.308 triángulos y 3 materiales; mide 1,75 m. El modelo MPFB anterior sigue en `Source/MPFB`.
+- **Interfaz:** estilo «cuaderno de campo».
+  - `Runtime/UI/UiKit.cs` reúne vidrio con filete, teclas dibujadas, degradados, rombos y la fila `KeyHintRow`.
+  - Menú principal y pausa: columna izquierda sin cajas, elementos de menú en versalitas con rombo y velo animado (`Ui.MenuItem`, `MenuItemFx`). La pausa muestra la zona y el objetivo (`PauseView.SetContext`).
+  - HUD: sin cajas. Texto sobre sombras suaves de esquina, progreso con rombos o con una barra fina, aviso con tecla dibujada, atajos con teclas y estado lateral alineado a la derecha.
+  - Rótulos de zona, ayuda, paneles de opciones y controles, y brújula, con el mismo estilo.
+- **Corrección:** `PresentationBuilder` ya no borra el valle de la lista de escenas al regenerar el menú.
+- **Pruebas:** PlayMode 48/48 y EditMode 38/38. Pruebas manuales de la interfaz y del personaje **no ejecutadas**.
+
+# Zona 4 V13: acabado realista y mapa topográfico (21/11/2026)
+
+- **Rama:** `feature/valle-olvidado`. Sin fusionar.
+- **Build:** `Builds/Windows/V13-Acabado` (commit `da0cfe5`); `Tools/Build-ArroyoRC1.ps1 -Configuration V13-Acabado`.
+- **Pedido:** que lo hecho a mano tenga el realismo del ambiente y que el mapa se vea profesional, con referencias de otros juegos.
+- **Cambios:**
+  - Puentes con tramos del muelle modular de Poly Haven (CC0, Rico Cilliers) y barandas de rollizos.
+  - Puntos de reciclaje: panel de madera con rótulo pintado y chapas de color; grava pintada en el terreno; sin textos flotantes.
+  - Agua:
+    - lagunas irregulares (`ValleWater.RadiusToward`);
+    - corriente por vértice (UV2 + flow map en dos fases en `BosqueV6Water.shader`, propiedad `_FlowMap`);
+    - olas propias (`M_Valle_Agua`);
+    - turbidez según la profundidad;
+    - orillas de guijarros con juncos y piedras; vados más visibles.
+  - Mapa topográfico en papel (referencias: Firewatch y RDR2):
+    - tipografía Alegreya (OFL) en `UiTheme.mapSerif*`/`mapCaps*`;
+    - iconos en `Runtime/UI/MapIcons.cs`;
+    - panel de sectores mediante `IZoneMapInfo`;
+    - marcadores con `MarkerKind.Region` y ángulo `MapMarker.angle`.
+- **Pruebas:** PlayMode 48/48 y EditMode 38/38. FPS en la build: 57,0 de media, p95 17,8 ms (GTX 1650, 1080p). Las pruebas manuales Z4-M14..M16 **no se han ejecutado**.
+- **Incidencia previa:** el cierre con D3D12 falla a veces después del apagado limpio de Unity. También pasa en V11 y V12. Detalle en el informe.
+
+# Zona 4 V12: ríos, brújula y minimapa (21/11/2026)
+
+- **Rama:** `feature/valle-olvidado`. Sin fusionar.
+- **Build:** `Builds/Windows/V12-Rios`.
+- **Ríos y lagunas**, a partir del mapa de referencia del usuario:
+  - **Mayu:** río principal de norte a sur, hondo; se cruza por 2 puentes o 4 vados.
+  - **Chico:** afluente del oeste.
+  - **Lagunas Alta, del Medio y Baja**, con el **río de la Salida** hacia el este.
+  - **Bofedal** y **río del Sur** al suroeste.
+- **Agua:** se vadea con freno; lo hondo bloquea con una pista. Turbia mientras el sector está sucio y clara al limpiarlo.
+- **Modelo único:** `ValleWater`. El constructor talla el terreno y genera la malla; el juego lo usa para la profundidad, el sonido y el mapa.
+- **Orientación:** brújula y minimapa (`Runtime/UI/NavigationViews.cs`).
+  - Lo ubicado (a menos de 24 m o marcado con T) aparece en la brújula, el minimapa y el mapa.
+  - El mapa muestra los nombres de ríos y lagunas, puentes y vados.
+- **Motor:** `ThirdPersonMotor.MoveBlocked` es un delegado opcional que deshace el paso horizontal.
+- **Pruebas:** PlayMode 48/48 y EditMode 38/38. Las pruebas manuales nuevas, Z4-M10..M13, están en el informe y **no se han ejecutado**.
+
+# Zona 4: El valle olvidado (21/11/2026)
+
+- **Rama:** `feature/valle-olvidado`, que incluye el Bloque 05. Sin fusionar.
+- **Build:** `Builds/Windows/V11-Valle`; `-zona valle` entra directamente.
+- **Juego:** valle de ~210 × 210 m con 4 sectores, 40 residuos de Poly Haven (CC0) y 16 troncos.
+  - Bolsa de 8 espacios y separación en 4 contenedores.
+  - Troncos que se apartan manteniendo E.
+  - Rastreo (T), mapa (M) y medallas.
+  - El final del juego pasa a esta zona.
+- **Regenerar:** `Bosque.LevelEditor.ValleBuilder.BuildAllBatch`.
+- **Pruebas:** PlayMode 45/45 y EditMode 38/38. FPS en la build: valle 53 y refugio 82 (GTX 1650, 1080p).
+- **Informe y pruebas manuales Z4-M01..M09:** `Docs/Valle/INFORME-ZONA-4.md`.
+
+# Bloque 05: presentación, menús e interfaz (21/11/2026)
+
+- **Rama:** `feature/presentation-menus`, que sale de `main` `1d143d8`; commit `389a98b`. Sin fusionar.
+- **Build:** `Builds/Windows/V10-Presentacion`. Arranca en el menú principal; `-zona claro` y `-zona refugio` siguen funcionando.
+- **Contenido:**
+  - menú principal con introducción, pausa (Esc) con opciones y controles, y créditos;
+  - fundidos, rótulos de zona y HUD uGUI;
+  - notas del cuaderno al completar cada zona y pantalla final.
+- **Regenerar:** `Bosque.PresentationEditor.PresentationBuilder.BuildAllBatch`.
+- **Pruebas:** PlayMode 34/34, EditMode 38/38 y verificador V10 `passed=True`.
+- **Informe y pruebas manuales B5-M01..M08:** `Docs/Presentacion/INFORME-BLOQUE-05.md`.
+- **Créditos:** editar en `Game/Assets/_Bosque/UI/Creditos.txt`; falta el nombre de quien programa.
+
+# Bloque 04: Zona 3, "El refugio perdido", fauna y final (21/11/2026)
+
+- **Rama:** `feature/character-animation-audio`, commit `5cc5a98`.
+- **Build:** `Builds/Windows/V9-Zona3-Refugio`, con las tres zonas encadenadas. Para entrar directamente en la zona 3: `-zona refugio`.
+- **Escena:** `Scenes/Zonas/RefugioPerdido.unity`, generada con `Bosque.LevelEditor.RefugioBuilder.BuildAllBatch`.
+  - También construye el zorro (`FaunaBuilder`), integra la transición en el claro y registra las tres escenas.
+- **Mecánicas:**
+  - E recoge y coloca elementos (`RefugeItem`, `RefugeSpot`, `ItemCarrier`) y Q hace crecer el matorral.
+  - El zorro de neblina recorre una ruta fija (`FaunaRoute`) con plano de cámara (`FaunaCinematic`).
+  - Con las tres zonas aparece el final en `RefugioHud`.
+- **Animal:** el modelo Fox de Khronos (CC0 + CC-BY 4.0, **requiere atribución en los créditos**), procesado con `Docs/Fauna/pipeline/preparar_zorro.py`.
+- **Pruebas:** PlayMode 26/26 y EditMode 38/38. El verificador sobre V9 da `passed=True`.
+- **Informe y pruebas manuales Z3-M01..M08:** `Docs/Zonas/Refugio/INFORME-ZONA-3.md`.
+
+# Bloque 03: Zona 2, "El claro vacío" (21/11/2026)
+
+- **Rama:** `feature/character-animation-audio`, commits `7855cdd` y `40b863c`.
+- **Build:** `Builds/Windows/V8-Zona2-Claro`. Para entrar directamente en la zona 2: `-zona claro`.
+- **Escena:** `Scenes/Zonas/ClaroVacio.unity`, generada con `Bosque.LevelEditor.ClaroBuilder.BuildAllBatch`, que además integra la transición en `ArroyoPlayable`.
+- **Habilidad Q:** `Runtime/Abilities/GrowthAbility.cs`, con lechos `GrowthPoint`. El progreso entre zonas vive en `GameProgress`, solo en memoria.
+- **Pruebas:** PlayMode 18/18, EditMode 38/38 y sonda 43 OK.
+- **Informe y pruebas manuales:** `Docs/Zonas/Claro/INFORME-ZONA-2.md`.
+
+# Bloque 02: personaje, animaciones y audio (20/11/2026)
+
+- **Rama:** `feature/character-animation-audio`, que sale de la integración V6 `4c973e5`.
+- **Build:** `Builds/Windows/V7-Character-Audio`.
+- **Informe y pruebas manuales:** `Docs/Character/INFORME-BLOQUE-02.md`.
+- **Regenerar:** `Bosque.CharacterEditor.GuardianaBuilder.BuildAllBatch`.
+- **Pruebas:** PlayMode en `Tests/PlayMode` (9/9) y EditMode 38/38.
+- **Cambios en el motor** (compatibles con lo anterior): eventos de solo lectura, Shift para caminar y margen de apoyo de 0,1 s.
+
+# Bloque 01.2: integración del arte V6 en ArroyoPlayable (20/11/2026)
+
+- **Rama:** `feature/arroyo-v6-integration` (sin fusionar). Contiene `develop` (arte V6 y QA V6), las correcciones P1 `afcbe4d` y RC1.
+- **Commits del bloque:**
+  - `122b504`: QA6-001 a QA6-004, efecto único y modo integrado de la sonda;
+  - `38acc1d`: escena vestida y build V6;
+  - `2cc512c`: rendimiento;
+  - además, un commit de documentación.
+- **Escena:** `ArroyoPlayable` vestida con `Bosque.ArtV6.Editor.ArroyoArtV6Dresser.DressPlayableBatch`. Colliders y componentes son idénticos a `EVIDENCIAS/contrato-arroyoplayable-pre-v6.json`.
+- **Build:** `Tools/Build-ArroyoRC1.ps1 -Configuration V6` → `Builds/Windows/V6`. Se verifica con `Tools/Verify-ArroyoV4.ps1 -Executable Builds/Windows/V6/BosqueDeRegreso.exe -AllowMissingReleaseCounters`.
+- **Sonda integrada:** `-executeMethod Bosque.Acceptance.ArroyoQAV6Probe.RunBatch -qa6-integrada`.
+- **Reparto de rendimiento:** `BosqueV6Preview.exe -v6-perf -v6-perf-breakdown`.
+- **Necesita a Codex:**
+  - QA6-016: la prueba `ActiveVisualBudgetStaysBoundedInBothStates` aplica el presupuesto de V3; no se cambió el criterio.
+  - QA6-006: para llegar a 60 FPS en restaurado haría falta tocar las cascadas de sombra o la escala de render del asset URP compartido.
+- **Detalle:** `Docs/QA/Entregable06/INFORME-ACEPTACION-V6.md`, sección "Integración en ArroyoPlayable".
+
 # C-02: revisión del recorrido con T06 integrado
 Fecha: 12 de noviembre de 2026. Estado: terminado salvo las pruebas manuales, que quedan pendientes para Diego.
 

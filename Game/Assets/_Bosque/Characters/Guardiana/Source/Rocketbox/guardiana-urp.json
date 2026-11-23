@@ -1,0 +1,34 @@
+{
+ "materiales": [
+  {
+   "material": "f007_body",
+   "parte": "RB_Cuerpo",
+   "base": "T_GuardianaRB_Cuerpo_BaseColor.jpg",
+   "normal": "T_GuardianaRB_Cuerpo_Normal.jpg",
+   "smoothMap": "T_GuardianaRB_Cuerpo_MetalSmooth.png",
+   "smoothness": 0.75,
+   "alphaClip": 0,
+   "doubleSided": false
+  },
+  {
+   "material": "f007_head",
+   "parte": "RB_Cabeza",
+   "base": "T_GuardianaRB_Cabeza_BaseColor.jpg",
+   "normal": "T_GuardianaRB_Cabeza_Normal.jpg",
+   "smoothMap": "T_GuardianaRB_Cabeza_MetalSmooth.png",
+   "smoothness": 0.8,
+   "alphaClip": 0,
+   "doubleSided": false
+  },
+  {
+   "material": "f007_opacity",
+   "parte": "RB_Pelo",
+   "base": "T_GuardianaRB_Pelo_BaseColor.png",
+   "normal": "",
+   "smoothMap": "",
+   "smoothness": 0.32,
+   "alphaClip": 0.42,
+   "doubleSided": true
+  }
+ ]
+}

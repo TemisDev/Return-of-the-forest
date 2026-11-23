@@ -1,0 +1,285 @@
+{
+ "materiales": {
+  "Human.high-poly": {
+   "mhmat": "brown.mhmat",
+   "asset": "eyes/high-poly",
+   "diffuseColor": "1.0 1.0 1.0",
+   "transparent": "True",
+   "alphaToCoverage": "True",
+   "backfaceCull": "True",
+   "diffuseTexture": "brown_eye.png",
+   "materiales_blender": [
+    "Human.high-poly"
+   ]
+  },
+  "Human.eyebrow001": {
+   "mhmat": "eyebrow001.mhmat",
+   "asset": "eyebrows/eyebrow001",
+   "diffuseColor": "1 1 1",
+   "transparent": "True",
+   "backfaceCull": "False",
+   "diffuseTexture": "eyebrow001.png",
+   "materiales_blender": [
+    "Human.eyebrow001"
+   ]
+  },
+  "Human.eyelashes01": {
+   "mhmat": "eyelashes01.mhmat",
+   "asset": "eyelashes/eyelashes01",
+   "diffuseColor": "1 1 1",
+   "transparent": "True",
+   "backfaceCull": "False",
+   "diffuseTexture": "eyelashes01.png",
+   "materiales_blender": [
+    "Human.eyelashes01"
+   ]
+  },
+  "Human.braid01": {
+   "mhmat": "braid01.mhmat",
+   "asset": "hair/braid01",
+   "diffuseColor": "1.0 1.0 1.0",
+   "transparent": "True",
+   "alphaToCoverage": "True",
+   "backfaceCull": "False",
+   "diffuseTexture": "braid01_diffuse.png",
+   "materiales_blender": [
+    "Human.braid01"
+   ]
+  },
+  "Human.toigo_fisherman_sweater": {
+   "mhmat": "sweater_fisherman.mhmat",
+   "asset": "clothes/toigo_fisherman_sweater",
+   "diffuseColor": "0.64 0.64 0.64",
+   "diffuseTexture": "shirt-knit.png",
+   "materiales_blender": [
+    "Human.toigo_fisherman_sweater"
+   ]
+  },
+  "Human.cortu_cargo_pants": {
+   "mhmat": "cargo_pants.mhmat",
+   "asset": "clothes/cortu_cargo_pants",
+   "diffuseColor": "1.0 1.0 1.0",
+   "transparent": "False",
+   "alphaToCoverage": "True",
+   "backfaceCull": "True",
+   "diffuseTexture": "cargo_pants_diff.png",
+   "normalmapTexture": "cargo_pants_norm.png",
+   "materiales_blender": [
+    "Human.cortu_cargo_pants"
+   ]
+  },
+  "Human.toigo_ankle_boots_female": {
+   "mhmat": "boots_ankle.mhmat",
+   "asset": "clothes/toigo_ankle_boots_female",
+   "diffuseColor": "0.64 0.64 0.64",
+   "diffuseTexture": "BootsAnkle.png",
+   "normalmapTexture": "BootsAnkle-norm.png",
+   "materiales_blender": [
+    "Human.toigo_ankle_boots_female"
+   ]
+  },
+  "Human": {
+   "mhmat": "callharvey3d_midtoned_female.mhmat",
+   "diffuseColor": "0.5 0.5 0.5",
+   "transparent": "False",
+   "alphaToCoverage": "True",
+   "backfaceCull": "True",
+   "diffuseTexture": "harvey_midtoned_female_diffuse.png",
+   "materiales_blender": [
+    "Human.body"
+   ]
+  }
+ },
+ "mallas": [
+  {
+   "objeto": "Human",
+   "triangulos": 15248,
+   "materiales": [
+    "Human.body"
+   ],
+   "grupos": 205,
+   "alto_m": 1.527,
+   "padre": "Human.rig"
+  },
+  {
+   "objeto": "Human.braid01",
+   "triangulos": 5518,
+   "materiales": [
+    "Human.braid01"
+   ],
+   "grupos": 10,
+   "alto_m": 0.611,
+   "padre": "Human.rig"
+  },
+  {
+   "objeto": "Human.cortu_cargo_pants",
+   "triangulos": 1568,
+   "materiales": [
+    "Human.cortu_cargo_pants"
+   ],
+   "grupos": 10,
+   "alto_m": 0.9,
+   "padre": "Human.rig"
+  },
+  {
+   "objeto": "Human.eyebrow001",
+   "triangulos": 192,
+   "materiales": [
+    "Human.eyebrow001"
+   ],
+   "grupos": 1,
+   "alto_m": 0.011,
+   "padre": "Human.rig"
+  },
+  {
+   "objeto": "Human.eyelashes01",
+   "triangulos": 368,
+   "materiales": [
+    "Human.eyelashes01"
+   ],
+   "grupos": 1,
+   "alto_m": 0.015,
+   "padre": "Human.rig"
+  },
+  {
+   "objeto": "Human.high-poly",
+   "triangulos": 2040,
+   "materiales": [
+    "Human.high-poly"
+   ],
+   "grupos": 1,
+   "alto_m": 0.029,
+   "padre": "Human.rig"
+  },
+  {
+   "objeto": "Human.toigo_ankle_boots_female",
+   "triangulos": 4120,
+   "materiales": [
+    "Human.toigo_ankle_boots_female"
+   ],
+   "grupos": 6,
+   "alto_m": 0.154,
+   "padre": "Human.rig"
+  },
+  {
+   "objeto": "Human.toigo_fisherman_sweater",
+   "triangulos": 4164,
+   "materiales": [
+    "Human.toigo_fisherman_sweater"
+   ],
+   "grupos": 16,
+   "alto_m": 0.55,
+   "padre": "Human.rig"
+  }
+ ],
+ "recursos": [
+  [
+   "eyes",
+   "high-poly",
+   [
+    "Human.high-poly"
+   ]
+  ],
+  [
+   "eyebrows",
+   "eyebrow001",
+   [
+    "Human.eyebrow001"
+   ]
+  ],
+  [
+   "eyelashes",
+   "eyelashes01",
+   [
+    "Human.eyelashes01"
+   ]
+  ],
+  [
+   "hair",
+   "braid01",
+   [
+    "Human.braid01"
+   ]
+  ],
+  [
+   "clothes",
+   "toigo_fisherman_sweater",
+   [
+    "Human.toigo_fisherman_sweater"
+   ]
+  ],
+  [
+   "clothes",
+   "cortu_cargo_pants",
+   [
+    "Human.cortu_cargo_pants"
+   ]
+  ],
+  [
+   "clothes",
+   "toigo_ankle_boots_female",
+   [
+    "Human.toigo_ankle_boots_female"
+   ]
+  ]
+ ],
+ "config": {
+  "macros": {
+   "gender": 0.0,
+   "age": 0.5,
+   "muscle": 0.56,
+   "weight": 0.46,
+   "proportions": 0.62,
+   "height": 0.58,
+   "cupsize": 0.42,
+   "firmness": 0.6,
+   "race": {
+    "asian": 0.6,
+    "caucasian": 0.3,
+    "african": 0.1
+   }
+  },
+  "skin": "callharvey3d_midtoned_female",
+  "eye_material": "brown",
+  "assets": [
+   [
+    "eyes",
+    "high-poly"
+   ],
+   [
+    "eyebrows",
+    "eyebrow001"
+   ],
+   [
+    "eyelashes",
+    "eyelashes01"
+   ],
+   [
+    "hair",
+    "braid01"
+   ],
+   [
+    "clothes",
+    "toigo_fisherman_sweater"
+   ],
+   [
+    "clothes",
+    "cortu_cargo_pants"
+   ],
+   [
+    "clothes",
+    "toigo_ankle_boots_female"
+   ]
+  ],
+  "rig": "game_engine",
+  "subdiv": {
+   "cortu_cargo_pants": 1
+  },
+  "cubren": [
+   "sweater",
+   "pants",
+   "boots"
+  ],
+  "margen_ropa": 0.045
+ }
+}

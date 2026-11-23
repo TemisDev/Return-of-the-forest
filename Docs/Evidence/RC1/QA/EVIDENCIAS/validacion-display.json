@@ -1,0 +1,28 @@
+{
+  "buildCommit": "8838ff5c74038a5399d15b141e30a6b60e5fc949",
+  "runs": [
+    {
+      "session": "RUN-01",
+      "width": 1920,
+      "height": 1080,
+      "fullscreen": false,
+      "passed": true
+    },
+    {
+      "session": "SMOKE-800",
+      "width": 1280,
+      "height": 800,
+      "fullscreen": false,
+      "passed": true
+    },
+    {
+      "session": "FULLSCREEN",
+      "width": 1920,
+      "height": 1080,
+      "fullscreen": true,
+      "passed": true
+    }
+  ],
+  "humanIconComprehension": "PENDIENTE",
+  "captures": "../../Art/CAPTURAS/"
+}

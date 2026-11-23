@@ -1,0 +1,128 @@
+{
+  "unity": "6000.3.22f1",
+  "fechaLocal": "2026-11-18",
+  "zona": "America/Lima",
+  "rama": "feature/arroyo-visual-integration",
+  "resultado": "Passed",
+  "total": 27,
+  "aprobadas": 27,
+  "fallidas": 0,
+  "omitidas": 0,
+  "preservacion": {
+    "fisicaModificada": 0,
+    "bloquesFisicaOriginal": 26,
+    "scriptIdsActualizados": [
+      "364697227"
+    ]
+  },
+  "pruebas": [
+    {
+      "nombre": "Bosque.Tests.ArroyoGameplayTests.AnyOrderRestoresExactlyOnceAndOnlyThenAllowsCompletion",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.ArroyoGameplayTests.InRangeTargetCanBeInteractedWith",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.ArroyoGameplayTests.InvalidAndDisabledTargetsAreIgnored",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.ArroyoGameplayTests.InvalidConfigurationIsRejected",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.ArroyoGameplayTests.LeavingRangeCancelsTargetAndRejectsStaleInteraction",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.ArroyoGameplayTests.NearestAvailableSurfaceIsSelected",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.ArroyoGameplayTests.ResetStartsAnotherCleanCycleAndPublishesChanges",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.ArroyoGameplayTests.UnknownAndRepeatedIdsNeverAdvanceProgress",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.ArroyoGameplayTests.WallPreventsInteraction",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.ArroyoPlaySmokeTests.ActualExitVolumeCompletesOnlyAfterRestoringAndRestartIsClean",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.ArroyoSceneTests.PhysicalBarrierBlocksWalkingAndJumpingUntilRestored",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.ArroyoSceneTests.RealObstaclesRestoreAndCanBeResetWithoutDuplicatingComponents",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.ArroyoSessionTests.EnvironmentAndBarrierFollowProgressAndRestart",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.ArroyoSessionTests.RemovedObstacleCannotCountTwiceOrAcceptForeignActorAtExit",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.ArroyoSessionTests.StandingOnObstacleCannotRemoveItsSupport",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.ArroyoVisualTests.ActiveVisualBudgetStaysBoundedInBothStates",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.ArroyoVisualTests.ArtMountsRemainVisualOnlyAndFollowExistingRestorationState",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.ArroyoVisualTests.PolishedHudAndEffectHaveRequiredArtReferences",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.ArroyoVisualTests.VisualPrefabsHaveMeshesUrpMaterialsAndNoGameplayComponents",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.MovementTests.CameraStaysInFrontOfAnObstructingWall",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.MovementTests.FallResetsToTheConfiguredSafePoint",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.MovementTests.JumpCannotBeRepeatedInTheAirAndReturnsToGround",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.MovementTests.MovementUsesCameraYawAndClampsDiagonalSpeed",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.MovementTests.SolidWallStopsTheCharacter",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.MovementTests.ZeroDeltaDoesNotMoveTheCharacter",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.RestorationFeedbackTests.DisablingAndRebindingDoesNotAccumulateEventSubscriptions",
+      "resultado": "Passed"
+    },
+    {
+      "nombre": "Bosque.Tests.RestorationFeedbackTests.EffectRunsOncePerCycleAndRestartClearsIt",
+      "resultado": "Passed"
+    }
+  ]
+}

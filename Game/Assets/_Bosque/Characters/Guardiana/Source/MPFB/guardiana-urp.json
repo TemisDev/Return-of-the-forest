@@ -1,0 +1,84 @@
+{
+ "materiales": [
+  {
+   "material": "Human.high-poly",
+   "parte": "Ojos",
+   "base": "T_Guardiana_Ojos_BaseColor.png",
+   "smoothness": 0.85,
+   "alphaClip": 0.3,
+   "doubleSided": false,
+   "fuente": "eyes/high-poly",
+   "normal": ""
+  },
+  {
+   "material": "Human.eyebrow001",
+   "parte": "Cejas",
+   "base": "T_Guardiana_Cejas_BaseColor.png",
+   "smoothness": 0.2,
+   "alphaClip": 0.35,
+   "doubleSided": true,
+   "fuente": "eyebrows/eyebrow001",
+   "normal": ""
+  },
+  {
+   "material": "Human.eyelashes01",
+   "parte": "Pestanas",
+   "base": "T_Guardiana_Pestanas_BaseColor.png",
+   "smoothness": 0.2,
+   "alphaClip": 0.35,
+   "doubleSided": true,
+   "fuente": "eyelashes/eyelashes01",
+   "normal": ""
+  },
+  {
+   "material": "Human.braid01",
+   "parte": "Trenza",
+   "base": "T_Guardiana_Trenza_BaseColor.png",
+   "smoothness": 0.45,
+   "alphaClip": 0.4,
+   "doubleSided": true,
+   "fuente": "hair/braid01",
+   "normal": ""
+  },
+  {
+   "material": "Human.toigo_fisherman_sweater",
+   "parte": "Sueter",
+   "base": "T_Guardiana_Sueter_BaseColor.png",
+   "smoothness": 0.15,
+   "alphaClip": 0,
+   "doubleSided": false,
+   "fuente": "clothes/toigo_fisherman_sweater",
+   "normal": "T_Guardiana_Sueter_Normal.png"
+  },
+  {
+   "material": "Human.cortu_cargo_pants",
+   "parte": "Pantalon",
+   "base": "T_Guardiana_Pantalon_BaseColor.png",
+   "smoothness": 0.22,
+   "alphaClip": 0,
+   "doubleSided": false,
+   "fuente": "clothes/cortu_cargo_pants",
+   "normal": "T_Guardiana_Pantalon_Normal.png"
+  },
+  {
+   "material": "Human.toigo_ankle_boots_female",
+   "parte": "Botas",
+   "base": "T_Guardiana_Botas_BaseColor.png",
+   "smoothness": 0.42,
+   "alphaClip": 0,
+   "doubleSided": false,
+   "fuente": "clothes/toigo_ankle_boots_female",
+   "normal": "T_Guardiana_Botas_Normal.png"
+  },
+  {
+   "material": "Human.body",
+   "parte": "Piel",
+   "base": "T_Guardiana_Piel_BaseColor.png",
+   "smoothness": 0.38,
+   "alphaClip": 0,
+   "doubleSided": false,
+   "fuente": "skins/callharvey3d_midtoned_female",
+   "normal": ""
+  }
+ ]
+}

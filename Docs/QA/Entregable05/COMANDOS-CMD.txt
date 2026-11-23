@@ -1,0 +1,25 @@
+Ejecutar en CMD desde la raiz de su propia copia del repositorio. Cerrar Unity.
+Primero confirmar que Final Polish V4 fue revisado e integrado a develop.
+Si existe trabajo sin guardar, detenerse. No cambiar rama con cambios pendientes.
+
+git status
+git fetch origin
+git switch develop
+git pull --ff-only origin develop
+git switch -c feature/arroyo-qa-v5
+
+Si la rama ya existe, usar git switch feature/arroyo-qa-v5 (no crearla otra vez).
+Si solo existe en remoto: git switch --track origin/feature/arroyo-qa-v5
+Actualizar una rama existente mediante git merge origin/develop tras comprobar estado limpio.
+Copiar solamente la carpeta Docs del ZIP en la raiz del repositorio.
+Las correcciones reales de arte, si las hay, requieren revision y sus .meta.
+Revisar los archivos y los datos personales antes de publicar evidencias.
+
+git add Docs/QA/Entregable05/
+git diff --cached --stat
+git diff --cached --check
+git commit -m "test: add RC1 verification and build evidence workflow"
+git push -u origin feature/arroyo-qa-v5
+
+Abrir Pull Request hacia develop. No fusionar main ni declarar aceptacion sin evidencia.
+Para actualizar despues de una revision: repetir git add, commit y push.

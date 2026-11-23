@@ -1,0 +1,6 @@
+id,observacion_historica,estado,sha_build,resultado,evidencia
+I-01,Caminar sobre obstáculos 1 y 3; retirada podría causar caída,PARCIAL; pendiente humano,8838ff5c74038a5399d15b141e30a6b60e5fc949,Proteccion de soporte aprobada en NUnit; prueba fisica pendiente.,EVIDENCIAS/pruebas.json; ../recorrido-historico.json
+I-02,Salir del cauce saltando en lugar de caminar,PARCIAL; pendiente humano,8838ff5c74038a5399d15b141e30a6b60e5fc949,Sonda reproduce que se necesita salto fuera de rampas; diseno conservado.,EVIDENCIAS/pruebas.json; ../recorrido-historico.json
+I-03,Tronco opcional superable sin salto,PARCIAL; pendiente humano,8838ff5c74038a5399d15b141e30a6b60e5fc949,Tronco opcional caminable; no se convirtio en salto obligatorio.,EVIDENCIAS/pruebas.json; ../recorrido-historico.json
+I-04,Respawn al inicio con retroceso,PARCIAL; pendiente humano,8838ff5c74038a5399d15b141e30a6b60e5fc949,Respawn inicial conservado y aprobado en NUnit; sin checkpoints nuevos.,EVIDENCIAS/pruebas.json; ../recorrido-historico.json
+I-05,Cámara demasiado cercana junto a paredes,PARCIAL; pendiente humano,8838ff5c74038a5399d15b141e30a6b60e5fc949,Sin collider entre camara/foco en muestreos; distancias hasta 0.26m en sonda; comodidad humana pendiente.,EVIDENCIAS/pruebas.json; ../recorrido-historico.json

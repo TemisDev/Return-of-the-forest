@@ -1,0 +1,59 @@
+{
+ "macros": {
+  "gender": 0.0,
+  "age": 0.5,
+  "muscle": 0.56,
+  "weight": 0.46,
+  "proportions": 0.62,
+  "height": 0.58,
+  "cupsize": 0.42,
+  "firmness": 0.6,
+  "race": {
+   "asian": 0.6,
+   "caucasian": 0.3,
+   "african": 0.1
+  }
+ },
+ "skin": "callharvey3d_midtoned_female",
+ "eye_material": "brown",
+ "assets": [
+  [
+   "eyes",
+   "high-poly"
+  ],
+  [
+   "eyebrows",
+   "eyebrow001"
+  ],
+  [
+   "eyelashes",
+   "eyelashes01"
+  ],
+  [
+   "hair",
+   "braid01"
+  ],
+  [
+   "clothes",
+   "toigo_fisherman_sweater"
+  ],
+  [
+   "clothes",
+   "cortu_cargo_pants"
+  ],
+  [
+   "clothes",
+   "toigo_ankle_boots_female"
+  ]
+ ],
+ "rig": "game_engine",
+ "subdiv": {
+  "cortu_cargo_pants": 1
+ },
+ "cubren": [
+  "sweater",
+  "pants",
+  "boots"
+ ],
+ "margen_ropa": 0.045
+}
