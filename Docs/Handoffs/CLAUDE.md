@@ -1,5 +1,34 @@
 # Relevo de Claude Code
 
+# V16: sonido, solidez, charcos e inventario (23/11/2026)
+
+- **Pedido del usuario:**
+  - mejor música y ambiente («apagado pero que suene mejor; ahora suena a motor o ventilador»);
+  - objetos que se atraviesan en varios niveles (había capturas de cada uno);
+  - un inventario.
+- **Audio** (`Docs/Character/pipeline/audio_v16.py`):
+  - **Causa medida:** `AMB_Viento_Seco` era una banda fija de ruido, con el 76 % de la energía entre 500 Hz y 2 kHz y nada por encima. `AMB_Brisa_Hojas` tenía el 74 % de la energía por debajo de 150 Hz.
+  - **Viento seco y brisa:** sustituidos por viento sintetizado con ráfagas (rango de unos 11 dB), banda variable, silbido y crujido de pasto u hojas.
+  - **Aves:** «Birds and Wind» (Spring Spring, CC0) con paso alto.
+  - **Música:** «Cathedral in the forest» (congusbongus, CC0) suena en lo degradado y pasa por fundido cruzado a «Forest Whisper» (Cleyton Kauffman, CC0) al restaurar (`MusicPlayer.SetDegradedClip`).
+  - **Sonoridad:** ambientes a -24/-26 LUFS y música a -23/-25 LUFS.
+- **Solidez** (`Editor/LevelTools/SolidPropColliders.cs`):
+  - Arroyo, claro y refugio no tenían colisión en árboles, rocas, peñascos ni tocones.
+  - En el valle, la cápsula de los árboles quedaba a 0,8 m del tronco, porque el pivote del modelo está desplazado.
+  - La herramienta añade un MeshCollider a lo sólido y una cápsula medida sobre el tronco de cada árbol. Respeta el contrato de los montajes solo visuales del arroyo (`ArtV3`, `ArtV4Integration`, `VisualIntegrationV3`).
+  - Es idempotente. La llaman los constructores de claro, refugio y valle; para el arroyo, o para repasar todo: `Bosque.LevelTools.SolidPropColliders.ApplyAllBatch`.
+  - Las mallas con colisión se marcan como legibles, porque *Prebake Collision Meshes* está desactivado.
+- **Otros arreglos:**
+  - Puente de raíces: la caja sube hasta la cresta del tronco, así que las botas ya no se hunden.
+  - Objetos que se cargan en el refugio: el eje largo va hacia delante, a la altura de la cadera y al costado; ya no atraviesan la cabeza.
+  - Charcos del arroyo: planos con borde de tierra mojada difuminado, en lugar de discos con aro oscuro (sombreador `_PuddleShape`).
+- **Inventario** (`Runtime/UI/InventoryView.cs`): se abre con Tab o I en todas las zonas y pausa el juego. Muestra:
+  - la bolsa por casillas o el objeto cargado;
+  - las habilidades con su tecla;
+  - el recorrido por las cuatro zonas;
+  - las notas del cuaderno.
+- **Pruebas:** `V16PlayModeTests` comprueba la solidez en las 4 zonas, que los troncos del valle bloquean, el inventario y el fundido de la música.
+
 # V15.1: locomoción corregida (22/11/2026)
 
 - **Problema reportado por el usuario en la V15:** al correr y moverse, el personaje «parece moverse a distintos lados».

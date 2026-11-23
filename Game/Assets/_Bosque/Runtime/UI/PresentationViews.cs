@@ -87,7 +87,7 @@ namespace Bosque.UI
             tipRow.Rect.Place(new Vector2(0, 0), new Vector2(0, 0), new Vector2(44, 26), new Vector2(1180, 40));
             keysRow = new KeyHintRow(rt, "Teclas", TextAnchor.MiddleRight);
             keysRow.Rect.Place(new Vector2(1, 0), new Vector2(1, 0), new Vector2(-44, 26), new Vector2(700, 40));
-            keysRow.Set("Esc: pausa · F1: ayuda · R: reiniciar zona");
+            keysRow.Set("Tab: inventario · Esc: pausa · F1: ayuda · R: reiniciar zona");
 
             // Estado lateral (zonas grandes): alineado a la derecha, sin caja.
             side = Ui.Rect("Lateral", rt); side.Place(new Vector2(1, 1), new Vector2(1, 1), new Vector2(-56, -46), new Vector2(480, 380));

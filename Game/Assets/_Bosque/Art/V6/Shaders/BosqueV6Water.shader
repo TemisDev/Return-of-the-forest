@@ -173,9 +173,11 @@ Shader "Bosque/V6/Water"
                 // Charcos: contorno irregular (UV radial del disco + ruido de mundo) y borde de barro húmedo.
                 half rim = length(i.uv - 0.5) * 2.0;
                 half wobble = SAMPLE_TEXTURE2D(_NoiseTex, sampler_NoiseTex, p.xz * 0.35).r - 0.5;
-                half shape = saturate((0.82 + wobble * 0.7 - rim) / 0.12);
-                half inner = saturate((0.6 + wobble * 0.7 - rim) / 0.16);
-                half3 mud = _FoamColor.rgb * (sun.color * shadow * 0.55 + SampleSHPixel(half3(0,0,0), half3(0,1,0)));
+                // V16: contorno difuminado y borde de tierra mojada (el mismo suelo, oscurecido), no un aro de barro.
+                half shape = saturate((0.84 + wobble * 0.7 - rim) / 0.26);
+                half inner = saturate((0.55 + wobble * 0.7 - rim) / 0.32);
+                half3 wetGround = SampleSceneColor(screenUV) * 0.52;
+                half3 mud = lerp(wetGround, _FoamColor.rgb * (sun.color * shadow * 0.55 + SampleSHPixel(half3(0,0,0), half3(0,1,0))), _FoamColor.a);
                 color = lerp(color, lerp(mud, color, inner), _PuddleShape);
 
                 color = MixFog(color, InitializeInputDataFog(float4(p, 1), i.fogFactor));

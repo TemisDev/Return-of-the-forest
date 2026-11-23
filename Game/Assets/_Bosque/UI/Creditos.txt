@@ -32,8 +32,9 @@ Puentes y paneles de madera: «Modular Wooden Pier», Poly Haven (CC0) — Rico 
 
 
 <color=#B0D180><b>AUDIO</b></color>
-Música: "Beautiful Forest [Orchestra]" — nene (CC0)
-Ambientes: Some Weirdo, Thimras, rubberduck, isaiah658, syncopika (CC0, OpenGameArt)
+Música: "Forest Whisper" — Cleyton Kauffman · "Cathedral in the forest" — congusbongus (CC0, OpenGameArt)
+Ambientes: "Birds and Wind" — Spring Spring; Some Weirdo, rubberduck, isaiah658, syncopika (CC0, OpenGameArt)
+Viento y hojas: síntesis propia del proyecto
 Efectos: Kenney, qubodup / Independent.nu Ljudbank, Fantozzi, rubberduck (CC0, OpenGameArt)
 Síntesis de quena, brotes y restauración: propia del proyecto
 

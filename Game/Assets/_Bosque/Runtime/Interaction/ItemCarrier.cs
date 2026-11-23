@@ -14,7 +14,7 @@ namespace Bosque.Interaction
     [RequireComponent(typeof(PlayerInteractor))]
     public sealed class ItemCarrier : MonoBehaviour
     {
-        [SerializeField] private Vector3 holdOffset = new Vector3(.62f, 1.2f, .25f);
+        [SerializeField] private Vector3 holdOffset = new Vector3(.66f, 1.0f, .35f);   // costado derecho, a la altura de la cadera (V16)
         [SerializeField, Range(.3f, 1f)] private float carrySpeedFactor = .8f;
         [SerializeField] private float dropDistance = 1f;
 

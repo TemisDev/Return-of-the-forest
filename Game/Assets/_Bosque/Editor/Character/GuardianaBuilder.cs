@@ -447,6 +447,7 @@ namespace Bosque.CharacterEditor
             var musGo = new GameObject("Musica"); musGo.transform.SetParent(audio.transform, false);
             var src = musGo.AddComponent<AudioSource>(); src.clip = AssetDatabase.LoadAssetAtPath<AudioClip>($"{AudioRoot}/Music/MUS_Bosque_Hermoso.ogg");
             var music = musGo.AddComponent<MusicPlayer>();
+            music.SetDegradedClip(AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Bosque/Audio/Music/MUS_Bosque_Apagado.ogg"));   // V16: pad sombrío hasta restaurar
             var bridge = audio.AddComponent<ArroyoAudioBridge>();
             var session = Object.FindFirstObjectByType<ArroyoSession>();
             var exit = all.FirstOrDefault(t => t.name == "ExitMarker") ?? all.First(t => t.name == "ExitBlocker");

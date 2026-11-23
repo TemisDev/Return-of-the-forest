@@ -523,10 +523,13 @@ namespace Bosque.LevelEditor
             var musGo = new GameObject("Musica"); musGo.transform.SetParent(audio.transform, false);
             musGo.AddComponent<AudioSource>().clip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Bosque/Audio/Music/MUS_Bosque_Hermoso.ogg");
             var music = musGo.AddComponent<MusicPlayer>();
+            music.SetDegradedClip(AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Bosque/Audio/Music/MUS_Bosque_Apagado.ogg"));   // V16: pad sombrío hasta restaurar
             audio.AddComponent<RefugioAudioBridge>().Configure(session, sfx, ac, music, guardiana.GetComponent<CharacterAnimationDriver>());
 
             RenderSettings.fog = true; RenderSettings.fogMode = FogMode.ExponentialSquared;
             EditorSceneManager.MarkSceneDirty(scene);
+            var solid = Bosque.LevelTools.SolidPropColliders.Apply();   // V16: lo que se ve sólido, lo es
+            Debug.Log($"[Solidez] {ScenePath}: {solid.added} colisionadores añadidos, {solid.alreadySolid} ya sólidos.");
             if (!EditorSceneManager.SaveScene(scene, ScenePath)) throw new Exception("No se pudo guardar " + ScenePath);
             int renderersD = degraded.GetComponentsInChildren<Renderer>(true).Length, renderersR = restored.GetComponentsInChildren<Renderer>(true).Length;
             Debug.Log($"[Refugio] Escena guardada: {spots.Count} lugares, {printCount} huellas, renderers degradado {renderersD}, restaurado {renderersR}, ruta {route.RouteLength:F1} m.");

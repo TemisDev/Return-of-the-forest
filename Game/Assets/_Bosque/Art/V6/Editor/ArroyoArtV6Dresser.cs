@@ -217,13 +217,13 @@ namespace Bosque.ArtV6.Editor
                 int pieces = _rng.Next(2, 4);
                 for (int i = 0; i < pieces; i++)
                 {
-                    var p = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
+                    var p = GameObject.CreatePrimitive(PrimitiveType.Quad);   // V16: plano (UV radial correcta), no un disco con canto
                     Object.DestroyImmediate(p.GetComponent<Collider>());
                     p.name = "V6_Puddle";
                     p.transform.SetParent(pd, false);
                     p.transform.position = new Vector3(Rand(-3.2f, -1.8f), -0.585f, z + Rand(-0.8f, 0.6f));
-                    p.transform.rotation = Quaternion.Euler(0, Rand(0, 180), 0);
-                    p.transform.localScale = new Vector3(Rand(0.7f, 1.5f), 0.004f, Rand(0.5f, 1.1f));
+                    p.transform.rotation = Quaternion.Euler(90, Rand(0, 180), 0);
+                    p.transform.localScale = new Vector3(Rand(1.2f, 2.2f), Rand(0.9f, 1.5f), 1f);
                     var r = p.GetComponent<MeshRenderer>(); r.sharedMaterial = B.M("M_Water_Stagnant"); r.shadowCastingMode = ShadowCastingMode.Off;
                 }
             }

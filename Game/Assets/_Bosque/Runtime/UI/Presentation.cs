@@ -30,6 +30,7 @@ namespace Bosque.UI
         public TitleCardView TitleCard { get; private set; }
         public MapView Map { get; private set; }
         public NavigationView Navigation { get; private set; }
+        public InventoryView Inventory { get; private set; }
         public bool Fading => fading != null;
         public bool InZone => Hud != null && Hud.Model != null;
 
@@ -58,6 +59,7 @@ namespace Bosque.UI
             Ending = new EndingView(overlayCanvas.transform);
             Pause = new PauseView(overlayCanvas.transform, Resume, RestartFromPause);
             Map = new MapView(overlayCanvas.transform);
+            Inventory = new InventoryView(overlayCanvas.transform);
             var black = Ui.Image(fadeCanvas.transform, "Negro", Color.black, null, true); black.rectTransform.Stretch();
             fade = black.gameObject.AddComponent<CanvasGroup>(); fade.alpha = 0; fade.blocksRaycasts = false;
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -75,7 +77,7 @@ namespace Bosque.UI
         {
             if (mode != LoadSceneMode.Single) return;
             GamePause.Set(false);
-            Pause.Hide(); Notebook.Hide(); Ending.Hide(); TitleCard.Hide(); Map.Hide(); endingNoteShown = false;
+            Pause.Hide(); Notebook.Hide(); Ending.Hide(); TitleCard.Hide(); Map.Hide(); Inventory.Hide(); endingNoteShown = false;
             Hud.Bind(FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IZoneHud>().FirstOrDefault());
             var zone = GameFlow.Zone(scene.name);
             if (zone != null && !GameFlow.VerifierRunning) TitleCard.Show(zone);
@@ -84,8 +86,9 @@ namespace Bosque.UI
         private void Update()
         {
             var kb = Keyboard.current;
-            bool overlay = Notebook.Visible || Ending.Visible || Pause.Visible || Map.Visible;
+            bool overlay = Notebook.Visible || Ending.Visible || Pause.Visible || Map.Visible || Inventory.Visible;
             Map.Tick(Hud.Model as IZoneMap);
+            Inventory.Tick();
             Hud.Tick(InZone && !overlay);
             Navigation.Tick(InZone ? Hud.Model as IZoneMap : null, InZone && !overlay && !Hud.HelpShown);
             TitleCard.Tick();
@@ -110,6 +113,9 @@ namespace Bosque.UI
                 (kb.eKey.wasPressedThisFrame || kb.enterKey.wasPressedThisFrame || kb.spaceKey.wasPressedThisFrame))
                 Notebook.Continue();
             if (Map.Visible && (kb.mKey.wasPressedThisFrame || kb.escapeKey.wasPressedThisFrame)) { CloseMap(); return; }
+            bool invKey = kb.tabKey.wasPressedThisFrame || kb.iKey.wasPressedThisFrame;
+            if (Inventory.Visible && (invKey || kb.escapeKey.wasPressedThisFrame)) { CloseInventory(); return; }
+            if (invKey && InZone && !Map.Visible && !Notebook.Visible && !Ending.Visible && !Pause.Visible) { OpenInventory(); return; }
             if (kb.mKey.wasPressedThisFrame && Hud.Model is IZoneMap && !Notebook.Visible && !Ending.Visible && !Pause.Visible) { OpenMap(); return; }
             if (kb.escapeKey.wasPressedThisFrame && InZone && !Notebook.Visible && !Ending.Visible)
             {
@@ -132,6 +138,19 @@ namespace Bosque.UI
         {
             if (!(Hud.Model is IZoneMap) || Map.Visible) return;
             GamePause.Set(true); Map.Show();
+        }
+
+        public void OpenInventory()
+        {
+            if (!InZone || Inventory.Visible) return;
+            GamePause.Set(true); Inventory.Show();
+        }
+
+        public void CloseInventory()
+        {
+            if (!Inventory.Visible) return;
+            Inventory.Hide(); GamePause.Set(false);
+            Cursor.lockState = CursorLockMode.Locked; Cursor.visible = false;
         }
 
         public void CloseMap()

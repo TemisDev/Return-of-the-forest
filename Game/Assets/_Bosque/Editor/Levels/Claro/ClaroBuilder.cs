@@ -246,6 +246,10 @@ namespace Bosque.LevelEditor
             var bc = bridge.AddComponent<BoxCollider>(); bc.center = new Vector3(0, -.25f, 0); bc.size = new Vector3(1.8f, .5f, 8.4f);
             var log = Put("VIS_V6_DeadLog_A", bridge.transform, new Vector3(0, -.5f, 22f), 90f, 1f);
             log.transform.localScale = new Vector3(2.6f, 1.3f, 1.3f);
+            // V16: la caja de paso sube hasta la cresta del tronco (antes quedaba por debajo y las botas se hundían).
+            var logRs = log.GetComponentsInChildren<Renderer>(); var logB = logRs[0].bounds; foreach (var lr in logRs) logB.Encapsulate(lr.bounds);
+            float crest = logB.max.y - .04f - bridge.transform.position.y;
+            bc.center = new Vector3(0, crest - .25f, 0);
             var living = Variant("M_DeadLog", "M_Claro_TroncoVivo", m => m.SetColor("_BaseColor", new Color(.66f, .74f, .5f)));
             foreach (var r in log.GetComponentsInChildren<Renderer>()) r.sharedMaterial = living;
             for (float z = 18.6f; z <= 25.4f; z += 1.1f)
@@ -411,10 +415,13 @@ namespace Bosque.LevelEditor
             var musGo = new GameObject("Musica"); musGo.transform.SetParent(audio.transform, false);
             musGo.AddComponent<AudioSource>().clip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Bosque/Audio/Music/MUS_Bosque_Hermoso.ogg");
             var music = musGo.AddComponent<MusicPlayer>();
+            music.SetDegradedClip(AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Bosque/Audio/Music/MUS_Bosque_Apagado.ogg"));   // V16: pad sombrío hasta restaurar
             audio.AddComponent<ClaroAudioBridge>().Configure(session, sfx, ac, music, guardiana.GetComponent<CharacterAnimationDriver>());
 
             RenderSettings.fog = true; RenderSettings.fogMode = FogMode.ExponentialSquared;
             EditorSceneManager.MarkSceneDirty(scene);
+            var solid = Bosque.LevelTools.SolidPropColliders.Apply();   // V16: lo que se ve sólido, lo es
+            Debug.Log($"[Solidez] {ScenePath}: {solid.added} colisionadores añadidos, {solid.alreadySolid} ya sólidos.");
             if (!EditorSceneManager.SaveScene(scene, ScenePath)) throw new Exception("No se pudo guardar " + ScenePath);
             int renderersD = degraded.GetComponentsInChildren<Renderer>(true).Length, renderersR = restored.GetComponentsInChildren<Renderer>(true).Length;
             Debug.Log($"[Claro] Escena guardada: {points.Count} lechos ({HumidPoints.Length} húmedos), renderers degradado {renderersD}, restaurado {renderersR}.");

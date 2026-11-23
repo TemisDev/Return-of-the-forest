@@ -55,14 +55,14 @@ namespace Bosque.UI
 
         public static GameObject Controls(Transform parent, Action onBack)
         {
-            var card = Card(parent, "PanelControles", "Controles", new Vector2(880, 760));
+            var card = Card(parent, "PanelControles", "Controles", new Vector2(880, 840));
             (string key, string what)[] rows =
             {
                 ("W A S D", "Moverse"), ("Ratón", "Mirar alrededor"), ("Shift", "Caminar despacio"), ("Espacio", "Saltar"),
                 ("E", "Interactuar: retirar, recoger, colocar"), ("Q", "Crecimiento (tras recuperar el arroyo)"),
-                ("R", "Reiniciar la zona"), ("F1", "Ayuda de la zona"), ("Esc", "Pausa"),
+                ("Tab", "Inventario y cuaderno"), ("R", "Reiniciar la zona"), ("F1", "Ayuda de la zona"), ("Esc", "Pausa"),
             };
-            var list = Ui.Rect("Lista", card).Stretch(90, 90, 140, 130);
+            var list = Ui.Rect("Lista", card).Stretch(90, 90, 140, 118);
             Ui.Column(list, 8, TextAnchor.UpperCenter);
             foreach (var (key, what) in rows)
             {

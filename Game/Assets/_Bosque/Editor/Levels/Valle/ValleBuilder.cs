@@ -409,7 +409,17 @@ namespace Bosque.LevelEditor
             string path = $"{Root}/Prefabs/Arboles/PF_Valle_{v6.Replace("VIS_V6_", "")}.prefab";
             var go = (GameObject)PrefabUtility.InstantiatePrefab(B.Prefab(v6));
             PrefabUtility.UnpackPrefabInstance(go, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
-            var cap = go.AddComponent<CapsuleCollider>(); cap.radius = .32f; cap.height = 4f; cap.center = new Vector3(0, 2f, 0);
+            // V16: el tronco de estos modelos no está en el origen (0,8 m de desfase): la cápsula va sobre el tronco medido.
+            // El Terrain solo usa el colisionador de la raíz del prefab, así que se copia ahí con su centro desplazado.
+            var trunk = Bosque.LevelTools.SolidPropColliders.TrunkCapsule(go);
+            var cap = go.AddComponent<CapsuleCollider>(); cap.height = 4f;
+            if (trunk != null)
+            {
+                var local = go.transform.InverseTransformPoint(trunk.transform.position);
+                cap.radius = Mathf.Max(.18f, trunk.radius); cap.center = new Vector3(local.x, 2f, local.z);
+                Object.DestroyImmediate(trunk.gameObject);
+            }
+            else { cap.radius = .32f; cap.center = new Vector3(0, 2f, 0); }
             var saved = PrefabUtility.SaveAsPrefabAsset(go, path);
             Object.DestroyImmediate(go);
             return saved;
@@ -917,9 +927,12 @@ namespace Bosque.LevelEditor
             var musGo = new GameObject("Musica"); musGo.transform.SetParent(audio.transform, false);
             musGo.AddComponent<AudioSource>().clip = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Bosque/Audio/Music/MUS_Bosque_Hermoso.ogg");
             var music = musGo.AddComponent<MusicPlayer>();
+            music.SetDegradedClip(AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Bosque/Audio/Music/MUS_Bosque_Apagado.ogg"));   // V16: pad sombrío hasta restaurar
             audio.AddComponent<ValleAudioBridge>().Configure(session, sfx, ac, music, guardiana.GetComponent<CharacterAnimationDriver>());
 
             EditorSceneManager.MarkSceneDirty(scene);
+            var solid = Bosque.LevelTools.SolidPropColliders.Apply();   // V16: lo que se ve sólido, lo es
+            Debug.Log($"[Solidez] {ScenePath}: {solid.added} colisionadores añadidos, {solid.alreadySolid} ya sólidos.");
             if (!EditorSceneManager.SaveScene(scene, ScenePath)) throw new Exception("No se pudo guardar " + ScenePath);
             int lit = sectorItems.Sum(s => s.Count), wd = sectorWood.Sum(s => s.Count);
             Debug.Log($"[Valle] Escena guardada: {lit} residuos, {wd} maderas, {bins.Count} contenedores, {treeSpots.Count} árboles, " +
