@@ -1,15 +1,19 @@
 using Bosque.Interaction;
+using Bosque.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Bosque.Session
 {
     // Replaceable prototype view. All state and commands belong to ArroyoSession.
-    public sealed class ArroyoPrototypeHud : MonoBehaviour
+    public sealed class ArroyoPrototypeHud : MonoBehaviour, IZoneHud
     {
         [SerializeField] private ArroyoSession session;
         [SerializeField] private PlayerInteractor interactor;
         [SerializeField] private Texture2D interactionIcon, progressIcon, restorationIcon, exitIcon;
+        [SerializeField, Tooltip("Si hay una zona siguiente, al completar se anuncia la habilidad nueva en vez del final.")]
+        private string nextZoneTitle;
+        public void ConfigureNextZone(string title) => nextZoneTitle = title;
         private GUIStyle title, body, small, interaction;
         private bool helpVisible;
         private int lastShownRemoved = -1, lastShownTotal = -1;
@@ -23,13 +27,40 @@ namespace Bosque.Session
         { interactionIcon = interact; progressIcon = progress; restorationIcon = restore; exitIcon = exit; }
         private void Update()
         {
-            if (!Application.isFocused || Keyboard.current == null) return;
+            if (!Application.isFocused || Keyboard.current == null || GamePause.IsPaused) return;
             if (Keyboard.current.f1Key.wasPressedThisFrame) helpVisible = !helpVisible;
             if (Keyboard.current.rKey.wasPressedThisFrame) { session.Restart(); helpVisible = false; }
         }
+        // ---- IZoneHud (interfaz común uGUI; el dibujo IMGUI de abajo queda como respaldo sin la capa de presentación)
+        public int ZoneNumber => 1;
+        public string ZoneTitle => "El arroyo dormido";
+        public string Objective
+        {
+            get
+            {
+                var p = session != null ? session.Progress : null;
+                if (p == null) return "";
+                return p.IsCompleted ? "Arroyo recuperado. ¡Gracias por cuidarlo!" :
+                    p.IsRestored ? "El agua volvió. Sigue el sendero hasta el arco." : "Retira los tres bloqueos del cauce para devolver el agua.";
+            }
+        }
+        public int ProgressDone => session != null && session.Progress != null ? session.Progress.RemovedCount : 0;
+        public int ProgressTotal => session != null && session.Progress != null ? session.Progress.TotalCount : 0;
+        public string ProgressLabel => "obstáculos retirados";
+        public string PromptKey => interactor != null && interactor.Target != null ? "E" : null;
+        public string PromptText => interactor != null ? interactor.Prompt : null;
+        public string HintTitle => null;
+        public string HintText => null;
+        public string Tip => "Acércate a los bloqueos desde la orilla, sin subirte encima.";
+        public bool HelpVisible => helpVisible;
+        public string HelpTitle => "Recupera el arroyo";
+        public string HelpText => "E: retirar un bloqueo del cauce (ramas, rocas, tronco)\nAcércate desde la orilla, sin subir al obstáculo\nCon el agua de vuelta, sigue el sendero hasta el arco\nWASD · Shift: caminar · Ratón: mirar · Espacio: saltar\nR: reiniciar · Esc: pausa · F1: cerrar ayuda";
+        public bool ShowEnding => false;
+        public void RestartZone() { if (session != null) session.Restart(); helpVisible = false; }
+
         private void OnGUI()
         {
-            if (session == null || session.Progress == null) return;
+            if (session == null || session.Progress == null || Presentation.HudActive) return;
             if (title == null)
             {
                 title = new GUIStyle(GUI.skin.label) { fontSize = 24, fontStyle = FontStyle.Bold, wordWrap = true };
@@ -58,7 +89,7 @@ namespace Bosque.Session
             for (int i = 0; i < p.TotalCount; i++)
                 Icon(new Rect(44 + i * 29, 165, 23, 23), progressIcon, i < p.RemovedCount ? Accent : new Color(.48f, .51f, .45f));
             GUI.Label(new Rect(150, 162, 280, 30), progressText, body);
-            GUI.Label(new Rect(44, 205, 410, 24), "WASD · Ratón · Espacio    F1: ayuda", small);
+            GUI.Label(new Rect(44, 205, 410, 24), "WASD · Ratón · Espacio · E: retirar · F1: ayuda", small);
             if (interactor != null && interactor.Target != null)
             {
                 Panel(new Rect(378, 586, 524, 76));
@@ -68,7 +99,15 @@ namespace Bosque.Session
             Panel(new Rect(24, 670, 900, 32));
             GUI.Label(new Rect(36, 676, 880, 24),
                 "Desde la orilla, sin subir al bloqueo.   R: reiniciar · F1: ayuda · Esc: cursor · Clic: volver", small);
-            if (p.IsCompleted)
+            if (p.IsCompleted && !string.IsNullOrEmpty(nextZoneTitle))
+            {
+                Panel(new Rect(300, 470, 680, 150));
+                GUI.Label(new Rect(320, 486, 640, 32), "Nueva habilidad: CRECIMIENTO  [Q]", interaction);
+                GUI.Label(new Rect(320, 524, 636, 65),
+                    "El agua volvió al arroyo. Ahora puedes hacer brotar plantas nativas donde el suelo tenga humedad.", body);
+                GUI.Label(new Rect(320, 593, 636, 22), "Siguiente zona: " + nextZoneTitle + "…", small);
+            }
+            else if (p.IsCompleted)
             {
                 Panel(new Rect(300, 470, 680, 150));
                 GUI.Label(new Rect(320, 486, 640, 32), "ODS 15 · Vida de ecosistemas terrestres", interaction);
@@ -80,7 +119,7 @@ namespace Bosque.Session
                 Panel(new Rect(350, 250, 580, 260));
                 GUI.Label(new Rect(374, 270, 530, 35), "RECUPERA EL ARROYO", title);
                 GUI.Label(new Rect(374, 316, 530, 170),
-                    "WASD: moverte · Ratón: mirar\nEspacio: saltar · E: retirar un bloqueo\nAcércate desde la orilla, sin subir al obstáculo.\nR: reiniciar · Esc: liberar el cursor\nF1: cerrar ayuda\nEl progreso no se guarda al cerrar.", body);
+                    "WASD: moverte · Shift: caminar · Ratón: mirar\nEspacio: saltar · E: retirar un bloqueo\nAcércate desde la orilla, sin subir al obstáculo.\nR: reiniciar · Esc: liberar el cursor\nF1: cerrar ayuda\nEl progreso no se guarda al cerrar.", body);
             }
             if (p.IsCompleted && Cursor.lockState != CursorLockMode.Locked)
             {

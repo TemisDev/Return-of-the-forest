@@ -33,8 +33,9 @@ namespace Bosque.Player
         {
             if (target == null || dt <= 0f) return;
             lookDelta = Vector2.ClampMagnitude(lookDelta, 256f);
-            yaw = Mathf.Repeat(yaw + lookDelta.x * .12f, 360f);
-            pitch = Mathf.Clamp(pitch - lookDelta.y * .12f, -20f, 65f);
+            float k = .12f * CameraSettings.Sensitivity;
+            yaw = Mathf.Repeat(yaw + lookDelta.x * k, 360f);
+            pitch = Mathf.Clamp(pitch - lookDelta.y * k * (CameraSettings.InvertY ? -1f : 1f), -20f, 65f);
             var focus = target.position + Vector3.up * focusHeight;
             var desired = focus + Quaternion.Euler(pitch, yaw, 0) * Vector3.back * distance;
             desired = ResolveObstruction(focus, desired);

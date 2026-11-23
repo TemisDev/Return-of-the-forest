@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cef8818234028f4f803bb924ecd91f9, type: 3}
+  m_Name: BosqueUiTheme
+  m_EditorClassIdentifier: Bosque.Runtime::Bosque.UI.UiTheme
+  body: {fileID: 11400000, guid: 0e5e31a88307bb144bc0178ba0da970d, type: 2}
+  bold: {fileID: 11400000, guid: abad9e79560e41643b123600d140e4b2, type: 2}
+  title: {fileID: 11400000, guid: d0a1503ba4844f04190f33d6919fbd96, type: 2}
+  italic: {fileID: 11400000, guid: 6b0bc33eec4a5fe4593cdd4478e35e1c, type: 2}
+  handwriting: {fileID: 11400000, guid: 60bf615f59914fa42b034385221f0df1, type: 2}
+  mapSerif: {fileID: 11400000, guid: fa2b63d80f97b894a907b121f28a82f8, type: 2}
+  mapSerifItalic: {fileID: 11400000, guid: 4da0cfe5062777a40b6d68b83fdd6263, type: 2}
+  mapCaps: {fileID: 11400000, guid: 1009acd69ab0e7a489923e08e6cea10a, type: 2}
+  mapCapsBold: {fileID: 11400000, guid: 1371663b068b64c4fb9f41e65e3f692d, type: 2}
+  panel: {fileID: 21300000, guid: 5a1ddeb4ce194e04289bd9c7b80aa0e2, type: 3}
+  paper: {fileID: 21300000, guid: bb243d54154c66c4ab3623603537a90e, type: 3}
+  pill: {fileID: 21300000, guid: 26c4b18a93f6de94d8279c6642870707, type: 3}
+  glow: {fileID: 21300000, guid: 8dab6bb4a59bd1d449d1c3bc6d1d1db3, type: 3}
+  interactionIcon: {fileID: 2800000, guid: a9149c0475ff7d74c93f75a0e0064bba, type: 3}
+  progressIcon: {fileID: 2800000, guid: 218bd938561b9a8448b516705a201281, type: 3}
+  restorationIcon: {fileID: 2800000, guid: c3599dfc72418534fa5a9214fa55294b, type: 3}
+  exitIcon: {fileID: 2800000, guid: eb660d99267d6fe4eab634095eaef1df, type: 3}
+  credits: {fileID: 4900000, guid: 4aefc2605f629db4d8789cfa6710e848, type: 3}

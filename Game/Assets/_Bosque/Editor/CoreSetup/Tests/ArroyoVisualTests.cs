@@ -67,8 +67,12 @@ namespace Bosque.Tests
                         for (int submesh = 0; submesh < filter.sharedMesh.subMeshCount; submesh++)
                             triangles += (int)filter.sharedMesh.GetIndexCount(submesh) / 3;
                 }
-                Debug.Log("[ArteV3] Estado " + state + ": " + activeRenderers + " renderers, " + triangles + " triángulos.");
-                Assert.That(activeRenderers, Is.LessThan(180)); Assert.That(triangles, Is.LessThan(20000));
+                Debug.Log("[ArteV6] Estado " + state + ": " + activeRenderers + " renderers, " + triangles + " triángulos.");
+                // QA6-016: presupuesto del arte V6 (antes V3: <180 renderers, <20 000 triángulos). Es una guarda de
+                // regresión con ~10 % de margen sobre lo medido en la integración (degradado 590 / 2,04 M;
+                // restaurado 1100 / 2,70 M, sumando todas las mallas de LOD). La aceptación real de rendimiento es
+                // el p95 del verificador de builds (Tools/Verify-ArroyoV4.ps1) en el equipo de referencia.
+                Assert.That(activeRenderers, Is.LessThan(1250)); Assert.That(triangles, Is.LessThan(3000000));
                 if (state == 0)
                 { session.Progress.TryRemove("arroyo.log"); session.Progress.TryRemove("arroyo.rocks"); session.Progress.TryRemove("arroyo.branches"); }
             }

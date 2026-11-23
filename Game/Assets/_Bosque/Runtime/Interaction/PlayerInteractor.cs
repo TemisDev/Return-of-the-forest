@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,8 @@ namespace Bosque.Interaction
         private readonly Collider[] candidates = new Collider[128];
         private readonly RaycastHit[] sightHits = new RaycastHit[128];
         public InteractionTarget Target { get; private set; }
+        /// <summary>Se emite una sola vez por interacción aceptada (animación y sonido; no cambia el progreso).</summary>
+        public event Action<InteractionTarget> Interacted;
         public Vector3 Origin => transform.position + Vector3.up * .9f;
         public float MaxDistance => maxDistance;
         public bool CanReach(InteractionTarget target, Collider shape) =>
@@ -65,8 +68,10 @@ namespace Bosque.Interaction
             if (!isActiveAndEnabled) { ClearTarget(); return false; }
             Scan(); // Never execute a cached target after moving or changing availability.
             if (Target == null) return false;
-            bool result = Target.TryInteract(this);
+            var target = Target;
+            bool result = target.TryInteract(this);
             Scan();
+            if (result) Interacted?.Invoke(target);
             return result;
         }
     }

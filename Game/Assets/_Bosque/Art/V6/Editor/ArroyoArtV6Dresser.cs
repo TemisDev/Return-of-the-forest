@@ -33,13 +33,34 @@ namespace Bosque.ArtV6.Editor
         public static void BuildShowcase()
         {
             Directory.CreateDirectory(Path.GetDirectoryName(ShowcaseScene));
-            if (File.Exists(ShowcaseScene)) AssetDatabase.DeleteAsset(ShowcaseScene);
-            if (!AssetDatabase.CopyAsset(SourceScene, ShowcaseScene)) throw new Exception("No se pudo copiar la escena base");
+            if (File.Exists(ShowcaseScene))
+            {
+                // Reemplaza el contenido conservando el .meta: el GUID de la escena de muestra no cambia entre ejecuciones.
+                File.Copy(SourceScene, ShowcaseScene, true);
+                AssetDatabase.ImportAsset(ShowcaseScene, ImportAssetOptions.ForceUpdate);
+            }
+            else if (!AssetDatabase.CopyAsset(SourceScene, ShowcaseScene)) throw new Exception("No se pudo copiar la escena base");
             var scene = EditorSceneManager.OpenScene(ShowcaseScene, OpenSceneMode.Single);
             Dress();
             EditorSceneManager.MarkSceneDirty(scene);
             EditorSceneManager.SaveScene(scene);
             Debug.Log("[V6] Escena de muestra lista: " + ShowcaseScene);
+        }
+
+        /// <summary>Integración: viste y guarda la escena principal (ArroyoPlayable). Uso en batch.</summary>
+        public static void DressPlayableBatch()
+        {
+            int code = 0;
+            try
+            {
+                var scene = EditorSceneManager.OpenScene(SourceScene, OpenSceneMode.Single);
+                Dress();
+                EditorSceneManager.MarkSceneDirty(scene);
+                if (!EditorSceneManager.SaveScene(scene)) throw new Exception("No se pudo guardar " + SourceScene);
+                Debug.Log("[V6] Escena principal vestida y guardada: " + SourceScene);
+            }
+            catch (Exception e) { Debug.LogException(e); code = 1; }
+            EditorApplication.Exit(code);
         }
 
         // ------------------------------------------------------------------ vestido
@@ -67,12 +88,14 @@ namespace Bosque.ArtV6.Editor
             Obstacles();
             ExitBarrier();
             Gate(root, deg, res);
+            OptionalLog(root);
             Trees(deg, res);
             Rocks(deg, res);
             Vegetation(deg, res);
             Backdrop(deg, res);
             Particles(deg, res);
-            Ambience(root, restored.gameObject);
+            var ambience = Ambience(root, restored.gameObject);
+            SingleRestorationEffect(root, ambience);
             NoFarShadows(deg); NoFarShadows(res);
             Debug.Log($"[V6] Escena vestida. Degradado: {Count(deg)} renderers, restaurado: {Count(res)} renderers.");
         }
@@ -227,7 +250,12 @@ namespace Bosque.ArtV6.Editor
 
             // Tronco caído (arroyo.log). Collider 2.9 x 0.8 x 0.8, centro y=-0.2.
             var v1 = Visual("Obstacle_01");
-            Local(Put("VIS_V6_DeadLog_A", v1, Vector3.zero, Vector3.zero, 1), new Vector3(0.05f, -0.42f, 0f), new Vector3(0, 3, 0), new Vector3(0.88f, 1.45f, 1.45f));
+            var log1 = Put("VIS_V6_DeadLog_A", v1, Vector3.zero, Vector3.zero, 1);
+            Local(log1, new Vector3(0.05f, -0.42f, 0f), new Vector3(0, 3, 0), new Vector3(0.88f, 1.45f, 1.45f));
+            // QA6-004: el tronco termina en el borde de la orilla (x≈-1), no bajo los pies de quien pulsa E,
+            // y sigue cubriendo todo el ancho del collider.
+            var c1 = v1.parent.GetComponent<Collider>();
+            if (c1 != null) FitSpanX(log1, c1.bounds.min.x - 0.25f, Mathf.Max(c1.bounds.max.x + 0.03f, -1.02f));
             // Escombros apilados aguas arriba: leen como dique que corta el agua.
             Local(Put("VIS_V6_RootCluster_A", v1, Vector3.zero, Vector3.zero, 1), new Vector3(-0.5f, -0.42f, -0.3f), new Vector3(0, 170, 0), new Vector3(0.42f, 0.45f, 0.3f));
             Local(Put("VIS_V6_BoulderDry_A", v1, Vector3.zero, Vector3.zero, 1), new Vector3(0.9f, -0.45f, -0.35f), new Vector3(0, 40, 0), Vector3.one * 0.42f);
@@ -256,6 +284,16 @@ namespace Bosque.ArtV6.Editor
             go.transform.localPosition = p; go.transform.localRotation = Quaternion.Euler(e); go.transform.localScale = s;
         }
 
+        /// <summary>Estira o encoge un objeto alargado en X (su eje largo) para que ocupe [minX, maxX] del mundo.</summary>
+        private static void FitSpanX(GameObject go, float minX, float maxX)
+        {
+            var b = MeshBounds(go, true);
+            float k = (maxX - minX) / Mathf.Max(0.01f, b.size.x);
+            var s = go.transform.localScale; s.x *= k; go.transform.localScale = s;
+            b = MeshBounds(go, true);
+            go.transform.position += new Vector3(maxX - b.max.x, 0, 0);
+        }
+
         // ------------------------------------------------------------------ barrera de salida
         private static void ExitBarrier()
         {
@@ -280,6 +318,19 @@ namespace Bosque.ArtV6.Editor
             Put("VIS_V6_RootCluster_A", g, new Vector3(-0.6f, 0f, z + 0.2f), new Vector3(0, 90, 0), 0.6f);
             Put("VIS_V6_RootCluster_A", g, new Vector3(3.0f, 0f, z - 0.2f), new Vector3(0, 250, 0), 0.65f);
             Put("VIS_V6_DeadLog_A", g, new Vector3(1.5f, 0.05f, z + 0.25f), new Vector3(0, 2, 0), 1, new Vector3(1.2f, 0.55f, 0.55f));
+
+            // QA6-001: nada de la maraña sobresale por delante del collider de la barrera (lado del jugador):
+            // lo que asoma se desplaza hacia la salida, que solo es accesible cuando la barrera ya no existe.
+            var col = blocker.GetComponent<Collider>();
+            if (col != null)
+            {
+                float front = col.bounds.min.z - 0.05f;
+                foreach (Transform piece in g)
+                {
+                    var b = MeshBounds(piece.gameObject, true);
+                    if (b.min.z < front) piece.position += new Vector3(0, 0, front - b.min.z);
+                }
+            }
         }
 
         // ------------------------------------------------------------------ arco de salida
@@ -308,11 +359,34 @@ namespace Bosque.ArtV6.Editor
             {
                 // En la orilla jugable la copa debe quedar por encima de la cámara (≈2.7 m): árbol alto y esbelto.
                 bool onBank = t.position.y < 1f;
-                string kind = onBank ? "B_Tall" : (i % 2 == 0 ? "A" : "B");
-                float s = onBank ? Rand(1.85f, 2.05f) : kind == "A" ? Rand(1.6f, 1.9f) : Rand(1.35f, 1.6f);
+                // Los árboles con collider usan el modelo B: su tronco es recto hasta los 3 m del collider
+                // (el A se bifurca antes y no puede ocupar el collider entero, QA6-014).
+                string kind = onBank ? "B_Tall" : "B";
+                float s = onBank ? Rand(1.85f, 2.05f) : (i % 2 == 0 ? Rand(1.6f, 1.9f) : Rand(1.35f, 1.6f));
                 float yaw = Rand(0, 360);
-                Put($"VIS_V6_Tree{kind}_Green", tr, t.position, new Vector3(0, yaw, 0), s);
-                Put($"VIS_V6_Tree{kind}_Dead", td, t.position, new Vector3(0, yaw, 0), s);
+                var green = Put($"VIS_V6_Tree{kind}_Green", tr, t.position, new Vector3(0, yaw, 0), s);
+                var dead = Put($"VIS_V6_Tree{kind}_Dead", td, t.position, new Vector3(0, yaw, 0), s);
+                var trunk = t.GetComponentInChildren<CapsuleCollider>(true);
+                if (trunk != null)
+                {
+                    if (onBank)
+                    {
+                        // QA6-002: de 24 orientaciones, la que deja menos corteza y ramas a la altura del cuerpo
+                        // fuera del collider del tronco y dentro de la orilla transitable.
+                        float best = yaw; int bestScore = int.MaxValue;
+                        for (int k = 0; k < 24; k++)
+                        {
+                            float cand = yaw + k * 15f;
+                            green.transform.SetPositionAndRotation(t.position, Quaternion.Euler(0, cand, 0));
+                            AlignTrunkToCollider(green, null, trunk, false);
+                            int score = BankIntrusion(green, trunk);
+                            if (score < bestScore) { bestScore = score; best = cand; }
+                        }
+                        foreach (var go in new[] { green, dead }) go.transform.SetPositionAndRotation(t.position, Quaternion.Euler(0, best, 0));
+                        Debug.Log($"[V6] {t.name}: orientación {best % 360:F0}°, vértices de madera en el paso {bestScore}");
+                    }
+                    AlignTrunkToCollider(green, dead, trunk); // QA6-014
+                }
                 i++;
             }
             // Bosque de fondo sobre los muros y más allá de la barranca este
@@ -327,9 +401,137 @@ namespace Bosque.ArtV6.Editor
                 if (_rng.NextDouble() < 0.6) Put($"VIS_V6_Tree{kind}_Dead", td, p, new Vector3(0, yaw, 0), s);
                 else Put("VIS_V6_Stump_A", td, p, new Vector3(0, yaw, 0), Rand(0.7f, 0.9f));
             }
-            // Tocones talados en la orilla (relato de deforestación) solo en degradado
-            foreach (var p in new[] { new Vector3(5.3f, 0, 12f), new Vector3(5.2f, 0, 21f), new Vector3(5.4f, 0, 27f), new Vector3(-0.4f, 0, 36.5f), new Vector3(5.0f, 0, 1.5f) })
+            // Tocones talados (relato de deforestación) solo en degradado. QA6-003: van en lo alto del muro oeste,
+            // visibles desde la orilla pero fuera del paso, para que nadie atraviese un tocón sin collider.
+            foreach (var p in new[] { new Vector3(-4.55f, 3f, 6.5f), new Vector3(-4.7f, 3f, 10.5f), new Vector3(-4.5f, 3f, 20.5f), new Vector3(-4.65f, 3f, 23.5f), new Vector3(-4.6f, 3f, 32f) })
                 Put("VIS_V6_Stump_A", td, p, new Vector3(0, Rand(0, 360), 0), Rand(0.45f, 0.6f));
+        }
+
+        /// <summary>
+        /// El pivote de los árboles V6 no está sobre el tronco. Endereza y desplaza ambos estados para que el
+        /// tronco visible (submalla de corteza) ocupe el collider del tronco de juego, que no se toca.
+        /// </summary>
+        private static void AlignTrunkToCollider(GameObject green, GameObject dead, CapsuleCollider trunk, bool log = true)
+        {
+            var cb = trunk.bounds;
+            float y0 = cb.min.y, y1 = cb.max.y;
+            Vector3 target = new Vector3(cb.center.x, y0, cb.center.z);
+            for (int pass = 0; pass < 3; pass++)
+            {
+                if (!BarkCentroid(green, y0, y0 + 0.5f, out var bottom, out _) || !BarkCentroid(green, y1 - 0.5f, y1, out var top, out _))
+                {
+                    Debug.LogWarning($"[V6] {green.name}: no se encontró corteza a la altura del collider {trunk.transform.parent?.name}");
+                    return;
+                }
+                // Enderezar el tramo de tronco que cubre el collider y llevar su base al centro del collider.
+                var straighten = Quaternion.FromToRotation(top - bottom, Vector3.up);
+                foreach (var go in new[] { green, dead })
+                {
+                    if (go == null) continue;
+                    go.transform.rotation = straighten * go.transform.rotation;
+                    go.transform.position = bottom + straighten * (go.transform.position - bottom) + new Vector3(target.x - bottom.x, 0, target.z - bottom.z);
+                }
+            }
+            if (!log) return;
+            BarkCentroid(green, y0, y0 + 0.5f, out var b2, out float rb);
+            BarkCentroid(green, y1 - 0.5f, y1, out var t2, out float rt);
+            Debug.Log($"[V6] Tronco {trunk.transform.parent?.name}: base a {Horizontal(b2 - target):F3} m, " +
+                      $"arriba a {Horizontal(t2 - target):F3} m del collider; radio corteza {rb:F2}/{rt:F2} m (collider {cb.extents.x:F2} m)");
+        }
+
+        /// <summary>Vértices de madera (corteza y ramas) entre 0,1 y 1,9 m, dentro de la orilla transitable y fuera del collider del tronco.</summary>
+        private static int BankIntrusion(GameObject tree, CapsuleCollider trunk)
+        {
+            var c = trunk.bounds.center; float clear = trunk.bounds.extents.x + 0.3f; int n = 0;
+            foreach (var mf in tree.GetComponentsInChildren<MeshFilter>(true))
+            {
+                var r = mf.GetComponent<MeshRenderer>();
+                if (r == null || mf.sharedMesh == null || mf.name.Contains("LOD1") || r.sharedMaterials.Length == 0) continue;
+                if (r.sharedMaterials[0] == null || !r.sharedMaterials[0].name.Contains("Bark")) continue;
+                var m = mf.transform.localToWorldMatrix;
+                foreach (var v in mf.sharedMesh.vertices)
+                {
+                    var w = m.MultiplyPoint3x4(v);
+                    if (w.y < 0.1f || w.y > 1.9f || w.x < -0.95f || w.x > 5.95f) continue;
+                    if (new Vector2(w.x - c.x, w.z - c.z).magnitude > clear) n++;
+                }
+            }
+            return n;
+        }
+
+        private static float Horizontal(Vector3 v) => new Vector2(v.x, v.z).magnitude;
+
+        /// <summary>Centro (xz) y radio medio de la corteza del tronco entre dos alturas del mundo.</summary>
+        private static bool BarkCentroid(GameObject tree, float yMin, float yMax, out Vector3 center, out float radius)
+        {
+            center = Vector3.zero; radius = 0;
+            var pts = new List<Vector3>();
+            foreach (var mf in tree.GetComponentsInChildren<MeshFilter>(true))
+            {
+                var r = mf.GetComponent<MeshRenderer>();
+                if (r == null || mf.sharedMesh == null || r.sharedMaterials.Length == 0) continue;
+                var mat = r.sharedMaterials[0];
+                if (mat == null || !mat.name.Contains("Bark")) continue;
+                var mesh = mf.sharedMesh; var verts = mesh.vertices;
+                var used = new HashSet<int>(mesh.GetTriangles(0));
+                var m = mf.transform.localToWorldMatrix;
+                foreach (int i in used)
+                {
+                    var w = m.MultiplyPoint3x4(verts[i]);
+                    if (w.y >= yMin && w.y <= yMax) pts.Add(w);
+                }
+            }
+            if (pts.Count < 6) return false;
+            // Mediana en xz: ignora el arranque de ramas que comparten la submalla de corteza.
+            float mx = Median(pts.Select(p => p.x)), mz = Median(pts.Select(p => p.z));
+            var near = pts.Where(p => new Vector2(p.x - mx, p.z - mz).magnitude < 0.6f).ToList();
+            if (near.Count < 6) near = pts;
+            center = new Vector3(near.Average(p => p.x), (yMin + yMax) * 0.5f, near.Average(p => p.z));
+            var c = center;
+            radius = Median(near.Select(p => new Vector2(p.x - c.x, p.z - c.z).magnitude));
+            return true;
+        }
+
+        private static float Median(IEnumerable<float> values)
+        {
+            var a = values.OrderBy(v => v).ToArray();
+            return a.Length == 0 ? 0 : a[a.Length / 2];
+        }
+
+        /// <summary>QA6-013: el tronco opcional del sendero conserva su collider; necesita un visual que lo ocupe.</summary>
+        private static void OptionalLog(Transform root)
+        {
+            var src = Find("LowLog_Optional");
+            var cap = src ? src.GetComponent<CapsuleCollider>() : null;
+            if (cap == null) { Debug.LogWarning("[V6] Sin LowLog_Optional"); return; }
+            var gs = root.Find("V6_Static") ?? Group(root, "V6_Static");
+            var log = Put("VIS_V6_DeadLog_A", gs, Vector3.zero, Vector3.zero, 1);
+            log.name = Tag + "_LowLog_Optional";
+            // Eje largo del collider en el mundo (dirección de la cápsula) y tamaño del modelo sin escalar.
+            var axisLocal = cap.direction == 0 ? Vector3.right : cap.direction == 1 ? Vector3.up : Vector3.forward;
+            var axis = src.TransformDirection(axisLocal).normalized;
+            float length = cap.height * Mathf.Abs(Vector3.Dot(src.lossyScale, axisLocal));
+            float radius = cap.bounds.extents.y; // tronco tumbado: el radio es la media altura de su caja
+            var mb = MeshBounds(log);
+            var yaw = Quaternion.FromToRotation(Vector3.right, new Vector3(axis.x, 0, axis.z).normalized);
+            log.transform.rotation = yaw;
+            // Algo más grueso que el collider para que el jugador choque con la madera, no con el aire.
+            float thick = radius * 2f * 1.15f;
+            log.transform.localScale = new Vector3(length / mb.size.x, thick / mb.size.y, thick / mb.size.z);
+            var b = MeshBounds(log, true);
+            log.transform.position += cap.bounds.center - b.center;
+            Debug.Log($"[V6] Tronco opcional: visual {b.size.ToString("F2")} sobre collider {cap.bounds.size.ToString("F2")}");
+        }
+
+        /// <summary>Caja de los renderers; con world=false, la del modelo en rotación/escala identidad.</summary>
+        private static Bounds MeshBounds(GameObject go, bool world = false)
+        {
+            var rot = go.transform.rotation; var sc = go.transform.localScale; var pos = go.transform.position;
+            if (!world) { go.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity); go.transform.localScale = Vector3.one; }
+            var rs = go.GetComponentsInChildren<Renderer>(true);
+            var b = rs[0].bounds; foreach (var r in rs) b.Encapsulate(r.bounds);
+            if (!world) { go.transform.SetPositionAndRotation(pos, rot); go.transform.localScale = sc; }
+            return b;
         }
 
         // ------------------------------------------------------------------ rocas
@@ -408,6 +610,12 @@ namespace Bosque.ArtV6.Editor
         // ------------------------------------------------------------------ vegetación
         private static float BankHeight(float x) => x > -0.95f && x < 5.95f ? 0f : (x < -4.05f && x > -5.45f ? 3f : float.NaN);
 
+        private static string PrefabRootName(Transform t)
+        {
+            var root = PrefabUtility.GetOutermostPrefabInstanceRoot(t.gameObject);
+            return root != null ? root.name : t.name;
+        }
+
         private static void Scatter(Transform parent, string[] prefabs, int count, Func<Vector3> sample, float minS, float maxS, bool alignRandom = true)
         {
             for (int i = 0; i < count; i++)
@@ -471,6 +679,13 @@ namespace Bosque.ArtV6.Editor
                 if (float.IsNaN(p.y)) continue;
                 Put(Pick(new[] { "VIS_V6_DryBranch_A", "VIS_V6_DryBranch_B", "VIS_V6_DryBranch_C" }), vd, p, new Vector3(0, Rand(0, 360), 0), Rand(0.8f, 1.4f));
             }
+            // Rendimiento: la vegetación baja (hierba, flores, helechos) no proyecta sombra; arbustos y árboles sí.
+            foreach (var r in vd.GetComponentsInChildren<Renderer>(true).Concat(vr.GetComponentsInChildren<Renderer>(true)))
+            {
+                var n = r.transform.root != null ? PrefabRootName(r.transform) : r.name;
+                if (n.Contains("Grass") || n.Contains("Flower") || n.Contains("Dandelion") || n.Contains("Fern"))
+                    r.shadowCastingMode = ShadowCastingMode.Off;
+            }
         }
 
         // ------------------------------------------------------------------ fondo de valle
@@ -492,8 +707,11 @@ namespace Bosque.ArtV6.Editor
             {
                 var p = new Vector3(Rand(14f, 36f), -11.5f, Rand(-12f, 50f));
                 string kind = _rng.NextDouble() < 0.5 ? "A" : "B"; float s = Rand(2.2f, 3.2f); float yaw = Rand(0, 360);
-                Put($"VIS_V6_Tree{kind}_Green", br, p, new Vector3(0, yaw, 0), s);
-                if (_rng.NextDouble() < 0.5) Put($"VIS_V6_Tree{kind}_Dead", bd, p, new Vector3(0, yaw, 0), s);
+                bool dead = _rng.NextDouble() < 0.5;
+                // Rendimiento (integración V6): las copas del fondo eran ~18 % del coste; se conserva uno de cada dos.
+                if (i % 2 == 1) continue;
+                Put($"VIS_V6_Tree{kind}_Green", br, p, new Vector3(0, yaw, 0), s * 1.1f);
+                if (dead) Put($"VIS_V6_Tree{kind}_Dead", bd, p, new Vector3(0, yaw, 0), s * 1.1f);
             }
             // Terreno alrededor del nivel (sin colliders): meseta oeste/norte/sur a la altura de los muros,
             // acantilado bajo el borde este y fondo del valle. Evita que el nivel parezca una isla flotante.
@@ -519,9 +737,11 @@ namespace Bosque.ArtV6.Editor
             {
                 var p = new Vector3(Rand(-26f, -7f), 3f, Rand(-14f, 52f));
                 string kind = _rng.NextDouble() < 0.5 ? "A" : "B"; float s = Rand(1.6f, 2.4f); float yaw = Rand(0, 360);
+                double r1 = _rng.NextDouble(), r2 = _rng.NextDouble(); float stumpScale = Rand(0.7f, 1f);
+                if (i % 3 == 2) continue; // rendimiento: dos de cada tres árboles de la meseta
                 Put($"VIS_V6_Tree{kind}_Green", br, p, new Vector3(0, yaw, 0), s);
-                if (_rng.NextDouble() < 0.45) Put($"VIS_V6_Tree{kind}_Dead", bd, p, new Vector3(0, yaw, 0), s);
-                else if (_rng.NextDouble() < 0.5) Put("VIS_V6_Stump_A", bd, p, new Vector3(0, yaw, 0), Rand(0.7f, 1f));
+                if (r1 < 0.45) Put($"VIS_V6_Tree{kind}_Dead", bd, p, new Vector3(0, yaw, 0), s);
+                else if (r2 < 0.5) Put("VIS_V6_Stump_A", bd, p, new Vector3(0, yaw, 0), stumpScale);
             }
         }
 
@@ -553,7 +773,38 @@ namespace Bosque.ArtV6.Editor
         }
 
         // ------------------------------------------------------------------ ambiente
-        private static void Ambience(Transform root, GameObject restored)
+        /// <summary>
+        /// QA6-009: un solo efecto de restauración. El RestorationFeedback de gameplay (que cuenta las presentaciones
+        /// y se limpia al reiniciar) pasa a reproducir una versión local de la ola V6; el sistema antiguo deja de verse
+        /// y el ambiente V6 ya no lanza su propia ola.
+        /// </summary>
+        private static void SingleRestorationEffect(Transform root, BosqueV6Ambience ambience)
+        {
+            var feedback = AllTransforms().SelectMany(t => t.GetComponents<MonoBehaviour>())
+                .FirstOrDefault(m => m != null && m.GetType().Name == "RestorationFeedback");
+            if (feedback == null) return; // escena sin gameplay: se queda la ola del ambiente
+            var prefab = AssetDatabase.LoadAssetAtPath<GameObject>($"{B.Root}/Particles/PFX_V6_RestorationWave.prefab");
+            var fx = (GameObject)PrefabUtility.InstantiatePrefab(prefab, root);
+            fx.name = Tag + "_RestorationFeedbackFX";
+            foreach (var ps in fx.GetComponentsInChildren<ParticleSystem>(true))
+            {
+                var main = ps.main; main.playOnAwake = false; main.stopAction = ParticleSystemStopAction.None;
+                var shape = ps.shape; var sc = shape.scale; shape.scale = new Vector3(Mathf.Min(sc.x, 7f), sc.y, Mathf.Min(sc.z, 7f));
+            }
+            var so = new SerializedObject(feedback);
+            var old = so.FindProperty("particles").objectReferenceValue as ParticleSystem;
+            if (old != null && old.gameObject != fx)
+            {
+                var oldMain = old.main; oldMain.playOnAwake = false;
+                foreach (var r in old.GetComponentsInChildren<ParticleSystemRenderer>(true)) r.enabled = false;
+            }
+            so.FindProperty("particles").objectReferenceValue = fx.GetComponent<ParticleSystem>();
+            so.ApplyModifiedPropertiesWithoutUndo();
+            ambience.restorationBurst = null;
+            Debug.Log($"[V6] Efecto de restauración único: {feedback.name} reproduce {fx.name}; sistema anterior oculto ({(old != null ? old.name : "ninguno")}).");
+        }
+
+        private static BosqueV6Ambience Ambience(Transform root, GameObject restored)
         {
             var amb = new GameObject("V6_Ambience").transform; amb.SetParent(root, false);
             Volume Vol(string name, string profile, float weight)
@@ -589,6 +840,7 @@ namespace Bosque.ArtV6.Editor
                 cam.farClipPlane = Mathf.Max(cam.farClipPlane, 250f);
             }
             a.ApplyImmediate(restored.activeInHierarchy);
+            return a;
         }
     }
 }
