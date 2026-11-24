@@ -1,0 +1,13 @@
+﻿ID,Campana,API,Intento,Estado,Build_ID,Commit_build,SHA256_EXE,Fecha_Lima,Argumentos,Codigo_salida,Cierre_normal_verificado,Log_Player,Log_Windows,Error_exacto,Comparativa_D3D11,Observaciones
+B-D3D12-1,BASE,D3D12,1,NO EJECUTADO,,,,,,,,,,,,
+B-D3D12-2,BASE,D3D12,2,NO EJECUTADO,,,,,,,,,,,,
+B-D3D12-3,BASE,D3D12,3,NO EJECUTADO,,,,,,,,,,,,
+B-D3D12-4,BASE,D3D12,4,NO EJECUTADO,,,,,,,,,,,,
+B-D3D12-5,BASE,D3D12,5,NO EJECUTADO,,,,,,,,,,,,
+B-D3D11-1,BASE,D3D11 contraste opcional,1,NO EJECUTADO,,,,,,,,,,,,
+R-D3D12-1,REGRESION,D3D12,1,NO EJECUTADO,,,,,,,,,,,,
+R-D3D12-2,REGRESION,D3D12,2,NO EJECUTADO,,,,,,,,,,,,
+R-D3D12-3,REGRESION,D3D12,3,NO EJECUTADO,,,,,,,,,,,,
+R-D3D12-4,REGRESION,D3D12,4,NO EJECUTADO,,,,,,,,,,,,
+R-D3D12-5,REGRESION,D3D12,5,NO EJECUTADO,,,,,,,,,,,,
+R-D3D11-1,REGRESION,D3D11 contraste opcional,1,NO EJECUTADO,,,,,,,,,,,,
